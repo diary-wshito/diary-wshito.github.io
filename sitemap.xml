@@ -69,13 +69,13 @@
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/categories/assembly/</loc>
+    <loc>http://diary.wshito.com/tags/assembly/</loc>
     <lastmod>2017-06-12T21:15:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/tags/assembly/</loc>
+    <loc>http://diary.wshito.com/categories/assembly/</loc>
     <lastmod>2017-06-12T21:15:11+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -93,13 +93,13 @@
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/categories/c/</loc>
+    <loc>http://diary.wshito.com/tags/c/</loc>
     <lastmod>2017-01-06T00:05:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/tags/c/</loc>
+    <loc>http://diary.wshito.com/categories/c/</loc>
     <lastmod>2017-01-06T00:05:25+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -129,13 +129,13 @@
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/categories/diary/</loc>
+    <loc>http://diary.wshito.com/tags/diary/</loc>
     <lastmod>2016-11-06T20:43:33+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/tags/diary/</loc>
+    <loc>http://diary.wshito.com/categories/diary/</loc>
     <lastmod>2016-11-06T20:43:33+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -153,26 +153,26 @@
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/categories/libuv/</loc>
-    <lastmod>2017-01-06T00:05:25+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://diary.wshito.com/tags/libuv/</loc>
     <lastmod>2017-01-06T00:05:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/categories/lisp/</loc>
-    <lastmod>2017-01-01T01:21:32+09:00</lastmod>
+    <loc>http://diary.wshito.com/categories/libuv/</loc>
+    <lastmod>2017-01-06T00:05:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://diary.wshito.com/tags/lisp/</loc>
     <lastmod>2016-12-23T15:25:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/categories/lisp/</loc>
+    <lastmod>2017-01-01T01:21:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -189,13 +189,13 @@
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/categories/network/</loc>
+    <loc>http://diary.wshito.com/tags/network/</loc>
     <lastmod>2016-11-09T19:29:46+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/tags/network/</loc>
+    <loc>http://diary.wshito.com/categories/network/</loc>
     <lastmod>2016-11-09T19:29:46+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -213,13 +213,13 @@
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/categories/programming/</loc>
+    <loc>http://diary.wshito.com/tags/programming/</loc>
     <lastmod>2017-06-12T21:15:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://diary.wshito.com/tags/programming/</loc>
+    <loc>http://diary.wshito.com/categories/programming/</loc>
     <lastmod>2017-06-12T21:15:11+09:00</lastmod>
     <priority>0</priority>
   </url>
