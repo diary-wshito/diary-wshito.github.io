@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="「対話によるCommon Lisp入門」第４話まとめノート"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="「対話によるCommon Lisp入門」第４話まとめノート &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/cl-dialogue/4/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2016-11-15T22:11:47&#43;09:00" />
+
+    
+    <meta property="article:tag" content="programming" />
+    
+    <meta property="article:tag" content="lisp" />
+    
+    
+
+    <title>「対話によるCommon Lisp入門」第４話まとめノート &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，consの基本関数以外に，便利な" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.26" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": 
+    },
+    "author": {
+        "@type": "Person",
+        "name": ,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": 「対話によるCommon Lisp入門」第４話まとめノート,
+    "name": 「対話によるCommon Lisp入門」第４話まとめノート,
+    "wordCount": 816,
+    "timeRequired": "PT2M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/cl-dialogue/4/,
+    "datePublished": 2016-11-15T22:11Z,
+    "dateModified": 2016-11-15T22:11Z,
+    
+    "keywords": programming, lisp,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/cl-dialogue/4/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">「対話によるCommon Lisp入門」第４話まとめノート</h1>
+        <small></small>
+
+        <section class="post-meta">
+          <time class="post-date" datetime="2016-11-15T22:11:47&#43;09:00">
+            November 15, 2016
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      
+
+<p>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．<code>car</code>，<code>cdr</code>，<code>cons</code>の基本関数以外に，便利な関数が幾つか紹介されている．</p>
+
+<h4 id="要素の取り出し">要素の取り出し</h4>
+
+<ul>
+<li><code>first</code>, <code>second</code>, &hellip;., <code>tenth</code><br/>
+第1要素から第10要素まで簡単に取りだす関数が用意されている．</li>
+
+<li><p><code>elt</code> Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える．</p>
+
+<pre><code class="language-lisp">&gt; (elt '(0 1 2 3 4 5) 3)
+3
+</code></pre></li>
+
+<li><p><code>last</code> リストの末尾の要素を取り出す．</p></li>
+</ul>
+
+<h4 id="末尾の要素を取り出す別の方法">末尾の要素を取り出す別の方法</h4>
+
+<ul>
+<li><code>length</code>と<code>elt</code>を組み合わせる．
+<code>lisp
+&gt; (set x '(0 1 2 3 4 5))
+&gt; (elt x (- (length x) 1))
+5
+</code></li>
+<li><code>reverse</code>で反転させて <code>car</code>を取る．
+<code>lisp
+&gt; (car (reverse x))
+5
+</code></li>
+</ul>
+
+<h4 id="cons-append-list-の違い"><code>cons</code>, <code>append</code>, <code>list</code>の違い．</h4>
+
+<pre><code class="language-lisp">&gt; (cons '(a b) '(c d))
+((A B) C D)
+&gt; (append '(a b) '(c d))
+(A B C D)
+&gt; (list '(a b) '(c d))
+((A B) (C D))
+</code></pre>
+
+<p><code>append</code>は括弧を取るため空リスト<code>nil</code>は要素を成さない．</p>
+
+<pre><code class="language-lisp">&gt; (list '(a) '(b c) nil '(d))
+((A) (B C) NIL (D))
+&gt; (append '(a) '(b c) nil '(d))
+(A B C D)
+</code></pre>
+
+<h4 id="リストの末尾に要素を挿入する方法">リストの末尾に要素を挿入する方法</h4>
+
+<pre><code class="language-lisp">&gt; (append '(ape bear cat) '(dog))
+(APE BEAR CAT DOG)
+</code></pre>
+
+<p><code>dog</code>が変数<code>x</code>に入っている場合．</p>
+
+<pre><code class="language-lisp">&gt; (setf x 'dog)
+&gt; (append '(ape bear cat) (list x))
+(APE BEAR CAT DOG)
+</code></pre>
+
+<h4 id="butlast-関数は-cdr-の逆"><code>butlast</code>関数は<code>cdr</code>の逆</h4>
+
+<p><code>cdr</code>は1番目の要素を除いた残りを返すが，<code>butlast</code>は末尾要素を除いた残りを返す．</p>
+
+<pre><code class="language-lisp">&gt; (butlast '(a b c d e))
+(A B C D)
+</code></pre>
+
+<p><code>butlast</code>関数を自分で定義するなら下のように定義できる．</p>
+
+<pre><code class="language-lisp">&gt; (defun my-butlast (x)
+     (reverse (cdr (reverse x))))
+</code></pre>
+
+<h4 id="第４話で出てきた組込み関数一覧">第４話で出てきた組込み関数一覧</h4>
+
+<ul>
+<li><code>first</code>&mdash;<code>car</code>と同じ．</li>
+<li><code>rest</code>&mdash;<code>cdr</code>と同じ．</li>
+<li><code>first</code>, <code>second</code>,&hellip;, <code>tenth</code>&mdash;1番目から10番目まで要素を簡単に取り出せる関数．</li>
+<li><code>elt</code>&mdash;<code>(elt (リスト) i)</code>でリストのi番目の要素を取り出す関数．</li>
+<li><code>length</code>&mdash;リストの長さを返す関数．</li>
+<li><code>reverse</code>&mdash;リストの要素を逆順に並び替える関数．</li>
+<li><code>last</code>&mdash;リストの最後の要素を返す関数．</li>
+<li><code>append</code>&mdash;引数に与えられたリストを結合する関数．</li>
+<li><code>list</code>&mdash;引数を要素とするリストを作成する関数．</li>
+<li><code>butlast</code>&mdash;リストの最後の要素を除いた残りを返す関数．</li>
+</ul>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%80%8c%e5%af%be%e8%a9%b1%e3%81%ab%e3%82%88%e3%82%8bCommon%20Lisp%e5%85%a5%e9%96%80%e3%80%8d%e7%ac%ac%ef%bc%94%e8%a9%b1%e3%81%be%e3%81%a8%e3%82%81%e3%83%8e%e3%83%bc%e3%83%88&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f4%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f4%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f4%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/cl-dialogue/5/">
+          <section class="post">
+              <h2>「対話によるCommon Lisp入門」第５話まとめノート</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/cl-dialogue/3/">
+          <section class="post">
+              <h2>「対話によるCommon Lisp入門」第3話まとめノート</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    
+</body>
+</html>
+

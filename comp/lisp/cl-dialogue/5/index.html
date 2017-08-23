@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="「対話によるCommon Lisp入門」第５話まとめノート"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="「対話によるCommon Lisp入門」第５話まとめノート &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/cl-dialogue/5/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2016-11-17T23:34:58&#43;09:00" />
+
+    
+    <meta property="article:tag" content="programming" />
+    
+    <meta property="article:tag" content="lisp" />
+    
+    
+
+    <title>「対話によるCommon Lisp入門」第５話まとめノート &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="この章では再帰の基本から，末尾再帰への書き換え方について解説している．またエディタにプログラムを書いてLispインタプリタに読み込む方法も説" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.26" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/cl-dialogue/5/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": 
+    },
+    "author": {
+        "@type": "Person",
+        "name": ,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": 「対話によるCommon Lisp入門」第５話まとめノート,
+    "name": 「対話によるCommon Lisp入門」第５話まとめノート,
+    "wordCount": 1773,
+    "timeRequired": "PT4M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/cl-dialogue/5/,
+    "datePublished": 2016-11-17T23:34Z,
+    "dateModified": 2016-11-17T23:34Z,
+    
+    "keywords": programming, lisp,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/cl-dialogue/5/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">「対話によるCommon Lisp入門」第５話まとめノート</h1>
+        <small></small>
+
+        <section class="post-meta">
+          <time class="post-date" datetime="2016-11-17T23:34:58&#43;09:00">
+            November 17, 2016
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      
+
+<p>この章では再帰の基本から，末尾再帰への書き換え方について解説している．またエディタにプログラムを書いてLispインタプリタに読み込む方法も説明している．</p>
+
+<h4 id="末尾再帰とは">末尾再帰とは</h4>
+
+<p>再帰的に定義された関数の末尾で，自分自身を呼び出した戻り値をそのままリターンする関数定義．</p>
+
+<h6 id="末尾再帰の例-ユークリッドの互除法">末尾再帰の例（ユークリッドの互除法）</h6>
+
+<pre><code class="language-lisp">(defun gcd2 (m n)
+   (if (= (mod m n) 0) n
+       (gcd2 n (mod m n))))
+</code></pre>
+
+<p>最後の行で自分自身<code>gcd2</code>への呼び出しで終わっている．すなわち，自分自身への呼び出しの戻り値をそのままリターンしている．</p>
+
+<h6 id="末尾再帰ではない例-m-n-の計算">末尾再帰ではない例（\(m^n\)の計算）</h6>
+
+<pre><code class="language-lisp">(defun expt2 (m n)
+   (if (= n 0) 1
+       (* m (expt2 m (- n 1)))))
+</code></pre>
+
+<p>最後の行で自分自身<code>expt2</code>を呼び出した戻り値をさらに<code>m</code>と掛け合わせている．</p>
+
+<h4 id="末尾再帰の効能">末尾再帰の効能</h4>
+
+<p>上の<code>expt2</code>では自分自身の呼び出しから戻った後，<code>m</code>と戻り値を掛け合わせるという処理が残っているため，呼び出し側は<code>m</code>の値を保持しておかなければならない．つまりスタックに現在の関数の状態をプッシュしてから自分自身をコールし，コールから戻ったらスタックから情報をポップして処理をする．再帰が深くなればスタックオーバーフローが発生するし処理速度も落ちる．</p>
+
+<p>一方，末尾再帰の場合，自分自身の再帰的呼び出し後に処理が残っていないので，スタックに保持しておく値がない．従ってLispコンパイラは単なるループ処理のコードを生成する．</p>
+
+<h4 id="末尾再帰への書き換え方">末尾再帰への書き換え方</h4>
+
+<p>末尾再帰は本質的にループと同じ．ループではループを１回繰り返すたび「状態」を変え，その中で処理を完結する．従って，ループ１回分の処理に必要な全状態変数を再帰呼び出しの引数に渡せば良い．呼び出しの際には適切にループ変数を更新し，境界条件で一気に状態変数を用いて処理すれば良い．</p>
+
+<h5 id="末尾再帰への書き換え例１-階乗計算">末尾再帰への書き換え例１&mdash;階乗計算</h5>
+
+<p>まずはテキストで説明されている階乗計算（\(n!\)）の書き換え例から．</p>
+
+<p><strong>通常の再帰</strong></p>
+
+<pre><code class="language-lisp">(defun factorial (n)
+   (if (= n 0) 1
+       (* n (factorial (- n 1)))))
+</code></pre>
+
+<p><strong>末尾再帰への書き換え手順</strong></p>
+
+<p>1．通常の再帰定義のようにループしながら\(n\)から順にデクリメントして掛け合わせていくとすると，C言語のループでは以下のように書けるだろう．</p>
+
+<pre><code class="language-lisp">int result = 1;
+for (int i=0; i&amp;lt;n; i++) {
+  result = result * (n-i)
+}
+</code></pre>
+
+<p>つまりループ１回の処理で必要な変数は，<code>n</code>，<code>i</code>，<code>result</code>の３つである．</p>
+
+<p>2．終端条件は<code>i</code>が<code>n-1</code>に等しい時，<code>result * (n-i)</code>を返す．<code>i</code>に<code>n-1</code>を代入すると<code>result</code>．</p>
+
+<p>3．初期条件は，<code>n = n</code>，<code>i = 0</code>，<code>result = 1</code>．</p>
+
+<p>以上をまとめると次のようなコードになる．</p>
+
+<pre><code class="language-lisp">(defun my-fact (n i result)
+   (if (= i (- n 1)) result
+       (my-fact n (+ i 1) (* result (- n i)))))
+(defun factorial (n)
+	   (my-fact n 0 1))
+</code></pre>
+
+<p>これで，<code>(factorial 5)</code>で120を返す．</p>
+
+<p>4．テキストの変換例の解説．<code>i=1</code>を初期条件として採用して1から順に<code>n</code>までインクリメントして掛け合わせている．従ってCのループは以下のようになる．</p>
+
+<pre><code class="language-lisp">int result = 1;
+for (int i=1; i &amp;lt;= n; i++) {
+  result = result * i
+}
+</code></pre>
+
+<p>従って<code>i &gt; n</code>の時，ループから抜けて<code>result</code>を返すと答えを得るので，Lispコードは以下のようになる．</p>
+
+<pre><code class="language-lisp">(defun text-fact (n i result)
+   (if (&gt; i n) result
+       (text-fact n (+ i 1) (* result i))))
+(defun factorial2 (n)
+	   (text-fact n 1 1))
+</code></pre>
+
+<p>やはりテキストのコードの方がスマートだ．</p>
+
+<h5 id="末尾再帰への書き換え例２-組み合わせ計算">末尾再帰への書き換え例２&mdash;組み合わせ計算</h5>
+
+<div>
+\[
+{}_nC_k = \frac{n!}{k!(n-k)!} = {}_{n-1}C_{k-1} + {}_{n-1}C_k
+\]
+</div>
+
+<p>上の2項係数を実装すると以下のように２重再帰となる．</p>
+
+<pre><code class="language-lisp">(defun C (n k)
+   (if (= k 0) 1
+       (if (= n k) 1
+	   (+ (C (- n 1) (- k 1))
+	      (C (- n 1) k)))))
+</code></pre>
+
+<p>これを末尾再帰に書き換えようとしたがうまくいかなかった．ループは再帰に書き換えられるが，再帰は必ずしもループに書き換えられないので，これがその例なのかもしれない．</p>
+
+<p>代わりに階乗で定義された2項係数を末尾再帰に書き換える．</p>
+
+<div>\[
+\begin{align}
+{}_nC_k &= \frac{n!}{k!(n-k)!} 
+= \frac{n}{k} \frac{(n-1)!}{(k-1)!(n-k)!}
+\\
+&= \frac{n}{k} \cdot \frac{(n-1)!}{(k-1)!((n-1)-(k-1))!}
+\\
+&= \frac{n}{k} \cdot {}_{n-1}C_{k-1}
+\end{align}
+\]
+</div>
+
+<p>まず通常の再帰で書くと以下のようになる．今回は<code>if</code>を入れ子にせず<code>cond</code>を使ってみた．</p>
+
+<pre><code class="language-lisp">(defun C (n k)
+   (cond ((or (= k 0) (= n k)) 1)
+	     (t (* (/ n k) (C (- n 1) (- k 1))))))
+</code></pre>
+
+<p>これを末尾再帰にするには，計算結果を格納する<code>res</code>と<code>n</code>，<code>k</code>の３変数が必要だ．</p>
+
+<pre><code class="language-lisp">(defun tail-C (n k res)
+   (cond ((or (= k 0) (= n k)) res)
+    	 (t (tail-C (- n 1) (- k 1) (* (/ n k) res)))))
+(defun C (n k)
+   (tail-C n k 1))
+</code></pre>
+
+<h4 id="プログラムファイルのロードの仕方">プログラムファイルのロードの仕方</h4>
+
+<p><code>(load &quot;ファイル名&quot;)</code>．ファイルの拡張子は<code>l</code>，<code>lsp</code>，<code>lisp</code>がよく使われる．</p>
+
+<h4 id="第５話に出てきた組込み関数一覧">第５話に出てきた組込み関数一覧</h4>
+
+<ul>
+<li><code>mod</code>&mdash;<code>(mod m n)</code>で\(m\div n\)の余りを返す関数．</li>
+<li><code>gcd</code>&mdash;引数の最大公約数を返す関数．</li>
+<li><code>load</code>&mdash;Lispプログラムの入ったファイルを読み込む．</li>
+</ul>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%80%8c%e5%af%be%e8%a9%b1%e3%81%ab%e3%82%88%e3%82%8bCommon%20Lisp%e5%85%a5%e9%96%80%e3%80%8d%e7%ac%ac%ef%bc%95%e8%a9%b1%e3%81%be%e3%81%a8%e3%82%81%e3%83%8e%e3%83%bc%e3%83%88&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f5%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f5%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f5%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/cl-dialogue/6/">
+          <section class="post">
+              <h2>「対話によるCommon Lisp入門」第６話まとめノート</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/">
+          <section class="post">
+              <h2>「対話によるCommon Lisp入門」第４話まとめノート</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    
+</body>
+</html>
+

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/lisp-pm/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2016-12-23T15:25:34&#43;09:00" />
+
+    
+    <meta property="article:tag" content="lisp" />
+    
+    <meta property="article:tag" content="programming" />
+    
+    <meta property="article:tag" content="development tool" />
+    
+    
+
+    <title>Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="Lispを始めたばかりで，まだ規模の大きいプログラムを書いていないため，パッケージ管理やらライブラリの依存関係解決などわからないことだらけで" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.26" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/lisp-pm/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": 
+    },
+    "author": {
+        "@type": "Person",
+        "name": ,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど,
+    "name": Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど,
+    "wordCount": 4043,
+    "timeRequired": "PT9M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/lisp-pm/,
+    "datePublished": 2016-12-23T15:25Z,
+    "dateModified": 2016-12-23T15:25Z,
+    
+    "keywords": lisp, programming, development tool,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/lisp-pm/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど</h1>
+        <small></small>
+
+        <section class="post-meta">
+          <time class="post-date" datetime="2016-12-23T15:25:34&#43;09:00">
+            December 23, 2016
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/development-tool/">#development tool</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      
+
+<p>Lispを始めたばかりで，まだ規模の大きいプログラムを書いていないため，パッケージ管理やらライブラリの依存関係解決などわからないことだらけで，<a href="https://www.quicklisp.org/beta/">Quicklisp</a>や<a href="https://common-lisp.net/project/asdf/">ASDF</a>，<a href="https://github.com/KeenS/CIM">CIM</a>，<a href="https://github.com/roswell/roswell">Roswell</a>等，色々調べました．包括的かつ初心者に優しいリソースがなく，最初は苦労しました．解説がどれも各ツールの使い方に特化していて，他のツールの関係や，どのツールが必要で，どの機能が重複しているかなどの解説がなかったからです．色々読んでいるうちに朧げながら全体像が掴めてきました．ここでは私の朧げな解釈を下に，それぞれのツールの大まかな機能と役割について説明したいと思います．間違いなどありましたら，<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>までお願いします．（CIMは実際に使ってないので解説してません．ゴメンナサイ）</p>
+
+<h4 id="quicklisp-asdf-roswell-違いは何">Quicklisp, ASDF, Roswell 違いは何？</h4>
+
+<p>他人の書いたパッケージを利用する場合，1.インストールし，2.プログラムをロードする必要があります．インストールをしてくれるのがQuicklisp，依存関係を解決しロードしてくれるのがASDFと理解して良いと思います．</p>
+
+<p>それではRoswellは何かと言うと，Quicklispのようなインストーラです．Quicklispとの違いは，ライブラリだけでなくLisp処理系のインストールもできる点です．RoswellでインストールされたLisp処理系を使うと，Roswellでインストールしたライブラリを何の設定もなしに<code>require</code>でロードできます．したがって，RoswellさえあればQuicklispは必要ありません．また，Roswellでインストールした処理系とライブラリは，単一のディレクトリ以下に配置されるので，既存の開発環境と共存できます．</p>
+
+<p>Roswellは処理系やライブラリのインストールだけでなく，作成したプログラムをコンパイルし，バイナリファイルにパッケージングもしてくれます．したがって，Roswellがあれば，開発からデプロイメントまで一貫して行うことができます．</p>
+
+<p>以下，それぞれのツールについて説明します．</p>
+
+<h4 id="asdf">ASDF</h4>
+
+<p><a href="https://common-lisp.net/project/asdf/">ASDF</a>は，ローカルに存在するライブラリを，依存関係に基づいてロードします．実際には，ロードする前にコンパイルまで行ってくれます．依存関係を定義するファイルは.asdファイルで，プロジェクトトップに置かれます．</p>
+
+<p>Lisp標準の<code>require</code>関数で外部ファイルをロードする際，ほとんどの処理系がASDFを用いてファイルをロードするため，ASDF自体はLisp標準規格に含まれませんが，処理系と共に予めインストールされていることが多いです．</p>
+
+<p>ASDFをCの開発ツールに喩えるとmakeとリンカとローダを合わせたようなものです．Makefileには各ターゲットに必要なリソースを並べて，ターゲットの生成方法を記述しますが，.asdファイルも同様にコンパイルに必要な依存パッケージをファイル毎に列挙します．makeは依存関係に応じて順にターゲットを生成していきますが，ASDFもLisp処理系を用いて順番にコンパイルしていきます．リンカはオブジェクトファイルをリンクして一つにまとめあげ，ローダは複数のオブジェクトコードをロードしますが，ASDFもコンパイル済みのファイルを依存関係に応じて探し出しロードしてくれます．makeが依存ファイルをダウンロード・インストールしてくれないように，ASDFにもインストーラー機能はありません．それは後述のQuicklispかRoswellを使います．</p>
+
+<p>Javaの開発ツールで喩えるなら，Mavenのcompilerプラグインと，仮想マシンのクラスパス解決機能をまとめ合わせたものがASDFです．しかし，依存関係に応じてパッケージをダウンロード・インストールするMaven installプラグインの機能はありません．</p>
+
+<p><strong>ASDFリソース</strong></p>
+
+<ul>
+<li><a href="https://common-lisp.net/project/asdf/">ASDF公式サイト</a></li>
+<li><a href="https://common-lisp.net/~mmommer/asdf-howto.shtml">Getting Started with ASDF</a></li>
+<li><a href="http://qiita.com/kahuu/items/dfb110104d9db4bca16d">ASDF使い方メモ</a></li>
+<li><a href="http://keens.github.io/blog/2014/11/30/quicklisp/">require, ASDF, quicklispを正しく使う by CIMの作者</a></li>
+</ul>
+
+<h4 id="quicklisp">Quicklisp</h4>
+
+<p>Quicklispは依存しているライブラリをウェブ上のリポジトリからダウンロード・インストールしてくれるツールです．さらにQuicklisp内部からASDFを呼び出しライブラリのロードも行えるので，ユーザ側からはQuicklispの使い方を学べばインストールもロードも完結します．しかしながら，自分が作ったプログラムで依存関係を定義するには.asdファイルを用意しなければならないので，最終的にはASDFの使い方を学ぶ必要があるでしょう．</p>
+
+<p>Quicklispはインストールすべきライブラリの決定にASDF用の依存関係定義ファイル（.asdファイル）を用います．別言語用の似たようなツールと言えば，Javaプロジェクトで使われるMavenのinstallプラグインや，Node.jsのnpmなどが挙げられるでしょう．</p>
+
+<p>QuicklispはASDFと違い処理系に梱包されていません．したがって自分でインストールする必要があります．インストールは簡単で，本家から<code>quiclisp.lisp</code>ファイルをダウンロードし，<code>(load &quot;quicklisp.lisp&quot;)</code>，<code>(quicklisp-quickstart:install)</code>，<code>(ql:add-to-init-file)</code>の3式を順に評価するだけです．しかし，Quicklispには色々と問題もあるようです．
+<a href="http://blog.8arrow.org/entry/2014/08/01/234941">深町（@nitro_idiot）</a>さんや<a href="http://keens.github.io/blog/2014/11/30/quicklisp/">keen(@blackenedgold)</a>さんが問題点とその解決法を説明しています．</p>
+
+<p>後述するRoswellが，ライブラリのインストーラーとしての機能を完全に代替してくれる上，開発に必要な様々な機能を提供してくれるので，QuicklispはインストールせずRoswellでライブラリ管理を１本化するのがこれからのベストプラクティスだと思います．</p>
+
+<p><strong>Quicklispリソース</strong></p>
+
+<ul>
+<li><a href="https://www.quicklisp.org/beta/">公式ホーム</a></li>
+<li><a href="http://qiita.com/singy/items/bca1a601fa4c35d81580">SBCL ＋ ASDF3 ＋QuickLispでプロジェクトの作り方</a></li>
+<li><a href="(http://keens.github.io/blog/2014/11/30/quicklisp/)">require, ASDF, quicklispを正しく使う（再掲）</a></li>
+<li><a href="http://blog.8arrow.org/entry/2013/08/26/130240">プロジェクトごとに使うQuicklispを分離する</a></li>
+<li><a href="https://github.com/fukamachi/qlot">qlot</a></li>
+</ul>
+
+<h4 id="roswell">Roswell</h4>
+
+<p>RoswellはQuicklispのようなライブラリのインストーラーであると同時に，Lisp処理系のインストーラーでもあります．Roswellを使う場合，Lisp処理系もRoswellを使ってインストールします．</p>
+
+<p>Quicklispを使ってインストールしたライブラリは全ての処理系から共有されますが，Roswellを使ってインストールしたライブラリは，RoswellでインストールしたLisp処理系からしか使用されません（もちろんパスを設定して読み込めばどの処理系からも使えますが）．したがって，これまで使っていたLisp処理系とは独立に開発環境を構築でき，共存させることができます．</p>
+
+<p>Roswellは背後でQuicklispを使用していますが，ユーザ側からはそれを意識することは一切ありません．したがって，Roswellさえインストールすれば，パスやリポジトリの設定をせずにライブラリのインストールから管理まで全て行えます．</p>
+
+<p>Roswellのもう一つの強みは，アプリケーションを作成した際，処理系と依存ライブラリをパッケージ化し，コマンドラインから起動できるバイナリを簡単に生成できる点です．したがって，Roswellを使えば，開発段階のライブラリ収集から，デプロイメントまで一貫して行えます．自分の開発環境にQuicklispのインストールが不要なだけでなく，プロダクトの配布時に相手にQuicklispのインストールを依頼する必要もありません．</p>
+
+<p>ここでは，パッケージ管理ツールとしてのRoswellについて書くのが目的なので，バイナリパッケージの作り方やコマンドスクリプトの作成方法は別の機会に譲り，Roswellでの開発環境のセットアップ方法のみ説明します．</p>
+
+<h5 id="roswellのインストール">Roswellのインストール</h5>
+
+<p>Lispプログラミングを始める時，通常，WindowsユーザはLispInBoxをインストールしたり，Unix系OSならばディストリビューションのパッケージマネージャを使ってLisp処理系をインストールするでしょう．Roswell流の開発では，Roswellを使ってLisp処理系をインストールします．ということで，まずはRoswellを用意しましょう．</p>
+
+<p>Roswellは様々なOSに移植できるようC言語で書かれています（一部Lisp）．したがってOSに合ったバイナリをダウンロード・インストールするか，Roswellのソースをダウンロードしインストールする必要があります．各OS毎の<a href="https://github.com/roswell/roswell/wiki/1.-Installation">インストール方法はこちら</a>を参照してください．</p>
+
+<p>例えばOSXではHomebrewでインストールできます．HomebrewはMacPortsと共存可能なのでMacPortsユーザもHomebrewを使ってインストールできます（/usr/local/Cellar/roswell以下にインストールされる）．インストール後は，</p>
+
+<pre><code class="language-bash">$ ros setup
+</code></pre>
+
+<p>を実行すると，Lisp処理系がダウンロードされインストールされます．デフォルトでインストールされた処理系のバージョンは，</p>
+
+<pre><code class="language-bash">$ ros run -- --version
+</code></pre>
+
+<p>で確認できます．インストールしたい処理系のバージョンを指定したい場合，以下のように指定します．</p>
+
+<pre><code class="language-bash">$ ros install sbcl/1.3.12
+</code></pre>
+
+<p>インストールされている処理系のリストは以下で得られます．</p>
+
+<pre><code class="language-bash">$ ros list installed
+</code></pre>
+
+<p>デフォルトで使用する処理系は以下のコマンドで指定できます．</p>
+
+<pre><code class="language-bash">$ ros use sbcl/1.3.12
+</code></pre>
+
+<p>処理系の管理方法は<a href="https://github.com/roswell/roswell/wiki/3.-Roswell-as-an-implementation-manager">こちらを参照</a>してください．</p>
+
+<h5 id="roswellの処理系を使う">Roswellの処理系を使う</h5>
+
+<p>Roswellを用いてパッケージ管理する場合，処理系はRoswellでインストールしたものを使います．以下のコマンドでデフォルトの処理系が起動し，REPLが使えます．</p>
+
+<pre><code class="language-bash">$ ros run
+</code></pre>
+
+<p>Emacsエディタを使って開発するには，slimeを以下のように設定します．</p>
+
+<pre><code class="language-lisp">(setq slime-lisp-implementations
+      `((ros (&quot;ros&quot; &quot;run&quot;))
+        (sbcl (&quot;/opt/local/bin/sbcl&quot;))
+        (abcl (&quot;/opt/local/bin/abcl&quot;))
+        (clisp (&quot;/opt/local/bin/clisp&quot;))))
+</code></pre>
+
+<p><code>M-x slime</code>で起動し．<code>M-- M-x slime</code>で処理系を選択できます．
+さらに詳しい設定方法は<a href="https://github.com/roswell/roswell/wiki/1.1-Initial-Recommended-Setup">こちらを参照</a>してください．</p>
+
+<h5 id="ライブラリのインストール">ライブラリのインストール</h5>
+
+<p>Roswellでライブラリをダウンロード，インストールするのは簡単です．Quicklispに登録されているライブラリは，芋づる式に依存ライブラリをダウンロードしインストールしてくれます．例えば，clackをインストールしたければ，</p>
+
+<pre><code class="language-bash">$ ros install clack
+</code></pre>
+
+<p>だけです．あとはプログラムから<code>(require 'clack)</code>でロード完了です．</p>
+
+<p><strong>Roswellリソース</strong></p>
+
+<ul>
+<li><a href="https://github.com/roswell/roswell">公式ホーム</a></li>
+<li><a href="https://github.com/roswell/roswell/wiki">Roswell Wiki</a></li>
+<li><a href="http://blog.8arrow.org/entry/2015/06/11/101511">Common Lispとリアル・ワールドを繋ぐ「Roswell」の紹介</a></li>
+</ul>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=Lisp%e3%81%ae%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e7%ae%a1%e7%90%86%e5%85%a5%e9%96%80%ef%bc%8eQuicklisp%ef%bc%8cASDF%ef%bc%8cRoswell%e3%81%ae%e9%81%95%e3%81%84%e3%81%aa%e3%81%a9&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2flisp-pm%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2flisp-pm%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2flisp-pm%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/uvbook/uv-lisp-helloworld/">
+          <section class="post">
+              <h2>uvbook for Lisp -- Hello World</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/cl-dialogue/6/">
+          <section class="post">
+              <h2>「対話によるCommon Lisp入門」第６話まとめノート</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    
+</body>
+</html>
+

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="「対話によるCommon Lisp入門」第６話まとめノート"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="「対話によるCommon Lisp入門」第６話まとめノート &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/cl-dialogue/6/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2016-11-20T15:51:03&#43;09:00" />
+
+    
+    <meta property="article:tag" content="programming" />
+    
+    <meta property="article:tag" content="lisp" />
+    
+    
+
+    <title>「対話によるCommon Lisp入門」第６話まとめノート &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="本章ではリスト処理を行う関数を再帰を使って書く練習をしながら，関数の処理時間の見積もり方と最適なコードのへの書き換え方を学ぶ．本ページではま" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.26" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/cl-dialogue/6/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": 
+    },
+    "author": {
+        "@type": "Person",
+        "name": ,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": 「対話によるCommon Lisp入門」第６話まとめノート,
+    "name": 「対話によるCommon Lisp入門」第６話まとめノート,
+    "wordCount": 3200,
+    "timeRequired": "PT7M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/cl-dialogue/6/,
+    "datePublished": 2016-11-20T15:51Z,
+    "dateModified": 2016-11-20T15:51Z,
+    
+    "keywords": programming, lisp,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/cl-dialogue/6/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">「対話によるCommon Lisp入門」第６話まとめノート</h1>
+        <small></small>
+
+        <section class="post-meta">
+          <time class="post-date" datetime="2016-11-20T15:51:03&#43;09:00">
+            November 20, 2016
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      
+
+<p>本章ではリスト処理を行う関数を再帰を使って書く練習をしながら，関数の処理時間の見積もり方と最適なコードのへの書き換え方を学ぶ．本ページではまず第５話と６話の間に挿入されたLispのコンパイル方法と，第６話で説明されている関数のトレースの仕方についてまとめ，その後，処理時間の見積もり方と，効率的なコードへの書き換えについてまとめる．</p>
+
+<h4 id="lispのコンパイル方法">Lispのコンパイル方法</h4>
+
+<p>REPLで作業をしている時，定義済みの関数や外部ファイルに書かれたプログラムをコンパイルする方法についてまとめる．</p>
+
+<h5 id="関数ごとのコンパイル">関数ごとのコンパイル</h5>
+
+<p><code>foo</code>という名の関数を定義したら，REPLで<code>(compile 'foo)</code>を実行すると関数単位でコンパイルされる．コンパイルされている関数とされていない関数が混在しても問題なく動作する．当然コンパイル済みの関数は早く動く．</p>
+
+<pre><code class="language-lisp">(defun foo ....)
+(compile 'foo)
+</code></pre>
+
+<p>slimeを使っている場合，「C-c C-c」でカーソル位置のトップレベルをcomplileする．この場合出力はない．</p>
+
+<h5 id="ファイル単位でのコンパイル">ファイル単位でのコンパイル</h5>
+
+<p>ファイルの内容をすべてコンパイルするにはファイル名を指定して<code>(compile-file &quot;foo.lisp&quot;)</code>でコンパイルした後，拡張子を省略したファイル名でプログラムをロードする．</p>
+
+<pre><code class="language-lisp">(compile-file &quot;foo.lisp&quot;)
+(load &quot;foo&quot;)
+</code></pre>
+
+<p>slimeでは「C-c C-k」でバッファ全体（ファイル）をcompileする．</p>
+
+<h5 id="逆アセンブル">逆アセンブル</h5>
+
+<p>コンパイラが変換した機械語は，<code>disassemble</code>関数で逆アセンブルすることができる．</p>
+
+<pre><code class="language-lisp">(defun foo .....)
+(compile 'foo)
+(disassemble 'foo)
+</code></pre>
+
+<p>slimeでは定義した関数のシンボル上で「C-c M-d (slime-disassemble-symbol)」を実行すると，一時バッファに逆アセンブルした結果が表示される．</p>
+
+<h5 id="関数処理のトレース">関数処理のトレース</h5>
+
+<p><code>trace</code>関数を使うと関数に入る時と出る時の情報が表示される．組込み関数を<code>trace</code>の引数に渡すとエラーが出るが，自分で定義した関数なら問題ない．</p>
+
+<pre><code class="language-lisp">&gt; (defun length$ (lst)
+     (length-loop lst 0))
+&gt; (defun length-loop (lst count)
+     (if (null lst) count
+         (length-loop (cdr lst) (+ count 1))))
+&gt; (trace length$)      ; length$関数のトレース開始
+&gt; (length$ '(a b c))
+  0: (LENGTH$ (A B C))
+  0: LENGTH$ returned 3
+3
+&gt; (trace length-loop)  ; length-loop関数のトレース追加
+&gt; (length$ '(a b c))
+  0: (LENGTH$ (A B C))
+    1: (LENGTH-LOOP (A B C) 0)
+      2: (LENGTH-LOOP (B C) 1)
+        3: (LENGTH-LOOP (C) 2)
+          4: (LENGTH-LOOP NIL 3)
+          4: LENGTH-LOOP returned 3
+        3: LENGTH-LOOP returned 3
+      2: LENGTH-LOOP returned 3
+    1: LENGTH-LOOP returned 3
+  0: LENGTH$ returned 3
+3
+&gt; (untrace)     ; 全関数のトレース終了．
+T
+</code></pre>
+
+<h4 id="計算時間の見積もり方">計算時間の見積もり方</h4>
+
+<p>オーダー記法と同様，データのサイズに対しどれ位のオーダーで処理時間が増加していくかに興味があるため，以下の方法で見積もる．</p>
+
+<ul>
+<li>データの長さ<code>n</code>に比例しない一定時間処理は，何ステップかかっても１と数える．</li>
+<li><code>car</code>, <code>car</code>, <code>cons</code>, <code>null</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> 等の基本関数は一定時間で実行できると考える．</li>
+<li>長さ<code>n</code>のデータ（リスト）に比例してかかる計算時間は<code>n</code>と数える．</li>
+<li>同様に長さ<code>n^2</code>のデータ（リスト）に比例してかかる計算時間は<code>n^2</code>で数える．</li>
+</ul>
+
+<p>例）リストの長さを求める<code>length$</code>関数の計算時間の見積もり．</p>
+
+<pre><code class="language-lisp">(defun length$ (lst)
+   (length-loop lst 0))
+(defun length-loop (lst count)
+   (if (null lst) count
+       (length-loop (cdr lst) (+ count 1))))
+</code></pre>
+
+<ul>
+<li>2行目の<code>length-loop</code>の呼び出し，4行目の<code>null</code>判断，最終行の<code>length-loop</code>に渡す引数準備計算は全てリストの長さに依存しないので一定時間と考え，計算時間は合わせて１とカウントする．</li>
+<li>リスト<code>lst</code>の<code>cdr</code>部分を渡して再帰処理している<code>length-loop</code>は引数の長さに依存して処理が決まる．リストの長さ<code>n</code>に依存して決まる<code>length-loop</code>の計算時間を\(T(n)\)で表すと，一定時間の処理と合わせて，\(T(n) = 1 + T(n-1)\)で表せる．\(T(0)\)は<code>null</code>テストだけで処理時間は１であることを考慮すると以下を得る．</li>
+</ul>
+
+<div>
+\[
+\begin{align}
+T(n) &= 1 + T(n-1) \\
+&= 1 + (1 + T(n-2)) = 2 + T(n-2)\\
+&= 2 + (1 + T(n-3)) = 3 + T(n-3)\\
+&= \cdots \\
+&= n + T(n-n) = n + T(0)\\
+&= n + 1
+\end{align}
+\]
+</div>
+
+<p><code>length$</code>の一定時間処理と合わせても定数処理時間は１とカウントするので，<code>length$</code>の処理時間は\(1+n\)である．</p>
+
+<p>定数時間はいくら合わせても１とする理由は，データ数（リスト長）が増加して行った時，どれくらいのオーダーで処理時間が増えるかに興味があるからだ．結局，<code>length$</code>関数はリスト長<code>n</code>に比例して計算時間が増加していくことを示している．</p>
+
+<h4 id="append-の処理時間"><code>append</code>の処理時間</h4>
+
+<p><code>append</code>の処理時間を考えるために<code>append$</code>を実装してみる．</p>
+
+<pre><code class="language-lisp">(defun append$ (lst1 lst2)
+   (if (null lst1) lst2
+       (cons (car lst1) (append$ (cdr lst1) lst2))))
+</code></pre>
+
+<p><code>lst1</code>の長さ<code>n</code>だけ<code>append$</code>が再帰的に呼び出されるので<code>append$</code>の処理時間は<code>n</code>の関数になる．これを\(T(n)\)とおくと，2行目の<code>if</code>のテストと3行目の<code>(cons (car lst1)</code>部分は一定時間なので1，再帰呼び出しは\(T(n-1)\)となるので，\(T(n)\)は以下を満たす．</p>
+
+<p>\[
+\begin{align}
+T(n) = 1 + T(n-1)
+\end{align}
+\]</p>
+
+<p>上式右辺に再帰的に\(T(0)\)まで代入し，\(T(0) = 1\)を用いて解くか，以下のように解けば，\(T(n) = 1 + n\)を得る．</p>
+
+<div>
+\[
+\begin{align}
+& T(n) = 1 + T(n-1) \\
+\leftrightarrow \quad
+& T(n) - T(n-1) = 1 \\
+\leftrightarrow \quad
+& \sum_{k=1}^n (T(k) - T(k-1)) = \sum_{k=1}^n 1 \\
+\leftrightarrow \quad
+& T(n) - T(0) = n \\
+\leftrightarrow \quad
+& T(n) = 1 + n
+\end{align}
+\]
+</div>
+
+<h4 id="効率的な-reverse-の実装">効率的な<code>reverse</code>の実装．</h4>
+
+<p>リストの要素を逆順に並び替えるには，先頭要素を取り出して，残りの要素を再帰的に<code>reverse</code>で並び替えて，その後ろに最初に取り出した先頭要素を加えれば良い．この時，<code>append</code>で両者をつなげるか，<code>cons</code>で繋げるかで実行時間が変わってくる．
+先ほど計算したように<code>append</code>の計算時間は要素の長さ<code>n</code>に比例するが，<code>cons</code>なら一定時間で処理できる．</p>
+
+<p>まず，悪い例を挙げて，実際に計算時間を求めてみる．</p>
+
+<pre><code class="language-lisp">(defun reverse1 (lst)
+   (if (null lst) nil
+       (append (reverse1 (cdr lst)) (list (car lst)))))
+</code></pre>
+
+<p><code>append</code>は第１引数の長さに比例するので<code>n-1</code>の時間がかかる．また，<code>append</code>に渡す第１引数の準備で<code>reverse1</code>自身が<code>n-1</code>の長さで呼び出される．他の処理は全て一定時間なので１とする．以上を合わせると，<code>reverse1</code>の処理時間\(T(n)\)は以下を満たす．</p>
+
+<div>
+\[
+\begin{align}
+& T(n) = (n - 1) + T(n-1) + 1 = n + T(n-1)
+\\
+\leftrightarrow \quad
+& T(n) - T(n-1) = n
+\\
+\leftrightarrow \quad
+& \sum_{k=1}^n T(k) - T(k-1) = \sum_{k=1}^n k
+\\
+\leftrightarrow \quad
+& T(n) - T(0) = (1 + n)n/2
+\\
+\leftrightarrow \quad
+& T(n) = (n^2 + n + 1)/2
+\end{align}
+\]
+</div>
+
+<p>従って<code>reverse1</code>を用いた実装では\(n^2\)に比例した時間がかかる．</p>
+
+<p>次は良い例． <code>append</code>ではなく一定時間でリスト操作する<code>cons</code>を使う．</p>
+
+<pre><code class="language-lisp">(defun reverse2 (let)
+   (reverse-loop lst nil))
+(defun reverse-loop (lst reversed)
+   (if (null lst) reversed
+       (reverse-loop (cdr lst)
+		     (cons (car lst) reversed))))
+</code></pre>
+
+<p>この場合の処理時間は，\(T(n) = 1 + T(n-1)\)になるので，<code>append</code>の処理時間の計算と同じで，\(T(n) = 1 + n\)となる．</p>
+
+<h5 id="計算効率に関する教訓">計算効率に関する教訓</h5>
+
+<ul>
+<li>リストの長さ<code>n</code>に比例する関数を入れ子にしない！</li>
+<li><code>append</code>より<code>cons</code>や<code>list</code>を使う！</li>
+</ul>
+
+<h4 id="eq-eql-equal-の違い"><code>eq</code>, <code>eql</code>, <code>equal</code>の違い</h4>
+
+<p>包含関係でいくと\(\text{eq}\subset\text{eql}\subset\text{equal}\)で，<code>eq</code>で真を返す関係は他の2つでも真となり，<code>eql</code>で真となる関係は<code>equal</code>でも真となる．すなわち，左から「等しさ」基準が厳しい順に並んでいると考えてよい．</p>
+
+<ul>
+<li><code>eq</code>&mdash;メモリ上で等しいオブジェクトなら<code>T</code>を返す．シンボルが同じかどうかをテストする時はこれを使う．Javaオブジェクトの<code>==</code>比較と同じ．</li>
+<li><code>eql</code>&mdash;アトムの値が等しければ<code>T</code>を返す．数値の場合は型も同じでなければ等しいとはみなされない． Javaの<code>equals()</code>と似ている．</li>
+<li><code>equal</code>&mdash;リストの見かけが同じならば<code>T</code>を返す．</li>
+</ul>
+
+<p>シンボルが同じなら同じメモリ上のアドレスを指すので，当然シンボルの値も等しいし，見かけも等しいので，<code>eq</code>で<code>T</code>なら<code>eql</code>でも<code>equal</code>でも<code>T</code>である．</p>
+
+<p>ちなみに<code>=</code>は数値が等しいかどうかを判定するときに使う．<code>==</code>じゃない点に注意！</p>
+
+<h4 id="述語関数">述語関数</h4>
+
+<p>`真偽を返す述語関数が幾つか紹介された．</p>
+
+<ul>
+<li><code>atom</code></li>
+<li><code>consp</code></li>
+<li><code>listp</code></li>
+<li><code>symbolp</code></li>
+<li><code>numberp</code></li>
+<li><code>integerp</code></li>
+<li><code>null</code></li>
+</ul>
+
+<h4 id="連想配列">連想配列</h4>
+
+<p>「<code>car</code>がキーで<code>cdr</code>が値とみなしたリスト」から成るリストを連想配列（association list, alist）と呼ぶ．</p>
+
+<ul>
+<li><code>(assoc キー alist)</code>で連想配列<code>alis</code>の先頭（左）から探して最初に見つかるキーの要素を返す．</li>
+</ul>
+
+<h4 id="sublis-関数"><code>sublis</code>関数</h4>
+
+<p><code>(sublis alist lst)</code>で<code>lst</code>内のアトムを連想配列内の値と置き換える．</p>
+
+<pre><code class="language-lisp">CL-USER&gt; (sublis '((first-name . 太朗)
+                   (last-name . 鈴木)
+                   (telno . 03-432-323))
+                 '((last-name first-name) tel telno))
+
+((鈴木 太朗) TEL |03-432-323|)
+</code></pre>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%80%8c%e5%af%be%e8%a9%b1%e3%81%ab%e3%82%88%e3%82%8bCommon%20Lisp%e5%85%a5%e9%96%80%e3%80%8d%e7%ac%ac%ef%bc%96%e8%a9%b1%e3%81%be%e3%81%a8%e3%82%81%e3%83%8e%e3%83%bc%e3%83%88&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f6%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f6%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fcl-dialogue%2f6%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/lisp-pm/">
+          <section class="post">
+              <h2>Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/cl-dialogue/5/">
+          <section class="post">
+              <h2>「対話によるCommon Lisp入門」第５話まとめノート</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    
+</body>
+</html>
+

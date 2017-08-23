@@ -1,0 +1,40 @@
+/* Override screen.css */
+
+code, tt {
+  background: #f5f2f0;
+}
+
+/* Override Prism */
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: inherit;
+  margin: -0.5em 0 1.8em 0; /* pre's bottom margin
+}
+
+/*
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  border: #E3EDF3 1px solid;
+  // mix #f5f5f5; ghost #F7FAFB; Original #f5f2f0
+  background: #F7FAFB;
+  color: #3A4145;
+}
+*/
+
+/*
+pre.code-toolbar > .toolbar span {
+  color: #bbb;
+  background: #D6EDFF;
+}
+*/
+
+/* For MathJax */
+
+code.has-jax {
+  font: inherit;
+  font-size: 100%;
+  background: inherit;
+  border: inherit;
+  color: inherit;
+}

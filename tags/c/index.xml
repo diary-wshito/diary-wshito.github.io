@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/tags/c/</link>
+    <description>Recent content in C on wshito&#39;s diary</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>All rights reserved 2016--</copyright>
+    <lastBuildDate>Fri, 06 Jan 2017 00:05:25 +0900</lastBuildDate>
+    
+	<atom:link href="http://diary.wshito.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>uvbook -- libuvの仕組みとidle-basicの解説</title>
+      <link>http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/</link>
+      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/</guid>
+      <description>libuvのチュートリアルuvbook，第２節のIdlingプログラムを解説します．libuvはNode.jsの根幹部分を担うCライブラリで</description>
+    </item>
+    
+  </channel>
+</rss>

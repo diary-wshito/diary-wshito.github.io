@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Micromouse on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/tags/micromouse/</link>
+    <description>Recent content in Micromouse on wshito&#39;s diary</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>All rights reserved 2016--</copyright>
+    <lastBuildDate>Thu, 16 Feb 2017 19:59:57 +0900</lastBuildDate>
+    
+	<atom:link href="http://diary.wshito.com/tags/micromouse/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>次のマイクロマウス製作に向けて</title>
+      <link>http://diary.wshito.com/elec/micromouse/micromouse2017/</link>
+      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/elec/micromouse/micromouse2017/</guid>
+      <description>初出場の2016年九州地区大会では完走できなかった．今年は初号機を調整して完走を目指すと同時に，もっと速いマウスの製作にも挑戦したい．DCマ</description>
+    </item>
+    
+  </channel>
+</rss>

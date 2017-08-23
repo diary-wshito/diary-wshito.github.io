@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="uvbook for Lisp -- Hello World"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="uvbook for Lisp -- Hello World &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/uvbook/uv-lisp-helloworld/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2017-01-01T01:21:32&#43;09:00" />
+
+    
+    <meta property="article:tag" content="list" />
+    
+    <meta property="article:tag" content="programming" />
+    
+    <meta property="article:tag" content="async" />
+    
+    <meta property="article:tag" content="node.js" />
+    
+    <meta property="article:tag" content="uvbook" />
+    
+    <meta property="article:tag" content="CFFI" />
+    
+    
+
+    <title>uvbook for Lisp -- Hello World &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="ここでは，libuvのチュートリアル本，uvbookの第2.2節に載っている以下のHello WorldコードをLispで実装する手順を解説し" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.26" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/uvbook/uv-lisp-helloworld/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": 
+    },
+    "author": {
+        "@type": "Person",
+        "name": ,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": uvbook for Lisp -- Hello World,
+    "name": uvbook for Lisp -- Hello World,
+    "wordCount": 3730,
+    "timeRequired": "PT8M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/uvbook/uv-lisp-helloworld/,
+    "datePublished": 2017-01-01T01:21Z,
+    "dateModified": 2017-01-01T01:21Z,
+    
+    "keywords": list, programming, async, node.js, uvbook, CFFI,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/uvbook/uv-lisp-helloworld/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">uvbook for Lisp -- Hello World</h1>
+        <small></small>
+
+        <section class="post-meta">
+          <time class="post-date" datetime="2017-01-01T01:21:32&#43;09:00">
+            January 1, 2017
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/list/">#list</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/async/">#async</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/node.js/">#node.js</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/uvbook/">#uvbook</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/cffi/">#CFFI</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      
+
+<p>ここでは，<a href="https://github.com/libuv/libuv">libuv</a>のチュートリアル本，<a href="http://nikhilm.github.io/uvbook/basics.html#hello-world">uvbookの第2.2節</a>に載っている以下のHello WorldコードをLispで実装する手順を解説します．</p>
+
+<pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;uv.h&gt;
+
+int main() {
+    uv_loop_t *loop = malloc(sizeof(uv_loop_t));
+    uv_loop_init(loop);
+
+    printf(&quot;Now quitting.\n&quot;);
+    uv_run(loop, UV_RUN_DEFAULT);
+
+    uv_loop_close(loop);
+    free(loop);
+    return 0;
+}
+</code></pre>
+
+<p>まず始めに<a href="https://common-lisp.net/project/cffi/">CFFI</a>を使って直接libuvの関数を呼び出す方法を解説し，最後にlibuvラッパーの<a href="https://github.com/orthecreedence/cl-libuv">cl-libuv</a>を使った実装方法を解説します．間違い，コメント等ありましたら，<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>までお願いします．</p>
+
+<h3 id="ライブラリのロード">ライブラリのロード</h3>
+
+<p>Cで書かれた<code>libuv</code>の関数を呼び出す前に，<code>libuv</code>ライブラリをロードする必要があります．<code>libuv</code>がシステムにインストールされている場合，<code>cffi:load-foreign-library</code>関数を使ってロードすることができます．ファイル名を直接指定するよりも，拡張子を省略して<code>:default</code>指定すると，環境に応じてライブラリがロードされます．</p>
+
+<pre><code class="language-lisp">(require 'cffi)
+(cffi:load-foreign-library '(:default &quot;libuv&quot;))
+</code></pre>
+
+<p>OSに応じてロードするライブラリを細かく指定したい場合は，<code>cffi:define-foreign-library</code>関数でライブラリを定義した後，<code>cffi:use-foreign-library</code>を使ってロードします．<code>cffi:use-foreign-library</code>で複数回ロードするとエラーが出るので下の例のようにロード済みかどうか確認します．</p>
+
+<pre><code class="language-lisp">(cffi:define-foreign-library libuv
+  (:darwin  (:or &quot;libuv.1.dylib&quot; &quot;libuv.dylib&quot;))
+  (:unix    (:or &quot;libuv.so.1&quot; &quot;libuv.so&quot;))
+  (:windows (:or &quot;libuv.dll&quot; &quot;libuv-1.dll&quot;))
+  (t        (:default &quot;libuv&quot;)))
+
+(unless (cffi:foreign-library-loaded-p 'libuv)
+  (cffi:use-foreign-library libuv))
+</code></pre>
+
+<h3 id="uv-loop-t-構造体変数の準備"><code>uv_loop_t</code>構造体変数の準備</h3>
+
+<p>Cのサンプルコード6行目にある以下のコードを実装します．</p>
+
+<pre class="language-c line-numbers" data-start="6"><code>    uv_loop_t *loop = malloc(sizeof(uv_loop_t));
+</code></pre>
+
+<p>まず始めに，<code>size_t</code>型をCFFIで使えるように設定し，次にメモリの割当方法を学び，最後にポインタ変数を作成します．</p>
+
+<h4 id="型の定義方法">型の定義方法</h4>
+
+<p>libuvの<a href="http://docs.libuv.org/en/v1.x/loop.html">APIドキュメント</a>には<code>uv_loop_t</code>構造体の詳細は示されていませんが，代わりに同じページの下の方に，<code>uv_loop_t</code>の大きさを<code>size_t</code>で返す<code>uv_loop_size(void)</code>関数があります．Cの組込み型は通常CFFIから利用可能ですが，<code>size_t</code>は何故か利用できないので，まず<code>size_t</code>と同じ大きさの<code>unsigned int</code>型をエイリアスとしてCFFI版teypdefしておきましょう．</p>
+
+<pre><code class="language-lisp">(cffi:defctype size_t :uint)
+</code></pre>
+
+<h4 id="c関数のコール方法">C関数のコール方法</h4>
+
+<p>Cの関数をcallするには2通りの方法があります．CFFIを使って直接関数を起動する方法と，CFFIでCの関数にLispシンボルをバインドしてLisp関数として起動する方法です．</p>
+
+<p>１つ目の直接起動する方法は<code>cffi:foreign-funcall</code>を使う方法です．下の例の様に<code>cffi:foreign-funcall</code>に関数名，戻り値型，(引数型 引数値)から成る引数リストを指定して呼びます．</p>
+
+<pre><code class="language-lisp">(cffi:foreign-funcall &quot;uv_loop_size&quot; size_t)
+</code></pre>
+
+<p>２つ目のLispシンボルにバインドして呼ぶ方法は<code>cffi:defcfun</code>マクロを使います．，<code>cffi:defcfun</code>マクロを使って以下のように定義すると，<strong>アンダースコアがハイフンに変わった</strong>Lisp関数が定義されます．</p>
+
+<pre><code class="language-lisp">(cffi:defcfun &quot;uv_loop_size&quot; size_t)  ; uv-loop-sizeにバインド
+(uv-loop-size)                        ; Lisp関数として起動
+</code></pre>
+
+<p><code>uv_loop_size</code>は何回も呼ばないので，ここでは<code>cffi:foreign-funcall</code>を使った１番目の方法を採用することにします．</p>
+
+<h4 id="メモリの割当て方法">メモリの割当て方法</h4>
+
+<p>Lispからメモリを割り当てる場合，型に合わせたメモリ割り当てと，バイトサイズを指定したメモリ割り当ての２通りの方法があります．型を指定してその大きさのメモリを割り当てる場合には，<code>cffi:foreign-alloc</code>か<code>with-foreign-objects</code>を使います．バイトサイズを指定してメモリを割り当てるには，<code>with-foreign-pointer</code>を使います．</p>
+
+<p>CFFIでメモリを割り当てる際にはバイト（8bit）単位で指定します．そこで，<code>size_t</code>型のバイト数を取得する必要があります．CFFIから利用可能なCの組込み型は，例えば<code>(cffi:foreign-type-size :int)</code>でバイト数を取得できますが，先ほど作成したエイリアス<code>size_t</code>を使う場合にはクォートが必要です．後でコードが読みやすくなるように，ここでは<code>uv_loop_t</code>型のバイト数を<code>*size*</code>に格納しておきましょう．</p>
+
+<pre><code class="language-lisp">(* (cffi:foreign-type-size 'size_t)
+   (cffi:foreign-funcall &quot;uv_loop_size&quot; size_t))
+</code></pre>
+
+<p>バイト数を指定してメモリを割り当てるには<code>cffi:with-foreign-pointer</code>マクロを使います．以下のコードで本体処理部分でのみ<code>*size*</code>バイトのメモリが<code>uvloop</code>にバインドされます．メモリは通常スタックに割り当てられ<code>with</code>ブロックを抜けると解放されます．</p>
+
+<pre><code class="language-lisp">(cffi:with-foreign-pointer (uvloop *size*)
+   '処理本体)
+</code></pre>
+
+<p>バイト数を指定する代わりに型を指定してメモリを割り当てる<code>cffi:with-foreign-object</code>もあります．型の後ろに整数を指定すると，与えられた型が連続した領域を確保することができます．</p>
+
+<pre><code class="language-lisp">(cffi:with-foreign-object
+    (uvloop 'size_t (cffi:foreign-funcall &quot;uv_loop_size&quot; size_t))
+  '処理本体)
+</code></pre>
+
+<p><code>malloc()</code>の様にヒープにメモリを割り当てたい時には<code>cffi:foreign-alloc</code>を使います．この関数はバイト数ではなく型をとるので，任意の大きさを得るには<code>:count</code>キーワードで連続した領域数を指定します．この方法でメモリを割り当てた場合，<code>cffi:foreign-free</code>で解放する必要があります．</p>
+
+<pre><code class="language-lisp">;; メモリを割当てポインタを*uvloop*にバインド
+(defparameter *uvloop*
+  (cffi:foreign-alloc 'size_t
+		      :count (cffi:foreign-funcall &quot;uv_loop_size&quot; size_t)))
+;; メモリ解放
+(cffi:foreign-free *uvloop*)
+</code></pre>
+
+<p>ここでは，１番始めに紹介した，<code>cffi:with-foreign-pointer</code>を使って実装することにします．</p>
+
+<h3 id="イベントループの初期化">イベントループの初期化</h3>
+
+<p>ここまでで<code>uv_loop_t</code>型へのポインタ変数を用意できました．次はサンプルCプログラムの7行目の以下のコードを実装します．</p>
+
+<pre class="language-c line-numbers" data-start="7"><code>    uv_loop_init(loop);</code></pre>
+
+<p><code>uv_loop_init</code>関数の定義は，<code>int uv_loop_init(uv_loop_t* loop)</code>です．引数がポインタの場合，CFFIでの型指定は<code>:pointer</code>を使います．Lispシンボルとバインドして呼び出したいなら，</p>
+
+<pre><code class="language-lisp">(cffi:defcfun &quot;uv_loop_init&quot; :int (loop :pointer))
+</code></pre>
+
+<p>で，ポインタを引数<code>loop</code>に取り，<code>int</code>を返す<code>uv-loop-init</code>関数が定義できます．呼び出し方法はハイフンに注意して<code>(uv-loop-init uvloop)</code>です（<code>uvloop</code>は前節でメモリ割当てしたポインタ変数）．</p>
+
+<p>直接呼ぶ場合には，引数と戻り値の記述順序が<code>cffi:defcfun</code>と逆で，</p>
+
+<pre><code class="language-lisp">(cffi:foreign-funcall &quot;uv_loop_init&quot; :pointer uvloop :int)
+</code></pre>
+
+<p>で呼出せます．先ほどのメモリ割当てコードと合わせるとここまでの処理は以下の通りです．</p>
+
+<pre><code class="language-lisp">;; install libuv and cffi first.
+(require 'cffi)
+
+(cffi:load-foreign-library '(:default &quot;libuv&quot;))
+
+(cffi:defctype size_t :uint)
+
+(defparameter *size* (* (cffi:foreign-type-size :uint)
+			(cffi:foreign-funcall &quot;uv_loop_size&quot; size_t)))
+
+(cffi:with-foreign-pointer (uvloop *size*)
+  (cffi:foreign-funcall &quot;uv_loop_init&quot; :pointer uvloop :int))
+</code></pre>
+
+<h3 id="ポインタ変数について">ポインタ変数について</h3>
+
+<p>上の例ではポインタを取る関数に<code>uvloop</code>を渡しました．この例では出て来ませんが，ポインタが指し示す先を得る方法も説明しておきましょう．ポインタの参照先を得るには<code>cffi:mem-ref</code>を使います．例えば，<code>char</code>型のポインタ変数<code>ptr</code>の参照先は以下で得られます．</p>
+
+<pre><code class="language-lisp">(cffi:mem-ref ptr :char)
+</code></pre>
+
+<p><code>ptr</code>が<code>char</code>配列の場合，<code>ptr[3]</code>は<code>(cffi:mem-ref ptr :char 3)</code>でアクセスします．参照先に値を設定する場合は以下のように書きます．</p>
+
+<pre><code class="language-lisp">(setf (cffi:mem-ref ptr :char 3) (char-code #\a))
+</code></pre>
+
+<h3 id="cffiによる実装仕上げ">CFFIによる実装仕上げ</h3>
+
+<p>残りのCコードは以下の通りです．</p>
+
+<pre class="language-c line-numbers" data-start="9"><code>    printf("Now quitting.\n");
+    uv_run(loop, UV_RUN_DEFAULT);
+
+    uv_loop_close(loop);
+    free(loop);
+</code></pre>
+
+<p>最後のメモリ解放は<code>cffi:with-foreign-pointer</code>を使った場合，自動的に行われるので必要ありません．</p>
+
+<p><code>uv_run()</code>関数のシグニチャは<code>int uv_run(uv_loop_t* loop, uv_run_mode mode)</code>で，<code>uv_run_mode</code>型は<a href="http://docs.libuv.org/en/v1.x/loop.html#c.uv_run_mode">ここで</a>以下の様に定義されている<code>enum</code>型です．</p>
+
+<pre><code class="language-c">typedef enum {
+    UV_RUN_DEFAULT = 0,
+    UV_RUN_ONCE,
+    UV_RUN_NOWAIT
+} uv_run_mode;
+</code></pre>
+
+<p>Cの<code>uv_run</code>を起動するときに引数で<code>UV_RUN_DEFAULT</code>の値を渡さなければいけないので，CFFIからCのenum型を定義し用意します．</p>
+
+<pre><code class="language-lisp">(cffi:defcenum :uv-run-mode
+  (:uv-run-default 0)
+  :uv-run-once
+  :uv-run-nowait)
+</code></pre>
+
+<p><code>uv_loop_close(loop)</code>は<code>int</code>を返す関数です．以上をまとめるとHello WorldサンプルコードのLisp版は以下のようになります．</p>
+
+<pre><code class="language-lisp line-numbers">;; install libuv and cffi first.
+(require 'cffi)
+(cffi:load-foreign-library '(:default &quot;libuv&quot;))
+
+(cffi:defctype size_t :uint)
+(defparameter *size* (* (cffi:foreign-type-size :uint)
+			(cffi:foreign-funcall &quot;uv_loop_size&quot; size_t)))
+(cffi:defcenum :uv-run-mode
+  (:uv-run-default 0)
+  :uv-run-once
+  :uv-run-nowait)
+
+(cffi:with-foreign-pointer (uvloop *size*)
+  (cffi:foreign-funcall &quot;uv_loop_init&quot; :pointer uvloop :int)
+  (format t &quot;Now quitting.~%&quot;)
+  (cffi:foreign-funcall &quot;uv_run&quot; :pointer uvloop :uv-run-mode :uv-run-default)
+  (cffi:foreign-funcall &quot;uv_loop_close&quot; :pointer uvloop :int))
+</code></pre>
+
+<h3 id="cl-libuvを使った実装">cl-libuvを使った実装</h3>
+
+<p>CFFIの実装を理解していれば基本的には同じです．cl-libuvではアンダースコアの関数名をハイフンに変えているだけです．</p>
+
+<p>CFFIを用いた前節までの実装では，<code>malloc(sizeof(uv_loop_t))</code>を実装しました．libuvには他言語からの利用を考慮して<code>uv_loop_t</code>インスタンスを初期化してポインタを返す<code>uv_default_loop()</code>関数が用意されています．ここではこの関数を用いてメモリアロケーションを回避しています．</p>
+
+<p><code>uv_run_mode</code>型は<code>cl-libuv/bindings.lisp</code>ファイルでCのenum型として定義されています．Cのenum変数にアクセスするには，<code>cffi:foreign-enum-value</code>に型名を指定してアクセスします．cl-libuvでは，<code>lispify</code>マクロ（<code>cl-libuv/wrapper.lisp</code>で定義）でenum変数名の先頭から<code>uv-</code>を取り除き<code>:keyword</code>パッケージにinternするので，<code>UV_RUN_DEFAULT</code>は<code>:RUN_DEFAULT</code>でアクセスできます．</p>
+
+<pre><code class="language-lisp line-numbers">(require 'cl-libuv)
+
+(defparameter *loop* (uv:uv-default-loop))
+(uv:uv-run *loop* (cffi:foreign-enum-value
+                        'uv:uv-run-mode :run-default))
+(format t &quot;Now quitting.~%&quot;)
+
+(uv:uv-loop-close *loop*)
+</code></pre>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=uvbook%20for%20Lisp%20--%20Hello%20World&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fuvbook%2fuv-lisp-helloworld%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fuvbook%2fuv-lisp-helloworld%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fuvbook%2fuv-lisp-helloworld%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/">
+          <section class="post">
+              <h2>uvbook -- libuvの仕組みとidle-basicの解説</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/lisp-pm/">
+          <section class="post">
+              <h2>Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    
+</body>
+</html>
+

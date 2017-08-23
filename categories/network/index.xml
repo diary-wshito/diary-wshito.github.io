@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Network on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/categories/network/</link>
+    <description>Recent content in Network on wshito&#39;s diary</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>All rights reserved 2016--</copyright>
+    <lastBuildDate>Wed, 09 Nov 2016 19:29:46 +0900</lastBuildDate>
+    
+	<atom:link href="http://diary.wshito.com/categories/network/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Buffered IO or Unbuffered IO</title>
+      <link>http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/</link>
+      <pubDate>Wed, 09 Nov 2016 19:29:46 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/</guid>
+      <description>ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，Unbuffered IOのread()，write()を使用している理由が</description>
+    </item>
+    
+  </channel>
+</rss>
