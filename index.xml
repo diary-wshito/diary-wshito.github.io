@@ -41,10 +41,10 @@
     
     <item>
       <title>uvbook for Lisp -- Hello World</title>
-      <link>http://diary.wshito.com/comp/lisp/uvbook/uv-lisp-helloworld/</link>
+      <link>http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/</link>
       <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/comp/lisp/uvbook/uv-lisp-helloworld/</guid>
+      <guid>http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/</guid>
       <description>ここでは，libuvのチュートリアル本，uvbookの第2.2節に載っている以下のHello WorldコードをLispで実装する手順を解説し</description>
     </item>
     
