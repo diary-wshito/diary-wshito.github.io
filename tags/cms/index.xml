@@ -18,7 +18,7 @@
       <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/cms/hugo-asciidoc/</guid>
-      <description>で変換することを前提に， Hugo で AsciiDoc 原稿を書く際に気をつけるべき点を書き留めておく． Level 0のタイトル Hugo は = で始まるLevel 0のタイトルを無視するの</description>
+      <description>Asciidoctor で変換することを前提に， Hugo で AsciiDoc 原稿を書く際に気をつけるべき点を書き留めておく． Level 0のタイトル Hugo は = で始まるLevel 0のタイトルを無視する</description>
     </item>
     
   </channel>
