@@ -13,12 +13,12 @@
     
     
     <item>
-      <title>HugoでAsciidocフォーマット原稿を書く際の留意点</title>
+      <title>Hugo で AsciiDoc フォーマット原稿を書く際の留意点</title>
       <link>http://diary.wshito.com/comp/cms/hugo-asciidoc/</link>
       <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/cms/hugo-asciidoc/</guid>
-      <description>Asciidoctor で変換することを前提に， Hugo で asciidoc 原稿を書く際に気をつけるべき点を書き留めておく． Level 0のタイトル Hugoは = で始まるLevel 0のタイトルを無</description>
+      <description>で変換することを前提に， Hugo で AsciiDoc 原稿を書く際に気をつけるべき点を書き留めておく． Level 0のタイトル Hugo は = で始まるLevel 0のタイトルを無視するの</description>
     </item>
     
   </channel>

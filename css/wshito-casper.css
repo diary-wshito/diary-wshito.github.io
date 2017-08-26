@@ -94,16 +94,20 @@ code.has-jax {
 }
 
 /* Asciidoctor ソースコード番号付け */
+body {
+  counter-reset: cnum 0;           /* cnum のカウンタを 0 にセット */
+}
+
 .listingblock .title {
   color: inherit; // #3A4145
   font-style: normal;
   font-weight: bold;
   font-family: "Open Sans", "Sans", sans-serif;
+  counter-increment: cnum 1;
 }
 
 .listingblock .title:before {
-  counter-increment: code;
-  content: "コード " counter(code) ".";
+  content: "コード " counter(cnum) ".";
   margin-right: 1em;
 }
 

@@ -12,13 +12,13 @@
 
 
 
-<meta name="twitter:title" content="HugoでAsciidocフォーマット原稿を書く際の留意点"/>
+<meta name="twitter:title" content="Hugo で AsciiDoc フォーマット原稿を書く際の留意点"/>
 <meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@waterloo_jp"/>
 
 
 
-  	<meta property="og:title" content="HugoでAsciidocフォーマット原稿を書く際の留意点 &middot; wshito&#39;s diary" />
+  	<meta property="og:title" content="Hugo で AsciiDoc フォーマット原稿を書く際の留意点 &middot; wshito&#39;s diary" />
   	<meta property="og:site_name" content="wshito&#39;s diary" />
   	<meta property="og:url" content="http://diary.wshito.com/comp/cms/hugo-asciidoc/" />
 
@@ -40,10 +40,10 @@
     
     
 
-    <title>HugoでAsciidocフォーマット原稿を書く際の留意点 &middot; wshito&#39;s diary</title>
+    <title>Hugo で AsciiDoc フォーマット原稿を書く際の留意点 &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="Asciidoctor で変換することを前提に， Hugo で asciidoc 原稿を書く際に気をつけるべき点を書き留めておく． Level 0のタイトル Hugoは = で始まるLevel 0のタイトルを無" />
+    <meta name="description" content="で変換することを前提に， Hugo で AsciiDoc 原稿を書く際に気をつけるべき点を書き留めておく． Level 0のタイトル Hugo は = で始まるLevel 0のタイトルを無視するの" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -96,9 +96,9 @@
             
         ]
     },
-    "headline": HugoでAsciidocフォーマット原稿を書く際の留意点,
-    "name": HugoでAsciidocフォーマット原稿を書く際の留意点,
-    "wordCount": 1123,
+    "headline": Hugo で AsciiDoc フォーマット原稿を書く際の留意点,
+    "name": Hugo で AsciiDoc フォーマット原稿を書く際の留意点,
+    "wordCount": 1066,
     "timeRequired": "PT3M",
     "inLanguage": {
       "@type": "Language",
@@ -201,7 +201,7 @@
   <article class="post comp">
 
     <header class="post-header">
-        <h1 class="post-title">HugoでAsciidocフォーマット原稿を書く際の留意点</h1>
+        <h1 class="post-title">Hugo で AsciiDoc フォーマット原稿を書く際の留意点</h1>
         <small></small>
 
         <section class="post-meta">
@@ -225,7 +225,7 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://asciidoctor.org">Asciidoctor</a> で変換することを前提に， <a href="http://gohugo.io">Hugo</a> で <a href="http://asciidoc.org">asciidoc</a> 原稿を書く際に気をつけるべき点を書き留めておく．</p>
+<p> で変換することを前提に， <a href="http://gohugo.io">Hugo</a> で <a href="http://asciidoc.org">AsciiDoc</a> 原稿を書く際に気をつけるべき点を書き留めておく．</p>
 </div>
 </div>
 </div>
@@ -233,7 +233,7 @@
 <h2 id="_level_0のタイトル">Level 0のタイトル</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hugoは <code>=</code> で始まるLevel 0のタイトルを無視するので，独立した文書として変換するときのために <code>=</code> で始まる行にタイトルを記述して問題ない．ただしHugo（もしくはtheme）がページタイトルとして抽出するのは，ページ冒頭に付加する <a href="http://gohugo.io/content-management/front-matter/">Front Matter</a> で設定する <code>title</code> である．</p>
+<p><a href="http://gohugo.io">Hugo</a> は <code>=</code> で始まるLevel 0のタイトルを無視するので，独立した文書として変換するときのために <code>=</code> で始まる行にタイトルを記述して問題ない．ただし <a href="http://gohugo.io">Hugo</a> （もしくはtheme）がページタイトルとして抽出するのは，ページ冒頭に付加する <a href="http://gohugo.io/content-management/front-matter/">Front Matter</a> で設定する <code>title</code> である．</p>
 </div>
 </div>
 </div>
@@ -241,7 +241,7 @@
 <h2 id="_コマンドの前後の空白">コマンドの前後の空白</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Asciidocは，DocBookに比べマークアップの手間が省ける分，地のテキストとコマンドを分離するマークアップ記号がない．そのため，コマンドの前後に空白を置かなければならないという制約がある．</p>
+<p><a href="http://asciidoc.org">AsciiDoc</a> は， <a href="http://docbook.org">DocBook</a> に比べマークアップの手間が省ける分，地のテキストとコマンドを分離するマークアップ記号がない．そのため，コマンドの前後に空白を置かなければならないという制約がある．</p>
 </div>
 <div class="sect2">
 <h3 id="_インライン_コードのケース">インライン・コードのケース</h3>
@@ -254,7 +254,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>ただしAsciidoctorバージョン1.5.6.1現在，句読点の直後には空白を入れなくてもコードとして認識される．</p>
+<p>ただし  バージョン1.5.6.1現在，句読点の直後には空白を入れなくてもコードとして認識される．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -280,10 +280,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prismjsを使ったコードハイライト">PrismJSを使ったコードハイライト</h2>
+<h2 id="_prismjs_を使ったコードハイライト">PrismJS を使ったコードハイライト</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://prismjs.com">PrismJS</a> は，<code>&lt;pre&gt;&lt;code class="language-lisp"&gt;</code> で始まるコードブロックを処理する．Asciidocの記法でコードを書けば，この形式に変換される．</p>
+<p><a href="http://prismjs.com">PrismJS</a> は，<code>&lt;pre&gt;&lt;code class="language-lisp"&gt;</code> で始まるコードブロックを処理する． <a href="http://asciidoc.org">AsciiDoc</a> の記法でコードを書けば，この形式に変換される．</p>
 </div>
 <div class="sect2">
 <h3 id="_行番号のつけ方">行番号のつけ方</h3>
@@ -358,7 +358,7 @@
 <div class="sect2">
 <h3 id="_コールアウトを実現するには">コールアウトを実現するには</h3>
 <div class="paragraph">
-<p>Asciidoctorはコールアウトを <code>&lt;b class="conum"&gt;(1)&lt;/b&gt;</code> というマークアップに変換する．PrismJSは，ソースコード中のマークアップをプログラミング言語の一部とみなして別の形式に変換してしまうので，ソースコード中のマークアップをそのまま残す &#8220;Keep Markup&#8221; プラグインを一緒にインストールする．あとは，スタイルシートで見栄えを設定する．</p>
+<p> はコールアウトを <code>&lt;b class="conum"&gt;(1)&lt;/b&gt;</code> というマークアップに変換する． <a href="http://prismjs.com">PrismJS</a> は，ソースコード中のマークアップをプログラミング言語の一部とみなして別の形式に変換してしまうので，ソースコード中のマークアップをそのまま残す &#8220;Keep Markup&#8221; プラグインを一緒にインストールする．あとは，スタイルシートで見栄えを設定する．</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -436,7 +436,7 @@ int main() {
     
 <section class="share">
   <h4>Share this post</h4>
-  <a class="icon-twitter" href="https://twitter.com/share?text=Hugo%e3%81%a7Asciidoc%e3%83%95%e3%82%a9%e3%83%bc%e3%83%9e%e3%83%83%e3%83%88%e5%8e%9f%e7%a8%bf%e3%82%92%e6%9b%b8%e3%81%8f%e9%9a%9b%e3%81%ae%e7%95%99%e6%84%8f%e7%82%b9&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fcms%2fhugo-asciidoc%2f"
+  <a class="icon-twitter" href="https://twitter.com/share?text=Hugo%20%e3%81%a7%20AsciiDoc%20%e3%83%95%e3%82%a9%e3%83%bc%e3%83%9e%e3%83%83%e3%83%88%e5%8e%9f%e7%a8%bf%e3%82%92%e6%9b%b8%e3%81%8f%e9%9a%9b%e3%81%ae%e7%95%99%e6%84%8f%e7%82%b9&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fcms%2fhugo-asciidoc%2f"
       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
       <span class="hidden">Twitter</span>
   </a>
