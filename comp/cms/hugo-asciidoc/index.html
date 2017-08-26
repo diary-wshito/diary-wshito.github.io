@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="HugoでAsciidocフォーマット原稿を書く際の留意点"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="HugoでAsciidocフォーマット原稿を書く際の留意点 &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/cms/hugo-asciidoc/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2017-08-25T23:20:41&#43;09:00" />
+
+    
+    <meta property="article:tag" content="cms" />
+    
+    <meta property="article:tag" content="hugo" />
+    
+    <meta property="article:tag" content="asciidoc" />
+    
+    
+
+    <title>HugoでAsciidocフォーマット原稿を書く際の留意点 &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="Asciidoctorで変換することを前提に，Hugoでasciidoc原稿を書く際に気をつけるべき点を書き留めておく． Level 0のタイトル Hug" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.26" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/cms/hugo-asciidoc/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": 
+    },
+    "author": {
+        "@type": "Person",
+        "name": ,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": HugoでAsciidocフォーマット原稿を書く際の留意点,
+    "name": HugoでAsciidocフォーマット原稿を書く際の留意点,
+    "wordCount": 1173,
+    "timeRequired": "PT3M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/cms/hugo-asciidoc/,
+    "datePublished": 2017-08-25T23:20Z,
+    "dateModified": 2017-08-25T23:20Z,
+    
+    "keywords": cms, hugo, asciidoc,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/cms/hugo-asciidoc/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">HugoでAsciidocフォーマット原稿を書く際の留意点</h1>
+        <small></small>
+
+        <section class="post-meta">
+          <time class="post-date" datetime="2017-08-25T23:20:41&#43;09:00">
+            August 25, 2017
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/cms/">#cms</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/hugo/">#hugo</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/asciidoc/">#asciidoc</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctorで変換することを前提に，Hugoでasciidoc原稿を書く際に気をつけるべき点を書き留めておく．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_level_0のタイトル">Level 0のタイトル</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hugoは <code>=</code> で始まるLevel 0のタイトルを無視するので，独立した文書として変換するときのために <code>=</code> で始まる行にタイトルを記述して問題ない．ただしHugo（もしくはtheme）がページタイトルとして抽出するのは，ページ冒頭に付加するFront Matterで設定する <code>title</code> である．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_コマンドの前後の空白">コマンドの前後の空白</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidocは，DocBookに比べマークアップの手間が省ける分，地のテキストとコマンドを分離するマークアップ記号がない．そのため，コマンドの前後に空白を置かなければならないという制約がある．</p>
+</div>
+<div class="sect2">
+<h3 id="_インライン_コードのケース">インライン・コードのケース</h3>
+<div class="paragraph">
+<p>インライン・コードを書く際は，下のようにコードの前後に空白を入れる必要がある．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>コード `print();` の前後に空白を入れる</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ただしAsciidoctorバージョン1.5.6.1現在，句読点の直後には空白を入れなくてもコードとして認識される．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>このように，`print();` 後ろだけ空白を入れれば良い．`print()` ここも大丈夫．</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>これを変換すると以下のようになる．<br>
+&#8220;このように，<code>print();</code> 後ろだけ空白を入れれば良い．<code>print()</code> ここも大丈夫．&#8221;</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_urlのケース">URLのケース</h3>
+<div class="paragraph">
+<p>残念ながらURLは句読点の後ろでも半角スペースを入れなければ，URLとして認識されない．URL以外のコマンドも同様である．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>こんな時， http://gohugo.io[Hugo] は前後に空白を入れる</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prismjsを使ったコードハイライト">PrismJSを使ったコードハイライト</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://prismjs.com">PrismJS</a> は，<code>&lt;pre&gt;&lt;code class="language-lisp"&gt;</code> で始まるコードブロックを処理する．Asciidocの記法でコードを書けば，この形式に変換される．</p>
+</div>
+<div class="sect2">
+<h3 id="_行番号のつけ方">行番号のつけ方</h3>
+<div class="paragraph">
+<p>行番号をつけるには，言語の後ろに半角スペースを入れて <code>line-numbers</code> を指定する．これにより，<code>&lt;code class="language-c line-numbers"&gt;</code> というマークアップが生成される．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>```lisp line-numbers
+(cffi:define-foreign-library libuv
+  (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
+  (:unix    (:or "libuv.so.1" "libuv.so"))
+  (:windows (:or "libuv.dll" "libuv-1.dll"))
+  (t        (:default "libuv")))
+
+(unless (cffi:foreign-library-loaded-p 'libuv)
+  (cffi:use-foreign-library libuv))
+```</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>以下のように変換される．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(cffi:define-foreign-library libuv
+  (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
+  (:unix    (:or "libuv.so.1" "libuv.so"))
+  (:windows (:or "libuv.dll" "libuv-1.dll"))
+  (t        (:default "libuv")))
+
+(unless (cffi:foreign-library-loaded-p 'libuv)
+  (cffi:use-foreign-library libuv))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>次のように記述しても良い．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>[source, lisp line-numbers]
+.libuvのロード
+----
+(cffi:define-foreign-library libuv
+  (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
+  (:unix    (:or "libuv.so.1" "libuv.so"))
+  (:windows (:or "libuv.dll" "libuv-1.dll"))
+  (t        (:default "libuv")))
+
+(unless (cffi:foreign-library-loaded-p 'libuv)
+  (cffi:use-foreign-library libuv))
+----</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>これは以下のように変換される．</p>
+</div>
+<div class="listingblock">
+<div class="title">libuvのロード</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(cffi:define-foreign-library libuv
+  (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
+  (:unix    (:or "libuv.so.1" "libuv.so"))
+  (:windows (:or "libuv.dll" "libuv-1.dll"))
+  (t        (:default "libuv")))
+
+(unless (cffi:foreign-library-loaded-p 'libuv)
+  (cffi:use-foreign-library libuv))</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_コールアウトを実現するには">コールアウトを実現するには</h3>
+<div class="paragraph">
+<p>Asciidoctorはコールアウトを <code>&lt;b class="conum"&gt;(1)&lt;/b&gt;</code> というマークアップに変換する．PrismJSは，ソースコード中のマークアップをプログラミング言語の一部とみなして別の形式に変換してしまうので，ソースコード中のマークアップをそのまま残す &#8220;Keep Markup&#8221; プラグインを一緒にインストールする．あとは，スタイルシートで見栄えを設定する．</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./keep-markup.png" alt="keep markup" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>下のコードを変換してみる．</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[source, c line-numbers]
+.Idle basic
+----
+#include <stdio.h>
+int main() {
+    printf("Hello World\n");    // <1>
+    return 0;
+}
+----
+<1> コールアウト</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Idle basic</div>
+<div class="content">
+<pre class="highlight"><code class="language-c line-numbers" data-lang="c line-numbers">#include &lt;stdio.h&gt;
+int main() {
+    printf("Hello World\n");   <b class="conum">(1)</b>
+    return 0;
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>コールアウト</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=Hugo%e3%81%a7Asciidoc%e3%83%95%e3%82%a9%e3%83%bc%e3%83%9e%e3%83%83%e3%83%88%e5%8e%9f%e7%a8%bf%e3%82%92%e6%9b%b8%e3%81%8f%e9%9a%9b%e3%81%ae%e7%95%99%e6%84%8f%e7%82%b9&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fcms%2fhugo-asciidoc%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2fcms%2fhugo-asciidoc%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fcms%2fhugo-asciidoc%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/as/step-by-step/begin-assembly/">
+          <section class="post">
+              <h2>アセンブリを始めてみる</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+
+    
+</body>
+</html>
+

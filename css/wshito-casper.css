@@ -9,7 +9,7 @@ code, tt {
 code[class*="language-"],
 pre[class*="language-"] {
   color: inherit;
-  margin: -0.5em 0 1.8em 0; /* pre's bottom margin
+  margin: -0.5em 0 1.8em 0; /* pre's bottom margin */
 }
 
 /*
@@ -38,3 +38,78 @@ code.has-jax {
   border: inherit;
   color: inherit;
 }
+
+/* Asciidoctor callout.  Use "Keep Markup" plugin of PrismJS */
+.conum .punctuation {
+  display: none;
+}
+.conum .number {
+  display: inline-block;
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  text-align: center;
+  width: 1.35em;
+  height: 1.35em;
+  font-size: 0.9em;
+  line-height: 1.37em;
+  font-family: "Open Sans", "Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* Asciidoctor callout list */
+.colist ol {
+  margin-top: -1em;
+  counter-reset: my-counter;
+  list-style: none;
+  padding: 0;
+}
+
+.colist li {
+  margin-bottom: 10px;
+  padding-left: 30px;
+  position: relative;
+}
+.colist li:before {
+  content: counter(my-counter);
+  counter-increment: my-counter;
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: block;
+  float: left;
+  line-height: 1.37em; // 22px;
+  margin-left: -27px;
+  margin-right: 10px;
+  margin-top: 2px;
+  text-align: center;
+  height: 1.35em; // 22px;
+  width: 1.35em; // 22px;
+  font-size: 0.9em;
+  border-radius: 50%;
+  font-family: "Open Sans", "Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* Asciidoctor ソースコード番号付け */
+.listingblock .title {
+  color: inherit; // #3A4145
+  font-style: normal;
+  font-weight: bold;
+  font-family: "Open Sans", "Sans", sans-serif;
+}
+
+.listingblock .title:before {
+  counter-increment: code;
+  content: "コード " counter(code) ".";
+  margin-right: 1em;
+}
+
+/* Asciidoctor 見栄え調整 */
+.sectionbody {
+  margin-top: 1.8em;
+  margin-bottom: 2em;
+}
+
