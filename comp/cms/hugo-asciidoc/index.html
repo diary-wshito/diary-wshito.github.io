@@ -98,7 +98,7 @@
     },
     "headline": Hugo で AsciiDoc フォーマット原稿を書く際の留意点,
     "name": Hugo で AsciiDoc フォーマット原稿を書く際の留意点,
-    "wordCount": 1066,
+    "wordCount": 1275,
     "timeRequired": "PT3M",
     "inLanguage": {
       "@type": "Language",
@@ -402,6 +402,59 @@ int main() {
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_数式の挿入">数式の挿入</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>数式はMathJaxの設定をしていれば，あとは <a href="http://asciidoctor.org/docs/user-manual/#stem">Asciidoctorのstem</a> に従って記述するだけでよい．</p>
+</div>
+<div class="paragraph">
+<p>まず文書の冒頭で，latexインタプリタを使う設定をする．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">:stem: latexmath</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>あとは文中でインライン数式の場合，<code>stem:[\int_0^\infty f(x) dx]</code> と書くと <code>\(\int_0^\infty f(x) dx\)</code> に変換され，MathJaxによって \(\int_0^\infty f(x) dx\) と表示される．</p>
+</div>
+<div class="paragraph">
+<p>ディスプレイ数式の場合，</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[stem]
+++++
+\int_0^\infty f(x) dx
+++++</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>と書くと，</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;div class="stemblock"&gt;
+&lt;div class="content"&gt;
+\[\int_0^\infty f(x) dx\]
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>に変換され，</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\int_0^\infty f(x) dx\]
+</div>
+</div>
+<div class="paragraph">
+<p>と表示される．</p>
+</div>
+</div>
+</div>
 
     </section>
 
@@ -453,6 +506,29 @@ int main() {
 
 
     
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "http:\/\/diary.wshito.com\/comp\/cms\/hugo-asciidoc\/";  
+this.page.identifier = "http:\/\/diary.wshito.com\/comp\/cms\/hugo-asciidoc\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://wshito.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
 
