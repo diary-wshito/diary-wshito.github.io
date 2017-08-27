@@ -12,13 +12,13 @@
 
 
 
-<meta name="twitter:title" content="Hugo で AsciiDoc フォーマット原稿を書く際の留意点"/>
+<meta name="twitter:title" content="Hugo で AsciiDoc 原稿を書く際の留意点"/>
 <meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@waterloo_jp"/>
 
 
 
-  	<meta property="og:title" content="Hugo で AsciiDoc フォーマット原稿を書く際の留意点 &middot; wshito&#39;s diary" />
+  	<meta property="og:title" content="Hugo で AsciiDoc 原稿を書く際の留意点 &middot; wshito&#39;s diary" />
   	<meta property="og:site_name" content="wshito&#39;s diary" />
   	<meta property="og:url" content="http://diary.wshito.com/comp/cms/hugo-asciidoc/" />
 
@@ -38,12 +38,16 @@
     
     <meta property="article:tag" content="asciidoc" />
     
+    <meta property="article:tag" content="prism" />
+    
+    <meta property="article:tag" content="mathjax" />
+    
     
 
-    <title>Hugo で AsciiDoc フォーマット原稿を書く際の留意点 &middot; wshito&#39;s diary</title>
+    <title>Hugo で AsciiDoc 原稿を書く際の留意点 &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="Asciidoctor で変換することを前提に， Hugo で AsciiDoc 原稿を書く際に気をつけるべき点を書き留めておく． Level 0のタイトル Hugo は = で始まるLevel 0のタイトルを無視する" />
+    <meta name="description" content="Hugo で AsciiDoc 原稿を書く際，気付いた点をまとめておきます．インストールしている処理系は Asciidoctor であることを前提にしています．質問等ありましたら，ページ下の" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -96,9 +100,9 @@
             
         ]
     },
-    "headline": Hugo で AsciiDoc フォーマット原稿を書く際の留意点,
-    "name": Hugo で AsciiDoc フォーマット原稿を書く際の留意点,
-    "wordCount": 1274,
+    "headline": Hugo で AsciiDoc 原稿を書く際の留意点,
+    "name": Hugo で AsciiDoc 原稿を書く際の留意点,
+    "wordCount": 1444,
     "timeRequired": "PT3M",
     "inLanguage": {
       "@type": "Language",
@@ -108,7 +112,7 @@
     "datePublished": 2017-08-25T23:20Z,
     "dateModified": 2017-08-25T23:20Z,
     
-    "keywords": cms, hugo, asciidoc,
+    "keywords": cms, hugo, asciidoc, prism, mathjax,
     "description": ,
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -201,7 +205,7 @@
   <article class="post comp">
 
     <header class="post-header">
-        <h1 class="post-title">Hugo で AsciiDoc フォーマット原稿を書く際の留意点</h1>
+        <h1 class="post-title">Hugo で AsciiDoc 原稿を書く際の留意点</h1>
         <small></small>
 
         <section class="post-meta">
@@ -218,6 +222,10 @@
          
           <span class="post-tag small"><a href="http://diary.wshito.com//tags/asciidoc/">#asciidoc</a></span>
          
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/prism/">#prism</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/mathjax/">#mathjax</a></span>
+         
         </section>
     </header>
 
@@ -225,7 +233,7 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://asciidoctor.org">Asciidoctor</a> で変換することを前提に， <a href="http://gohugo.io">Hugo</a> で <a href="http://asciidoc.org">AsciiDoc</a> 原稿を書く際に気をつけるべき点を書き留めておく．</p>
+<p><a href="http://gohugo.io">Hugo</a> で <a href="http://asciidoc.org">AsciiDoc</a> 原稿を書く際，気付いた点をまとめておきます．インストールしている処理系は <a href="http://asciidoctor.org">Asciidoctor</a> であることを前提にしています．質問等ありましたら，ページ下のコメントか， <a href="https://twitter.com/waterloo_jp">@waterloo_jp</a> までお願いします．</p>
 </div>
 </div>
 </div>
@@ -233,7 +241,7 @@
 <h2 id="_level_0のタイトル">Level 0のタイトル</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://gohugo.io">Hugo</a> は <code>=</code> で始まるLevel 0のタイトルを無視するので，独立した文書として変換するときのために <code>=</code> で始まる行にタイトルを記述して問題ない．ただし <a href="http://gohugo.io">Hugo</a> （もしくはtheme）がページタイトルとして抽出するのは，ページ冒頭に付加する <a href="http://gohugo.io/content-management/front-matter/">Front Matter</a> で設定する <code>title</code> である．</p>
+<p><a href="http://gohugo.io">Hugo</a> は <code>=</code> で始まるLevel 0のタイトルを無視します．独立した文書として変換するときのために <code>=</code> で始まる行にタイトルを記述しても問題ありません．ただし <a href="http://gohugo.io">Hugo</a> （もしくはtheme）がページタイトルとして抽出するのは，ページ冒頭の <a href="http://gohugo.io/content-management/front-matter/">Front Matter</a> 内で設定する <code>title</code> です．</p>
 </div>
 </div>
 </div>
@@ -241,12 +249,12 @@
 <h2 id="_コマンドの前後の空白">コマンドの前後の空白</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://asciidoc.org">AsciiDoc</a> は， <a href="http://docbook.org">DocBook</a> に比べマークアップの手間が省ける分，地のテキストとコマンドを分離するマークアップ記号がない．そのため，コマンドの前後に空白を置かなければならないという制約がある．</p>
+<p><a href="http://asciidoc.org">AsciiDoc</a> は， <a href="http://docbook.org">DocBook</a> に比べマークアップの手間が省ける分，地のテキストとコマンドを分離するマークアップ記号がありません．そのため，コマンドの前後に空白を置かなければならないという制約があります．</p>
 </div>
 <div class="sect2">
 <h3 id="_インライン_コードのケース">インライン・コードのケース</h3>
 <div class="paragraph">
-<p>インライン・コードを書く際は，下のようにコードの前後に空白を入れる必要がある．</p>
+<p>例えばインライン・コードを書くときには，下のようにコードの前後に空白を入れる必要があります．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -254,7 +262,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>ただし  バージョン1.5.6.1現在，句読点の直後には空白を入れなくてもコードとして認識される．</p>
+<p>ただし  バージョン1.5.6.1現在，句読点の直後には空白を入れなくてもコードとして認識されます．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -262,14 +270,14 @@
 </div>
 </div>
 <div class="paragraph">
-<p>これを変換すると以下のようになる．<br>
+<p>これを変換すると以下のようになります．<br>
 &#8220;このように，<code>print();</code> 後ろだけ空白を入れれば良い．<code>print()</code> ここも大丈夫．&#8221;</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_urlのケース">URLのケース</h3>
 <div class="paragraph">
-<p>残念ながらURLは句読点の後に半角スペースを入れなければ，URLとして認識されない．URL以外のコマンドも同様である．</p>
+<p>URLの場合は，句読点の後ろに半角スペースを入れなければURLとして認識されません．URL以外のコマンドも同じで，半角スペースが必要です．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -280,15 +288,15 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prismjs_を使ったコードハイライト">PrismJS を使ったコードハイライト</h2>
+<h2 id="_prism_js_を使ったコードハイライト">Prism.js を使ったコードハイライト</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://prismjs.com">PrismJS</a> は，<code>&lt;pre&gt;&lt;code class="language-lisp"&gt;</code> で始まるコードブロックを処理する． <a href="http://asciidoc.org">AsciiDoc</a> の記法でコードを書けば，この形式に変換される．</p>
+<p><a href="http://prismjs.com">PrismJS</a> は，<code>&lt;pre&gt;&lt;code class="language-lisp"&gt;</code> で始まるコードブロックをハイライト処理します． <a href="http://asciidoc.org">AsciiDoc</a> の記法でコードを書くと，この形式に変換されます．</p>
 </div>
 <div class="sect2">
 <h3 id="_行番号のつけ方">行番号のつけ方</h3>
 <div class="paragraph">
-<p>行番号をつけるには，言語の後ろに半角スペースを入れて <code>line-numbers</code> を指定する．これにより，<code>&lt;code class="language-c line-numbers"&gt;</code> というマークアップが生成される．</p>
+<p><a href="http://prismjs.com">PrismJS</a> で行番号をつけるには，<code>code</code> 要素に <code>line-numbers</code> クラスを追加する必要があります． <a href="http://asciidoc.org">AsciiDoc</a> では，言語指定の後ろに半角スペースを入れて <code>line-numbers</code> を追加すると，<code>&lt;code class="language-c line-numbers"&gt;</code> というマークアップが生成されます．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -305,7 +313,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>以下のように変換される．</p>
+<p>上のコードは以下のように変換されます．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -320,7 +328,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>次のように記述しても良い．</p>
+<p>コード・ブロックにタイトルを付けたい場合は，次のように記述します．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -339,7 +347,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>これは以下のように変換される．</p>
+<p>変換結果は次の通りです．</p>
 </div>
 <div class="listingblock">
 <div class="title">libuvのロード</div>
@@ -358,7 +366,7 @@
 <div class="sect2">
 <h3 id="_コールアウトを実現するには">コールアウトを実現するには</h3>
 <div class="paragraph">
-<p><a href="http://asciidoctor.org">Asciidoctor</a> はコールアウトを <code>&lt;b class="conum"&gt;(1)&lt;/b&gt;</code> というマークアップに変換する． <a href="http://prismjs.com">PrismJS</a> は，ソースコード中のマークアップをプログラミング言語の一部とみなして別の形式に変換してしまうので，ソースコード中のマークアップをそのまま残す &#8220;Keep Markup&#8221; プラグインを一緒にインストールする．あとは，スタイルシートで見栄えを設定する．</p>
+<p><a href="http://asciidoctor.org">Asciidoctor</a> はコールアウトを <code>&lt;b class="conum"&gt;(1)&lt;/b&gt;</code> というマークアップに変換します． <a href="http://prismjs.com">PrismJS</a> は，ソースコード中のマークアップをプログラミング言語の一部とみなして別の形式に変換してしまいます．ソースコード中のマークアップをそのまま残すには，&#8220;Keep Markup&#8221; プラグインを一緒にインストールします．あとは，スタイルシートでコールアウトの見栄えを設定します．</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -366,7 +374,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>下のコードを変換してみる．</p>
+<p>下のコードを変換してみます．</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -406,7 +414,7 @@ int main() {
 <h2 id="_数式の挿入">数式の挿入</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>数式はMathJaxの設定をしていれば，あとは <a href="http://asciidoctor.org/docs/user-manual/#stem">Asciidoctorのstem</a> に従って記述するだけでよい．まず文書の冒頭で，latexインタプリタを使う設定をする．</p>
+<p>数式はMathJaxの設定をしていれば， <a href="http://asciidoctor.org/docs/user-manual/#stem">Asciidoctorのstem</a> に従って記述するだけで大丈夫です．まず文書の冒頭で，latexインタプリタを使う設定をします．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -414,10 +422,10 @@ int main() {
 </div>
 </div>
 <div class="paragraph">
-<p>あとは文中でインライン数式の場合，<code>stem:[\int_0^\infty f(x) dx]</code> と書くと <code>\(\int_0^\infty f(x) dx\)</code> に変換され，MathJaxによって \(\int_0^\infty f(x) dx\) と表示される．</p>
+<p>あとはインライン数式の場合，<code>stem:[\int_0^\infty f(x) dx]</code> と書くと <code>\(\int_0^\infty f(x) dx\)</code> に変換され，MathJaxによって \(\int_0^\infty f(x) dx\) と表示されます．</p>
 </div>
 <div class="paragraph">
-<p>ディスプレイ数式の場合，</p>
+<p>ディスプレイ数式の場合は，</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -448,7 +456,7 @@ int main() {
 </div>
 </div>
 <div class="paragraph">
-<p>と表示される．</p>
+<p>と表示されます．</p>
 </div>
 </div>
 </div>
@@ -486,7 +494,7 @@ int main() {
     
 <section class="share">
   <h4>Share this post</h4>
-  <a class="icon-twitter" href="https://twitter.com/share?text=Hugo%20%e3%81%a7%20AsciiDoc%20%e3%83%95%e3%82%a9%e3%83%bc%e3%83%9e%e3%83%83%e3%83%88%e5%8e%9f%e7%a8%bf%e3%82%92%e6%9b%b8%e3%81%8f%e9%9a%9b%e3%81%ae%e7%95%99%e6%84%8f%e7%82%b9&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fcms%2fhugo-asciidoc%2f"
+  <a class="icon-twitter" href="https://twitter.com/share?text=Hugo%20%e3%81%a7%20AsciiDoc%20%e5%8e%9f%e7%a8%bf%e3%82%92%e6%9b%b8%e3%81%8f%e9%9a%9b%e3%81%ae%e7%95%99%e6%84%8f%e7%82%b9&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fcms%2fhugo-asciidoc%2f"
       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
       <span class="hidden">Twitter</span>
   </a>
