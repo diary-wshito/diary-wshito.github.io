@@ -269,7 +269,7 @@
 
 <p>1．通常の再帰定義のようにループしながら\(n\)から順にデクリメントして掛け合わせていくとすると，C言語のループでは以下のように書けるだろう．</p>
 
-<pre><code class="language-lisp">int result = 1;
+<pre><code class="language-c">int result = 1;
 for (int i=0; i&amp;lt;n; i++) {
   result = result * (n-i)
 }
@@ -294,7 +294,7 @@ for (int i=0; i&amp;lt;n; i++) {
 
 <p>4．テキストの変換例の解説．<code>i=1</code>を初期条件として採用して1から順に<code>n</code>までインクリメントして掛け合わせている．従ってCのループは以下のようになる．</p>
 
-<pre><code class="language-lisp">int result = 1;
+<pre><code class="language-c">int result = 1;
 for (int i=1; i &amp;lt;= n; i++) {
   result = result * i
 }
