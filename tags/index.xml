@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Fri, 25 Aug 2017 23:20:41 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 06 Sep 2017 17:33:34 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Asciidoc</title>
       <link>http://diary.wshito.com/tags/asciidoc/</link>
-      <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/asciidoc/</guid>
       <description></description>
@@ -58,11 +58,29 @@
     </item>
     
     <item>
+      <title>Canvas</title>
+      <link>http://diary.wshito.com/tags/canvas/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/canvas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Cffi</title>
       <link>http://diary.wshito.com/tags/cffi/</link>
       <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/cffi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cg</title>
+      <link>http://diary.wshito.com/tags/cg/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/cg/</guid>
       <description></description>
     </item>
     
@@ -99,6 +117,15 @@
       <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript</title>
+      <link>http://diary.wshito.com/tags/javascript/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/javascript/</guid>
       <description></description>
     </item>
     
@@ -184,6 +211,15 @@
     </item>
     
     <item>
+      <title>Physics</title>
+      <link>http://diary.wshito.com/tags/physics/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/physics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Prism</title>
       <link>http://diary.wshito.com/tags/prism/</link>
       <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
@@ -207,6 +243,15 @@
       <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/robot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Simulation</title>
+      <link>http://diary.wshito.com/tags/simulation/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/simulation/</guid>
       <description></description>
     </item>
     

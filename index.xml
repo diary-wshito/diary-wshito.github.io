@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Fri, 25 Aug 2017 23:20:41 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 06 Sep 2017 17:33:34 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AsciiDocでBouncing Ball</title>
+      <link>http://diary.wshito.com/comp/js/canvas/bouncing-ball/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/js/canvas/bouncing-ball/</guid>
+      <description>ここでは，HTML5のCanvasを画面いっぱいに表示して，Webページにアニメーションを重ねる方法を説明します．実際のデモであるこのページ</description>
+    </item>
     
     <item>
       <title>Hugo で AsciiDoc 原稿を書く際の留意点</title>

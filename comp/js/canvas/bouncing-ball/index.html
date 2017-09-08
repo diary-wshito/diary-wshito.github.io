@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="AsciiDocでBouncing Ball"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="AsciiDocでBouncing Ball &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/js/canvas/bouncing-ball/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2017-09-06T17:33:34&#43;09:00" />
+
+    
+    <meta property="article:tag" content="javascript" />
+    
+    <meta property="article:tag" content="canvas" />
+    
+    <meta property="article:tag" content="CG" />
+    
+    <meta property="article:tag" content="physics" />
+    
+    <meta property="article:tag" content="simulation" />
+    
+    <meta property="article:tag" content="asciidoc" />
+    
+    
+
+    <title>AsciiDocでBouncing Ball &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="ここでは，HTML5のCanvasを画面いっぱいに表示して，Webページにアニメーションを重ねる方法を説明します．実際のデモであるこのページ" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.26" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/js/canvas/bouncing-ball/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": AsciiDocでBouncing Ball,
+    "name": AsciiDocでBouncing Ball,
+    "wordCount": 3522,
+    "timeRequired": "PT8M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/js/canvas/bouncing-ball/,
+    "datePublished": 2017-09-06T17:33Z,
+    "dateModified": 2017-09-06T17:33Z,
+    
+    "keywords": javascript, canvas, CG, physics, simulation, asciidoc,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/js/canvas/bouncing-ball/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">AsciiDocでBouncing Ball</h1>
+        <small></small>
+
+        <section class="post-meta">
+          <time class="post-date" datetime="2017-09-06T17:33:34&#43;09:00">
+            September 6, 2017
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/javascript/">#javascript</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/canvas/">#canvas</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/cg/">#CG</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/physics/">#physics</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/simulation/">#simulation</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/asciidoc/">#asciidoc</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>ここでは，HTML5のCanvasを画面いっぱいに表示して，Webページにアニメーションを重ねる方法を説明します．実際のデモであるこのページは，AsciiDoc原稿にCanvasを埋め込んで作成したので，AsciiDocでの設定方法についても説明したいと思います．アニメーションのバウンシング・ボールは，中1の息子が夏休みの自由研究で作った <a href="https://scratch.mit.edu/projects/171848318/">Scratchプロジェクト</a>へのオマージュです（笑）．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_基本設定">基本設定</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>まず，ページの好きな場所にCanvas要素とアニメーションのスクリプトを記述します（<a href="#canvas-element">コード1</a>）．Canvasの表示位置はCSSでコントロールするので，どこに記述しても構いません．<code>style</code> 属性の中身はCSSファイルに書いても良いのですが．このページは <a href="http://gohugo.io">Hugo</a> で作られており，テーマのスタイルシートをいじりたくないのでCanvas要素に直接書いています．</p>
+</div>
+<div id="cavas-element" class="listingblock">
+<div class="title">HTMLファイルの記述</div>
+<div class="content">
+<pre class="highlight"><code class="language-HTML" data-lang="HTML">&lt;canvas id="canvas", style="position:fixed; top:0; right:0; z-index:10; pointer-events: none"&gt;&lt;/canvas&gt;
+&lt;script src="FullCanvas.js"&gt;&lt;/script&gt;
+&lt;script src="bouncing-ball.js"&gt;&lt;/script&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Canvasをページ全体に表示させるために，<code>position:fixed; top:0; right:0</code> でページ左上に原点を固定します．<code>z-index:10</code> はページに表示される要素の重なり具合を設定します．<code>z-index</code> のデフォルト値は0で，値が大きい要素ほど上に表示されます．<code>pointer-events:none</code> は，マウス等のポインタ・デバイスのイベントを受け取らず，下の要素にパススルーする設定です．<code>z-index</code> で一番上に表示されているので，イベントを下の要素に渡さないとページ内のリンクをクリックすることができません．</p>
+</div>
+<div class="paragraph">
+<p>AsciiDocの場合は，<a href="#asciidoc-howto">コード2</a> のように <a href="http://asciidoctor.org/docs/asciidoc-writers-guide/#pass-blocks">AsciiDocのパススルー・ブロック</a> にHTMLタグを書くと，変換後の出力にそのままコードが残ります．</p>
+</div>
+<div id="asciidoc-howto" class="listingblock">
+<div class="title">AsciiDocでの記述の仕方</div>
+<div class="content">
+<pre class="highlight"><code class="language-HTML" data-lang="HTML">++++
+&lt;canvas id="canvas", style="position:fixed; top:0; right:0; z-index:10; pointer-events: none"&gt;&lt;/canvas&gt;
+&lt;script src="FullCanvas.js"&gt;&lt;/script&gt;
+&lt;script src="bouncing-ball.js"&gt;&lt;/script&gt;
+++++</code></pre>
+</div>
+</div>
+<canvas id="canvas", style="position:fixed; top:0; right:0; z-index:10; pointer-events: none"></canvas>
+<script src="FullCanvas.js"></script>
+<script src="bouncing-ball.js"></script>
+<div class="paragraph">
+<p>Canvasのサイズ設定やアニメーションの描画処理は <code>FullCanvas.js</code> ファイルにまとめています．バウンシング・ボールの定義は <code>bouncing-ball.js</code> ファイルに記述しています．</p>
+</div>
+<div class="paragraph">
+<p>アニメーションを実行するには，<code>FullCanvas()</code> 関数に以下の引数を指定し呼び出してから，<code>init()</code> 関数を実行します（<a href="#usage-of-FullCanvas">コード3</a>）．</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>第1引数: Canvas要素のID．</p>
+</li>
+<li>
+<p>第2引数: アニメーションの実行前に一度だけ呼び出されるコールバック関数．</p>
+</li>
+<li>
+<p>第3引数: アニメーションの描画ループごとに呼び出されるコールバック関数.</p>
+</li>
+<li>
+<p>第4引数: FPS（フレーム数/秒）．</p>
+</li>
+</ul>
+</div>
+<div id="usage-of-FullCanvas" class="listingblock">
+<div class="title">FullCanvas()の使い方（bouncing-ball.js）</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">var mycanvas = FullCanvas("#canvas", mySketch.setup, mySketch.draw, fps);
+mycanvas.init();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第2引数に渡すコールバック関数（<code>mySketch.setup</code>）関数は，描画Contextオブジェクトを引数に渡されてコールバックされます．<code>bouncing-ball.js</code> では <code>Ball</code> オブジェクトを生成しています．第3引数に渡すコールバックルーチンは，アニメーションの描画ループ毎に2つの引数を渡されてコールバックされます．1つ目の引数は前回の描画ループからの経過時間をフレーム数で表したもので，2つ目の引数は描画Contextオブジェクトです．第1引数で渡される経過時間は，<code>FullCanvas()</code> を最初に呼び出した時に設定したFPSを基準にしています．Canvas APIでは正確なFPSを指定できないので，経過時間に応じてユーザが描画位置をアップデートする必要があります．</p>
+</div>
+<div id="callbacks" class="listingblock">
+<div class="title">バウンシング・ボールの描画ルーチン（bouncing-ball.js）</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">var mySketch = (function() {
+  var ball;
+  var prevTime;
+
+  function setup(context) {                    <b class="conum">(1)</b>
+    ball = new Ball(25, "#0000ff", context);
+  }
+
+  function draw(dt, context) {                 <b class="conum">(2)</b>
+    if (ball.isStopped()) {
+      ball = new Ball(25, "#0000ff", context); <b class="conum">(3)</b>
+    }
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height); <b class="conum">(4)</b>
+    ball.draw(dt);                             <b class="conum">(5)</b>
+  }
+
+  return {
+    setup: setup,
+    draw: draw
+  };
+})();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>FullCanvas</code> の第2引数に渡すコールバック関数の定義．Contextオブジェクトを引数に取る．</p>
+</li>
+<li>
+<p><code>FullCanvas</code> の第3引数に渡すコールバック関数の定義．第1引数に前回の描画ループからの経過フレーム数 <code>dt</code> と，Contextオブジェクトを引数に取る．</p>
+</li>
+<li>
+<p>ボールが停止したら新たなボールを生成して再びバウンシングさせる．</p>
+</li>
+<li>
+<p>Canvas全体をクリア．</p>
+</li>
+<li>
+<p><code>Ball</code> オブジェクトの <code>draw()</code> メソッドを呼び出して，<code>dt</code> フレーム後の位置に描画する．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>基本的な使い方は以上です．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fullcanvas関数の詳細">FullCanvas関数の詳細</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>すでに説明した通り，アニメーションの実行とCanvasの設置は <code>FullCanvas.js</code> 内の <code>FullCanvas()</code> 関数が担当しています．ここで実装の詳細を解説します．</p>
+</div>
+<div class="paragraph">
+<p>パブリックなAPIとプライベート関数を分けるために，<code>FullCanvas</code> はプロトタイプベースのオブジェクトではなく，モジュールパターンを使った関数として実装しています．<code>FullCanvas()</code> を呼ぶと以下のパブリック関数を格納するオブジェクトを受け取ります．</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>init()</code> メソッドでCanvasの初期化設定．</p>
+</li>
+<li>
+<p><code>start()</code> メソッドが描画開始．`setup()`コールバックを実行し，`draw()`コールバックを呼び続ける．</p>
+</li>
+<li>
+<p><code>stop()</code> メソッドで描画終了．</p>
+</li>
+<li>
+<p><code>pause()</code> メソッドで描画一時停止．</p>
+</li>
+<li>
+<p><code>resume()</code> メソッドで描画再開．`setup()`は呼ばない．</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Canvasのサイズの設定は <code>_init()</code> プライベート関数が行います．Canvasの初期化と描画のためのグラフィック・コンテキストを準備しています．</p>
+</div>
+<div class="listingblock">
+<div class="title">Canvasのサイズ設定とグラフィック・コンテキストの準備</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">  var _init = function() {
+    canvas = $(id)[0];
+    context = this.canvas.getContext("2d");
+    canvas.width = $(window).width(); <b class="conum">(1)</b>
+    canvas.height = $(window).height();
+    prevTime = new Date().getTime();
+  };</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>ブラウザ間の違いに対応するためJQueryを使用．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>FullCanvas</code> モジュールはjQueryを利用するため，上の <code>_init()</code> 関数の呼び出しはjQueryのロードを待ってから呼び出しています．http://gohugo.io[Hugo] 等のCMSのテーマは，ページの最後にjQuery等のライブラリを読み込むため，HTMLページの真ん中に <a href="#asciidoc-howto">コード1</a> を記述した場合は，<code>DOMContentLoaded</code>  イベントを待ち，全てのリソースが読み込まれたことを確認してから実行する必要があります．</p>
+</div>
+<div class="listingblock">
+<div class="title">jQueryのロードを待ってからFullCanvasを初期化</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">if (typeof jQuery == 'undefined') {
+  document.addEventListener("DOMContentLoaded", function invokeLater() {
+    _registerEventHandlers();   <b class="conum">(1)</b>
+    start();                    <b class="conum">(2)</b>
+  });
+} else {
+  _registerEventHandlers();
+  start();
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>ウィンドウ・サイズが変更された時のイベント・ハンドラを登録．</p>
+</li>
+<li>
+<p>内部で <code>_init()</code> をコールし，Canvasのサイズを画面の大きさに設定．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>_registerEventHandlers()</code> プライベート関数は，画面サイズが変更されるたびに <code>_init()</code> 関数が呼び出されるようにイベント登録します．</p>
+</div>
+<div class="listingblock">
+<div class="title">_registerEventHandlers()関数の実装</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">var _registerEventHandlers = function() {
+    // Window のリサイズ・イベントでcanvasのcontextを更新
+    $(window).resize(_init);
+    // ページが非表示・表示になった時の対応
+    $(document).on('visibilitychange', function(e) {
+      if (e.target.visibilityState === 'visible') {
+        _init();
+        resume();
+      } else if (e.target.visibilityState === 'hidden') {
+        stop();
+      }
+    });
+  };</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最後に，アニメーションの描画ループの実体，<code>_run()</code> プライベート関数を見てみましょう．前回の呼び出しタイム <code>prevTime</code> からの経過フレーム数と描画コンテキストを引数にして，ユーザの <code>draw()</code> コールバック関数を呼び出しています．</p>
+</div>
+<div class="listingblock">
+<div class="title">描画ループの実装</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">  var _run = function() {
+    // 経過フレーム数を渡す
+    draw((new Date().getTime() - prevTime) / (1000 / fps), context);
+    prevTime = new Date().getTime();
+    if (isRunning)
+      requestAnimationFrame(_run);
+  };</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_カスタマイズ">カスタマイズ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>もし，Canvas全体を透明に設定したい場合は，以下のようにIDを指定してスタイルシートに記述します．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-css" data-lang="css">#canvas{
+    opacity:0.5;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>個別の描画要素を透明にしたい場合は，<code>fillStyle</code> で設定します．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>context.fillStyle = "rgba(0, 0, 200, 0.5)";</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_おまけ_bouncing_ballの実装">おまけ Bouncing Ballの実装</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bouncing Ballの実装は誰も興味がないと思いますが，息子がJavaScriptに目覚めた時のために解説を残しておきます（笑）．</p>
+</div>
+<div class="paragraph">
+<p><a href="#ball-constructor">コード5</a> は <code>Ball</code> オブジェクトのコンストラクタです．まずグローバル変数で重力や摩擦力，FPSを設定しています．位置の更新は <code>FullCanvas</code> に渡される経過時間（フレーム数）を基準に行われるので，重力が3ということは，60fpsの1フレームで3ピクセルのy方向加速度を仮定しているということです．摩擦はボールが地面を転がり始めた時，0.03ピクセル減速するように設定しています．</p>
+</div>
+<div id="ball-constructor" class="listingblock">
+<div class="title">Bouncing Ballのコンストラクタ</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">var gravity = 3;
+var friction = 0.03;
+var fps = 60;
+
+function Ball(radius, color, context) {
+  this.context = context;
+  this.radius = radius;
+  this.color = color;
+  this.x = Math.random() * (context.canvas.width - radius) + radius;   <b class="conum">(1)</b>
+  this.y = radius;
+  this.dir = [1, -1];
+  this.vx = 8 * this.dir[Math.floor(Math.random() * this.dir.length)]; <b class="conum">(2)</b>
+  this.vy = 0;
+  this.ax = 0;
+  this.ay = gravity;
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>初期時点のx座標をランダムに決定．</p>
+</li>
+<li>
+<p>初期時点のx方向をランダムに決定．高さはCanvasの上端で常に同じ．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>描画ルーチンは以下の通りです．アニメーションの更新タイミングの間に衝突するかどうかだけ気をつけている点以外は，普通の物理プログラムです．</p>
+</div>
+<div id="ball-methods" class="listingblock">
+<div class="title">Bouncing Ballの描画メソッド定義</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">Ball.prototype.draw = function(dt) {
+  var vx, vy, x, y, t;
+
+  vx = this.vx + (this.ax * dt);
+  vy = this.vy + (this.ay * dt);
+  x = this.x + (vx * dt);
+  y = this.y + (vy * dt);
+
+  if (y &gt; (this.context.canvas.height - this.radius)) {
+    t = (this.context.canvas.height - this.radius - this.y) / vy;
+    this.vy += (this.ay * t);
+    this.vy *= -1;
+    this.y = (this.context.canvas.height - this.radius) + this.vy * (dt - t);
+  } else if (y &lt; this.radius) {
+    t = (this.y - this.radius) / vy;
+    this.vy += (this.ay * t);
+    this.vy *= -1;
+    this.y = this.radius + this.vy * (dt - t);
+  } else {
+    this.y = y;
+    this.vy = vy;
+  }
+
+  // 地上を転がる間は摩擦でx方向減速
+  if (this.y === (this.context.canvas.height - this.radius) &amp;&amp; this.vy === 0) {
+    this.ax = vx &gt; 0 ? -friction : friction;
+    if (vx &lt; friction &amp;&amp; vx &gt; -friction) {
+      this.ax = 0;
+      vx = 0;
+    }
+  } else if (this.y &gt; (this.context.canvas.height - this.radius - friction) &amp;&amp;
+    this.vy &lt; friction &amp;&amp; this.vy &gt; -friction) { // y方向速度が誤差以内なら0に設定
+    this.vy = 0;
+    this.y = (this.context.canvas.height - this.radius);
+  }
+
+  if (x &lt; this.radius) {
+    t = (this.x - this.radius) / vx; // 衝突までの時間
+    this.vx += (this.ax * t); // 衝突時の速度
+    this.vx *= -1;
+    this.x = (this.radius + this.vx * (dt - t)); // はね返り後の位置
+  } else if (x &gt; (this.context.canvas.width - this.radius)) {
+    t = (this.context.canvas.width - this.radius - this.x) / vx;
+    this.vx += (this.ax * t);
+    this.vx *= -1;
+    this.x = (this.context.canvas.width - this.radius) + this.vx * (dt - t);
+  } else {
+    this.x = x;
+    this.vx = vx;
+  }
+
+  this.context.fillStyle = this.color;
+  this.context.beginPath();
+  this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true);
+  this.context.closePath();
+  this.context.fill();
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=AsciiDoc%e3%81%a7Bouncing%20Ball&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2fcanvas%2fbouncing-ball%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2fcanvas%2fbouncing-ball%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2fcanvas%2fbouncing-ball%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "http:\/\/diary.wshito.com\/comp\/js\/canvas\/bouncing-ball\/";  
+this.page.identifier = "http:\/\/diary.wshito.com\/comp\/js\/canvas\/bouncing-ball\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diary-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/cms/hugo-asciidoc/">
+          <section class="post">
+              <h2>Hugo で AsciiDoc 原稿を書く際の留意点</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+
+    
+</body>
+</html>
+

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://diary.wshito.com/comp/js/canvas/bouncing-ball/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/comp/cms/hugo-asciidoc/</loc>
     <lastmod>2017-08-25T23:20:41+09:00</lastmod>
   </url>
@@ -75,7 +80,7 @@
   
   <url>
     <loc>http://diary.wshito.com/tags/asciidoc/</loc>
-    <lastmod>2017-08-25T23:20:41+09:00</lastmod>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -122,6 +127,18 @@
   </url>
   
   <url>
+    <loc>http://diary.wshito.com/tags/canvas/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/categories/canvas/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/categories/</loc>
     <lastmod>2017-08-25T23:20:41+09:00</lastmod>
     <priority>0</priority>
@@ -130,6 +147,18 @@
   <url>
     <loc>http://diary.wshito.com/tags/cffi/</loc>
     <lastmod>2017-01-01T01:21:32+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/tags/cg/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/categories/cg/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -147,7 +176,7 @@
   
   <url>
     <loc>http://diary.wshito.com/comp/</loc>
-    <lastmod>2017-08-25T23:20:41+09:00</lastmod>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -178,6 +207,18 @@
   <url>
     <loc>http://diary.wshito.com/tags/hugo/</loc>
     <lastmod>2017-08-25T23:20:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/tags/javascript/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/categories/javascript/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -254,6 +295,12 @@
   </url>
   
   <url>
+    <loc>http://diary.wshito.com/tags/physics/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/tags/prism/</loc>
     <lastmod>2017-08-25T23:20:41+09:00</lastmod>
     <priority>0</priority>
@@ -278,6 +325,12 @@
   </url>
   
   <url>
+    <loc>http://diary.wshito.com/tags/simulation/</loc>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/tags/stm32/</loc>
     <lastmod>2017-02-16T19:59:57+09:00</lastmod>
     <priority>0</priority>
@@ -285,7 +338,7 @@
   
   <url>
     <loc>http://diary.wshito.com/tags/</loc>
-    <lastmod>2017-08-25T23:20:41+09:00</lastmod>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -297,7 +350,7 @@
   
   <url>
     <loc>http://diary.wshito.com/</loc>
-    <lastmod>2017-08-25T23:20:41+09:00</lastmod>
+    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   

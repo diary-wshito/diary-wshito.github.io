@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Asciidoc on wshito&#39;s diary</title>
-    <link>http://diary.wshito.com/tags/asciidoc/</link>
-    <description>Recent content in Asciidoc on wshito&#39;s diary</description>
+    <title>Javascript on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/tags/javascript/</link>
+    <description>Recent content in Javascript on wshito&#39;s diary</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
     <lastBuildDate>Wed, 06 Sep 2017 17:33:34 +0900</lastBuildDate>
     
-	<atom:link href="http://diary.wshito.com/tags/asciidoc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://diary.wshito.com/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       
       <guid>http://diary.wshito.com/comp/js/canvas/bouncing-ball/</guid>
       <description>ここでは，HTML5のCanvasを画面いっぱいに表示して，Webページにアニメーションを重ねる方法を説明します．実際のデモであるこのページ</description>
-    </item>
-    
-    <item>
-      <title>Hugo で AsciiDoc 原稿を書く際の留意点</title>
-      <link>http://diary.wshito.com/comp/cms/hugo-asciidoc/</link>
-      <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/comp/cms/hugo-asciidoc/</guid>
-      <description>Hugo で AsciiDoc 原稿を書く際，気付いた点をまとめておきます．インストールしている処理系は Asciidoctor であることを前提にしています．質問等ありましたら，ページ下の</description>
     </item>
     
   </channel>
