@@ -80,8 +80,6 @@ Ball.prototype.draw = function(dt) {
     this.vx = vx;
   }
 
-  console.log("Begin x=" + (this.x - this.gradOffset) + " y=" + (this.y - this.gradOffset) + " r=" + this.gradBeginRadius);
-  console.log("End   x=" + this.x + " y=" + this.y + " r=" + this.gradEndRadius);
   this.context.strokeStyle = this.color;
   this.context.lineWidth = 3;
   gradient = this.context.createRadialGradient(
