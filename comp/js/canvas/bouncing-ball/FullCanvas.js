@@ -17,23 +17,22 @@ function FullCanvas(id, setup, draw, fps) {
   var _registerEventHandlers = function() {
     var timer = false;
     // Window のリサイズ・イベントでcanvasのcontextを更新
+    /*
     // mobile devicesはスクルールでリサイズイベントが発生するので，スクロールの終了を待つ
     if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
       $(window).resize(function() {
         if (timer !== false) {
           clearTimeout(timer);
         }
-        timer = setTimeout(function() {
-          _init();
-        }, 200);
+        timer = setTimeout(_resizeCanvas, 200);
       });
-    } else {
-      $(window).resize(_init);
     }
+    */
+    $(window).resize(_resizeCanvas);
     // ページが非表示・表示になった時の対応
     $(document).on('visibilitychange', function(e) {
       if (e.target.visibilityState === 'visible') {
-        _init();
+        _resizeCanvas();
         resume();
       } else if (e.target.visibilityState === 'hidden') {
         stop();
@@ -45,9 +44,12 @@ function FullCanvas(id, setup, draw, fps) {
   var _init = function() {
     canvas = $(id)[0];
     context = this.canvas.getContext("2d");
-    canvas.width = $(window).width(); // ブラウザ間の違いに対応するためJQueryを使用する
-    canvas.height = window.innerHeight ? window.innerHeight : $(window).height();
-    prevTime = new Date().getTime();
+    _resizeCanvas();
+  };
+
+  var _resizeCanvas = function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   };
 
   var _run = function() {
@@ -76,11 +78,11 @@ function FullCanvas(id, setup, draw, fps) {
     if (typeof jQuery == 'undefined') {
       document.addEventListener("DOMContentLoaded", function invokeLater() {
         _registerEventHandlers();
-        window.setTimeout(start(), 1500);
+        start();
       });
     } else {
       _registerEventHandlers();
-      window.setTimeout(start(), 1500);
+      start();
     }
   }
 
@@ -88,11 +90,13 @@ function FullCanvas(id, setup, draw, fps) {
     isRunning = true;
     _init();
     setup(context);
-    window.setTimeout(_run(), 1500);
+    prevTime = new Date().getTime();
+    _run();
   };
 
   var resume = function() {
     isRunning = true;
+    prevTime = new Date().getTime();
     _run();
   };
 
