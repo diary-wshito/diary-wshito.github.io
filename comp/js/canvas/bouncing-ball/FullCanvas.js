@@ -81,7 +81,7 @@ function FullCanvas(id, setup, draw, fps) {
       });
     } else {
       _registerEventHandlers();
-      start();
+      window.setTimeout(start(), 1500);
     }
   }
 
