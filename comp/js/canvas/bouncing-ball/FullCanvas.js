@@ -17,6 +17,7 @@ function FullCanvas(id, setup, draw, fps) {
   var _registerEventHandlers = function() {
     var timer = false;
     // Window のリサイズ・イベントでcanvasのcontextを更新
+    /*
     // mobile devicesはスクルールでリサイズイベントが発生するので，スクロールの終了を待つ
     if (userAgent.indexOf("iPhone") >= 0 || userAgent.indexOf("iPad") >= 0 || userAgent.indexOf("Android") >= 0) {
       $(window).resize(function() {
@@ -27,10 +28,9 @@ function FullCanvas(id, setup, draw, fps) {
           _init();
         }, 200);
       });
-
-    } else {
-      $(window).resize(_init);
     }
+    */
+    $(window).resize(_init);
     // ページが非表示・表示になった時の対応
     $(document).on('visibilitychange', function(e) {
       if (e.target.visibilityState === 'visible') {
