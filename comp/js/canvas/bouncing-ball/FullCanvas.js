@@ -44,7 +44,7 @@ function FullCanvas(id, setup, draw, fps) {
     canvas = $(id)[0];
     context = this.canvas.getContext("2d");
     canvas.width = $(window).width(); // ブラウザ間の違いに対応するためJQueryを使用する
-    canvas.height = window.innerHeight ? window.innderHeight : $(window).height();
+    canvas.height = window.innerHeight ? window.innerHeight : $(window).height();
     prevTime = new Date().getTime();
   };
 
