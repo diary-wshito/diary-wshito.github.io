@@ -15,14 +15,17 @@ function FullCanvas(id, setup, draw, fps) {
   var isRunning = false;
 
   var _registerEventHandlers = function() {
-    var timer = false;
     // Window のリサイズ・イベントでcanvasのcontextを更新
+    $(window).resize(_resizeCanvas);
+    /*
+    var timer = false;
     $(window).resize(function() {
       if (timer !== false) {
         clearTimeout(timer);
       }
       timer = setTimeout(_resizeCanvas, 200);
     });
+    */
     // ページが非表示・表示になった時の対応
     $(document).on('visibilitychange', function(e) {
       if (e.target.visibilityState === 'visible') {
