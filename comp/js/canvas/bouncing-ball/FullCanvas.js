@@ -89,7 +89,7 @@ function FullCanvas(id, setup, draw, fps) {
     isRunning = true;
     _init();
     setup(context);
-    window.setTimeout(_run(), 500);
+    window.setTimeout(_run(), 1500);
   };
 
   var resume = function() {
