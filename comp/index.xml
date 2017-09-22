@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Wed, 06 Sep 2017 17:33:34 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 22 Sep 2017 18:05:22 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/comp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lispのダイナミック・スコープとスペシャル変数</title>
+      <link>http://diary.wshito.com/comp/lisp/dynamic-scope/</link>
+      <pubDate>Fri, 22 Sep 2017 18:05:22 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/dynamic-scope/</guid>
+      <description>Common Lispのダイナミック・スコープについて勉強したのでまとめてみた．まず，要点は以下の通り． Lispのスコープは，レキシカル・スコープとダイ</description>
+    </item>
     
     <item>
       <title>AsciiDocでBouncing Ball</title>

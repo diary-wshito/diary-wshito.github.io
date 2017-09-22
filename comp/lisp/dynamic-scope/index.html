@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Lispのダイナミック・スコープとスペシャル変数"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="Lispのダイナミック・スコープとスペシャル変数 &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/dynamic-scope/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2017-09-22T18:05:22&#43;09:00" />
+
+    
+    <meta property="article:tag" content="Lisp" />
+    
+    
+
+    <title>Lispのダイナミック・スコープとスペシャル変数 &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="Common Lispのダイナミック・スコープについて勉強したのでまとめてみた．まず，要点は以下の通り． Lispのスコープは，レキシカル・スコープとダイ" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.26" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/dynamic-scope/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": Lispのダイナミック・スコープとスペシャル変数,
+    "name": Lispのダイナミック・スコープとスペシャル変数,
+    "wordCount": 2599,
+    "timeRequired": "PT6M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/dynamic-scope/,
+    "datePublished": 2017-09-22T18:05Z,
+    "dateModified": 2017-09-22T18:05Z,
+    
+    "keywords": Lisp,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/dynamic-scope/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">Lispのダイナミック・スコープとスペシャル変数</h1>
+        <small></small>
+
+        <section class="post-meta">
+          <time class="post-date" datetime="2017-09-22T18:05:22&#43;09:00">
+            September 22, 2017
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#Lisp</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Common Lispのダイナミック・スコープについて勉強したのでまとめてみた．まず，要点は以下の通り．</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Lispのスコープは，レキシカル・スコープとダイナミック・スコープの2種類ある．</p>
+</li>
+<li>
+<p>ダイナミック・スコープに従う変数をスペシャル変数という．</p>
+</li>
+<li>
+<p>スペシャル変数は <code>defvar</code> か <code>defparameter</code> によって作成される．</p>
+</li>
+<li>
+<p>スペシャル変数と同名の変数が作成されると，スコープを超えて同名のスペシャル変数全てが新しい変数を参照する．つまり，スコープを超えて同名の変数がシャドウイングされる．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>以下，順を追って見ていこう．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_レキシカル_スコープとダイナミック_スコープ">レキシカル・スコープとダイナミック・スコープ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>レキシカル・スコープでは，評価器がコードを読み込んだ時点で変数のスコープが決定する．つまり，書かれた通り（レキシカル）に変数のスコープが決まる．それに対し，ダイナミック・スコープでは実行時に変数の有効範囲が変わる．スコープが動的に決まるのだ．昨今のほとんどのプログラミング言語はレキシカル・スコープを採用している．</p>
+</div>
+<div class="paragraph">
+<p>Common Lispでも <strong>通常の変数</strong> はレキシカル・スコープに従う．それではどんな変数がダイナミック・スコープになるかというと，<strong>通常じゃないスペシャルな</strong> 変数だ．その名も <strong>スペシャル変数</strong> である．</p>
+</div>
+<div class="paragraph">
+<p><code>defvar</code> か <code>defparameter</code> によって作られた変数は全てスペシャル変数になる．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_レキシカル_スコープの場合">レキシカル・スコープの場合</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>まず，JavaScriptを使って，レキシカル・スコープの例を見てみよう．そのあと，同じコードをCommon Lispで記述し，ダイナミック・スコープとの違いを明らかにする．</p>
+</div>
+<div class="listingblock">
+<div class="title">JavaScriptのレキシカル・スコープ</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript line-numbers" data-lang="javascript line-numbers">var glvar = "Global";
+
+var inner = function () {
+   console.log("In inner: " + glvar); // グローバル変数
+}
+
+var shadowing = function () {
+   var glvar = "overriden!";
+   console.log("In shadowing: " + glvar);
+   inner();  // この中のglvarには上のローカルglvarは影響を及ぼせない．
+}
+
+inner();       // -&gt; In inner: Global
+
+shadowing();   // -&gt; In shadowing: overriden!
+               //    In inner: Global</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>shadowing()</code> 関数内でグローバル変数と同名の <code>glvar</code> を定義してグローバル変数をシャドーイングしている（コード1の8行目）．これによって9行目の実行結果（15行目のコメント）はローカル変数の値で上書きされる．しかし，<code>shadowing()</code> 関数から呼び出される <code>inner()</code> 関数内の <code>glvar</code> には上書きの効果は及ばない（16行目のコメント）．これは，<code>inner()</code> 関数の定義が評価器によって読み込まれた時点でレキシカル（書かれた通り）にスコープが決まるからだ．トップレベルで <code>inner()</code> 関数が呼び出されても，<code>shadowing()</code> 関数内から呼び出されても，<code>inner()</code> 関数内の <code>glvar</code> のスコープは変化しない．</p>
+</div>
+<div class="paragraph">
+<p>Common Lispでは <code>glvar</code> がスペシャル変数なら，<code>shadowing()</code> 関数内で新たに作成された <code>glvar</code> は，同名の変数を全てシャドウイングし，<code>inner()</code> 関数内の <code>glvar</code> も新しく作成された変数を参照することになる．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_common_lispのダイナミック_スコープ">Common Lispのダイナミック・スコープ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>コード1をLispに書き換えたものがコード2である．1行目で <code>*glvar*</code> に <code>"Global"</code> 文字列を設定している．トップレベルで作成された <code>*glvar*</code> はグローバル変数である．また，<code>defvar</code> で作成されたのでスペシャル変数でもある．Lispではスペシャル変数をアスタリスク（イヤーマフ）で囲む習慣がある．</p>
+</div>
+<div class="listingblock">
+<div class="title">Common Lispの例</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defvar *glvar* "Global")
+
+(defun inner ()
+  (format t "In inner: ~s~%" *glvar*))
+
+(defun shadowing ()
+  (let ((*glvar* "overriden!"))
+     (format t "In shadowig: ~s~%" *glvar*)
+     (inner)))
+
+(inner)      ; -&gt; In inner: "Global"
+
+(shadowing)  ; -&gt; In shadowig: "overriden!"
+             ;    In inner: "overriden!"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>inner</code> 関数内の <code>*glvar*</code> （4行目）の参照先は実行時に変化する．6行目の <code>let</code> で同名のローカル変数が作成されると，JavaScriptと同様，同じブロック内の <code>*glvar*</code> （8行目）もローカル変数によってシャドウイングされる（13行目のコメント内に実行結果）．ダイナミック・スコープのCommon Lispでは，このローカル変数の有効期間内に参照される全ての <code>*glvar*</code> は，たとえ他の関数内であっても全てこのローカル変数によってシャドウイングされる．実際，9行目で呼び出される <code>inner</code> 関数の実行結果（14行目）を見ると確かに値が上書きされている．これがダイナミック・スコープに従うスペシャル変数の特徴である．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_グローバルだがスペシャル変数ではないとどうなるか">グローバルだがスペシャル変数ではないとどうなるか？</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Common Lispの規格ではレキシカル・スコープに従うグローバル変数は未定義である．トップレベルで <code>defvar</code> と <code>defparameter</code> を使わずに変数を作成できるかは実装系に依存する．SBCLではトップレベルでも <code>setf</code> によって変数を作成できる．以下のコード3では，レキシカル・スコープのグローバル変数 <code>glvar</code> を作成しコード2と同じ処理を実行した結果である．</p>
+</div>
+<div class="listingblock">
+<div class="title">レキシカル・スコープのグローバル変数</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(setf glvar "Global")
+
+(defun inner2 ()
+  (format t "In inner: ~s~%" glvar))
+
+(defun shadowing2 ()
+  (let ((glvar "overriden!"))
+     (format t "In shadowig: ~s~%" glvar)
+     (inner)))
+
+(inner2)      ; -&gt; In inner: "Global"
+
+(shadowing2)  ; -&gt; In shadowig: "overriden!"
+              ;    In inner: "Global"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>14行目コメント欄の実行結果を見ると，JavaScriptと同様，<code>inner</code> 関数には <code>let</code> で作成された変数の影響が及んでいないのが分かる．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_スペシャル変数の使い道は">スペシャル変数の使い道は？</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lispのテキストで最もよく出てくるスペシャル変数の例は入出力先のコントロールだ．通常スペシャル変数はグローバル変数として使う．グローバル変数の利点はどこからでも参照できるため，関数に渡す引数を省略できる．Common Lispでは標準入出力のストリームがスペシャル変数として予め提供されているので，入出力系の関数内で入出力先のストリームを引数で渡す必要がない．しかし，ファイルに出力したい時もある．この時，新たにファイル出力用の関数を作成しなくても，同名のスペシャル変数をローカルで作成し，そこにファイル出力のストリームを代入すれば，そのローカル変数が有効な間，入出力をリダイレクトできる．既存の入出力系の関数をそのまま再利用できるのだ．</p>
+</div>
+<div class="paragraph">
+<p>コード2では <code>(format t &#8230;&#8203;</code> で標準出力に結果を表示した．試しに標準出力のストリーム型オブジェクトを格納したスペシャル変数 <code>*standard-output*</code> をファイルに結びつけて出力をリダイレクトしてみよう．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defun print-&gt;file ()
+  (let ((*standard-output* (open "shadow.txt"  ;; スペシャル変数をファイルストリームで一時的に上書き
+                                 :direction :output
+                                 :if-exists :supersede)))
+    (shadowing)                                ;; shadowing関数内のスペシャル変数もシャドウイングされる
+    (close *standard-output*)))
+
+(prnt-&gt;file)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>まず，2行目の <code>open</code> 関数が指定されたファイルへの出力ストリームを返す．それを <code>let</code> を用いて標準出力のストリーム型オブジェクトを指す <code>*standard-output*</code> に代入する．これでカレントディレクトリのshadow.txtファイルに2行出力される．上の例は自分でファイルストリームをオープンしローカル変数に束縛しているが，通常は <code>with-open-file</code> マクロを使って次のように書く．<code>with-open-file</code> マクロを使うとストリームを自分で閉じなくて良い．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defun print-&gt;file ()
+  (with-open-file (*standard-output* "shadow.txt"
+                                     :direction :output
+                                     :if-exists :supersede)
+    (shadowing)))
+
+(prnt-&gt;file)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>すっきりとしていて美しい&#8230;&#8203;.</p>
+</div>
+</div>
+</div>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=Lisp%e3%81%ae%e3%83%80%e3%82%a4%e3%83%8a%e3%83%9f%e3%83%83%e3%82%af%e3%83%bb%e3%82%b9%e3%82%b3%e3%83%bc%e3%83%97%e3%81%a8%e3%82%b9%e3%83%9a%e3%82%b7%e3%83%a3%e3%83%ab%e5%a4%89%e6%95%b0&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fdynamic-scope%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fdynamic-scope%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fdynamic-scope%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/js/canvas/bouncing-ball/">
+          <section class="post">
+              <h2>AsciiDocでBouncing Ball</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+
+    
+</body>
+</html>
+
