@@ -36,7 +36,7 @@
       <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/cms/hugo-asciidoc/</guid>
-      <description>Hugo で AsciiDoc 原稿を書く際，気付いた点をまとめておきます．インストールしている処理系は Asciidoctor であることを前提にしています．質問等ありましたら，ページ下の</description>
+      <description>Hugo は静的にWebサイトを生成するプログラムです．データベースを使って動的にページを生成するCMSと違い，ローカルに作成された全原稿から予めサ</description>
     </item>
     
     <item>

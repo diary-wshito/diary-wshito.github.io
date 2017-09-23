@@ -47,7 +47,7 @@
     <title>Hugo で AsciiDoc 原稿を書く際の留意点 &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="Hugo で AsciiDoc 原稿を書く際，気付いた点をまとめておきます．インストールしている処理系は Asciidoctor であることを前提にしています．質問等ありましたら，ページ下の" />
+    <meta name="description" content="Hugo は静的にWebサイトを生成するプログラムです．データベースを使って動的にページを生成するCMSと違い，ローカルに作成された全原稿から予めサ" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -102,8 +102,8 @@
     },
     "headline": Hugo で AsciiDoc 原稿を書く際の留意点,
     "name": Hugo で AsciiDoc 原稿を書く際の留意点,
-    "wordCount": 1444,
-    "timeRequired": "PT3M",
+    "wordCount": 1937,
+    "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
       "alternateName": en
@@ -233,7 +233,52 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://gohugo.io">Hugo</a> で <a href="http://asciidoc.org">AsciiDoc</a> 原稿を書く際，気付いた点をまとめておきます．インストールしている処理系は <a href="http://asciidoctor.org">Asciidoctor</a> であることを前提にしています．質問等ありましたら，ページ下のコメントか， <a href="https://twitter.com/waterloo_jp">@waterloo_jp</a> までお願いします．</p>
+<p><a href="http://gohugo.io">Hugo</a> は静的にWebサイトを生成するプログラムです．データベースを使って動的にページを生成するCMSと違い，ローカルに作成された全原稿から予めサイト全体のページを生成します．カテゴリやタグのページも静的に生成されます．このサイトも <a href="http://gohugo.io">Hugo</a> で作成しています．</p>
+</div>
+<div class="paragraph">
+<p>原稿ファイルをHTMLに変換するのは <a href="http://gohugo.io">Hugo</a> ではなく <a href="http://gohugo.io">Hugo</a> が起動する外部プログラムです． <a href="https://gohugo.io/content-management/formats/">Supported Content Formats</a> にサポートする原稿のフォーマットが載っています．拡張されたMarkdownと <a href="http://asciidoc.org">AsciiDoc</a> はデフォルトでサポートされており，変換プログラムとして <a href="http://asciidoctor.org">Asciidoctor</a> か <a href="http://asciidoc.org">AsciiDoc</a> をインストールしパスを通しておけば，特に何の設定も必要なく <code>.adoc</code> 拡張子のファイルが変換されます．</p>
+</div>
+<div class="paragraph">
+<p>ここでは， <a href="http://gohugo.io">Hugo</a> で <a href="http://asciidoc.org">AsciiDoc</a> 原稿を書く際に，気付いた点をまとめておきます．インストールしている処理系は <a href="http://asciidoctor.org">Asciidoctor</a> であることを前提にしています．質問等ありましたら，ページ下のコメントか， <a href="https://twitter.com/waterloo_jp">@waterloo_jp</a> までお願いします．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_原稿のテンプレート">原稿のテンプレート</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://gohugo.io">Hugo</a> の原稿は <code>content</code> ディレクトリ内に作成します．エディタで直接ファイルを作成しても全く問題ありませんが，<code>hugo new</code> コマンドで作成すると <code>archetype</code> ディレクトリにある雛形のファイルをコピーして作成してくれます． <a href="http://asciidoc.org">AsciiDoc</a> 用の雛形は <code>archetypes/default.adoc</code> に作成します．私の雛形は次のようになっています．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>---
+title: "{{ replace .TranslationBaseName "-" " " | title }}"
+date: {{ .Date }}
+draft: true
+aliases:
+categories:
+tags:
+comments: false
+description: ""
+keywords:
+isCJKLanguage: true
+---
+
+= タイトル
+
+== セクション</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>例えば，<code>comp/hugo.adoc</code> というパスのページを作成するには，</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>hugo new comp/hugo.adoc</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>を実行します．これで上の雛形の内容のファイルが <code>content/comp/hugo.adoc</code> に作成されます．</p>
 </div>
 </div>
 </div>
@@ -414,7 +459,7 @@ int main() {
 <h2 id="_数式の挿入">数式の挿入</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>数式はMathJaxの設定をしていれば， <a href="http://asciidoctor.org/docs/user-manual/#stem">Asciidoctorのstem</a> に従って記述するだけで大丈夫です．まず文書の冒頭で，latexインタプリタを使う設定をします．</p>
+<p>数式は <a href="https://gohugo.io/content-management/formats/#mathjax-with-hugo">MathJaxの設定</a> をしていれば， <a href="http://asciidoctor.org/docs/user-manual/#stem">Asciidoctorのstem</a> に従って記述するだけで大丈夫です．まず文書の冒頭で，latexインタプリタを使う設定をします．</p>
 </div>
 <div class="listingblock">
 <div class="content">
