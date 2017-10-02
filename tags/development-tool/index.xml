@@ -18,7 +18,7 @@
       <pubDate>Fri, 23 Dec 2016 15:25:34 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/lisp-pm/</guid>
-      <description>Lispを始めたばかりで，まだ規模の大きいプログラムを書いていないため，パッケージ管理やらライブラリの依存関係解決などわからないことだらけで</description>
+      <description>Lispを始めたばかりで，まだ規模の大きいプログラムを書いていないため，パッケージ管理やらライブラリの依存関係解決などわからないことだらけで，QuicklispやASDF，CIM，Roswell等，色々調べました．包括的かつ初心者に優しいリソースがなく，最初は苦労しました．解説がどれも各ツールの使い方に特化していて，他のツールの関係や，どのツールが必要で，どの機能が重複しているかなどの解説がなかっ</description>
     </item>
     
   </channel>

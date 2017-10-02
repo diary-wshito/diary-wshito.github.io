@@ -18,7 +18,7 @@
       <pubDate>Mon, 12 Jun 2017 21:15:11 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/as/step-by-step/begin-assembly/</guid>
-      <description>マイコンをもっと極めたい．その一心でひたすら低水準（マシン寄り）の勉強をしていると，結局アセンブリやリンカスクリプトの勉強に辿り着く． 坂井氏</description>
+      <description>マイコンをもっと極めたい．その一心でひたすら低水準（マシン寄り）の勉強をしていると，結局アセンブリやリンカスクリプトの勉強に辿り着く． 坂井氏の「12ステップで作る組込みOS自作入門」をやってH8のアセンブリを勉強するか，それとも，もっと基礎から書かれたCASLの解説書の方が良いか．CASL IIの本ではKindleで読める「アセンブリ言語スタートブック」が良さそうだ．でもシュミレーターで動く言語じゃ</description>
     </item>
     
   </channel>

@@ -18,7 +18,7 @@
       <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/</guid>
-      <description>libuvのチュートリアルuvbook，第２節のIdlingプログラムを解説します．libuvはNode.jsの根幹部分を担うCライブラリで</description>
+      <description>libuvのチュートリアルuvbook，第２節のIdlingプログラムを解説します．libuvはNode.jsの根幹部分を担うCライブラリです．IdlingプログラムのLispによる実装例は後ほど別ページとして投稿します．間違い，コメント等は@waterloo_jpまで． 下のコードは，uvbookのIdleハンドル使用例です．ここでは下のコード例を追いながら，Idleハンドルの使い方と，libuv</description>
     </item>
     
     <item>

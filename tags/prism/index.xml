@@ -18,7 +18,7 @@
       <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/cms/hugo-asciidoc/</guid>
-      <description>Hugo は静的にWebサイトを生成するプログラムです．データベースを使って動的にページを生成するCMSと違い，ローカルに作成された全原稿から予めサ</description>
+      <description>Hugo は静的にWebサイトを生成するプログラムです．データベースを使って動的にページを生成するCMSと違い，ローカルに作成された全原稿から予めサイト全体のページを生成します．カテゴリやタグのページも静的に生成されます．このサイトも Hugo で作成しています． 原稿ファイルをHTMLに変換するのは Hugo ではなく Hugo が起動する外部プログラムです． Supported Content Formats にサポートする原稿のフォーマットが載っています．拡張されたMarkdo</description>
     </item>
     
   </channel>

@@ -18,7 +18,7 @@
       <pubDate>Wed, 09 Nov 2016 19:29:46 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/</guid>
-      <description>ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，Unbuffered IOのread()，write()を使用している理由が</description>
+      <description>ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，Unbuffered IOのread()，write()を使用している理由が気になって調べてみた．普通のIOならシステムコールを減らすためにBuffered IOを使用するがなぜネットワークプログラミングではどの例もUnbufferedなのか？調べた結果は後でブログにまとめるとして，見つけた解説記事を載せておきます． Buffered vs unbuffered IO (stack overflow) - バッフ</description>
     </item>
     
   </channel>

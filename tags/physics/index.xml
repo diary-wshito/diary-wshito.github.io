@@ -18,7 +18,7 @@
       <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/js/canvas/bouncing-ball/</guid>
-      <description>HTML5のCanvasを画面いっぱいに表示して，Webページにアニメーションを重ねる方法を説明します．実際のデモであるこのページは，Asc</description>
+      <description>HTML5のCanvasを画面いっぱいに表示して，Webページにアニメーションを重ねる方法を説明します．実際のデモであるこのページは，AsciiDoc原稿にCanvasを埋め込んで作成したので，AsciiDocでの設定方法についても説明したいと思います．アニメーションのバウンシング・ボールは，中1の息子が夏休みの自由研究で作った Scratchプロジェクトへのオマージュです（笑）． ソースコードはこち</description>
     </item>
     
   </channel>
