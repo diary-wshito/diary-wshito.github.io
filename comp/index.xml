@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Fri, 22 Sep 2017 18:05:22 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 02 Oct 2017 10:39:51 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/comp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hugoのサマリ長（Summary Length）</title>
+      <link>http://diary.wshito.com/comp/cms/hugo-summarylength/</link>
+      <pubDate>Mon, 02 Oct 2017 10:39:51 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/cms/hugo-summarylength/</guid>
+      <description>Hugoではトップページの投稿一覧に表示するサマリの長さがデフォルトで70でした．英語の場合は70単語で良いのですが，日本語では70文字になってしまい圧倒的に少なすぎました．先日ようやく最新のMasterにデフォルトのサマリ長を変更するコードがマージされました． Make SummayLength configurable #3735 Change SummaryLength to be configurable #3924 リポジトリから最新バージョンをビルド，インストールし，config.toml に summaryLength = 200 と指定することで，デフォルトのサマ</description>
+    </item>
     
     <item>
       <title>Lispのダイナミック・スコープとスペシャル変数</title>
