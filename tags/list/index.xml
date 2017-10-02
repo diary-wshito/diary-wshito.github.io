@@ -18,7 +18,7 @@
       <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/</guid>
-      <description>ここでは，libuvのチュートリアル本，uvbookの第2.2節に載っている以下のHello WorldコードをLispで実装する手順を解説し</description>
+      <description>&lt;p&gt;ここでは，&lt;a href=&#34;https://github.com/libuv/libuv&#34;&gt;libuv&lt;/a&gt;のチュートリアル本，&lt;a href=&#34;http://nikhilm.github.io/uvbook/basics.html#hello-world&#34;&gt;uvbookの第2.2節&lt;/a&gt;に載っている以下のHello WorldコードをLispで実装する手順を解説します．まず始めに&lt;a href=&#34;https://common-lisp.net/project/cffi/&#34;&gt;CFFI&lt;/a&gt;を使って直接libuvの関数を呼び出す方法を解説し，最後にlibuvラッパーの&lt;a href=&#34;https://github.com/orthecreedence/cl-libuv&#34;&gt;cl-libuv&lt;/a&gt;を使った実装方法を解説します．間違い，コメント等ありましたら，&lt;a href=&#34;https://twitter.com/waterloo_jp&#34;&gt;@waterloo_jp&lt;/a&gt;までお願いします．&lt;/p&gt;</description>
     </item>
     
   </channel>

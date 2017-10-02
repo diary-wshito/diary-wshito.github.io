@@ -1,4 +1,48 @@
 /* Override screen.css */
+li {
+  margin-bottom: 0.6rem;
+  line-height: 2.4rem;
+}
+h1.post-title {
+    font-size: 4rem;
+    letter-spacing: -1px;
+    text-indent: -3px;
+    padding-bottom: 2rem;
+}
+
+h2 {
+    font-size: 2.7rem;
+    letter-spacing: -1px;
+}
+
+h3 {
+    font-size: 2.2rem;
+    letter-spacing: -0.6px;
+    padding-bottom: 0.6rem;
+}
+
+h4 {
+    font-size: 1.8rem;
+}
+
+h5 {
+    font-size: 1.8rem;
+}
+
+h6 {
+    font-size: 1.8rem;
+}
+
+#description {
+  padding-top: 1.3rem;
+  padding-bottom: 0.8rem;
+  font-size: 1.5rem;
+  line-height: 1.6em;
+}
+
+.read-more {
+    font-weight: bold;
+}
 
 code, tt {
   background: #f5f2f0;

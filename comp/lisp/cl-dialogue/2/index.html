@@ -190,18 +190,13 @@
 </header>
 
 
-
 <main class="content" role="main">
-
-
-
 
   <article class="post comp">
 
     <header class="post-header">
         <h1 class="post-title">「対話によるCommon Lisp入門」第2話まとめノート</h1>
-        <small></small>
-
+        
         <section class="post-meta">
           <time class="post-date" datetime="2016-11-14T19:27:25&#43;09:00">
             November 14, 2016
@@ -220,7 +215,7 @@
     <section class="post-content">
       
 
-<h4 id="関数と変数の作成">関数と変数の作成</h4>
+<h2 id="関数と変数の作成">関数と変数の作成</h2>
 
 <ul>
 <li><code>defun</code> 関数定義<br>
@@ -229,7 +224,7 @@
 変数宣言なしで新たに変数が作れる．トップレベルで使えばスペシャル変数（大域変数），関数内で使えばレキシカル変数（ローカル変数）を作れる．第１引数は評価されない（マクロで通常の関数ではない）．</li>
 </ul>
 
-<h4 id="共通点">共通点</h4>
+<h2 id="共通点">共通点</h2>
 
 <ul>
 <li>どちらも副作用がある．つまり処理をして値を返すだけでない．
@@ -241,7 +236,7 @@
 <li>引数を全て評価しないので関数ではない．</li>
 </ul>
 
-<h4 id="スペシャル変数とは">スペシャル変数とは？</h4>
+<h2 id="スペシャル変数とは">スペシャル変数とは？</h2>
 
 <ul>
 <li>グローバルスコープを持つ．つまり大域変数としてどこからでもアクセスできる．</li>
@@ -255,7 +250,7 @@
 </ul></li>
 </ul>
 
-<h4 id="用語">用語</h4>
+<h2 id="用語">用語</h2>
 
 <ul>
 <li><strong>束縛（binding）</strong> &mdash; 新しく変数を作って値を与えること(p.19)．</li>
@@ -263,7 +258,7 @@
 <li><strong>フォーム</strong> &mdash; 評価の対象となるもの．一般のプログラミング言語の「式」に相当(p.15, 32)．</li>
 </ul>
 
-<h4 id="参考リンク">参考リンク</h4>
+<h2 id="参考リンク">参考リンク</h2>
 
 <ul>
 <li><a href="http://tips.cddddr.org/common-lisp/index.cgi?変数とスコープ">変数とスコープ</a></li>
@@ -272,7 +267,7 @@
 <li>「On Lisp」第2.5節 スコープ，第2.6節 クロージャも参照．</li>
 </ul>
 
-<h4 id="第１話-２話の新規組込み関数とシンボル">第１話，２話の新規組込み関数とシンボル</h4>
+<h2 id="第１話-２話の新規組込み関数とシンボル">第１話，２話の新規組込み関数とシンボル</h2>
 
 <ul>
 <li><code>lisp-implementation-type</code>&mdash;Lisp処理系の名前を返す．</li>

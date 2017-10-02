@@ -198,18 +198,13 @@
 </header>
 
 
-
 <main class="content" role="main">
-
-
-
 
   <article class="post elec">
 
     <header class="post-header">
         <h1 class="post-title">次のマイクロマウス製作に向けて</h1>
-        <small></small>
-
+        
         <section class="post-meta">
           <time class="post-date" datetime="2017-02-16T19:59:57&#43;09:00">
             February 16, 2017
@@ -247,7 +242,7 @@
 <li>マウスのコントロールを物理量ベースで行う．</li>
 </ul>
 
-<h3 id="3d-cadの選定">3D CADの選定</h3>
+<h2 id="3d-cadの選定">3D CADの選定</h2>
 
 <p>フリーのCADで評判が良いのは，Fusion360やDesignSpark Mechanicalだ．しかし，多少使いづらかったり機能面で劣っていても，未来永劫フリーで何の縛りもない方が性に合うので，<a href="https://www.freecadweb.org">FreeCAD</a>に決まり．</p>
 
@@ -257,7 +252,7 @@
 <li><a href="http://freecad.vdlz.xyz/tutorial/tutorial.html">FreeCADのチュートリアル</a></li>
 </ul>
 
-<h3 id="基板cad">基板CAD</h3>
+<h2 id="基板cad">基板CAD</h2>
 
 <p>昨年はEagleを使って基板を製作した．随分多くのパーツを自分で作って登録したので愛着もあるが，今後長く使っていくならやはり何の縛りもないフリーのCADに早めに乗り換えた方が良いと考え，今年は<a href="http://kicad.jp">KiCad</a>を一から勉強し直そうと思う．</p>
 
@@ -267,7 +262,7 @@
 <li><a href="https://youtu.be/JN_Y93RTdSo?list=PL5iUxv3Op2fOpVASHvcpM2O4UO0yMfKJi">Contextual Electronicsのチュートリアルビデオシリーズ</a></li>
 </ul>
 
-<h3 id="mpuの選定">MPUの選定</h3>
+<h2 id="mpuの選定">MPUの選定</h2>
 
 <p>昨年はNXPのLPC1114を使用した．プロトタイプ製作ではDIPパッケージを使い，基板に実装する際はLPC1114FDH28/102（TSSOP 28pin）を使い，とても便利だった．しかしFPUがないため，浮動小数点の計算が続くとマシンの動きがギクシャクした．今年は昨年よりも速いステッピングモーターを使いたいので，FPUが付いたMPUにしたい．また色々なセンサを追加できるように，最低8つのADチャンネルは欲しい．PSoCも魅力的だが現時点でFPU付きのモデルが発売されていないので残念ながら今回は見送り．</p>
 

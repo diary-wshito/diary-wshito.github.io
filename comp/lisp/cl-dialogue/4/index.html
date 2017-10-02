@@ -190,18 +190,13 @@
 </header>
 
 
-
 <main class="content" role="main">
-
-
-
 
   <article class="post comp">
 
     <header class="post-header">
         <h1 class="post-title">「対話によるCommon Lisp入門」第４話まとめノート</h1>
-        <small></small>
-
+        
         <section class="post-meta">
           <time class="post-date" datetime="2016-11-15T22:11:47&#43;09:00">
             November 15, 2016
@@ -222,7 +217,7 @@
 
 <p>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．<code>car</code>，<code>cdr</code>，<code>cons</code>の基本関数以外に，便利な関数が幾つか紹介されている．</p>
 
-<h4 id="要素の取り出し">要素の取り出し</h4>
+<h2 id="要素の取り出し">要素の取り出し</h2>
 
 <ul>
 <li><code>first</code>, <code>second</code>, &hellip;., <code>tenth</code><br/>
@@ -237,7 +232,7 @@
 <li><p><code>last</code> リストの末尾の要素を取り出す．</p></li>
 </ul>
 
-<h4 id="末尾の要素を取り出す別の方法">末尾の要素を取り出す別の方法</h4>
+<h2 id="末尾の要素を取り出す別の方法">末尾の要素を取り出す別の方法</h2>
 
 <ul>
 <li><code>length</code>と<code>elt</code>を組み合わせる．
@@ -253,7 +248,7 @@
 </code></li>
 </ul>
 
-<h4 id="cons-append-list-の違い"><code>cons</code>, <code>append</code>, <code>list</code>の違い．</h4>
+<h2 id="cons-append-list-の違い"><code>cons</code>, <code>append</code>, <code>list</code>の違い．</h2>
 
 <pre><code class="language-lisp">&gt; (cons '(a b) '(c d))
 ((A B) C D)
@@ -271,7 +266,7 @@
 (A B C D)
 </code></pre>
 
-<h4 id="リストの末尾に要素を挿入する方法">リストの末尾に要素を挿入する方法</h4>
+<h2 id="リストの末尾に要素を挿入する方法">リストの末尾に要素を挿入する方法</h2>
 
 <pre><code class="language-lisp">&gt; (append '(ape bear cat) '(dog))
 (APE BEAR CAT DOG)
@@ -284,7 +279,7 @@
 (APE BEAR CAT DOG)
 </code></pre>
 
-<h4 id="butlast-関数は-cdr-の逆"><code>butlast</code>関数は<code>cdr</code>の逆</h4>
+<h2 id="butlast-関数は-cdr-の逆"><code>butlast</code>関数は<code>cdr</code>の逆</h2>
 
 <p><code>cdr</code>は1番目の要素を除いた残りを返すが，<code>butlast</code>は末尾要素を除いた残りを返す．</p>
 
@@ -298,7 +293,7 @@
      (reverse (cdr (reverse x))))
 </code></pre>
 
-<h4 id="第４話で出てきた組込み関数一覧">第４話で出てきた組込み関数一覧</h4>
+<h2 id="第４話で出てきた組込み関数一覧">第４話で出てきた組込み関数一覧</h2>
 
 <ul>
 <li><code>first</code>&mdash;<code>car</code>と同じ．</li>

@@ -190,18 +190,13 @@
 </header>
 
 
-
 <main class="content" role="main">
-
-
-
 
   <article class="post comp">
 
     <header class="post-header">
         <h1 class="post-title">「対話によるCommon Lisp入門」第６話まとめノート</h1>
-        <small></small>
-
+        
         <section class="post-meta">
           <time class="post-date" datetime="2016-11-20T15:51:03&#43;09:00">
             November 20, 2016
@@ -222,11 +217,11 @@
 
 <p>本章ではリスト処理を行う関数を再帰を使って書く練習をしながら，関数の処理時間の見積もり方と最適なコードのへの書き換え方を学ぶ．本ページではまず第５話と６話の間に挿入されたLispのコンパイル方法と，第６話で説明されている関数のトレースの仕方についてまとめ，その後，処理時間の見積もり方と，効率的なコードへの書き換えについてまとめる．</p>
 
-<h4 id="lispのコンパイル方法">Lispのコンパイル方法</h4>
+<h2 id="lispのコンパイル方法">Lispのコンパイル方法</h2>
 
 <p>REPLで作業をしている時，定義済みの関数や外部ファイルに書かれたプログラムをコンパイルする方法についてまとめる．</p>
 
-<h5 id="関数ごとのコンパイル">関数ごとのコンパイル</h5>
+<h3 id="関数ごとのコンパイル">関数ごとのコンパイル</h3>
 
 <p><code>foo</code>という名の関数を定義したら，REPLで<code>(compile 'foo)</code>を実行すると関数単位でコンパイルされる．コンパイルされている関数とされていない関数が混在しても問題なく動作する．当然コンパイル済みの関数は早く動く．</p>
 
@@ -236,7 +231,7 @@
 
 <p>slimeを使っている場合，「C-c C-c」でカーソル位置のトップレベルをcomplileする．この場合出力はない．</p>
 
-<h5 id="ファイル単位でのコンパイル">ファイル単位でのコンパイル</h5>
+<h3 id="ファイル単位でのコンパイル">ファイル単位でのコンパイル</h3>
 
 <p>ファイルの内容をすべてコンパイルするにはファイル名を指定して<code>(compile-file &quot;foo.lisp&quot;)</code>でコンパイルした後，拡張子を省略したファイル名でプログラムをロードする．</p>
 
@@ -246,7 +241,7 @@
 
 <p>slimeでは「C-c C-k」でバッファ全体（ファイル）をcompileする．</p>
 
-<h5 id="逆アセンブル">逆アセンブル</h5>
+<h3 id="逆アセンブル">逆アセンブル</h3>
 
 <p>コンパイラが変換した機械語は，<code>disassemble</code>関数で逆アセンブルすることができる．</p>
 
@@ -257,7 +252,7 @@
 
 <p>slimeでは定義した関数のシンボル上で「C-c M-d (slime-disassemble-symbol)」を実行すると，一時バッファに逆アセンブルした結果が表示される．</p>
 
-<h5 id="関数処理のトレース">関数処理のトレース</h5>
+<h3 id="関数処理のトレース">関数処理のトレース</h3>
 
 <p><code>trace</code>関数を使うと関数に入る時と出る時の情報が表示される．組込み関数を<code>trace</code>の引数に渡すとエラーが出るが，自分で定義した関数なら問題ない．</p>
 
@@ -288,7 +283,7 @@
 T
 </code></pre>
 
-<h4 id="計算時間の見積もり方">計算時間の見積もり方</h4>
+<h2 id="計算時間の見積もり方">計算時間の見積もり方</h2>
 
 <p>オーダー記法と同様，データのサイズに対しどれ位のオーダーで処理時間が増加していくかに興味があるため，以下の方法で見積もる．</p>
 
@@ -330,7 +325,7 @@ T(n) &= 1 + T(n-1) \\
 
 <p>定数時間はいくら合わせても１とする理由は，データ数（リスト長）が増加して行った時，どれくらいのオーダーで処理時間が増えるかに興味があるからだ．結局，<code>length$</code>関数はリスト長<code>n</code>に比例して計算時間が増加していくことを示している．</p>
 
-<h4 id="append-の処理時間"><code>append</code>の処理時間</h4>
+<h2 id="append-の処理時間"><code>append</code>の処理時間</h2>
 
 <p><code>append</code>の処理時間を考えるために<code>append$</code>を実装してみる．</p>
 
@@ -365,7 +360,7 @@ T(n) = 1 + T(n-1)
 \]
 </div>
 
-<h4 id="効率的な-reverse-の実装">効率的な<code>reverse</code>の実装．</h4>
+<h2 id="効率的な-reverse-の実装">効率的な<code>reverse</code>の実装．</h2>
 
 <p>リストの要素を逆順に並び替えるには，先頭要素を取り出して，残りの要素を再帰的に<code>reverse</code>で並び替えて，その後ろに最初に取り出した先頭要素を加えれば良い．この時，<code>append</code>で両者をつなげるか，<code>cons</code>で繋げるかで実行時間が変わってくる．
 先ほど計算したように<code>append</code>の計算時間は要素の長さ<code>n</code>に比例するが，<code>cons</code>なら一定時間で処理できる．</p>
@@ -413,14 +408,14 @@ T(n) = 1 + T(n-1)
 
 <p>この場合の処理時間は，\(T(n) = 1 + T(n-1)\)になるので，<code>append</code>の処理時間の計算と同じで，\(T(n) = 1 + n\)となる．</p>
 
-<h5 id="計算効率に関する教訓">計算効率に関する教訓</h5>
+<h3 id="計算効率に関する教訓">計算効率に関する教訓</h3>
 
 <ul>
 <li>リストの長さ<code>n</code>に比例する関数を入れ子にしない！</li>
 <li><code>append</code>より<code>cons</code>や<code>list</code>を使う！</li>
 </ul>
 
-<h4 id="eq-eql-equal-の違い"><code>eq</code>, <code>eql</code>, <code>equal</code>の違い</h4>
+<h2 id="eq-eql-equal-の違い"><code>eq</code>, <code>eql</code>, <code>equal</code>の違い</h2>
 
 <p>包含関係でいくと\(\text{eq}\subset\text{eql}\subset\text{equal}\)で，<code>eq</code>で真を返す関係は他の2つでも真となり，<code>eql</code>で真となる関係は<code>equal</code>でも真となる．すなわち，左から「等しさ」基準が厳しい順に並んでいると考えてよい．</p>
 
@@ -434,7 +429,7 @@ T(n) = 1 + T(n-1)
 
 <p>ちなみに<code>=</code>は数値が等しいかどうかを判定するときに使う．<code>==</code>じゃない点に注意！</p>
 
-<h4 id="述語関数">述語関数</h4>
+<h2 id="述語関数">述語関数</h2>
 
 <p>`真偽を返す述語関数が幾つか紹介された．</p>
 
@@ -448,7 +443,7 @@ T(n) = 1 + T(n-1)
 <li><code>null</code></li>
 </ul>
 
-<h4 id="連想配列">連想配列</h4>
+<h2 id="連想配列">連想配列</h2>
 
 <p>「<code>car</code>がキーで<code>cdr</code>が値とみなしたリスト」から成るリストを連想配列（association list, alist）と呼ぶ．</p>
 
@@ -456,7 +451,7 @@ T(n) = 1 + T(n-1)
 <li><code>(assoc キー alist)</code>で連想配列<code>alis</code>の先頭（左）から探して最初に見つかるキーの要素を返す．</li>
 </ul>
 
-<h4 id="sublis-関数"><code>sublis</code>関数</h4>
+<h2 id="sublis-関数"><code>sublis</code>関数</h2>
 
 <p><code>(sublis alist lst)</code>で<code>lst</code>内のアトムを連想配列内の値と置き換える．</p>
 

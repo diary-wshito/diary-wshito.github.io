@@ -49,7 +49,7 @@
     <title>uvbook for Lisp -- Hello World &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="ここでは，libuvのチュートリアル本，uvbookの第2.2節に載っている以下のHello WorldコードをLispで実装する手順を解説し" />
+    <meta name="description" content="&lt;p&gt;ここでは，&lt;a href=&#34;https://github.com/libuv/libuv&#34;&gt;libuv&lt;/a&gt;のチュートリアル本，&lt;a href=&#34;http://nikhilm.github.io/uvbook/basics.html#hello-world&#34;&gt;uvbookの第2.2節&lt;/a&gt;に載っている以下のH" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -104,7 +104,7 @@
     },
     "headline": uvbook for Lisp -- Hello World,
     "name": uvbook for Lisp -- Hello World,
-    "wordCount": 3730,
+    "wordCount": 3733,
     "timeRequired": "PT8M",
     "inLanguage": {
       "@type": "Language",
@@ -198,18 +198,13 @@
 </header>
 
 
-
 <main class="content" role="main">
-
-
-
 
   <article class="post comp">
 
     <header class="post-header">
         <h1 class="post-title">uvbook for Lisp -- Hello World</h1>
-        <small></small>
-
+        
         <section class="post-meta">
           <time class="post-date" datetime="2017-01-01T01:21:32&#43;09:00">
             January 1, 2017
@@ -234,9 +229,7 @@
     </header>
 
     <section class="post-content">
-      
-
-<p>ここでは，<a href="https://github.com/libuv/libuv">libuv</a>のチュートリアル本，<a href="http://nikhilm.github.io/uvbook/basics.html#hello-world">uvbookの第2.2節</a>に載っている以下のHello WorldコードをLispで実装する手順を解説します．</p>
+      <p>ここでは，<a href="https://github.com/libuv/libuv">libuv</a>のチュートリアル本，<a href="http://nikhilm.github.io/uvbook/basics.html#hello-world">uvbookの第2.2節</a>に載っている以下のHello WorldコードをLispで実装する手順を解説します．まず始めに<a href="https://common-lisp.net/project/cffi/">CFFI</a>を使って直接libuvの関数を呼び出す方法を解説し，最後にlibuvラッパーの<a href="https://github.com/orthecreedence/cl-libuv">cl-libuv</a>を使った実装方法を解説します．間違い，コメント等ありましたら，<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>までお願いします．</p>
 
 <pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -255,9 +248,7 @@ int main() {
 }
 </code></pre>
 
-<p>まず始めに<a href="https://common-lisp.net/project/cffi/">CFFI</a>を使って直接libuvの関数を呼び出す方法を解説し，最後にlibuvラッパーの<a href="https://github.com/orthecreedence/cl-libuv">cl-libuv</a>を使った実装方法を解説します．間違い，コメント等ありましたら，<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>までお願いします．</p>
-
-<h3 id="ライブラリのロード">ライブラリのロード</h3>
+<h2 id="ライブラリのロード">ライブラリのロード</h2>
 
 <p>Cで書かれた<code>libuv</code>の関数を呼び出す前に，<code>libuv</code>ライブラリをロードする必要があります．<code>libuv</code>がシステムにインストールされている場合，<code>cffi:load-foreign-library</code>関数を使ってロードすることができます．ファイル名を直接指定するよりも，拡張子を省略して<code>:default</code>指定すると，環境に応じてライブラリがロードされます．</p>
 
@@ -277,7 +268,7 @@ int main() {
   (cffi:use-foreign-library libuv))
 </code></pre>
 
-<h3 id="uv-loop-t-構造体変数の準備"><code>uv_loop_t</code>構造体変数の準備</h3>
+<h2 id="uv-loop-t-構造体変数の準備"><code>uv_loop_t</code>構造体変数の準備</h2>
 
 <p>Cのサンプルコード6行目にある以下のコードを実装します．</p>
 
@@ -310,7 +301,7 @@ int main() {
 
 <p><code>uv_loop_size</code>は何回も呼ばないので，ここでは<code>cffi:foreign-funcall</code>を使った１番目の方法を採用することにします．</p>
 
-<h4 id="メモリの割当て方法">メモリの割当て方法</h4>
+<h3 id="メモリの割当て方法">メモリの割当て方法</h3>
 
 <p>Lispからメモリを割り当てる場合，型に合わせたメモリ割り当てと，バイトサイズを指定したメモリ割り当ての２通りの方法があります．型を指定してその大きさのメモリを割り当てる場合には，<code>cffi:foreign-alloc</code>か<code>with-foreign-objects</code>を使います．バイトサイズを指定してメモリを割り当てるには，<code>with-foreign-pointer</code>を使います．</p>
 
@@ -345,7 +336,7 @@ int main() {
 
 <p>ここでは，１番始めに紹介した，<code>cffi:with-foreign-pointer</code>を使って実装することにします．</p>
 
-<h3 id="イベントループの初期化">イベントループの初期化</h3>
+<h2 id="イベントループの初期化">イベントループの初期化</h2>
 
 <p>ここまでで<code>uv_loop_t</code>型へのポインタ変数を用意できました．次はサンプルCプログラムの7行目の以下のコードを実装します．</p>
 
@@ -379,7 +370,7 @@ int main() {
   (cffi:foreign-funcall &quot;uv_loop_init&quot; :pointer uvloop :int))
 </code></pre>
 
-<h3 id="ポインタ変数について">ポインタ変数について</h3>
+<h2 id="ポインタ変数について">ポインタ変数について</h2>
 
 <p>上の例ではポインタを取る関数に<code>uvloop</code>を渡しました．この例では出て来ませんが，ポインタが指し示す先を得る方法も説明しておきましょう．ポインタの参照先を得るには<code>cffi:mem-ref</code>を使います．例えば，<code>char</code>型のポインタ変数<code>ptr</code>の参照先は以下で得られます．</p>
 
@@ -391,7 +382,7 @@ int main() {
 <pre><code class="language-lisp">(setf (cffi:mem-ref ptr :char 3) (char-code #\a))
 </code></pre>
 
-<h3 id="cffiによる実装仕上げ">CFFIによる実装仕上げ</h3>
+<h2 id="cffiによる実装仕上げ">CFFIによる実装仕上げ</h2>
 
 <p>残りのCコードは以下の通りです．</p>
 
@@ -442,7 +433,7 @@ int main() {
   (cffi:foreign-funcall &quot;uv_loop_close&quot; :pointer uvloop :int))
 </code></pre>
 
-<h3 id="cl-libuvを使った実装">cl-libuvを使った実装</h3>
+<h2 id="cl-libuvを使った実装">cl-libuvを使った実装</h2>
 
 <p>CFFIの実装を理解していれば基本的には同じです．cl-libuvではアンダースコアの関数名をハイフンに変えているだけです．</p>
 
@@ -459,7 +450,6 @@ int main() {
 
 (uv:uv-loop-close *loop*)
 </code></pre>
-
     </section>
 
 
