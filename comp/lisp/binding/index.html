@@ -94,7 +94,7 @@
     },
     "headline": Lispの変数とシンボルは同じか？,
     "name": Lispの変数とシンボルは同じか？,
-    "wordCount": 2057,
+    "wordCount": 2083,
     "timeRequired": "PT5M",
     "inLanguage": {
       "@type": "Language",
@@ -212,7 +212,7 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>David S. Touretzkyの"COMMON LISP: A Gentle Introduction to Symbolic Computation"では，変数に値を代入するという言葉を使い，束縛という言葉を極力使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）．」と，なかなか意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました．</p>
+<p>David S. Touretzkyの"COMMON LISP: A Gentle Introduction to Symbolic Computation"では，変数に値を代入するという言葉を使い，束縛という言葉を極力使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）」と，なかなか意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました．</p>
 </div>
 <div class="paragraph">
 <p>まず，ANSI X3J13のFinal Draftによると，束縛は「名前」と「名前が指し示すもの」を結びつけることと記されています（an association between a name and that which the name denotes）．以下，変数と値の束縛，それからシンボルについて詳しく見ていきましょう．</p>
@@ -294,13 +294,19 @@ car                        <b class="conum">(2)</b>
 
 (foo)
 ;; =&gt; X=局所変数, NIL
-;;    "foo関数終了"</code></pre>
+;;    "foo関数終了"
+
+X                                           <b class="conum">(2)</b>
+;; =&gt; "グローバル変数"</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <ol>
 <li>
 <p>局所変数 <code>X</code> とシンボル <code>X</code> は同じではないので，<code>NIL</code> を返す．</p>
+</li>
+<li>
+<p>シンボル <code>X</code> は上書きされない．</p>
 </li>
 </ol>
 </div>
