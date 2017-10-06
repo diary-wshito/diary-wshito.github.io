@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Fri, 22 Sep 2017 18:05:22 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 02 Oct 2017 21:20:13 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/tags/lisp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lispの変数とシンボルは同じか？</title>
+      <link>http://diary.wshito.com/comp/lisp/binding/</link>
+      <pubDate>Mon, 02 Oct 2017 21:20:13 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/binding/</guid>
+      <description>David S. Touretzkyの&#34;COMMON LISP: A Gentle Introduction to Symbolic Computation&#34;では，変数に値を代入するという言葉を使い，束縛という言葉を極力使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）．」と，なかなか意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました． まず，ANSI X3J13のFinal D</description>
+    </item>
     
     <item>
       <title>Lispのダイナミック・スコープとスペシャル変数</title>

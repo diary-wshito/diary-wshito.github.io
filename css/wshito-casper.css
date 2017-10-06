@@ -87,7 +87,7 @@ code.has-jax {
 .conum .punctuation {
   display: none;
 }
-.conum .number {
+.conum .number, .conum {
   display: inline-block;
   color: #fff !important;
   background-color: rgba(0, 0, 0, 0.8);
@@ -159,4 +159,12 @@ body {
 .sectionbody {
   margin-top: 1.8em;
   margin-bottom: 2em;
+}
+
+.imageblock {
+  margin-bottom: 2em;
+}
+
+.imageblock .title {
+  text-align: center;
 }
