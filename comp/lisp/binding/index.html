@@ -39,7 +39,7 @@
     <title>Lispの変数とシンボルは同じか？ &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="David S. Touretzkyの&#34;COMMON LISP: A Gentle Introduction to Symbolic Computation&#34;では，変数に値を代入するという言葉を使い，束縛という言葉を極力使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbo" />
+    <meta name="description" content="David S. Touretzkyの&#34;COMMON LISP: A Gentle Introduction to Symbolic Computation&#34;では，変数に値を代入するという言葉を使い，束縛という言葉を使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -94,7 +94,7 @@
     },
     "headline": Lispの変数とシンボルは同じか？,
     "name": Lispの変数とシンボルは同じか？,
-    "wordCount": 2083,
+    "wordCount": 2018,
     "timeRequired": "PT5M",
     "inLanguage": {
       "@type": "Language",
@@ -212,10 +212,10 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>David S. Touretzkyの"COMMON LISP: A Gentle Introduction to Symbolic Computation"では，変数に値を代入するという言葉を使い，束縛という言葉を極力使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）」と，なかなか意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました．</p>
+<p>David S. Touretzkyの"COMMON LISP: A Gentle Introduction to Symbolic Computation"では，変数に値を代入するという言葉を使い，束縛という言葉を使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）」と，意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました．</p>
 </div>
 <div class="paragraph">
-<p>まず，ANSI X3J13のFinal Draftによると，束縛は「名前」と「名前が指し示すもの」を結びつけることと記されています（an association between a name and that which the name denotes）．以下，変数と値の束縛，それからシンボルについて詳しく見ていきましょう．</p>
+<p>まず，ANSI X3J13のFinal Draftによると，束縛は「名前」と「名前が指し示すもの」を結びつけることと記されています（an association between a name and that which the name denotes）．</p>
 </div>
 </div>
 </div>
@@ -223,10 +223,10 @@
 <h2 id="_シンボルとは">シンボルとは</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>X3J13にはシンボルは「an object of type symbol」と説明されています．つまりシンボルは「シンボル型」という型のオブジェクトです．シンボルは数値や文字列のようにLispの組み込み型（アトム）なので，数値や文字列と同じようにそれ自身がデータになります．</p>
+<p>X3J13にはシンボルは「an object of type symbol」と説明されています．シンボルは「シンボル型」という型のオブジェクトですね．シンボルは数値や文字列のようにLispの組み込み型（アトム）なので，数値や文字列と同じようにそれ自身がデータになります．</p>
 </div>
 <div class="paragraph">
-<p>シンボルの面白いところは，カメレオンのようにコンテキスト（プログラム内の文脈）によって様相が変わるところです．なぜならシンボル型のオブジェクトは「名前」と「値」と「関数」の3つのフィールドを持つからです．<a href="#fig-symbol">図1</a>は前掲文献p.154にあるシンボル・オブジェクトの概念図です．「値」フィールドには別のアトムへの参照を保持することができ，「関数」フィールドには関数への参照を保持することができます．つまり，値や関数を格納しておく「変数」の役割も果たせるのです．</p>
+<p>シンボルはコンテキスト（プログラム内の文脈）によってカメレオンのように姿を変えます．シンボル型のオブジェクトは「名前」と「値」と「関数」の3つのフィールドを持ちます．<a href="#fig-symbol">図1</a>は前掲文献p.154にあるシンボル・オブジェクトの概念図です．「値」フィールドには別のアトムへの参照を保持することができ，「関数」フィールドには関数への参照を保持することができます．従って「名前」が表すデータとしてシンボルだけでなく，値や関数を格納しておく「変数」の役割も果たすのです．</p>
 </div>
 <div id="fig-symbol" class="imageblock">
 <div class="content">
@@ -235,7 +235,7 @@
 <div class="title">図 1. シンボル・オブジェクトの概念図</div>
 </div>
 <div class="paragraph">
-<p>図ではこのシンボル名は <code>CAR</code> でその値は <code>ROLLS-ROYCE</code> になっています．さらに関数フィールドには，<code>CAR</code> 関数への参照が設定されています．Lispで書くとこんな感じでしょうか．</p>
+<p>図ではこのシンボル名は <code>CAR</code> でその値は <code>ROLLS-ROYCE</code> です．さらに関数フィールドには，<code>CAR</code> 関数への参照が設定されています．Lispで書くとこんな感じでしょうか．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -268,7 +268,7 @@ car                        <b class="conum">(2)</b>
 </ol>
 </div>
 <div class="paragraph">
-<p><code>SETF</code> 関数を使い <code>car</code> シンボルに <code>ロールスロイス</code> というシンボルを代入したので，<code>car</code> シンボルは変数と同じじゃないか，と思いますよね．その通りです．シンボルは変数に「名前付け」するのに使われます．しかし「変数＝シンボル」ではありません．なぜなら，ローカル変数はシンボルではないからです．</p>
+<p><code>SETF</code> 関数を使って <code>car</code> シンボルに <code>ロールスロイス</code> というシンボルを代入したのだから，<code>car</code> シンボルは変数と同じじゃないか，と思いますよね．ここではその通りです．シンボルは変数に「名前付け」するのに使われます．しかし常に「変数＝シンボル」ではありません．ローカル変数はシンボルではないからです．</p>
 </div>
 </div>
 </div>
@@ -276,10 +276,10 @@ car                        <b class="conum">(2)</b>
 <h2 id="_変数とは">変数とは</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>沢山の変数がプログラム中に作成され，それらの変数に「名前」が識別子として付けられます．その名前に「シンボル」が使われることもありますが，必ずしもシンボルが使われるわけでもありません．つまり，束縛されるのは「値と名前」であって，「値とシンボル」ではないのです．</p>
+<p>沢山の変数がプログラム中に作成され，それら変数の識別子として「名前」が付けられます．その名前に「シンボル」が使われることもありますが，必ずしもシンボルが使われるというわけでもありません．束縛されるのは「値とシンボル」ではなく，「値と名前」です．</p>
 </div>
 <div class="paragraph">
-<p>実は，シンボル型オブジェクトが変数の名前として使われるのは，大域変数の値を指し示す時のみです．なぜなら，シンボル型オブジェクトの「値」フィールドに格納できるのは「大域変数の値」のみと規格で定められているからです．つまり，ローカル変数（レキシカル変数）の値は規格上シンボルには設定できないのです．大域変数の場合はシンボルが変数の役割（値の格納場所）を果たすので，変数とシンボルの違いがわかりづらく，「変数＝シンボル」と勘違いしてしまいますが，ローカル変数の場合はシンボルに束縛されません．</p>
+<p>実は，シンボルが変数の名前として使われるのは，大域変数を指し示す時だけです．シンボル型オブジェクトの「値」フィールドに格納できるのは「大域変数の値」のみと規格で定められています．ローカル変数（レキシカル変数）の値は規格上シンボルには設定できません．大域変数の場合はシンボルが変数の役割（値の格納場所）を果たすので，変数とシンボルの違いがわかりづらく，「変数＝シンボル」と勘違いしてしまいますが，ローカル変数の場合はシンボルに束縛されません．</p>
 </div>
 <div class="paragraph">
 <p>以下のコードではローカル変数（レキシカル変数）がシンボル型オブジェクトではないことを示しています．</p>
@@ -289,29 +289,22 @@ car                        <b class="conum">(2)</b>
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf X "グローバル変数")
 (defun foo ()
   (let ((X "局所変数"))
-    (format t "X=~a, ~a~%" X (eql X 'X)))  <b class="conum">(1)</b>
-  "foo関数終了")
+    (format t "X=~a, ~a~%" X (eql X 'X))))  <b class="conum">(1)</b>
 
 (foo)
 ;; =&gt; X=局所変数, NIL
-;;    "foo関数終了"
-
-X                                           <b class="conum">(2)</b>
-;; =&gt; "グローバル変数"</code></pre>
+;;    NIL</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <ol>
 <li>
-<p>局所変数 <code>X</code> とシンボル <code>X</code> は同じではないので，<code>NIL</code> を返す．</p>
-</li>
-<li>
-<p>シンボル <code>X</code> は上書きされない．</p>
+<p>局所変数 <code>X</code> とシンボル <code>X</code> は同じではないので，<code>eql</code> は <code>NIL</code> を返す．</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>シンボル型オブジェクトは名前から一意性が決まっています．同じパッケージ内であれば <code>'X</code> は常に同じシンボル型オブジェクトを指すことが保証されています．3行目の <code>let</code> は新しい局所変数 <code>X</code> を作りますがこれは1行目で作ったグローバル変数（つまりシンボル <code>X</code>）とは別物です．従って，局所変数 <code>X</code> に束縛された文字列「局所変数」がグローバル変数の中身を上書きすることはありません．</p>
+<p>シンボル型オブジェクトは名前の一意性から，同じパッケージ内であれば <code>'X</code> は常に同じシンボル型オブジェクトを指すことが保証されています．したがって，シンボル <code>'X</code> はグローバル変数 'X' を指します．<code>let</code> バインディングで作成された <code>X</code> は局所変数なので当然シンボル <code>X</code> とは別物です．</p>
 </div>
 <div class="paragraph">
 <p>それでは，局所変数 <code>X</code> とは一体何者なのだ，と思いますが，これは調べる術がありません．なぜなら，<code>let</code> ブロック内で，</p>
@@ -322,7 +315,7 @@ X                                           <b class="conum">(2)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>と書けば <code>class-of</code> に渡される前に評価されて中身の文字列になってしまいますし，かといって，</p>
+<p>と書けば <code>class-of</code> に渡される前に評価されて中身の文字列のクラスを調べることになってしまいますし，かといって，</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -330,7 +323,7 @@ X                                           <b class="conum">(2)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>と書けば，これは一意性が保証されたグローバルのシンボル型オブジェクト <code>X</code> になり，もはや局所変数 <code>X</code> とは別物になってしまうからです．</p>
+<p>と書けば，これは一意性が保証されたグローバルのシンボル型オブジェクト <code>X</code> になり，もはや局所変数 <code>X</code> とは別物になってしまいます．同じ理由で局所変数に対して <code>symbolp</code> や <code>symbol-value</code> を使ってシンボルかどうか調べることはできません．サンクを使って局所変数の評価を遅らせてもダメでした．</p>
 </div>
 </div>
 </div>
@@ -338,7 +331,7 @@ X                                           <b class="conum">(2)</b>
 <h2 id="_まとめ">まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>冒頭でTouretzky氏の「シンボルと値は束縛されない」という言葉に触れました．大域変数の場合はシンボルに値が格納されていますが，ANSIの規格書では「シンボルと値が束縛される」という言葉の使い方をしていません．全て「変数と値」か「名前と値」の束縛という書き方をしています．ということで，Touretzky氏は正しかったということになります．そして，局所変数の場合は値はシンボルに格納されないということが分かりました．つまり，シンボルと変数は同じではないということです．</p>
+<p>冒頭でTouretzky氏の「シンボルと値は束縛されない」という言葉に触れました．大域変数の場合はシンボルに値が格納されていますが，ANSIの規格書では「シンボルと値が束縛される」という言葉の使い方をしていません．全て「変数と値」か「名前と値」の束縛という書き方をしています．ということで，Touretzky氏は正しかったということになります．局所変数の正体は調べることができませんでしたが，少なくとも規格上，局所変数の値はシンボルに格納されません．つまり，シンボルと変数は同じではないということです．</p>
 </div>
 </div>
 </div>
