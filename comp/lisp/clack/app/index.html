@@ -101,7 +101,7 @@
     },
     "headline": コードリーディング: Lackアプリケーションを理解する,
     "name": コードリーディング: Lackアプリケーションを理解する,
-    "wordCount": 2782,
+    "wordCount": 2875,
     "timeRequired": "PT6M",
     "inLanguage": {
       "@type": "Language",
@@ -240,7 +240,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p><code>clack:clackup</code> に渡されているラムダ関数は，<code>env</code> を引数に取り，ステータス・コード，ヘッダ，レスポンス・ボディの3つを返す．<code>clackup</code> は，このラムダ関数をLackの <code>app</code> ビルダに渡しアプリケーションを構築し，それをWebサーバーに渡す．その詳細を追ってみる．</p>
+<p><code>clack:clackup</code> に渡されているラムダ関数は，<code>env</code> を引数に取り，ステータス・コード，ヘッダ，レスポンス・ボディの3つを返す．<code>clackup</code> は，このラムダ関数をLackの <code>app</code> ビルダに渡しアプリケーションを構築し，それをWebサーバーに渡す．コード2は <code>clackup</code> が受け取った <code>app</code> をビルダに渡す部分である．</p>
 </div>
 <div class="listingblock">
 <div class="title"><a href="https://github.com/fukamachi/clack/blob/310e6e2342e460ee10d1dd9dd835a268319b50b8/src/clack.lisp#L66"><code>src/clack.lisp</code> のアプリケーション構築部分</a></div>
@@ -313,7 +313,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 <p>なるほど．コード3の <code>loop</code> 内で呼び出している <code>convert-to-middleware-form</code> 関数に，最後の引数 <code>app</code> を除いたミドルウエア部分を渡し，ミドルウェアがキーワードか，シンボルか，それ以外かで，置き換え用コードを選別している．この関数はちと長いので <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/builder.lisp#L19">リンク先</a> を見てもらうとして先へ行く．</p>
 </div>
 <div class="paragraph">
-<p>結局，我らが最初に <code>app</code> として渡したラムダ式は <code>(to-app app)</code> に渡される．<code>to-app</code> は <code>lack.component</code> パッケージで定義．</p>
+<p>コード4の展開結果を見ると，我らが最初に <code>app</code> として渡したラムダ式は <code>(to-app app)</code> に渡される．<code>to-app</code> は <code>lack.component</code> パッケージで以下のように定義されている．</p>
 </div>
 <div class="listingblock">
 <div class="title"><a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/component.lisp#L9"><code>lack/src/component.lisp</code></a></div>
@@ -342,10 +342,10 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </ol>
 </div>
 <div class="paragraph">
-<p>これでコード4の6行目の <code>(to-app app)</code> がラムダ式になることが分かった．なんだかごちゃごちゃしてきたが，要は，コード4の5-6行目の評価結果がコード2の8行目の <code>app</code> に代入されるということだ．</p>
+<p>これでコード4の6行目の <code>(to-app app)</code> がラムダ式になることが分かった．なんだかごちゃごちゃしてきたが，要は，コード4の5-6行目の評価結果がコード2，8行目の <code>app</code> に代入されるということだ．</p>
 </div>
 <div class="paragraph">
-<p>ここで <code>reduce</code> のおさらい．関数 <code>f</code> をリスト <code>'(a b c)</code> にreduceで適用すると，リストの左から <code>f</code> を2項演算子として適用する．その際，最初の引数は前の演算結果が使われる．つまり前の適用結果で引数の位置を揃えると下のようになる．</p>
+<p>ここで，コード4の <code>builder</code> マクロの展開結果に出てくる <code>reduce</code> のおさらい．関数 <code>f</code> をリスト <code>'(a b c)</code> にreduceで適用すると，リストの左から <code>f</code> を2項演算子として適用する．その際，最初の引数は前の演算結果が使われる．つまり前の適用結果で引数の位置を揃えると下のようになる．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -373,7 +373,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 </div>
 <div class="paragraph">
-<p><code>:initial-value</code> キーワードがついているので，<code>funcall</code> が適用される2項のうち最初の1項目は <code>(to-app app)</code> の結果で，さらに <code>:from-end</code> キーワードが付いているので後ろから2項づつ適用することになる．ちなみに <code>:initial-value</code> は最後尾に置かれる．<code>nil</code> ではないミドルウェアが仮に <code>(a b c d)</code> と3つあったとしたら，</p>
+<p><code>:initial-value</code> キーワードがついているので，<code>funcall</code> が適用される2項のうち最初の1項目は <code>(to-app app)</code> の結果で，さらに <code>:from-end</code> キーワードが付いているので後ろから2項づつ適用することになる．<code>:from-end</code> の場合，<code>:initial-value</code> で指定された1項目は最後尾に置かれる．<code>nil</code> ではないミドルウェアが仮に <code>(a b c d)</code> と3つあったとしたら，</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -381,7 +381,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 </div>
 <div class="paragraph">
-<p>というコードがコード2の8行目の <code>(buildapp app)</code> に置きかわり，この実行結果が同じ行の <code>app</code> に代入される．今回はミドルウェアに <code>:backtrace</code> しか与えていないので，<code>(find-middleware :backtrace)</code> は <code>*lack-middleware-backtrace*</code> に設定されている値を返す（ <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/util.lisp#L27">lack/src/util.lisp</a> 参照）．つまり，backtraceミドルウェアのラムダ式だ．したがって上のreduceは以下のコードを実行する．</p>
+<p>というコードがコード2の5-7行目の <code>(builder (if &#8230;&#8203;) app)</code> に置きかわり，この実行結果が8行目の <code>app</code> に代入される．今回はミドルウェアに <code>:backtrace</code> しか与えていないので，<code>(find-middleware :backtrace)</code> は <code>*lack-middleware-backtrace*</code> に設定されている値を返す（ <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/util.lisp#L27">lack/src/util.lisp</a> 参照）．つまり，backtraceミドルウェアのラムダ式だ．したがって上のreduceは以下のコードを実行する．</p>
 </div>
 <div class="listingblock">
 <div class="title">今回buildされるLackアプリケーション</div>
@@ -448,7 +448,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 </div>
 <div class="paragraph">
-<p>まず，5行目から21行目はコード2，8行目の <code>buildapp</code> 時に実行されるので，サーバーが起動する前に1度だけ実行される処理だ．もっとも7行目から21行目は以降のラムダ関数内で使われる局所関数定義だが．</p>
+<p>まず，5行目から21行目はコード2，8行目の <code>buildapp</code> 時に実行されるので，サーバーが起動する前に1度だけ実行される処理だ．もっとも7行目から21行目はすぐ後のラムダ関数内で使われる局所関数定義だが．</p>
 </div>
 <div class="paragraph">
 <p>さて，コード6の実行によって返されのは22行目の <code>env</code> を引数に取るラムダ関数だ．そのラムダ関数は28行目でユーザが定義したレスポンスを返すラムダ関数を呼び出す．ユーザ定義のラムダ関数をラップしたbacktraceのラムダ関数が最終的にコード2の8行目の <code>app</code> に設定され，Webサーバーに渡される．</p>
