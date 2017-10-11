@@ -96,7 +96,7 @@
     <item>
       <title>Lisp</title>
       <link>http://diary.wshito.com/categories/lisp/</link>
-      <pubDate>Mon, 02 Oct 2017 21:20:13 +0900</pubDate>
+      <pubDate>Wed, 11 Oct 2017 21:25:26 +0900</pubDate>
       
       <guid>http://diary.wshito.com/categories/lisp/</guid>
       <description></description>
@@ -117,6 +117,24 @@
       <pubDate>Mon, 12 Jun 2017 21:15:11 +0900</pubDate>
       
       <guid>http://diary.wshito.com/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Application</title>
+      <link>http://diary.wshito.com/categories/web-application/</link>
+      <pubDate>Wed, 11 Oct 2017 21:25:26 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/categories/web-application/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>コードリーディング</title>
+      <link>http://diary.wshito.com/categories/%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/</link>
+      <pubDate>Wed, 11 Oct 2017 21:25:26 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/categories/%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/</guid>
       <description></description>
     </item>
     

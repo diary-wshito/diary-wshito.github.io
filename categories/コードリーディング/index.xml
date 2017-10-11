@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>コードリーディング on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/categories/%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/</link>
+    <description>Recent content in コードリーディング on wshito&#39;s diary</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>All rights reserved 2016--</copyright>
+    <lastBuildDate>Wed, 11 Oct 2017 21:25:26 +0900</lastBuildDate>
+    
+	<atom:link href="http://diary.wshito.com/categories/%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>コードリーディング: Lackアプリケーションを理解する</title>
+      <link>http://diary.wshito.com/comp/lisp/clack/app/</link>
+      <pubDate>Wed, 11 Oct 2017 21:25:26 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/clack/app/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;
+&lt;div class=&#34;sectionbody&#34;&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.8arrow.org&#34;&gt;深町氏&lt;/a&gt; のウェブアプリケーション・ツール &lt;a href=&#34;https://github.com/fukamachi/clack&#34;&gt;Clack&lt;/a&gt; のソースコード・リーディング．今回は，Clackが起動時に受け取る &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; アプリケーションを理解するために，その構築プロセスと使われ方をコードで追ってみる．
+ &lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

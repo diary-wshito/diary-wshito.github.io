@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="コードリーディング: Lackアプリケーションを理解する"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="コードリーディング: Lackアプリケーションを理解する &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/clack/app/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2017-10-11T21:25:26&#43;09:00" />
+
+    
+    <meta property="article:tag" content="lisp" />
+    
+    <meta property="article:tag" content="clack" />
+    
+    <meta property="article:tag" content="webapp" />
+    
+    
+
+    <title>コードリーディング: Lackアプリケーションを理解する &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="&lt;div id=&#34;preamble&#34;&gt;
+&lt;div class=&#34;sectionbody&#34;&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.8arrow.org&#34;&gt;深町氏&lt;/a&gt; のウェブアプリケーション・ツール &lt;a href=&#34;https://github.com/f" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.30-DEV" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/clack/app/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": コードリーディング: Lackアプリケーションを理解する,
+    "name": コードリーディング: Lackアプリケーションを理解する,
+    "wordCount": 2782,
+    "timeRequired": "PT6M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/clack/app/,
+    "datePublished": 2017-10-11T21:25Z,
+    "dateModified": 2017-10-11T21:25Z,
+    
+    "keywords": lisp, clack, webapp,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/clack/app/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+<main class="content" role="main">
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">コードリーディング: Lackアプリケーションを理解する</h1>
+        
+        <section class="post-meta">
+          <time class="post-date" datetime="2017-10-11T21:25:26&#43;09:00">
+            October 11, 2017
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/clack/">#clack</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/webapp/">#webapp</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://blog.8arrow.org">深町氏</a> のウェブアプリケーション・ツール <a href="https://github.com/fukamachi/clack">Clack</a> のソースコード・リーディング．今回は，Clackが起動時に受け取る <a href="https://github.com/fukamachi/lack">Lack</a> アプリケーションを理解するために，その構築プロセスと使われ方をコードで追ってみる．
+ </p>
+</div>
+<div class="paragraph">
+<p>以下は， <a href="https://github.com/fukamachi/clack">Clack</a> ページのサンプルコードである．</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://github.com/fukamachi/clack">Usageのサンプルコード</a></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defvar *handler*
+  (clack:clackup
+    (lambda (env)
+      (declare (ignore env))
+        '(200 (:content-type "text/plain") ("Hello, Clack!")))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>clack:clackup</code> に渡されているラムダ関数は，<code>env</code> を引数に取り，ステータス・コード，ヘッダ，レスポンス・ボディの3つを返す．<code>clackup</code> は，このラムダ関数をLackの <code>app</code> ビルダに渡しアプリケーションを構築し，それをWebサーバーに渡す．その詳細を追ってみる．</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://github.com/fukamachi/clack/blob/310e6e2342e460ee10d1dd9dd835a268319b50b8/src/clack.lisp#L66"><code>src/clack.lisp</code> のアプリケーション構築部分</a></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(flet ((buildapp (app)                                          <b class="conum">(1)</b>
+          (let ((app (typecase app
+                        ((or pathname string) (eval-file app))  <b class="conum">(2)</b>
+                        (otherwise app))))                      <b class="conum">(3)</b>
+          (builder                                              <b class="conum">(4)</b>
+            (if use-default-middlewares	:backtrace nil)
+            app))))
+  (let ((app (buildapp app)))                                   <b class="conum">(5)</b>
+    ;; Ensure the handler to be loaded.
+    (find-handler server)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>8行目で使われるローカル関数 <code>buildapp</code> を定義．</p>
+</li>
+<li>
+<p>appがパスネームか文字列なら <code>eval-file</code> を使ってファイルからアプリケーションを抽出．</p>
+</li>
+<li>
+<p>それ以外ならそのままapp局所変数に代入．ラムダ式はこのまま <code>app</code> に代入される．</p>
+</li>
+<li>
+<p>ここで <code>lack:builder</code> が呼ばれ <a href="https://github.com/fukamachi/lack">Lack</a> アプリケーションが構築される．</p>
+</li>
+<li>
+<p>ここでローカル関数 <code>buildapp</code> を呼んで <code>app</code> を構築．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>上の4行目で呼ばれるLackの <code>builder</code> マクロの定義は以下の通り．</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/builder.lisp#L62"><code>lack/src/builder.lisp</code> の <code>builder</code> マクロ定義</a></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defmacro builder (&amp;rest app-or-middlewares)
+  (let ((middlewares (butlast app-or-middlewares)))
+    `(reduce #'funcall
+             (remove-if
+              #'null
+              (list
+               ,@(loop for mw in middlewares
+                       when mw
+                         collect (convert-to-middleware-form mw))))
+             :initial-value (to-app ,(car (last app-or-middlewares)))
+             :from-end t)))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>むむ．これはややこしい．こういう時は，無理せずLispに展開をお願いし，展開結果を見ながら定義を見る．</p>
+</div>
+<div class="listingblock">
+<div class="title"><code>builder</code> マクロの展開結果</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (require 'lack)
+CL-USER&gt; (require 'clack)
+CL-USER&gt; (in-package :lack.builder)
+BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
+(REDUCE #'FUNCALL (REMOVE-IF #'NULL (LIST (FIND-MIDDLEWARE :BACKTRACE)))
+        :INITIAL-VALUE (TO-APP APP) :FROM-END T)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>なるほど．コード3の <code>loop</code> 内で呼び出している <code>convert-to-middleware-form</code> 関数に，最後の引数 <code>app</code> を除いたミドルウエア部分を渡し，ミドルウェアがキーワードか，シンボルか，それ以外かで，置き換え用コードを選別している．この関数はちと長いので <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/builder.lisp#L19">リンク先</a> を見てもらうとして先へ行く．</p>
+</div>
+<div class="paragraph">
+<p>結局，我らが最初に <code>app</code> として渡したラムダ式は <code>(to-app app)</code> に渡される．<code>to-app</code> は <code>lack.component</code> パッケージで定義．</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/component.lisp#L9"><code>lack/src/component.lisp</code></a></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defclass lack-component () ())
+
+(defgeneric call (component env)
+  (:method ((component function) env)
+    (funcall component env)))
+
+(defgeneric to-app (component)
+  (:method ((component lack-component))   <b class="conum">(1)</b>
+    (lambda (env) (call component env)))
+  (:method ((component t))                <b class="conum">(2)</b>
+    component))</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>to-app</code> の引数がLackのコンポーネントなら，「<code>env</code> を引数にしてコンポーネントを呼び出す」ラムダ関数でラップする．</p>
+</li>
+<li>
+<p>我らが <code>app</code> はただのラムダ式なのでこちらが呼び出され，ラムダ式がそのまま返される．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>これでコード4の6行目の <code>(to-app app)</code> がラムダ式になることが分かった．なんだかごちゃごちゃしてきたが，要は，コード4の5-6行目の評価結果がコード2の8行目の <code>app</code> に代入されるということだ．</p>
+</div>
+<div class="paragraph">
+<p>ここで <code>reduce</code> のおさらい．関数 <code>f</code> をリスト <code>'(a b c)</code> にreduceで適用すると，リストの左から <code>f</code> を2項演算子として適用する．その際，最初の引数は前の演算結果が使われる．つまり前の適用結果で引数の位置を揃えると下のようになる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">      (f a b)           ; 1回目の適用
+   (f (f a b) c)        ; 2回目の適用．第1引数は1回目の結果
+(f (f (f a b) c))       ; 3回目の適用．第1引数は2回目の結果</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>例えば <code>list</code> 関数でreduceするとこんな感じ．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(reduce #'list '(a b c d))
+; =&gt; (((A B) C) D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>さて，本題に戻って今確認したいのは下のコード結果．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(REDUCE #'FUNCALL (REMOVE-IF #'NULL (LIST (FIND-MIDDLEWARE :BACKTRACE)))
+        :INITIAL-VALUE (TO-APP APP) :FROM-END T)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>:initial-value</code> キーワードがついているので，<code>funcall</code> が適用される2項のうち最初の1項目は <code>(to-app app)</code> の結果で，さらに <code>:from-end</code> キーワードが付いているので後ろから2項づつ適用することになる．ちなみに <code>:initial-value</code> は最後尾に置かれる．<code>nil</code> ではないミドルウェアが仮に <code>(a b c d)</code> と3つあったとしたら，</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(funcall a (funcall b (funcall c (funcall d app))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>というコードがコード2の8行目の <code>(buildapp app)</code> に置きかわり，この実行結果が同じ行の <code>app</code> に代入される．今回はミドルウェアに <code>:backtrace</code> しか与えていないので，<code>(find-middleware :backtrace)</code> は <code>*lack-middleware-backtrace*</code> に設定されている値を返す（ <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/util.lisp#L27">lack/src/util.lisp</a> 参照）．つまり，backtraceミドルウェアのラムダ式だ．したがって上のreduceは以下のコードを実行する．</p>
+</div>
+<div class="listingblock">
+<div class="title">今回buildされるLackアプリケーション</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(funcall (lambda (app) backtraceミドルウェア本体) app)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>もし，他にもラップしているミドルウェアがあれば，以下のようになる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(funcall (lambada (app) ミドルウェア1)                    <b class="conum">(1)</b>
+         (funcall (lambda (app) ミドルウェア2)
+                  (funcall (lambda (app) ミドルウェア3)
+                           app)))                       <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>一番外側をラップしているミドルウェア．</p>
+</li>
+<li>
+<p><code>env</code> を引数に取るユーザ指定のラムダ式．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>コード6の実行結果を得るために，backtraceミドルウェアの定義を見る．</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/middleware/backtrace.lisp#L9">backtraceミドルウェアの定義</a></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defparameter *lack-middleware-backtrace*
+  (lambda (app &amp;key
+            (output '*error-output*)
+            result-on-error)
+    (check-type output (or symbol stream pathname string))
+    (check-type result-on-error (or function cons null))
+    (flet ((error-handler (condition)
+             (if (functionp result-on-error)
+                 (funcall result-on-error condition)
+                 result-on-error))
+           (output-backtrace (condition env)
+             (etypecase output
+               (symbol (print-error condition env (symbol-value output)))
+               (stream (print-error condition env output))
+               ((or pathname string)
+                (with-open-file (out output
+                                     :direction :output
+                                     :external-format #+clisp charset:utf-8 #-clisp :utf-8
+                                     :if-exists :append
+                                     :if-does-not-exist :create)
+                  (print-error condition env out))))))
+      (lambda (env)
+        (block nil
+          (handler-bind ((error (lambda (condition)
+                                  (output-backtrace condition env)
+                                  (when result-on-error
+                                    (return (error-handler condition))))))
+            (funcall app env))))))
+  "Middleware for outputting backtraces when an error occured")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>まず，5行目から21行目はコード2，8行目の <code>buildapp</code> 時に実行されるので，サーバーが起動する前に1度だけ実行される処理だ．もっとも7行目から21行目は以降のラムダ関数内で使われる局所関数定義だが．</p>
+</div>
+<div class="paragraph">
+<p>さて，コード6の実行によって返されのは22行目の <code>env</code> を引数に取るラムダ関数だ．そのラムダ関数は28行目でユーザが定義したレスポンスを返すラムダ関数を呼び出す．ユーザ定義のラムダ関数をラップしたbacktraceのラムダ関数が最終的にコード2の8行目の <code>app</code> に設定され，Webサーバーに渡される．</p>
+</div>
+<div class="paragraph">
+<p>したがって，ミドルウェアの役割は，サーバーから様々なパラメータをカプセル化した <code>env</code> を受け取り，それをユーザ定義のアプリケーションに渡す前に，何らかの事前処理（コード7，23&#8212;&#8203;27行目）を実行し，そしてユーザ定義のアプリケーションを呼び出すことだ．ちなみにbacktraceは事前処理しかないが，28行目以降に事後処理を追加することもできる．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_まとめ">まとめ</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>ミドルウェアは外側の <code>app</code> を引数に取るラムダ関数をサーバー起動前に実行し，サーバーには内側の <code>env</code> を引数に取るラムダ関数が返される．ミドルウエアはサンクのような役割を果たし，外側の関数を一皮むいて内側のアプリケーションをWebレスポンス時まで遅延評価している．</p>
+</li>
+<li>
+<p>数珠つなぎになったミドルウェアは全て起動前にreduce関数によって <code>funcall</code> され，一皮むけた内部のアプリケーションだけが返される．</p>
+</li>
+<li>
+<p>最終的にサーバーに渡される <code>app</code> の正体は，<code>env</code> を引数に取り，ステータス・コード，ヘッダ，ボディを返す関数である．</p>
+</li>
+<li>
+<p>ミドルウェアをチェーンにした場合，*外側ミドルウェアの事前処理から*実行され，レスポンスを返した後，*内側ミドルウェアのポスト処理から*順に実行される．ようやく <a href="https://github.com/fukamachi/lack">Lack</a> ページに掲載の以下のコードの意味が分かった．</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">ミドルウェアの内部構造（公式ページより）</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defvar *mw*
+  (lambda (app)
+    (lambda (env)
+      ;; preprocessing
+      (let ((res (funcall app env)))
+        ;; postprocessing
+        res))))
+
+;; getting a wrapped app
+(funcall *mw* *app*)</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_おまけ_サーバー起動部分">おまけ: サーバー起動部分</h3>
+<div class="paragraph">
+<p>最後にサーバー起動部分を見ておこう．</p>
+</div>
+<div class="listingblock">
+<div class="title"><code>src/clack.lisp</code> のサーバー呼び出し部分</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(prog1
+    (apply #'clack.handler:run app server
+           :port port
+           :debug debug
+           :use-thread use-thread
+           (delete-from-plist args :server :port :debug :silent :use-thread))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>上の2行目で <code>clack.handler:run</code> に <code>app</code> とWebサーバーのハンドラを渡しサーバーを起動している．</p>
+</div>
+<div class="listingblock">
+<div class="title"><code>src/handler.lisp</code> の <code>run</code> 関数</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun run (app server &amp;rest args &amp;key use-thread &amp;allow-other-keys)
+  (let ((handler-package (find-handler server))
+        (bt:*default-special-bindings* `((*standard-output* . ,*standard-output*)
+                                         (*error-output* . ,*error-output*)
+                                         ,@bt:*default-special-bindings*)))
+    (flet ((run-server ()
+             (apply (intern #.(string '#:run) handler-package)
+                    app
+                    :allow-other-keys t
+                    args)))
+      (make-handler
+       :server server
+       :acceptor (if use-thread
+                     (bt:make-thread #'run-server
+                                     :name (format nil "clack-handler-~(~A~)" server)
+                                     :initial-bindings
+                                     `((bt:*default-special-bindings* . ',bt:*default-special-bindings*)
+                                       ,@bt:*default-special-bindings*))
+                     (run-server))))))</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%82%b3%e3%83%bc%e3%83%89%e3%83%aa%e3%83%bc%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%3a%20Lack%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%92%e7%90%86%e8%a7%a3%e3%81%99%e3%82%8b&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2fapp%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2fapp%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2fapp%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/binding/">
+          <section class="post">
+              <h2>Lispの変数とシンボルは同じか？</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+
+    
+</body>
+</html>
+
