@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="コードリーディング: LackのMountミドルウエアを理解する"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="コードリーディング: LackのMountミドルウエアを理解する &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2017-10-14T23:13:44&#43;09:00" />
+
+    
+    <meta property="article:tag" content="lisp" />
+    
+    <meta property="article:tag" content="clack" />
+    
+    <meta property="article:tag" content="webapp" />
+    
+    
+
+    <title>コードリーディング: LackのMountミドルウエアを理解する &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="&lt;div id=&#34;preamble&#34;&gt;
+&lt;div class=&#34;sectionbody&#34;&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;../app&#34;&gt;前回&lt;/a&gt; はLackのアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げ" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.30-DEV" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": コードリーディング: LackのMountミドルウエアを理解する,
+    "name": コードリーディング: LackのMountミドルウエアを理解する,
+    "wordCount": 1480,
+    "timeRequired": "PT3M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/,
+    "datePublished": 2017-10-14T23:13Z,
+    "dateModified": 2017-10-14T23:13Z,
+    
+    "keywords": lisp, clack, webapp,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+<main class="content" role="main">
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">コードリーディング: LackのMountミドルウエアを理解する</h1>
+        
+        <section class="post-meta">
+          <time class="post-date" datetime="2017-10-14T23:13:44&#43;09:00">
+            October 14, 2017
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/clack/">#clack</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/webapp/">#webapp</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="../app">前回</a> はLackのアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げるのはMountミドルウェア（<code>lack-middleware-mount</code>）で，リクエスト・パスに応じたルーティングを司る．最初にミドルウェアのソースを読み，最後にMountミドルウェアを使ったサンプルWebアプリを作成する．コメント，間違いのご指摘等は <a href="https://twitter.com/waterloo_jp">@waterloo_jp</a> まで．
+</p>
+</div>
+<div class="paragraph">
+<p>コード1は <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/middleware/mount.lisp#L9">lack-middleware-mountのソースコード</a> である．</p>
+</div>
+<div class="listingblock">
+<div class="title">lack-middleware-mountのコード</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defparameter *lack-middleware-mount*
+  (lambda (app path mount-app)                      <b class="conum">(1)</b>
+    (let ((len (length path)))
+      (lambda (env)                                 <b class="conum">(2)</b>
+        (let ((path-info (getf env :path-info)))
+          (cond
+            ((string= path-info path)
+             (setf (getf env :path-info) "/")
+             (funcall (to-app mount-app) env))
+            ((and (&lt; len (length path-info))
+                  (string= path-info path :end1 len)
+                  (char= (aref path-info len) #\/))
+             (setf (getf env :path-info)
+                   (subseq path-info (length path)))
+             (funcall (to-app mount-app) env))
+            (t
+             (funcall app env)))))))
+  "Middleware for attaching another Lack application on a specific URL")</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>アプリケーションbuilderによってビルド時に１回だけ呼び出される関数．共通設定として <code>path</code> と <code>mount-app</code> を引数に取る．</p>
+</li>
+<li>
+<p>Webサーバー・ハンドラから呼び出されるミドルウェア本体．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="../adoc">前回</a> 見たように，一番外側のラムダ式はビルダによってアプリケーション生成時に1度だけ呼び出される．3行目でマウントするパスの長さを事前に取得しておく．</p>
+</div>
+<div class="paragraph">
+<p>リクエストの度にWebサーバーから呼び出されるのは4行目のラムダ式である．まずリクエストのパスを <code>path-info</code> に設定する．<code>path-info</code> はURLからホストネームとポートを取り除いたパス部分から，<code>?</code> 以降のクエリストリングを取り除いたものだ．</p>
+</div>
+<div class="paragraph">
+<p>ミドルウェアの処理は3つに分岐する．1つ目は，<code>path-info</code> がミドルウェアのマウンント <code>path</code> と完全一致した場合で，この時，<code>env</code> の <code>:path-info</code> をルート <code>/</code> で上書きして <code>mount-app</code> をコールする（9行目）．つまり，<code>mouta-app</code> は <code>path</code> をルートとするアプリケーションということになる．</p>
+</div>
+<div class="paragraph">
+<p>2つ目の分岐は，リクエストURLが <code>path</code> で始まっていた場合である．前方一致の場合は，<code>path</code> 部分を取り除いた残りが <code>:path-info</code> に設定されるので，<code>mount-app</code> は <code>path</code> をルートとし，さらに深いパスをリクエストで指定された状態としてコールされる（15行目）．</p>
+</div>
+<div class="paragraph">
+<p>3つ目の分岐は上記以外で，この場合，マウント・ミドルウェアでマウントしたアプリケーションではなく，アプリケーション・チェーンの次のアプリケーション呼び出される（17行目で）．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_基本事項のおさらい">基本事項のおさらい</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Characterは <code>#\</code> の後に1文字置いて表す．12行目の <code>#\/</code> はパス区切りのスラッシュを表す．</p>
+</li>
+<li>
+<p><code>(squbseq sequence start end)</code> は <code>sequence</code> の <code>start</code> から <code>end</code> までのコピーを新たに作成して返す．<code>end</code> が省略されるか <code>nil</code> なら <code>start</code> から最後までが返る．シーケンスはリストやベクトル（1次元配列）の親クラス． <a href="https://www.tutorialspoint.com/lisp/lisp_sequences.htm">Tutorialsponts</a>の解説が良い．</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_サンプルコード">サンプルコード</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mountミドルウェアを試してみる．コードは <a href="https://github.com/wshito/blog-examples/blob/master/lisp/lack/middleware-mount.lisp">GitHub</a> にある．</p>
+</div>
+<div class="paragraph">
+<p>まずは，ClackとLackをロード．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(require 'clack)
+(require 'lack)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>env</code> から <code>:path-info</code> を取り出して画面に表示するアプリケーションを定義して，<code>my-echo</code> に格納．</p>
+</div>
+<div class="listingblock">
+<div class="title">Path-infoを表示するアプリケーションを定義．</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf my-echo
+      (lambda (env)
+	      `(200 (:content-type "text/plain") ,(list (getf env :path-info)))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lackの <code>builder</code> マクロを使ってLackアプリケーションを構築．</p>
+</div>
+<div class="listingblock">
+<div class="title">Lackアプリケーションのビルド</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defparameter *app*
+  (lack:builder
+    (:mount "/echo" my-echo)                                        <b class="conum">(1)</b>
+    (:mount "/hello"                                                <b class="conum">(2)</b>
+	    (lambda (env)
+	      (declare (ignore env))
+	      '(200 (:content-type "text/plain") ("Hello world!"))))
+    (lambda (env)
+      (declare (ignore env))
+      '(404 (:content-type "text/plain") ("Not found, mate!")))))    <b class="conum">(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>/echo</code> 以下のアクセスでpath-infoを表示するアプリケーションが呼び出される．</p>
+</li>
+<li>
+<p><code>/hello</code> 以下のアクセスで呼び出されるアプリケーション．</p>
+</li>
+<li>
+<p>それ以外のアクセスは "Not found, mate!" を表示．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>これで準備完了．REPLで以下を実行してWebサーバーを起動．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (defparameter *handler*
+  (clack:clackup *app*))
+
+Hunchentoot server is started.
+Listening on localhost:5000.
+*HANDLER*</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>以下がアクセスと結果である．</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://localhost:5000/echo/hello/from/fukuoka" class="bare">http://localhost:5000/echo/hello/from/fukuoka</a> <strong>&#8658; /hello/from/fukuoka</strong></p>
+</li>
+<li>
+<p><a href="http://localhost:5000/echo/abc?my-query" class="bare">http://localhost:5000/echo/abc?my-query</a> <strong>&#8658; /abc</strong></p>
+</li>
+<li>
+<p><a href="http://localhost:5000/hello/everybody!/howareyou?" class="bare">http://localhost:5000/hello/everybody!/howareyou?</a> <strong>&#8658; Hello world!</strong></p>
+</li>
+<li>
+<p><a href="http://localhost:5000" class="bare">http://localhost:5000</a> <strong>&#8658; Not found, mate!</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>サーバーを停止するには以下を実行する．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (clack:stop *handler*)</code></pre>
+</div>
+</div>
+</div>
+</div>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%82%b3%e3%83%bc%e3%83%89%e3%83%aa%e3%83%bc%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%3a%20Lack%e3%81%aeMount%e3%83%9f%e3%83%89%e3%83%ab%e3%82%a6%e3%82%a8%e3%82%a2%e3%82%92%e7%90%86%e8%a7%a3%e3%81%99%e3%82%8b&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2flack-middleware-mount%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2flack-middleware-mount%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2flack-middleware-mount%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/clack/app/">
+          <section class="post">
+              <h2>コードリーディング: Lackアプリケーションを理解する</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+
+    
+</body>
+</html>
+

@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Wed, 11 Oct 2017 21:25:26 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 Oct 2017 23:13:44 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>コードリーディング: LackのMountミドルウエアを理解する</title>
+      <link>http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/</link>
+      <pubDate>Sat, 14 Oct 2017 23:13:44 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;
+&lt;div class=&#34;sectionbody&#34;&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;../app&#34;&gt;前回&lt;/a&gt; はLackのアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げるのはMountミドルウェア（&lt;code&gt;lack-middleware-mount&lt;/code&gt;）で，リクエスト・パスに応じたルーティングを司る．最初にミドルウェアのソースを読み，最後にMountミドルウェアを使ったサンプルWebアプリを作成する．コメント，間違いのご指摘等は &lt;a href=&#34;https://twitter.com/waterloo_jp&#34;&gt;@waterloo_jp&lt;/a&gt; まで．
+&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>コードリーディング: Lackアプリケーションを理解する</title>
