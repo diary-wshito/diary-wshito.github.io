@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Lisp で CouchDB の Getting Started を始めてみる"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="Lisp で CouchDB の Getting Started を始めてみる &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/db/couchdb-manual/getting-started/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2017-10-20T22:05:59&#43;09:00" />
+
+    
+    <meta property="article:tag" content="lisp" />
+    
+    <meta property="article:tag" content="db" />
+    
+    <meta property="article:tag" content="CouchDB" />
+    
+    <meta property="article:tag" content="NoSQL" />
+    
+    
+
+    <title>Lisp で CouchDB の Getting Started を始めてみる &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="CouchDBオフィシャル・ドキュメントの Getting Started をLispを使ってやってみた．CouchDBはRESTfulなAPIを提供しているので，特別なドライバを使わなくてもHTTPクライアントがあればDBを操作できる．ここでは，LispのHTTPクライアント・ライブラリ Dexador と，高速なJ" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.30-DEV" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/db/couchdb-manual/getting-started/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": Lisp で CouchDB の Getting Started を始めてみる,
+    "name": Lisp で CouchDB の Getting Started を始めてみる,
+    "wordCount": 1570,
+    "timeRequired": "PT4M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/db/couchdb-manual/getting-started/,
+    "datePublished": 2017-10-20T22:05Z,
+    "dateModified": 2017-10-20T22:05Z,
+    
+    "keywords": lisp, db, CouchDB, NoSQL,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/db/couchdb-manual/getting-started/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+<main class="content" role="main">
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">Lisp で CouchDB の Getting Started を始めてみる</h1>
+        
+        <section class="post-meta">
+          <time class="post-date" datetime="2017-10-20T22:05:59&#43;09:00">
+            October 20, 2017
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/db/">#db</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/couchdb/">#CouchDB</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/nosql/">#NoSQL</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>CouchDBオフィシャル・ドキュメントの <a href="http://docs.couchdb.org/en/2.1.0/intro/tour.html">Getting Started</a> をLispを使ってやってみた．CouchDBはRESTfulなAPIを提供しているので，特別なドライバを使わなくてもHTTPクライアントがあればDBを操作できる．ここでは，LispのHTTPクライアント・ライブラリ <a href="https://github.com/fukamachi/dexador">Dexador</a> と，高速なJSONエンコード/デコード・ライブラリ <a href="https://github.com/Rudolph-Miller/jonathan">Jonathan</a> を使って，CouchDBと通信する．どちらも日本を代表する若手Lisperによって書かれたライブラリだ．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:quickload 'dexador)
+(ql:quickload 'jonathan)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ダウンロードしたCouchDBをダブルクリックで起動し，ポート5984番にGETリクエストを発する．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (dex:get "http://localhost:5984")
+;=&gt; "{\"couchdb\":\"Welcome\",\"version\":\"2.1.0\",\"features\":[\"scheduler\"],\"vendor\":{\"name\":\"The Apache Software Foundation\"}}
+;   "
+;   200
+;   #&lt;HASH-TABLE :TEST EQUAL :COUNT 7 {10041F28C3}&gt;
+;   #&lt;QURI.URI.HTTP:URI-HTTP http://localhost:5984&gt;
+;   #&lt;SB-SYS:FD-STREAM for "socket 127.0.0.1:52372, peer: 127.0.0.1:5984"
+;   {1004112FE3}&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>CouchDBのルートURLにアクセスするとバージョンを取得できる．エスケープされた文字列は分かり辛いので，Jonathanを使ってJSONをS式に変換する．以下は読みやすいようにこちらでインデントした．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(jonathan:parse (dex:get "http://localhost:5984"))
+;=&gt; (:|vendor|   (:|name| "The Apache Software Foundation")
+;    :|features| ("scheduler")
+;    :|version|  "2.1.0"
+;    :|couchdb|  "Welcome")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>S式のリストが一つのオブジェクトか配列を表す．リストが，キーワードを含む連想配列の時はオブジェクト（key/value dictionaries）で，キーワードがなければ配列である．上のS式は以下のJSONをパースした結果である．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+	"couchdb": "Welcome",
+	"version": "2.1.0",
+	"features": ["scheduler"],
+	"vendor": {
+		  "name": "The Apache Software Foundation"
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ここでタイプの手間を減らすためにマクロを定義．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defmacro couchdb (method path)
+       `(jonathan:parse (
+       			,(intern (symbol-name method) :dex)
+			,(concatenate 'string "http://localhost:5984" path))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>引数の <code>method</code> はシンボルでもキーワードでもOK．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb get "/_all_dbs")   <b class="conum">(1)</b>
+;=&gt; nil
+(couchdb put "/baseball")   <b class="conum">(2)</b>
+;=&gt; (:|ok| T)
+(couchdb get "/_all_dbs")   <b class="conum">(3)</b>
+;=&gt; ("baseball")</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>/_all_dbs</code> でデータベース一覧を取得．まだデータベースは無いので空のJSONオブジェクトが返る．Lispでは <code>nil</code> となる．</p>
+</li>
+<li>
+<p><code>put</code> メソッドで <code>baseball</code> データベースを作成．成功すれば，<code>ok</code> キーに <code>true</code> が返される．</p>
+</li>
+<li>
+<p>データベース一覧を取得すると <code>baseball</code> データベースが作成されている．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>もう一度同じ名前のデータベースの作成を試みる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put "/baseball")
+;=&gt; An HTTP request to "http://localhost:5984/baseball" returned 412 precondition failed.
+;
+;   {"error":"file_exists","reason":"The database could not be created, the file already exists."}
+;      [Condition of type DEXADOR.ERROR:HTTP-REQUEST-PRECONDITION-FAILED]
+;
+;   Restarts:
+;    0: [RETRY-REQUEST] Retry the same request.
+;    1: [IGNORE-AND-CONTINUE] Ignore the error and continue.
+;    2: [RETRY] Retry SLIME REPL evaluation request.
+;    3: [*ABORT] Return to SLIME's top level.
+;    4: [ABORT] abort thread (#&lt;THREAD "new-repl-thread" RUNNING {1002AB5BA3}&gt;)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/fukamachi/dexador">Dexador</a> はErrorシグナルを発しデバッガが立ち上がる．エラーメッセージを見るとHTTPがStatus Code 412（Precondition Failed）を返したことがわかる．これはリクエスト先のリソースへのアクセスが拒否されたことを示すステータス・コード．</p>
+</div>
+<div class="paragraph">
+<p>Dexadorの <a href="https://github.com/fukamachi/dexador/blob/450ffa7f5b5c6c4e52ac98499e43f443147f3a57/src/error.lisp#L46">エラー・コンディション・オブジェクトの定義</a> は以下の通り．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(define-condition http-request-failed (error)
+  ((body :initarg :body
+         :reader response-body)
+   (status :initarg :status
+           :reader response-status)
+   (headers :initarg :headers
+            :reader response-headers)
+   (uri :initarg :uri
+        :reader request-uri)
+   (method :initarg :method
+           :reader request-method))
+  (:report (lambda (condition stream)
+             (with-slots (uri status) condition
+               (format stream "An HTTP request to ~S has failed (status=~D)."
+                       (quri:render-uri uri)
+                       status)))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>http-request-failed</code> クラスは全てのHTTPエラー・コンディション・オブジェクトの親クラス．<code>body</code> スロットにサーバーから返されるbodyが，<code>headers</code> スロットにヘッダが格納されている．アクセサーはそれぞれ <code>response-body</code> と <code>reponse-headers</code>．</p>
+</div>
+<div class="paragraph">
+<p>コンディション・オブジェクトのおさらい．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(handler-case 実行式
+    (condition-type (condition-object) エラー処理)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>まずはマクロを使わず手動接続．エラーを無視し結果のJSONだけ返すようにする．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(handler-case (jonathan:parse (dex:put "http://localhost:5984/baseball"))
+  (dex:http-request-failed (err)
+    (jonathan:parse (dex:response-body err))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>couchdb</code> マクロを再定義．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defmacro couchdb (method path)
+  `(handler-case (jonathan:parse (,(intern (symbol-name method) :dex)
+				                  ,(concatenate 'string "http://localhost:5984" path)))
+     (dex:http-request-failed (err)
+       (jonathan:parse (dex:response-body err)))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>もう一度，<code>baseball</code> データベースの作成を試みる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put "/baseball")
+;=&gt; (:|reason| "The database could not be created, the file already exists."
+;    :|error| "file_exists")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>次は，<code>plankton</code> データベースを新規作成．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put "/plankton")
+;=&gt; (:|ok| T)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>データベース一覧を取得．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb get "/_all_dbs")
+;=&gt; ("baseball" "plankton")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>plankton</code> データベースを削除し，データベース一覧を表示．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb delete "/plankton")
+;=&gt; (:|ok| T)
+(couchdb get "/_all_dbs")
+;=&gt; ("baseball")</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_まとめ">まとめ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Getting Startedでは以下の4つのAPIを学んだ．</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"GET /"</code> CouchDBのバージョンが得られる．</p>
+</li>
+<li>
+<p><code>"PUT /database"</code> databaseの作成．</p>
+</li>
+<li>
+<p><code>"DELETE /database"</code> databaseの削除．</p>
+</li>
+<li>
+<p><code>"GET /__all_dbs"</code> データベース一覧．</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>公式ドキュメントはこの後，ブラウザ・インターフェースを提供するFauxtonのハンズオンに進むが，そこは飛ばし，次回は <a href="http://docs.couchdb.org/en/2.1.0/intro/api.html">The Core API</a> へ進みドキュメントの操作方法を始め，様々なデータベース設定APIを学ぶ．</p>
+</div>
+</div>
+</div>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=Lisp%20%e3%81%a7%20CouchDB%20%e3%81%ae%20Getting%20Started%20%e3%82%92%e5%a7%8b%e3%82%81%e3%81%a6%e3%81%bf%e3%82%8b&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fdb%2fcouchdb-manual%2fgetting-started%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2fdb%2fcouchdb-manual%2fgetting-started%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fdb%2fcouchdb-manual%2fgetting-started%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/">
+          <section class="post">
+              <h2>コードリーディング: LackのMountミドルウエアを理解する</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"</script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>    
+
+    
+</body>
+</html>
+

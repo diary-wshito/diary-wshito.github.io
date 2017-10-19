@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nosql on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/tags/nosql/</link>
+    <description>Recent content in Nosql on wshito&#39;s diary</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>All rights reserved 2016--</copyright>
+    <lastBuildDate>Fri, 20 Oct 2017 22:05:59 +0900</lastBuildDate>
+    
+	<atom:link href="http://diary.wshito.com/tags/nosql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lisp で CouchDB の Getting Started を始めてみる</title>
+      <link>http://diary.wshito.com/comp/db/couchdb-manual/getting-started/</link>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/db/couchdb-manual/getting-started/</guid>
+      <description>CouchDBオフィシャル・ドキュメントの Getting Started をLispを使ってやってみた．CouchDBはRESTfulなAPIを提供しているので，特別なドライバを使わなくてもHTTPクライアントがあればDBを操作できる．ここでは，LispのHTTPクライアント・ライブラリ Dexador と，高速なJSONエンコード/デコード・ライブラリ Jonathan を使って，CouchDBと通信する．どちらも日本を代表する若手Lisperによって書か</description>
+    </item>
+    
+  </channel>
+</rss>

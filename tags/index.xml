@@ -103,6 +103,24 @@
     </item>
     
     <item>
+      <title>Couchdb</title>
+      <link>http://diary.wshito.com/tags/couchdb/</link>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/couchdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Db</title>
+      <link>http://diary.wshito.com/tags/db/</link>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/db/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Development Tool</title>
       <link>http://diary.wshito.com/tags/development-tool/</link>
       <pubDate>Fri, 23 Dec 2016 15:25:34 +0900</pubDate>
@@ -159,7 +177,7 @@
     <item>
       <title>Lisp</title>
       <link>http://diary.wshito.com/tags/lisp/</link>
-      <pubDate>Sat, 14 Oct 2017 23:13:44 +0900</pubDate>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/lisp/</guid>
       <description></description>
@@ -216,6 +234,15 @@
       <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/nonblocking-io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nosql</title>
+      <link>http://diary.wshito.com/tags/nosql/</link>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/nosql/</guid>
       <description></description>
     </item>
     

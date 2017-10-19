@@ -67,6 +67,15 @@
     </item>
     
     <item>
+      <title>Db</title>
+      <link>http://diary.wshito.com/categories/db/</link>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/categories/db/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Diary</title>
       <link>http://diary.wshito.com/categories/diary/</link>
       <pubDate>Sun, 06 Nov 2016 20:43:33 +0900</pubDate>
@@ -96,7 +105,7 @@
     <item>
       <title>Lisp</title>
       <link>http://diary.wshito.com/categories/lisp/</link>
-      <pubDate>Sat, 14 Oct 2017 23:13:44 +0900</pubDate>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
       
       <guid>http://diary.wshito.com/categories/lisp/</guid>
       <description></description>
