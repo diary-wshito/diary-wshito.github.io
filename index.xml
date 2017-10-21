@@ -22,7 +22,7 @@
     </item>
     
     <item>
-      <title>コードリーディング: LackのMountミドルウエアを理解する</title>
+      <title>コードリーディング: Lack の Mount ミドルウエアを理解する</title>
       <link>http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/</link>
       <pubDate>Sat, 14 Oct 2017 23:13:44 +0900</pubDate>
       
@@ -36,7 +36,7 @@
     </item>
     
     <item>
-      <title>コードリーディング: Lackアプリケーションを理解する</title>
+      <title>コードリーディング: Lack アプリケーションを理解する</title>
       <link>http://diary.wshito.com/comp/lisp/clack/app/</link>
       <pubDate>Wed, 11 Oct 2017 21:25:26 +0900</pubDate>
       

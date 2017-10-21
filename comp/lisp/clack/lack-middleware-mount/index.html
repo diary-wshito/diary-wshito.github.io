@@ -12,13 +12,13 @@
 
 
 
-<meta name="twitter:title" content="コードリーディング: LackのMountミドルウエアを理解する"/>
+<meta name="twitter:title" content="コードリーディング: Lack の Mount ミドルウエアを理解する"/>
 <meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@waterloo_jp"/>
 
 
 
-  	<meta property="og:title" content="コードリーディング: LackのMountミドルウエアを理解する &middot; wshito&#39;s diary" />
+  	<meta property="og:title" content="コードリーディング: Lack の Mount ミドルウエアを理解する &middot; wshito&#39;s diary" />
   	<meta property="og:site_name" content="wshito&#39;s diary" />
   	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/" />
 
@@ -36,11 +36,13 @@
     
     <meta property="article:tag" content="clack" />
     
+    <meta property="article:tag" content="lack" />
+    
     <meta property="article:tag" content="webapp" />
     
     
 
-    <title>コードリーディング: LackのMountミドルウエアを理解する &middot; wshito&#39;s diary</title>
+    <title>コードリーディング: Lack の Mount ミドルウエアを理解する &middot; wshito&#39;s diary</title>
 
     
     <meta name="description" content="&lt;div id=&#34;preamble&#34;&gt;
@@ -99,8 +101,8 @@
             
         ]
     },
-    "headline": コードリーディング: LackのMountミドルウエアを理解する,
-    "name": コードリーディング: LackのMountミドルウエアを理解する,
+    "headline": コードリーディング: Lack の Mount ミドルウエアを理解する,
+    "name": コードリーディング: Lack の Mount ミドルウエアを理解する,
     "wordCount": 1477,
     "timeRequired": "PT3M",
     "inLanguage": {
@@ -111,7 +113,7 @@
     "datePublished": 2017-10-14T23:13Z,
     "dateModified": 2017-10-14T23:13Z,
     
-    "keywords": lisp, clack, webapp,
+    "keywords": lisp, clack, lack, webapp,
     "description": ,
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -200,7 +202,7 @@
   <article class="post comp">
 
     <header class="post-header">
-        <h1 class="post-title">コードリーディング: LackのMountミドルウエアを理解する</h1>
+        <h1 class="post-title">コードリーディング: Lack の Mount ミドルウエアを理解する</h1>
         
         <section class="post-meta">
           <time class="post-date" datetime="2017-10-14T23:13:44&#43;09:00">
@@ -213,6 +215,8 @@
           <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
          
           <span class="post-tag small"><a href="http://diary.wshito.com//tags/clack/">#clack</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lack/">#lack</a></span>
          
           <span class="post-tag small"><a href="http://diary.wshito.com//tags/webapp/">#webapp</a></span>
          
@@ -426,7 +430,7 @@ Listening on localhost:5000.
     
 <section class="share">
   <h4>Share this post</h4>
-  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%82%b3%e3%83%bc%e3%83%89%e3%83%aa%e3%83%bc%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%3a%20Lack%e3%81%aeMount%e3%83%9f%e3%83%89%e3%83%ab%e3%82%a6%e3%82%a8%e3%82%a2%e3%82%92%e7%90%86%e8%a7%a3%e3%81%99%e3%82%8b&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2flack-middleware-mount%2f"
+  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%82%b3%e3%83%bc%e3%83%89%e3%83%aa%e3%83%bc%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%3a%20Lack%20%e3%81%ae%20Mount%20%e3%83%9f%e3%83%89%e3%83%ab%e3%82%a6%e3%82%a8%e3%82%a2%e3%82%92%e7%90%86%e8%a7%a3%e3%81%99%e3%82%8b&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2flack-middleware-mount%2f"
       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
       <span class="hidden">Twitter</span>
   </a>
@@ -466,7 +470,7 @@ Listening on localhost:5000.
   
       <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/clack/app/">
           <section class="post">
-              <h2>コードリーディング: Lackアプリケーションを理解する</h2>
+              <h2>コードリーディング: Lack アプリケーションを理解する</h2>
           </section>
       </a>
   
