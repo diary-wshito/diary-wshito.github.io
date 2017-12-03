@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Roswell 環境下でのローカル・プロジェクト管理入門"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="Roswell 環境下でのローカル・プロジェクト管理入門 &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/ros-local/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2017-12-04T00:00:00&#43;09:00" />
+
+    
+    <meta property="article:tag" content="lisp" />
+    
+    <meta property="article:tag" content="programming" />
+    
+    <meta property="article:tag" content="development tool" />
+    
+    <meta property="article:tag" content="roswell" />
+    
+    <meta property="article:tag" content="ASDF" />
+    
+    <meta property="article:tag" content="Quicklisp" />
+    
+    <meta property="article:tag" content="roswell" />
+    
+    
+
+    <title>Roswell 環境下でのローカル・プロジェクト管理入門 &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は @waterloo_jp まで． 「 Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswe" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.30-DEV" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/ros-local/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": Roswell 環境下でのローカル・プロジェクト管理入門,
+    "name": Roswell 環境下でのローカル・プロジェクト管理入門,
+    "wordCount": 7879,
+    "timeRequired": "PT16M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/ros-local/,
+    "datePublished": 2017-12-04T00:00Z,
+    "dateModified": 2017-12-04T00:00Z,
+    
+    "keywords": lisp, programming, development tool, roswell, ASDF, Quicklisp, roswell,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/ros-local/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+<main class="content" role="main">
+
+  
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">Roswell 環境下でのローカル・プロジェクト管理入門</h1>
+        
+        <section class="post-meta">
+          <time class="post-date" datetime="2017-12-04T00:00:00&#43;09:00">
+            December 4, 2017
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/development-tool/">#development tool</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/roswell/">#roswell</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/asdf/">#ASDF</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/quicklisp/">#Quicklisp</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/roswell/">#roswell</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>この記事は <a href="https://qiita.com/advent-calendar/2017/lisp">Lisp Advent Calendar 2017</a> の4日目の記事として書かれました．コメント，質問等は <a href="https://twitter.com/waterloo_jp">@waterloo_jp</a> まで．</p>
+</div>
+<div class="paragraph">
+<p>「 <a href="../lisp-pm/">Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど</a> 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswellの導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）をRoswellの環境下で管理する方法を説明します．本稿の最後では，<a href="#sec-tutorial">ハンズオン・チュートリアル</a>で実際のプロジェクト設定例を示します．</p>
+</div>
+<div class="paragraph">
+<p>Roswellは背後でQuicklispとASDFを使用してライブラリをビルドしロードしています．ローカル・プロジェクトをRoswellで管理・使用するには，QuicklispとASDFの理解が欠かせません．Quicklispはネット上のリポジトリからパッケージをダウンロードするだけで，コンパイルとロードはASDFが担っています．そこで，ローカル・プロジェクトをASDFに認識させるための設定から見ていきましょう．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_asdfにローカル_プロジェクトを認識させる方法">ASDFにローカル・プロジェクトを認識させる方法</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roswellで実装系をインストールした場合，ASDF 3がインストールされているはずですが一応ASDFのバージョンを確認しておきます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (asdf:asdf-version)
+"3.1.5"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>手っ取り早くASDFに認識させる方法はローカル・プロジェクトを <code>~/common-lisp/</code> 以下に配置します．これで <code>(ql:quickload :foo)</code>，<code>(require :foo)</code>，<code>(asdf:load-system :foo)</code> のいずれでもロードできます．</p>
+</div>
+<div class="paragraph">
+<p>しかし，複数プロジェクトで構成されるプログラムを配布する際には，インストール先を独自に設定する必要があるでしょう．ここでは，ASDF 3から採用されたsource-registryを使い，任意ディレクトリにロードパスを通す方法を解説します．source-registryはLispコードからも設定できるため，Rosスクリプト内で使うこともできます．</p>
+</div>
+<div class="paragraph">
+<p>source-registryの公式マニュアルは  <a href="https://common-lisp.net/project/asdf/asdf.html#Controlling-where-ASDF-searches-for-systems">ASDFマニュアル Sec 8</a> です．</p>
+</div>
+<div class="sect2">
+<h3 id="_source_registry">SOURCE-REGISTRY</h3>
+<div class="paragraph">
+<p>source-registryは，ASDF 3から採用されたロードパスの設定方法です．旧バージョンでは <code>*central-rgistry*</code> 変数を使って設定していました．後方互換性を維持するため <code>*central-registry*</code> に設定されたパスはsource-registryの設定より前に検索されます．Roswell環境下では旧バージョン用の <code>*central-registry*</code> が以下のように設定されています．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; asdf:*central-registry*
+(#P"/Users/wshito/.roswell/lisp/quicklisp/quicklisp/")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>source-registryは，設定ファイルに記述する方法と，Lispコードで設定する方法の2種類あります．どちらの方法でも <a href="https://common-lisp.net/project/asdf/asdf.html#Configuration-DSL">ASDFマニュアル Sec 8.5</a>で定義されているDSL文法にしたがって記述します．</p>
+</div>
+<div class="sect3">
+<h4 id="_source_registry設定用dsl">SOURCE-REGISTRY設定用DSL</h4>
+<div class="paragraph">
+<p>source-registry設定用のDSLは <code>(:source-registory &#8230;&#8203;.)</code> で始まります．<code>&#8230;&#8203;.</code> の箇所にはディレクティヴが続きます．主に使うディレクティヴは下記の4つでしょう．</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>(:tree パス)</code> ディレクティヴはパス以下を再帰的に検索する．</p>
+</li>
+<li>
+<p><code>(:directory パス)</code> ディレクティヴは指定されたパスのみを <strong>再帰せずに</strong> 検索する．</p>
+</li>
+<li>
+<p><code>:inherit-configuration</code> ディレクティヴは既に設定済みのsource-registryを挿入する．</p>
+</li>
+<li>
+<p><code>:ignore-inherited-configuration</code> ディレクティヴを指定すると既存の設定が上書きされる．</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>パス部分は以下のいずれかで記述します．</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>文字列によるパス．絶対パスで指定した方が安全．</p>
+</li>
+<li>
+<p><code>:home</code>, <code>:root</code> はそれぞれ，ホームディレクトリとルートディレクトリに展開される．</p>
+</li>
+<li>
+<p><code>([上記2つのうちいずれか] 相対パス)</code> で1つ目で指定されたパスと相対パスが結合されたパスを表す．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>実際の記述例を<a href="#listings-DSL">コード 1</a>に示します．</p>
+</div>
+<div id="listings-DSL" class="listingblock">
+<div class="title">コード 1. source-registry DSL記述例</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(:source-registry
+    (:tree (:home "lisp/project1"))        ; /Users/home/wshito/lisp/project1 に展開される
+    (:directory "/usr/local/lib/project2")
+    :inherit-configuration)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_source_registry設定方法">SOURCE-REGISTRY設定方法</h4>
+<div class="paragraph">
+<p>ここでは前節で説明したDSLを使って，Lispコードと設定ファイルを併用してロードパスを設定する方法を解説します．</p>
+</div>
+<div class="paragraph">
+<p>Lispコードから設定する場合は，<a href="#listings-DSL">コード 1</a>の記述をクォートして <code>asdf:initialize-source-registry</code> に渡します．</p>
+</div>
+<div id="listings-source-registry-api" class="listingblock">
+<div class="title">コード 2. Lispコードからのロードパス設定例</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(asdf:initialize-source-registry
+    '(:source-registry
+         (:tree (:home "lisp/project1"))
+         (:directory "/usr/local/lib/project2")
+         :inherit-configuration))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#listings-source-registry-api">コード 2</a>の3行目で <code>~/lisp/project1</code> 以下を再帰的に検索するように設定しています．プロジェクトフォルダ以下にLisp以外のディレクトリが多くある場合，全てのディレクトリを再帰的に検索するのは非効率です．例えば <code>~/lisp/project1</code> 以下で検索が必要なのは，<code>src/lisp</code> 以下の全ディレクトリと，<code>src/test/lisp</code> ディレクトリ直下だけだとします．この場合，プロジェクトフォルダに <code>asdf.conf</code> ファイルを配置し，その中で <code>:here</code> ディレクティヴを使った設定を書くことによって，ロードパスをさらに細かくコントロールすることができます．この例の場合，<code>~/lisp/project1/asdf.conf</code> ファイル内に<a href="#listings-asdconf">コード 3</a>を記述すると所望の結果が得られます．<code>:here</code> ディレクティヴは <code>asd.conf</code> があるディレクトリの絶対パスに展開されます．</p>
+</div>
+<div id="listings-asdconf" class="listingblock">
+<div class="title">コード 3. <code>~/lisp/project1/asdf.conf</code> の設定内容</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(:source-registry
+    (:tree (:here "src/lisp"))            ; /Users/home/wshito/lisp/project1/src/lisp
+    (:directory (:here "src/test/lisp"))) ; /Users/home/wshito/lisp/project1/src/test/lisp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最終的なsource-registryの設定は以下の変数で確認出来ます．ただし，この変数を直接変更してはいけません．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; asdf:*source-registry-parameter*</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ライブラリのロード">ライブラリのロード</h4>
+<div class="paragraph">
+<p>ここまでの設定が完了していれば，以下のいずれかでライブラリをロードできます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (asdf:load-system ライブラリ名)   ;; ASDFを使ってロード
+&gt; (ql:quickload ライブラリ名)      ;; Quicklispを使ってロード
+&gt; (require ライブラリ名)          ;; 処理系がASDF経由でロード</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#sec-tutorial">ハンズオン・チュートリアル</a> では実際にプロジェクトを使って設定手順を示します．</p>
+</div>
+<div class="paragraph">
+<p>ASDF3は，source-registryで設定したロードパス内のシステム情報をキャッシュします．ファイル名やディレクトリ構成を変更した場合，<code>(asdf:clear-source-registry)</code> を実行するとキャッシュをクリアできます．</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_asdfの検索パスとfasl保存ディレクトリの違い">ASDFの検索パスとfasl保存ディレクトリの違い</h4>
+<div class="paragraph">
+<p>これまで説明してきたロードパスは，システム定義が書かれたASDファイルをASDFが探すパスです．ASDFによってコンパイルされたfaslファイルは，<code>~/.cache/common-lisp/[処理系名]/path-to-src-file/src-file.fasl</code> に保存されます（保存先は手動コンパイル時に画面に表示される）．例えば sbcl-1.4.1でコンパイルされた <code>/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/lack-20170830-git/src/lack.lisp</code> ファイルは，<code>~/.cache/common-lisp/sbcl-1.4.1-macosx-x64/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/lack-20170830-git/src/lack.fasl</code> に保存されます．</p>
+</div>
+<div class="paragraph">
+<p>当然ですが，<code>~/.cache/common-lisp/</code> 以下にfaslが存在しても，ASDファイルがロードパス上になければfaslファイルはロードされません．</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quicklispを使ったローカル_プロジェクト管理">Quicklispを使ったローカル・プロジェクト管理</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>QuicklispはライブラリのコンパイルとロードをASDFに委譲するため，ASDFを使ったここまでの設定で <code>(ql:quickload :my-project)</code> とすると <code>my-project</code> をロードすることができます．一方で，Quicklispにもローカル・プロジェクトを認識させる設定方法があるため，ASDFのsource-registryを使わず，Quicklisp側の設定だけでローカル・プロジェクトを認識させることもできます．ここでは，Quicklispを中心としたローカル・プロジェクトの管理方法を説明します．</p>
+</div>
+<div class="sect2">
+<h3 id="_quicklispの基本">Quicklispの基本</h3>
+<div class="paragraph">
+<p>Quicklisp側の設定に入る前にQuicklispの基本的な使い方をおさらいしておきましょう．まずはQuicklisp自体のアップデート方法です．すでに最新バージョンの時はダウンロードせずバージョンを表示するので，バージョン確認にも使えます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (ql:update-client)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Quicklispはライブラリのダウンロード，インストール，コンパイル，ロードを <code>ql:quickload</code> 関数で行います．引数に <code>:verbose t</code> を設定すると，コンパイル時のメッセージなど詳しい出力が得られます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (ql:quickload :lack)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ダウンロード済みのライブラリを最新のバージョンにアップデートするには <code>ql:update-all-dists</code> を実行します．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (ql:update-all-dists)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Quicklispによってダウンロードされたライブラリの保存場所は以下で調べることができます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (ql:where-is-system :clack)
+#P"/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/clack-20161204-git/"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>インストール（ダウンロード）済み全ライブラリのリストを得たい時には <code>ql:system-list</code> を使います．膨大な量になるので下の例では結果を <code>all</code> に保持しています．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (setf all (ql:system-list))
+&gt; (length all)
+3491</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>名前を指定して特定のライブラリがインストールされているか調べたい時．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:system-apropos "woo")  ;; 部分文字列にマッチする．</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>アンインストールは <code>ql:uninstall</code> を使います．アンインストールする前に，依存関係を調べておきましょう．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:who-depends-on "woo")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>問題がなければ以下でアンインストールできます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:uninstall "woo")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>アンインストールは以下の3つの処理を行います．</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>ダウンロード済みのtarアーカイブと解凍済みのプロジェクトディレクトリを削除する．</p>
+</li>
+<li>
+<p>管理用のmetadataファイルを更新する．</p>
+</li>
+<li>
+<p><code>asdf:clear-system</code> を実行しASDFのキャッシュをクリアする．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>ただし，現在のLispセッションに既にロードされたライブラリは，セッションを終了するまでセッション内で生き続けます．</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_quicklispのローカル_プロジェクト">Quicklispのローカル・プロジェクト</h3>
+<div class="paragraph">
+<p>ここからはQuicklispにローカル・プロジェクトを認識させる方法を説明します．</p>
+</div>
+<div class="paragraph">
+<p>Quicklispがデフォルトで読み込むローカル・プロジェクトの場所は，<code>*quicklisp-home*</code> に設定されたディレクトリ下の <code>local-projects</code> ディレクトリです．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; ql:*quicklisp-home*
+#P"/Users/wshito/.roswell/lisp/quicklisp/"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Roswell環境下の <code>*quicklisp-home*</code> は上記のとおり <code>~/.roswell/lisp/quicklisp</code> なので，<code>~/.roswell/lisp/quicklisp/local-projects</code> にローカル・プロジェクトを配置します．</p>
+</div>
+<div class="paragraph">
+<p>Quicklispが認識するローカル・プロジェクトのディレクトリは <code>ql:*local-project-directories*</code> 変数で変更することができます．<a href="#listings-ql-local">コード 4</a> の通り，Roswell環境下ではデフォルトの <code>*quicklisp-home*</code> 以下のディレクトリ以外に <code>~/.roswell/local-projects</code> も使えることがわかります．</p>
+</div>
+<div id="listings-ql-local" class="listingblock">
+<div class="title">コード 4. Roswell環境下のQuicklispのローカル・プロジェクト・ディレクトリ</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; ql:*local-project-directories*
+(#P"/Users/wshito/.roswell/local-projects/"
+ #P"/Users/wshito/.roswell/lisp/quicklisp/local-projects/")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>local-projects</code> ディレクトリにプロジェクトを配置したら，Quicklispに登録する必要があります．登録するには以下を実行します．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:register-local-projects)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>これで <code>local-projects</code> ディレクトリ以下に <code>system-index.txt</code> というmetadataファイルが作成されます．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_asdfを使った手動コンパイルとロード">ASDFを使った手動コンパイルとロード</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>開発時にはデバッガを使ってプログラムをステップ実行したい場合，依存ライブラリをデバッグ用の設定で再コンパイルする必要があります．<a href="#listings-compile-load">コード 5</a>は，hunchentoot，clack，lackをデバグ用設定，<code>(declaim (optimize (debug 3)))</code>，で再コンパイルしてロードする例です．</p>
+</div>
+<div id="listings-compile-load" class="listingblock">
+<div class="title">コード 5. REPL上での手動コンパイルとロード</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (declaim (optimize (debug 3)))
+&gt; (asdf:compile-system :hunchentoot :force t)
+&gt; (asdf:compile-system :clack :force t)
+&gt; (asdf:compile-system :lack :force t)
+&gt; (asdf:load-system :clack)
+&gt; (asdf:load-system :lack)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>:force t</code> は依存ライブラリも再コンパイルするディレクティヴです．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec-tutorial">ハンズオン・チュートリアル</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>以上の解説を踏まえて，ここでは実際にローカル・プロジェクトを作成し，ビルド，実行まで行ってみましょう．コードは <a href="https://github.com/wshito/blog-examples/tree/master/lisp/package-management/hello-project">GitHub</a> 上に置いてあります．</p>
+</div>
+<div class="paragraph">
+<p>ローカル・プロジェクトを使うケースは，</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>開発作業中のREPLに独自ライブラリをコンパイル・ロードしたい，</p>
+</li>
+<li>
+<p>Rosスクリプトからプログラムを起動する際にローカル・プロジェクトをロードしたい，</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>という2つのケースが考えられます．</p>
+</div>
+<div class="paragraph">
+<p>まず<a href="#sec-ex1">例1</a>で，REPLからの開発作業を前提とした設定例を示します．<a href="#sec-ex2">例2</a>では，Rosスクリプトを使ってコマンドラインからLispプログラムを起動する設定例を示します．どちらも基本は同じでASDFのsource-registryを使って設定します．</p>
+</div>
+<div class="sect2">
+<h3 id="sec-ex1">例1: source-registryを設定しREPLから起動</h3>
+<div class="paragraph">
+<p>主な開発手順は以下の通りです．</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>必要なロードパスを設定する開発者用ツールを <code>~/common-lisp</code> に配備する．</p>
+</li>
+<li>
+<p>ローカル・プロジェクトの開発を始める前に開発者用ツールをロードする．</p>
+</li>
+<li>
+<p>ローカル・プロジェクトをビルド，ロードする．</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>プロジェクトの構成は<a href="#dir:hello-project">コード 6</a>の通りです．hello-projectは3つのサブ・プロジェクト（hello，date-v1.0，dummy）から構成されています．</p>
+</div>
+<div id="dir:hello-project" class="listingblock">
+<div class="title">コード 6. プロジェクト全体像</div>
+<div class="content">
+<pre class="highlight"><code>hello-project/
+ +- asd.conf
+ +- hello/
+ |    `- hello.asd
+ |    `- src/
+ |        `- hello.lisp
+ +- date-v1.0/
+ |    `- date.asd
+ |    `- src/
+ |        `- date.lisp
+ +- dummy/
+ +- hello-builder       ;;  開発者用ツール．~/common-lisp 以下にインストールする
+    `- hello-builder.asd
+    `- builder.lisp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>hello-builderは開発者用ツールのプロジェクトです．開発者用ツールを使って，親プロジェクトであるhello-project以下を再帰的に検索するようにロードパスを設定します．hello-project内のロードパスは <code>asd.conf</code> でさらに細かくコントロールします．dummyは検索パスに含めないプロジェクト例として置いているだけで中身は空です．</p>
+</div>
+<div class="sect3">
+<h4 id="_開発者用ツールの作成">開発者用ツールの作成</h4>
+<div class="paragraph">
+<p>まずは，開発者用ツールである <code>hello-builder</code> ディレクトリから見ていきましょう．この中の <code>hello-builder.asd</code> でhello-projectのsource-registryを設定します．<code>builder.lisp</code> 内にはコンパイル，ロードを自動化するコードを記述します．</p>
+</div>
+<div class="paragraph">
+<p><code>hello-builder.asd</code> の中身は<a href="#listings-hello-builder.asd">コード 7</a>の通りです．<code>asd</code> ファイルでは，パッケージ定義などをせず単一の <code>defsystem</code> のみを記述することがASDFマニュアルで推奨されています．一方で，<code>asd</code> ファイルの中身は通常のLispコードとしてリーダーで読まれ <code>eval</code> されるためLispコードを含めることもできます．ここでは，<a href="#listings-hello-builder.asd">コード 7</a>の14&#8212;&#8203;17行目でsource-registryの設定コードを含めています．これで <code>hello-builder</code> 開発ツールをロードすると，<code>hello-project</code> への検索パスが自動的に設定されます．</p>
+</div>
+<div id="listings-hello-builder.asd" class="listingblock">
+<div class="title">コード 7. hello-builder/hello-builder.asd</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(in-package :cl-user)
+
+(defpackage hello-builder-asd
+  (:use :cl :asdf))
+
+(in-package :hello-builder-asd)
+
+(defsystem "hello-builder"
+  :version "1.0"
+  :author "wshito"
+  :components ((:file "builder")))
+
+;; Set up source-registry
+(asdf:initialize-source-registry
+ '(:source-registry
+   (:tree (:home "program/blog-examples/lisp/package-management/hello-project")) <b class="conum">(1)</b>
+   :inherit-configuration))</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>`:home`を使うことで絶対パスに変換される．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="#listings-hello-builder.asd">コード 7</a>の14&#8212;&#8203;17行目を手動でREPLで評価してもパスが通りますが，<code>hello-builder</code> 開発ツールをシステムとして定義し <code>~/common-lisp</code> 以下に配置することで，開発ツールを <code>(require :hello-builder)</code> 一発でロードでき，source-registryも同時に設定できます．プロジェクト全体は任意の場所に配置し，開発者用ツールが入ったディレクトリだけ <code>~/common-lisp</code> に配置するのです．</p>
+</div>
+<div class="paragraph">
+<p>hello-project全体のコンパイルやロードは，開発ツールの <code>hello-builder/builder.lisp</code> 内で定義されている <code>make</code> マクロで行います（<a href="#listings-builder.lisp">コード 8</a>）．ASDF 3.1からは <code>asdf:make</code> が利用可能になっていますが，まだベータ実装ということなのでここでは使用していません．<code>make</code> マクロは <code>debug</code> キーワード引数に応じて <a href="#listings-compile-load">コード 5</a> の様な処理を実行します．</p>
+</div>
+<div id="listings-builder.lisp" class="listingblock">
+<div class="title">コード 8. <code>hello-builder/builder.lisp</code></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(in-package :cl-user)
+
+(defpackage hello-builder
+  (:use :cl :asdf)
+  (:export :make))
+
+(in-package :hello-builder)
+
+(defmacro make (&amp;key (debug nil))
+  (let ((dec (if debug
+		 '(declaim (optimize (debug 3)))
+		 '(declaim (optimize (speed 3)))))
+	(comp-op (append '(asdf:compile-system :hello :force) (list debug))))
+  `(progn
+     ,dec
+     ,comp-op
+     (asdf:load-system :hello))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>以上，2つのファイルから成る <code>hello-builder</code> ディレクトリを ASDFのデフォルト検索パスに含まれる <code>~/common-lisp</code> に配置します．</p>
+</div>
+<div class="paragraph">
+<p>本稿の前半で説明した通り，Roswellのデフォルト設定では，ASDFは <code>~/.roswell/lisp/quicklisp/quicklisp/</code> 以下を，Quicklispは <code><sub>/.roswell/local-projects/</code>，<code></sub>/.roswell/lisp/quicklisp/local-projects/</code> 以下のローカル・プロジェクトを認識します．しかし，<code>~/.roswell</code> 以下にローカル・プロジェクトを配備するのはお勧めしません．なぜなら，Rowswellをアプグレードし，Quicklisp等システム関連の初期化スクリプトが更新された場合，<code>~/.roswell</code> 以下を削除してもう一度，<code>$ros setup</code> を実行し，<code>~/.roswell</code> 以下を刷新する必要が生じることがあるからです．</p>
+</div>
+<div class="paragraph">
+<p>プロジェクトのsource-registryを設定するプログラムは <code>~/common-lisp</code> に配置するのがベスト・プラクティスでしょう．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 9. <code>~/common-lisp</code> 以下にbuildツールへのリンクを設置</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ cd ~/common-lisp
+$ ln -s ~/program/blog-examples/lisp/package-management/hello-project/hello-builder
+$ ls
+hello-builder</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_プロジェクト本体の作成">プロジェクト本体の作成</h4>
+<div class="paragraph">
+<p>開発者用ツールが出来たので，いよいよプロジェクト本体を作成しましょう．hello-projectは2つの独立したサブ・プロジェクトから構成されています．まず，source-registryで設定したプロジェクトルートに <code>asd.conf</code> ファイルを作成して，サブ・プロジェクトへのパスを通します．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 10. <code>asd.conf</code></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">;;
+;; ASDF source-registry configuration file
+;; ignores the 'dummy' project
+;;
+(:source-registry
+    (:directory (:here "hello"))
+    (:directory (:here "date-v1.0")))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>helloプロジェクトのシステム定義は<a href="#listings-hello.asd">コード 11</a>の通りです．ここではASDFマニュアルの推奨通り <code>asd</code> ファイルには単一の <code>defsystem</code> だけを記述します．</p>
+</div>
+<div id="listings-hello.asd" class="listingblock">
+<div class="title">コード 11. <code>hello/hello.asd</code></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defsystem "hello"
+  :version "0.0.1"
+  :author "wshito"
+  :depends-on (:date
+;	       :dummy
+	       )
+  :components ((:module "src"
+		:components
+		((:file "hello")))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#listings-hello.lisp">コード 12</a>がhelloプロジェクトのコード本体です．<code>hello</code> は単に標準出力にメッセージと日付を表示するだけのプログラムです．</p>
+</div>
+<div id="listings-hello.lisp" class="listingblock">
+<div class="title">コード 12. <code>hello/src/hello.lisp</code></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(in-package :cl)
+
+(defpackage :hello
+  (:use :cl)
+  (:export :hello))
+
+(in-package :hello)
+
+(defun hello ()
+  (format t "Hello world! ~A" (date:today)))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>次は，helloプロジェクトが依存するdateプロジェクトを作成します．<a href="#listings-date.asd">コード 13</a>が <code>date</code> のシステム定義です．</p>
+</div>
+<div id="listings-date.asd" class="listingblock">
+<div class="title">コード 13. <code>date-v1.0/date.asd</code></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defsystem "date"
+  :version "1.0"
+  :author "wshito"
+  :components ((:module "src"
+		:components
+		((:file "date")))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最後は<a href="#listings-date.lisp">コード 14</a>に掲げたdateプロジェクトのプログラム本体です．日付の文字列を返す <code>today</code> 関数を提供します．</p>
+</div>
+<div id="listings-date.lisp" class="listingblock">
+<div class="title">コード 14. <code>date-v1.0/src/date.lisp</code></div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(in-package :cl)
+
+(defpackage :date
+  (:use :cl)
+  (:export :today))
+
+(in-package :date)
+
+(defmacro with-utime-decoding ((utime &amp;optional zone) &amp;body body)
+  `(multiple-value-bind (sec min h date month year day-of-week daylight-p zone)
+       (decode-universal-time ,utime ,@(if zone (list zone)))
+     (declare (ignorable sec min h date month year day-of-week daylight-p zone))
+     ,@body))
+
+(defun today ()
+  (with-utime-decoding ((get-universal-time))
+      (format nil "~A年~A月~A日（~[月~;火~;水~;木~;金~;土~;日~]）~A時~A分~A秒"
+	      year month date day-of-week h min sec)))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>以上で準備完了です．<a href="#listings-repl">[listings-repl]</a>に，ASDFの検索パスの設定，ビルド，プログラム起動までの実行結果を示します．</p>
+</div>
+<div id="listings:repl" class="listingblock">
+<div class="title">コード 15. 実行結果</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (require :hello-builder)   ;; source-registryの設定とhello-builder:makeのロード
+&gt; (hello-builder:make)       ;; helloプロジェクトをビルドしロード
+&gt; (hello:hello)              ;; helloプロジェクトを実行してみる．
+Hello world! 2017年12月2日（土）18時36分47秒</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_例1のまとめ">例1のまとめ</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>プロジェクト・トップへの検索パスを開発者用ツール内のASDFファイルで設定する．</p>
+</li>
+<li>
+<p>サブ・プロジェクトへの細かな検索パスの設定を，プロジェクト・トップに配置した <code>asd.conf</code> で行う．</p>
+</li>
+<li>
+<p>開発者用ツールへのリンクを <code>~/common-lisp</code> に配置する．</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec-ex2">例2: Rosスクリプトからの起動設定</h3>
+<div class="paragraph">
+<p>ここでは，<a href="#sec-ex1">例1</a>のプロジェクトをRosスクリプトから起動する方法を説明します．Rosスクリプトから起動する場合も，ASDファイルで設定したsource-registryをそのまま利用することができます．</p>
+</div>
+<div class="paragraph">
+<p>Rosスクリプトはプロジェクト・ルートの roswell ディレクトリ内に作成します．まず，スクリプトの雛形を作成します．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 16. hello.rosの雛形生成</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ mkdir roswell; cd roswell
+$ ros init hello
+Successfully generated: hello.ros</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>生成された <code>hello.ros</code> ファイルを<a href="#listings:hello.ros">コード 17</a>の様に書き換えます．重要なポイントは3か所です．まず，<a href="#listings:hello.ros">コード 17</a>の16&#8212;&#8203;19行目は <a href="#listings:hello-builder.asd">[listings:hello-builder.asd]</a>の <code>hello-builder.asd</code> 内で設定したsource-registryと全く同じになります．これでプロジェクト・ルートの <code>asd.conf</code> が読み込まれます．2点目が22行目のプロジェクトのロードです．3点目は26行目でプログラムを起動しています．</p>
+</div>
+<div id="listings:hello.ros" class="listingblock">
+<div class="title">コード 17. hello.ros スクリプト</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">#!/bin/sh
+#|-*- mode:lisp -*-|#
+#| &lt;Put a one-line description here&gt;
+exec ros -Q -- $0 "$@"
+|#
+(progn ;;init forms
+  (ros:ensure-asdf)
+  ;;#+quicklisp (ql:quickload '() :silent t)
+  )
+
+(defpackage :ros.script.hello.3720592857
+  (:use :cl))
+(in-package :ros.script.hello.3720592857)
+
+;; Set up source-registry
+(asdf:initialize-source-registry
+ '(:source-registry
+   (:tree (:home "program/blog-examples/lisp/package-management/hello-project")) <b class="conum">(1)</b>
+   :inherit-configuration))
+
+;; load the application
+(require :hello)
+
+(defun main (&amp;rest argv)
+  (declare (ignorable argv))
+  (hello:hello))</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>:home</code> を使うことで絶対パスに変換される．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>実行結果は以下の通りです．source-registryでプロジェクトルートへの絶対パスを設定しているので，どのディレクトリからRosスクリプトを実行しても <code>hello</code> を実行することができます．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 18. Rosスクリプトの実行結果</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ cd ~/program/blog-example
+$ ros lisp/package-management/hello-project/roswell/hello.ros
+Hello world! 2017年12月2日（土）19時9分25秒</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=Roswell%20%e7%92%b0%e5%a2%83%e4%b8%8b%e3%81%a7%e3%81%ae%e3%83%ad%e3%83%bc%e3%82%ab%e3%83%ab%e3%83%bb%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e7%ae%a1%e7%90%86%e5%85%a5%e9%96%80&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fros-local%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fros-local%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fros-local%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/">
+          <section class="post">
+              <h2>コードリーディング: Lack の Session ミドルウェアを理解する</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/toc.js"></script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    
+</body>
+</html>
+

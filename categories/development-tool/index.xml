@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Development Tool on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/categories/development-tool/</link>
+    <description>Recent content in Development Tool on wshito&#39;s diary</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>All rights reserved 2016--</copyright>
+    <lastBuildDate>Mon, 04 Dec 2017 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="http://diary.wshito.com/categories/development-tool/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Roswell 環境下でのローカル・プロジェクト管理入門</title>
+      <link>http://diary.wshito.com/comp/lisp/ros-local/</link>
+      <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/ros-local/</guid>
+      <description>この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は @waterloo_jp まで． 「 Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswellの導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）をRoswellの環境下で管理する方法を説明し</description>
+    </item>
+    
+  </channel>
+</rss>
