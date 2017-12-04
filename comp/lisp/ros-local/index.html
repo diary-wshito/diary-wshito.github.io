@@ -106,7 +106,7 @@
     },
     "headline": Roswell 環境下でのローカル・プロジェクト管理入門,
     "name": Roswell 環境下でのローカル・プロジェクト管理入門,
-    "wordCount": 7879,
+    "wordCount": 7846,
     "timeRequired": "PT16M",
     "inLanguage": {
       "@type": "Language",
@@ -286,7 +286,7 @@
 <div class="sect3">
 <h4 id="_source_registry設定用dsl">SOURCE-REGISTRY設定用DSL</h4>
 <div class="paragraph">
-<p>source-registry設定用のDSLは <code>(:source-registory &#8230;&#8203;.)</code> で始まります．<code>&#8230;&#8203;.</code> の箇所にはディレクティヴが続きます．主に使うディレクティヴは下記の4つでしょう．</p>
+<p>source-registry設定用のDSLは <code>(:source-registory &#8230;&#8203;)</code> で始まります．<code>&#8230;&#8203;</code> の箇所にはディレクティヴが続きます．主に使うディレクティヴは下記の4つでしょう．</p>
 </div>
 <div class="ulist">
 <ul>
@@ -698,7 +698,7 @@
 <p>以上，2つのファイルから成る <code>hello-builder</code> ディレクトリを ASDFのデフォルト検索パスに含まれる <code>~/common-lisp</code> に配置します．</p>
 </div>
 <div class="paragraph">
-<p>本稿の前半で説明した通り，Roswellのデフォルト設定では，ASDFは <code>~/.roswell/lisp/quicklisp/quicklisp/</code> 以下を，Quicklispは <code><sub>/.roswell/local-projects/</code>，<code></sub>/.roswell/lisp/quicklisp/local-projects/</code> 以下のローカル・プロジェクトを認識します．しかし，<code>~/.roswell</code> 以下にローカル・プロジェクトを配備するのはお勧めしません．なぜなら，Rowswellをアプグレードし，Quicklisp等システム関連の初期化スクリプトが更新された場合，<code>~/.roswell</code> 以下を削除してもう一度，<code>$ros setup</code> を実行し，<code>~/.roswell</code> 以下を刷新する必要が生じることがあるからです．</p>
+<p>本稿の前半で説明した通り，Roswellのデフォルト設定では，ASDFは <code>~/.roswell/lisp/quicklisp/quicklisp/</code> 以下を，Quicklispは <code>~/.roswell/local-projects/</code>，<code>~/.roswell/lisp/quicklisp/local-projects/</code> 以下のローカル・プロジェクトを認識します．しかし，<code>~/.roswell</code> 以下にローカル・プロジェクトを配備するのはお勧めしません．なぜなら，Rowswellをアプグレードし，Quicklisp等システム関連の初期化スクリプトが更新された場合，<code>~/.roswell</code> 以下を削除してもう一度，<code>$ros setup</code> を実行し，<code>~/.roswell</code> 以下を刷新する必要が生じることがあるからです．</p>
 </div>
 <div class="paragraph">
 <p>プロジェクトのsource-registryを設定するプログラムは <code>~/common-lisp</code> に配置するのがベスト・プラクティスでしょう．</p>
@@ -806,9 +806,9 @@ hello-builder</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>以上で準備完了です．<a href="#listings-repl">[listings-repl]</a>に，ASDFの検索パスの設定，ビルド，プログラム起動までの実行結果を示します．</p>
+<p>以上で準備完了です．<a href="#listings-repl">コード 15</a>に，ASDFの検索パスの設定，ビルド，プログラム起動までの実行結果を示します．</p>
 </div>
-<div id="listings:repl" class="listingblock">
+<div id="listings-repl" class="listingblock">
 <div class="title">コード 15. 実行結果</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (require :hello-builder)   ;; source-registryの設定とhello-builder:makeのロード
@@ -852,7 +852,7 @@ Successfully generated: hello.ros</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>生成された <code>hello.ros</code> ファイルを<a href="#listings:hello.ros">コード 17</a>の様に書き換えます．重要なポイントは3か所です．まず，<a href="#listings:hello.ros">コード 17</a>の16&#8212;&#8203;19行目は <a href="#listings:hello-builder.asd">[listings:hello-builder.asd]</a>の <code>hello-builder.asd</code> 内で設定したsource-registryと全く同じになります．これでプロジェクト・ルートの <code>asd.conf</code> が読み込まれます．2点目が22行目のプロジェクトのロードです．3点目は26行目でプログラムを起動しています．</p>
+<p>生成された <code>hello.ros</code> ファイルを<a href="#listings:hello.ros">コード 17</a>の様に書き換えます．重要なポイントは3か所です．まず，<a href="#listings:hello.ros">コード 17</a>の16&#8212;&#8203;19行目は <a href="#listings-hello-builder.asd">コード 7</a>の <code>hello-builder.asd</code> 内で設定したsource-registryと全く同じになります．これでプロジェクト・ルートの <code>asd.conf</code> が読み込まれます．2点目が22行目のプロジェクトのロードです．3点目は26行目でプログラムを起動しています．</p>
 </div>
 <div id="listings:hello.ros" class="listingblock">
 <div class="title">コード 17. hello.ros スクリプト</div>
