@@ -1032,7 +1032,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defparameter *auth*
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defparameter *auth*
   (lambda (env)
     (let* ((params (getf env :body-parameters))
            (name (cdr (assoc "uname" params :test #'string=)))
