@@ -103,7 +103,7 @@
     },
     "headline": コードリーディング: Lack アプリケーションを理解する,
     "name": コードリーディング: Lack アプリケーションを理解する,
-    "wordCount": 2919,
+    "wordCount": 2931,
     "timeRequired": "PT6M",
     "inLanguage": {
       "@type": "Language",
@@ -251,36 +251,41 @@
 <div id="listings:buildapp" class="listingblock">
 <div class="title">コード 2. <a href="https://github.com/fukamachi/clack/blob/310e6e2342e460ee10d1dd9dd835a268319b50b8/src/clack.lisp#L66"><code>src/clack.lisp</code> のアプリケーション構築部分</a></div>
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(flet ((buildapp (app)                                          <b class="conum">(1)</b>
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(flet ((buildapp (app)                                          <i class="conum" data-value="1"></i><b>(1)</b>
           (let ((app (typecase app
-                        ((or pathname string) (eval-file app))  <b class="conum">(2)</b>
-                        (otherwise app))))                      <b class="conum">(3)</b>
-          (builder                                              <b class="conum">(4)</b>
+                        ((or pathname string) (eval-file app))  <i class="conum" data-value="2"></i><b>(2)</b>
+                        (otherwise app))))                      <i class="conum" data-value="3"></i><b>(3)</b>
+          (builder                                              <i class="conum" data-value="4"></i><b>(4)</b>
             (if use-default-middlewares	:backtrace nil)
             app))))
-  (let ((app (buildapp app)))                                   <b class="conum">(5)</b>
+  (let ((app (buildapp app)))                                   <i class="conum" data-value="5"></i><b>(5)</b>
     ;; Ensure the handler to be loaded.
     (find-handler server)</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>8行目で使われるローカル関数 <code>buildapp</code> を定義．</p>
-</li>
-<li>
-<p>appがパスネームか文字列なら <code>eval-file</code> を使ってファイルからアプリケーションを抽出．</p>
-</li>
-<li>
-<p>それ以外ならそのままapp局所変数に代入．ラムダ式はこのまま <code>app</code> に代入される．</p>
-</li>
-<li>
-<p>ここで <code>lack:builder</code> が呼ばれ <a href="https://github.com/fukamachi/lack">Lack</a> アプリケーションが構築される．</p>
-</li>
-<li>
-<p>ここでローカル関数 <code>buildapp</code> を呼んで <code>app</code> を構築．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>8行目で使われるローカル関数 <code>buildapp</code> を定義．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>appがパスネームか文字列なら <code>eval-file</code> を使ってファイルからアプリケーションを抽出．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>それ以外ならそのままapp局所変数に代入．ラムダ式はこのまま <code>app</code> に代入される．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>ここで <code>lack:builder</code> マクロが呼ばれ <a href="https://github.com/fukamachi/lack">Lack</a> アプリケーションが構築される．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>ここでローカル関数 <code>buildapp</code> を呼んで <code>app</code> を構築．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>上の4行目で呼ばれるLackの <code>builder</code> マクロの定義は以下の通り．</p>
@@ -331,21 +336,23 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
     (funcall component env)))
 
 (defgeneric to-app (component)
-  (:method ((component lack-component))   <b class="conum">(1)</b>
+  (:method ((component lack-component))   <i class="conum" data-value="1"></i><b>(1)</b>
     (lambda (env) (call component env)))
-  (:method ((component t))                <b class="conum">(2)</b>
+  (:method ((component t))                <i class="conum" data-value="2"></i><b>(2)</b>
     component))</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p><code>to-app</code> の引数がLackのコンポーネントなら，「<code>env</code> を引数にしてコンポーネントを呼び出す」ラムダ関数でラップする．</p>
-</li>
-<li>
-<p>我らが <code>app</code> はただのラムダ式なのでこちらが呼び出され，ラムダ式がそのまま返される．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>to-app</code> の引数がLackのコンポーネントなら，「<code>env</code> を引数にしてコンポーネントを呼び出す」ラムダ関数でラップする．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>我らが <code>app</code> はただのラムダ式なのでこちらが呼び出され，ラムダ式がそのまま返される．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>これで<a href="#listings:builder-macro">コード 3</a>の6行目の <code>(to-app app)</code> がラムダ式になることが分かった．なんだかごちゃごちゃしてきたが，要は，<a href="#listings:builder-macro">コード 3</a>の5-6行目の評価結果が<a href="#listings:buildapp">コード 2</a>，8行目の <code>app</code> に代入されるということだ．</p>
@@ -400,21 +407,23 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(funcall (lambada (app) ミドルウェア1)                    <b class="conum">(1)</b>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(funcall (lambada (app) ミドルウェア1)                    <i class="conum" data-value="1"></i><b>(1)</b>
          (funcall (lambda (app) ミドルウェア2)
                   (funcall (lambda (app) ミドルウェア3)
-                           app)))                       <b class="conum">(2)</b></code></pre>
+                           app)))                       <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>一番外側をラップしているミドルウェア．</p>
-</li>
-<li>
-<p><code>env</code> を引数に取るユーザ指定のラムダ式．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>一番外側をラップしているミドルウェア．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>env</code> を引数に取るユーザ指定のラムダ式．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><a href="#listings:our-app">コード 6</a>の実行結果を得るために，backtraceミドルウェアの定義を見る．</p>

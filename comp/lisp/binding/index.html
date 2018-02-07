@@ -94,7 +94,7 @@
     },
     "headline": Lispの変数とシンボルは同じか？,
     "name": Lispの変数とシンボルは同じか？,
-    "wordCount": 2018,
+    "wordCount": 2023,
     "timeRequired": "PT5M",
     "inLanguage": {
       "@type": "Language",
@@ -241,33 +241,37 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf car 'ロールスロイス)   <b class="conum">(1)</b>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf car 'ロールスロイス)   <i class="conum" data-value="1"></i><b>(1)</b>
 
-car                        <b class="conum">(2)</b>
+car                        <i class="conum" data-value="2"></i><b>(2)</b>
 ;; =&gt; ロールスロイス
 
-(symbol-value 'car)        <b class="conum">(3)</b>
+(symbol-value 'car)        <i class="conum" data-value="3"></i><b>(3)</b>
 ;; =&gt; ロールスロイス
 
-(symbol-function 'car)     <b class="conum">(4)</b>
+(symbol-function 'car)     <i class="conum" data-value="4"></i><b>(4)</b>
 ;; =&gt; #&lt;FUNCTION CAR&gt;</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>carシンボルに「ロールスロイス」シンボルを代入．</p>
-</li>
-<li>
-<p>carシンボルを評価してみる．</p>
-</li>
-<li>
-<p>carシンボルの「値」属性を取り出す．</p>
-</li>
-<li>
-<p>carシンボルの「関数」属性を取り出す．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>carシンボルに「ロールスロイス」シンボルを代入．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>carシンボルを評価してみる．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>carシンボルの「値」属性を取り出す．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>carシンボルの「関数」属性を取り出す．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><code>SETF</code> 関数を使って <code>car</code> シンボルに <code>ロールスロイス</code> というシンボルを代入したのだから，<code>car</code> シンボルは変数と同じじゃないか，と思いますよね．ここではその通りです．シンボルは変数に「名前付け」するのに使われます．しかし常に「変数＝シンボル」ではありません．ローカル変数はシンボルではないからです．</p>
@@ -291,7 +295,7 @@ car                        <b class="conum">(2)</b>
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf X "グローバル変数")
 (defun foo ()
   (let ((X "局所変数"))
-    (format t "X=~a, ~a~%" X (eql X 'X))))  <b class="conum">(1)</b>
+    (format t "X=~a, ~a~%" X (eql X 'X))))  <i class="conum" data-value="1"></i><b>(1)</b>
 
 (foo)
 ;; =&gt; X=局所変数, NIL
@@ -299,11 +303,12 @@ car                        <b class="conum">(2)</b>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>局所変数 <code>X</code> とシンボル <code>X</code> は同じではないので，<code>eql</code> は <code>NIL</code> を返す．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>局所変数 <code>X</code> とシンボル <code>X</code> は同じではないので，<code>eql</code> は <code>NIL</code> を返す．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>シンボル型オブジェクトは名前の一意性から，同じパッケージ内であれば <code>'X</code> は常に同じシンボル型オブジェクトを指すことが保証されています．したがって，シンボル <code>'X</code> はグローバル変数 'X' を指します．<code>let</code> バインディングで作成された <code>X</code> は局所変数なので当然シンボル <code>X</code> とは別物です．</p>

@@ -96,7 +96,7 @@
     },
     "headline": 「対話によるCommon Lisp入門」第５話まとめノート,
     "name": 「対話によるCommon Lisp入門」第５話まとめノート,
-    "wordCount": 1758,
+    "wordCount": 1791,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -215,159 +215,235 @@
     </header>
 
     <section class="post-content">
-      
-
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
 <p>この章では再帰の基本から，末尾再帰への書き換え方について解説している．またエディタにプログラムを書いてLispインタプリタに読み込む方法も説明している．</p>
-
-<h2 id="末尾再帰とは">末尾再帰とは</h2>
-
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_末尾再帰とは">末尾再帰とは</h2>
+<div class="sectionbody">
+<div class="paragraph">
 <p>再帰的に定義された関数の末尾で，自分自身を呼び出した戻り値をそのままリターンする関数定義．</p>
-
-<h3 id="末尾再帰の例-ユークリッドの互除法">末尾再帰の例（ユークリッドの互除法）</h3>
-
-<pre><code class="language-lisp">(defun gcd2 (m n)
+</div>
+<div class="sect2">
+<h3 id="_末尾再帰の例_ユークリッドの互除法">末尾再帰の例（ユークリッドの互除法）</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun gcd2 (m n)
    (if (= (mod m n) 0) n
-       (gcd2 n (mod m n))))
-</code></pre>
-
-<p>最後の行で自分自身<code>gcd2</code>への呼び出しで終わっている．すなわち，自分自身への呼び出しの戻り値をそのままリターンしている．</p>
-
-<h3 id="末尾再帰ではない例-m-n-の計算">末尾再帰ではない例（\(m^n\)の計算）</h3>
-
-<pre><code class="language-lisp">(defun expt2 (m n)
+       (gcd2 n (mod m n))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最後の行で自分自身`gcd2`への呼び出しで終わっている．すなわち，自分自身への呼び出しの戻り値をそのままリターンしている．</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_末尾再帰ではない例_m_n_の計算">末尾再帰ではない例（\\(m^n\\)の計算）</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun expt2 (m n)
    (if (= n 0) 1
-       (* m (expt2 m (- n 1)))))
-</code></pre>
-
-<p>最後の行で自分自身<code>expt2</code>を呼び出した戻り値をさらに<code>m</code>と掛け合わせている．</p>
-
-<h2 id="末尾再帰の効能">末尾再帰の効能</h2>
-
-<p>上の<code>expt2</code>では自分自身の呼び出しから戻った後，<code>m</code>と戻り値を掛け合わせるという処理が残っているため，呼び出し側は<code>m</code>の値を保持しておかなければならない．つまりスタックに現在の関数の状態をプッシュしてから自分自身をコールし，コールから戻ったらスタックから情報をポップして処理をする．再帰が深くなればスタックオーバーフローが発生するし処理速度も落ちる．</p>
-
+       (* m (expt2 m (- n 1)))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最後の行で自分自身`expt2`を呼び出した戻り値をさらに`m`と掛け合わせている．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_末尾再帰の効能">末尾再帰の効能</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>上の`expt2`では自分自身の呼び出しから戻った後，`m`と戻り値を掛け合わせるという処理が残っているため，呼び出し側は`m`の値を保持しておかなければならない．つまりスタックに現在の関数の状態をプッシュしてから自分自身をコールし，コールから戻ったらスタックから情報をポップして処理をする．再帰が深くなればスタックオーバーフローが発生するし処理速度も落ちる．</p>
+</div>
+<div class="paragraph">
 <p>一方，末尾再帰の場合，自分自身の再帰的呼び出し後に処理が残っていないので，スタックに保持しておく値がない．従ってLispコンパイラは単なるループ処理のコードを生成する．</p>
-
-<h2 id="末尾再帰への書き換え方">末尾再帰への書き換え方</h2>
-
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_末尾再帰への書き換え方">末尾再帰への書き換え方</h2>
+<div class="sectionbody">
+<div class="paragraph">
 <p>末尾再帰は本質的にループと同じ．ループではループを１回繰り返すたび「状態」を変え，その中で処理を完結する．従って，ループ１回分の処理に必要な全状態変数を再帰呼び出しの引数に渡せば良い．呼び出しの際には適切にループ変数を更新し，境界条件で一気に状態変数を用いて処理すれば良い．</p>
-
-<h3 id="末尾再帰への書き換え例１-階乗計算">末尾再帰への書き換え例１&mdash;階乗計算</h3>
-
-<p>まずはテキストで説明されている階乗計算（\(n!\)）の書き換え例から．</p>
-
+</div>
+<div class="sect2">
+<h3 id="_末尾再帰への書き換え例１_階乗計算">末尾再帰への書き換え例１---階乗計算</h3>
+<div class="paragraph">
+<p>まずはテキストで説明されている階乗計算（\\(n!\\)）の書き換え例から．</p>
+</div>
+<div class="paragraph">
 <p><strong>通常の再帰</strong></p>
-
-<pre><code class="language-lisp">(defun factorial (n)
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun factorial (n)
    (if (= n 0) 1
-       (* n (factorial (- n 1)))))
-</code></pre>
-
+       (* n (factorial (- n 1)))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p><strong>末尾再帰への書き換え手順</strong></p>
-
-<p>1．通常の再帰定義のようにループしながら\(n\)から順にデクリメントして掛け合わせていくとすると，C言語のループでは以下のように書けるだろう．</p>
-
-<pre><code class="language-c">int result = 1;
+</div>
+<div class="paragraph">
+<p>1．通常の再帰定義のようにループしながら\\(n\\)から順にデクリメントして掛け合わせていくとすると，C言語のループでは以下のように書けるだろう．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-c" data-lang="c">int result = 1;
 for (int i=0; i&lt;n; i++) {
   result = result * (n-i)
-}
-</code></pre>
-
-<p>つまりループ１回の処理で必要な変数は，<code>n</code>，<code>i</code>，<code>result</code>の３つである．</p>
-
-<p>2．終端条件は<code>i</code>が<code>n-1</code>に等しい時，<code>result * (n-i)</code>を返す．<code>i</code>に<code>n-1</code>を代入すると<code>result</code>．</p>
-
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>つまりループ１回の処理で必要な変数は，<code>n</code>，<code>i</code>，`result`の３つである．</p>
+</div>
+<div class="paragraph">
+<p>2．終端条件は`i`が`n-1`に等しい時，<code>result * (n-i)`を返す．`i`に`n-1`を代入すると`result</code>．</p>
+</div>
+<div class="paragraph">
 <p>3．初期条件は，<code>n = n</code>，<code>i = 0</code>，<code>result = 1</code>．</p>
-
+</div>
+<div class="paragraph">
 <p>以上をまとめると次のようなコードになる．</p>
-
-<pre><code class="language-lisp">(defun my-fact (n i result)
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun my-fact (n i result)
    (if (= i (- n 1)) result
        (my-fact n (+ i 1) (* result (- n i)))))
 (defun factorial (n)
-	   (my-fact n 0 1))
-</code></pre>
-
-<p>これで，<code>(factorial 5)</code>で120を返す．</p>
-
-<p>4．テキストの変換例の解説．<code>i=1</code>を初期条件として採用して1から順に<code>n</code>までインクリメントして掛け合わせている．従ってCのループは以下のようになる．</p>
-
-<pre><code class="language-c">int result = 1;
+	   (my-fact n 0 1))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>これで，`(factorial 5)`で120を返す．</p>
+</div>
+<div class="paragraph">
+<p>4．テキストの変換例の解説．`i=1`を初期条件として採用して1から順に`n`までインクリメントして掛け合わせている．従ってCのループは以下のようになる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-c" data-lang="c">int result = 1;
 for (int i=1; i &lt;= n; i++) {
   result = result * i
-}
-</code></pre>
-
-<p>従って<code>i &gt; n</code>の時，ループから抜けて<code>result</code>を返すと答えを得るので，Lispコードは以下のようになる．</p>
-
-<pre><code class="language-lisp">(defun text-fact (n i result)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>従って`i &gt; n`の時，ループから抜けて`result`を返すと答えを得るので，Lispコードは以下のようになる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun text-fact (n i result)
    (if (&gt; i n) result
        (text-fact n (+ i 1) (* result i))))
 (defun factorial2 (n)
-	   (text-fact n 1 1))
-</code></pre>
-
+	   (text-fact n 1 1))</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>やはりテキストのコードの方がスマートだ．</p>
-
-<h3 id="末尾再帰への書き換え例２-組み合わせ計算">末尾再帰への書き換え例２&mdash;組み合わせ計算</h3>
-
-<div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_末尾再帰への書き換え例２_組み合わせ計算">末尾再帰への書き換え例２---組み合わせ計算</h3>
+<div class="paragraph">
+<p>&lt;div&gt;
 \[
 {}_nC_k = \frac{n!}{k!(n-k)!} = {}_{n-1}C_{k-1} + {}_{n-1}C_k
 \]
+&lt;/div&gt;</p>
 </div>
-
+<div class="paragraph">
 <p>上の2項係数を実装すると以下のように２重再帰となる．</p>
-
-<pre><code class="language-lisp">(defun C (n k)
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun C (n k)
    (if (= k 0) 1
        (if (= n k) 1
 	   (+ (C (- n 1) (- k 1))
-	      (C (- n 1) k)))))
-</code></pre>
-
+	      (C (- n 1) k)))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>これを末尾再帰に書き換えようとしたがうまくいかなかった．ループは再帰に書き換えられるが，再帰は必ずしもループに書き換えられないので，これがその例なのかもしれない．</p>
-
+</div>
+<div class="paragraph">
 <p>代わりに階乗で定義された2項係数を末尾再帰に書き換える．</p>
-
-<div>\[
+</div>
+<div class="paragraph">
+<p>&lt;div&gt;\[
 \begin{align}
-{}_nC_k &= \frac{n!}{k!(n-k)!}
+{}_nC_k &amp;= \frac{n!}{k!(n-k)!}
 = \frac{n}{k} \frac{(n-1)!}{(k-1)!(n-k)!}
 \\
-&= \frac{n}{k} \cdot \frac{(n-1)!}{(k-1)!((n-1)-(k-1))!}
+&amp;= \frac{n}{k} \cdot \frac{(n-1)!}{(k-1)!n-1)-(k-1!}
 \\
-&= \frac{n}{k} \cdot {}_{n-1}C_{k-1}
+&amp;= \frac{n}{k} \cdot {}_{n-1}C_{k-1}
 \end{align}
 \]
+&lt;/div&gt;</p>
 </div>
-
-<p>まず通常の再帰で書くと以下のようになる．今回は<code>if</code>を入れ子にせず<code>cond</code>を使ってみた．</p>
-
-<pre><code class="language-lisp">(defun C (n k)
+<div class="paragraph">
+<p>まず通常の再帰で書くと以下のようになる．今回は`if`を入れ子にせず`cond`を使ってみた．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun C (n k)
    (cond ((or (= k 0) (= n k)) 1)
-	     (t (* (/ n k) (C (- n 1) (- k 1))))))
-</code></pre>
-
-<p>これを末尾再帰にするには，計算結果を格納する<code>res</code>と<code>n</code>，<code>k</code>の３変数が必要だ．</p>
-
-<pre><code class="language-lisp">(defun tail-C (n k res)
+	     (t (* (/ n k) (C (- n 1) (- k 1))))))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>これを末尾再帰にするには，計算結果を格納する`res`と`n`，`k`の３変数が必要だ．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun tail-C (n k res)
    (cond ((or (= k 0) (= n k)) res)
     	 (t (tail-C (- n 1) (- k 1) (* (/ n k) res)))))
 (defun C (n k)
-   (tail-C n k 1))
-</code></pre>
-
-<h2 id="プログラムファイルのロードの仕方">プログラムファイルのロードの仕方</h2>
-
-<p><code>(load &quot;ファイル名&quot;)</code>．ファイルの拡張子は<code>l</code>，<code>lsp</code>，<code>lisp</code>がよく使われる．</p>
-
-<h2 id="第５話に出てきた組込み関数一覧">第５話に出てきた組込み関数一覧</h2>
-
+   (tail-C n k 1))</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_プログラムファイルのロードの仕方">プログラムファイルのロードの仕方</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>(load "ファイル名")</code>．ファイルの拡張子は`l`，<code>lsp</code>，`lisp`がよく使われる．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_第５話に出てきた組込み関数一覧">第５話に出てきた組込み関数一覧</h2>
+<div class="sectionbody">
+<div class="ulist">
 <ul>
-<li><code>mod</code>&mdash;<code>(mod m n)</code>で\(m\div n\)の余りを返す関数．</li>
-<li><code>gcd</code>&mdash;引数の最大公約数を返す関数．</li>
-<li><code>load</code>&mdash;Lispプログラムの入ったファイルを読み込む．</li>
+<li>
+<p><code>mod</code>---`(mod m n)`で\\(m\\div n\\)の余りを返す関数．</p>
+</li>
+<li>
+<p><code>gcd</code>---引数の最大公約数を返す関数．</p>
+</li>
+<li>
+<p><code>load</code>---Lispプログラムの入ったファイルを読み込む．</p>
+</li>
 </ul>
+</div>
+</div>
+</div>
 
     </section>
 

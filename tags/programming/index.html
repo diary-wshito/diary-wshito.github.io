@@ -192,7 +192,7 @@
         <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/ros-local/">Roswell 環境下でのローカル・プロジェクト管理入門</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は @waterloo_jp まで． 「 Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswellの導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）をRoswellの環境下で管理する方法を説明し
+        <p>この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は [@waterloo_jp](https://twitter.com/waterloo_jp) まで． 「 Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswellの導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）をRoswellの環境下で管理する方法を説明し
         
         <a class="read-more" href="http://diary.wshito.com/comp/lisp/ros-local/">.... &raquo;</a>
         
@@ -406,7 +406,7 @@
         <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/5/">「対話によるCommon Lisp入門」第５話まとめノート</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>この章では再帰の基本から，末尾再帰への書き換え方について解説している．またエディタにプログラムを書いてLispインタプリタに読み込む方法も説明している． 末尾再帰とは 再帰的に定義された関数の末尾で，自分自身を呼び出した戻り値をそのままリターンする関数定義． 末尾再帰の例（ユークリッドの互除法） (defun gcd2 (m n) (if (= (mod m n) 0) n (gcd2 n (mod m n)))) 最後の行で自分自身gcd2への呼び出しで終わっている．すなわち，自分自身への呼
+        <p>この章では再帰の基本から，末尾再帰への書き換え方について解説している．またエディタにプログラムを書いてLispインタプリタに読み込む方法も説明している． 末尾再帰とは 再帰的に定義された関数の末尾で，自分自身を呼び出した戻り値をそのままリターンする関数定義． 末尾再帰の例（ユークリッドの互除法） (defun gcd2 (m n) (if (= (mod m n) 0) n (gcd2 n (mod m n)))) 最後の行で自分自身`gcd2`への呼び出しで終わっている．すなわち，自分自身へ
         
         <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/5/">.... &raquo;</a>
         
@@ -443,7 +443,7 @@
         <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/">「対話によるCommon Lisp入門」第４話まとめノート</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，consの基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;hellip;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える． &amp;gt; (elt &#39;(0 1 2 3 4 5) 3) 3 last リストの末尾の要素を取り出す． 末
+        <p>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;#8230;&amp;#8203;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える． &amp;gt; (elt &#39;(0 1 2 3 4 5) 3) 3 last リストの末尾の要素を取り出す． 末
         
         <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/">.... &raquo;</a>
         

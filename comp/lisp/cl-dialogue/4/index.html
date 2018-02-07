@@ -41,7 +41,7 @@
     <title>「対話によるCommon Lisp入門」第４話まとめノート &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，consの基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;hellip;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt" />
+    <meta name="description" content="この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;#8230;&amp;#8203;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されて" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -96,7 +96,7 @@
     },
     "headline": 「対話によるCommon Lisp入門」第４話まとめノート,
     "name": 「対話によるCommon Lisp入門」第４話まとめノート,
-    "wordCount": 817,
+    "wordCount": 690,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
@@ -215,100 +215,183 @@
     </header>
 
     <section class="post-content">
-      
-
-<p>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．<code>car</code>，<code>cdr</code>，<code>cons</code>の基本関数以外に，便利な関数が幾つか紹介されている．</p>
-
-<h2 id="要素の取り出し">要素の取り出し</h2>
-
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．<code>car</code>，<code>cdr</code>，<code>cons</code> の基本関数以外に，便利な関数が幾つか紹介されている．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_要素の取り出し">要素の取り出し</h2>
+<div class="sectionbody">
+<div class="ulist">
 <ul>
-<li><code>first</code>, <code>second</code>, &hellip;., <code>tenth</code><br/>
-第1要素から第10要素まで簡単に取りだす関数が用意されている．</li>
-
-<li><p><code>elt</code> Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える．</p>
-
-<pre><code class="language-lisp">&gt; (elt '(0 1 2 3 4 5) 3)
-3
-</code></pre></li>
-
-<li><p><code>last</code> リストの末尾の要素を取り出す．</p></li>
+<li>
+<p><code>first</code>, <code>second</code>, &#8230;&#8203;., <code>tenth</code><br>
+第1要素から第10要素まで簡単に取りだす関数が用意されている．</p>
+</li>
+<li>
+<p><code>elt</code> Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える．</p>
+</li>
 </ul>
-
-<h2 id="末尾の要素を取り出す別の方法">末尾の要素を取り出す別の方法</h2>
-
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (elt '(0 1 2 3 4 5) 3)
+3</code></pre>
+</div>
+</div>
+<div class="ulist">
 <ul>
-<li><code>length</code>と<code>elt</code>を組み合わせる．
-<code>lisp
-&gt; (set x '(0 1 2 3 4 5))
+<li>
+<p><code>last</code> リストの末尾の要素を取り出す．</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_末尾の要素を取り出す別の方法">末尾の要素を取り出す別の方法</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>length</code> と <code>elt</code> を組み合わせる．</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (set x '(0 1 2 3 4 5))
 &gt; (elt x (- (length x) 1))
-5
-</code></li>
-<li><code>reverse</code>で反転させて <code>car</code>を取る．
-<code>lisp
-&gt; (car (reverse x))
-5
-</code></li>
+5</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>reverse</code> で反転させて <code>car</code> を取る．</p>
+</li>
 </ul>
-
-<h2 id="cons-append-list-の違い"><code>cons</code>, <code>append</code>, <code>list</code>の違い．</h2>
-
-<pre><code class="language-lisp">&gt; (cons '(a b) '(c d))
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (car (reverse x))
+5</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_code_cons_code_code_append_code_code_list_code_の違い"><code>cons</code>, <code>append</code>, <code>list</code> の違い．</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (cons '(a b) '(c d))
 ((A B) C D)
 &gt; (append '(a b) '(c d))
 (A B C D)
 &gt; (list '(a b) '(c d))
-((A B) (C D))
-</code></pre>
-
-<p><code>append</code>は括弧を取るため空リスト<code>nil</code>は要素を成さない．</p>
-
-<pre><code class="language-lisp">&gt; (list '(a) '(b c) nil '(d))
+((A B) (C D))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>append</code> は括弧を取るため空リスト <code>nil</code> は要素を成さない．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (list '(a) '(b c) nil '(d))
 ((A) (B C) NIL (D))
 &gt; (append '(a) '(b c) nil '(d))
-(A B C D)
-</code></pre>
-
-<h2 id="リストの末尾に要素を挿入する方法">リストの末尾に要素を挿入する方法</h2>
-
-<pre><code class="language-lisp">&gt; (append '(ape bear cat) '(dog))
-(APE BEAR CAT DOG)
-</code></pre>
-
-<p><code>dog</code>が変数<code>x</code>に入っている場合．</p>
-
-<pre><code class="language-lisp">&gt; (setf x 'dog)
+(A B C D)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_リストの末尾に要素を挿入する方法">リストの末尾に要素を挿入する方法</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (append '(ape bear cat) '(dog))
+(APE BEAR CAT DOG)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>dog</code> が変数 <code>x</code> に入っている場合．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (setf x 'dog)
 &gt; (append '(ape bear cat) (list x))
-(APE BEAR CAT DOG)
-</code></pre>
-
-<h2 id="butlast-関数は-cdr-の逆"><code>butlast</code>関数は<code>cdr</code>の逆</h2>
-
-<p><code>cdr</code>は1番目の要素を除いた残りを返すが，<code>butlast</code>は末尾要素を除いた残りを返す．</p>
-
-<pre><code class="language-lisp">&gt; (butlast '(a b c d e))
-(A B C D)
-</code></pre>
-
-<p><code>butlast</code>関数を自分で定義するなら下のように定義できる．</p>
-
-<pre><code class="language-lisp">&gt; (defun my-butlast (x)
-     (reverse (cdr (reverse x))))
-</code></pre>
-
-<h2 id="第４話で出てきた組込み関数一覧">第４話で出てきた組込み関数一覧</h2>
-
+(APE BEAR CAT DOG)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_code_butlast_code_関数は_code_cdr_code_の逆"><code>butlast</code> 関数は <code>cdr</code> の逆</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>cdr</code> は1番目の要素を除いた残りを返すが，<code>butlast</code> は末尾要素を除いた残りを返す．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (butlast '(a b c d e))
+(A B C D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>butlast</code> 関数を自分で定義するなら下のように定義できる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (defun my-butlast (x)
+     (reverse (cdr (reverse x))))</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_第４話で出てきた組込み関数一覧">第４話で出てきた組込み関数一覧</h2>
+<div class="sectionbody">
+<div class="ulist">
 <ul>
-<li><code>first</code>&mdash;<code>car</code>と同じ．</li>
-<li><code>rest</code>&mdash;<code>cdr</code>と同じ．</li>
-<li><code>first</code>, <code>second</code>,&hellip;, <code>tenth</code>&mdash;1番目から10番目まで要素を簡単に取り出せる関数．</li>
-<li><code>elt</code>&mdash;<code>(elt (リスト) i)</code>でリストのi番目の要素を取り出す関数．</li>
-<li><code>length</code>&mdash;リストの長さを返す関数．</li>
-<li><code>reverse</code>&mdash;リストの要素を逆順に並び替える関数．</li>
-<li><code>last</code>&mdash;リストの最後の要素を返す関数．</li>
-<li><code>append</code>&mdash;引数に与えられたリストを結合する関数．</li>
-<li><code>list</code>&mdash;引数を要素とするリストを作成する関数．</li>
-<li><code>butlast</code>&mdash;リストの最後の要素を除いた残りを返す関数．</li>
+<li>
+<p><code>first</code> --- <code>car</code> と同じ．</p>
+</li>
+<li>
+<p><code>rest</code> --- <code>cdr</code> と同じ．</p>
+</li>
+<li>
+<p><code>first</code>, <code>second</code>,&#8230;&#8203;, <code>tenth</code> ---1番目から10番目まで要素を簡単に取り出せる関数．</p>
+</li>
+<li>
+<p><code>elt</code> --- <code>(elt (リスト) i)</code> でリストのi番目の要素を取り出す関数．</p>
+</li>
+<li>
+<p><code>length</code> ---リストの長さを返す関数．</p>
+</li>
+<li>
+<p><code>reverse</code> ---リストの要素を逆順に並び替える関数．</p>
+</li>
+<li>
+<p><code>last</code> ---リストの最後の要素を返す関数．</p>
+</li>
+<li>
+<p><code>append</code> ---引数に与えられたリストを結合する関数．</p>
+</li>
+<li>
+<p><code>list</code> ---引数を要素とするリストを作成する関数．</p>
+</li>
+<li>
+<p><code>butlast</code> ---リストの最後の要素を除いた残りを返す関数．</p>
+</li>
 </ul>
+</div>
+</div>
+</div>
 
     </section>
 

@@ -51,7 +51,7 @@
     <title>Roswell 環境下でのローカル・プロジェクト管理入門 &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は @waterloo_jp まで． 「 Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswe" />
+    <meta name="description" content="この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は [@waterloo_jp](https://twitter.com/waterloo_jp) まで． 「 Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど 」では，" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -106,7 +106,7 @@
     },
     "headline": Roswell 環境下でのローカル・プロジェクト管理入門,
     "name": Roswell 環境下でのローカル・プロジェクト管理入門,
-    "wordCount": 7925,
+    "wordCount": 7927,
     "timeRequired": "PT16M",
     "inLanguage": {
       "@type": "Language",
@@ -238,7 +238,7 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>この記事は <a href="https://qiita.com/advent-calendar/2017/lisp">Lisp Advent Calendar 2017</a> の4日目の記事として書かれました．コメント，質問等は <a href="https://twitter.com/waterloo_jp">@waterloo_jp</a> まで．</p>
+<p>この記事は <a href="https://qiita.com/advent-calendar/2017/lisp">Lisp Advent Calendar 2017</a> の4日目の記事として書かれました．コメント，質問等は [@waterloo_jp](<a href="https://twitter.com/waterloo_jp" class="bare">https://twitter.com/waterloo_jp</a>) まで．</p>
 </div>
 <div class="paragraph">
 <p>「 <a href="../lisp-pm/">Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど</a> 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswellの導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）をRoswellの環境下で管理する方法を説明します．本稿の最後では，<a href="#sec-tutorial">ハンズオン・チュートリアル</a>で実際のプロジェクト設定例を示します．</p>
@@ -658,16 +658,17 @@
 ;; Set up source-registry
 (asdf:initialize-source-registry
  '(:source-registry
-   (:tree (:home "program/blog-examples/lisp/package-management/hello-project")) <b class="conum">(1)</b>
+   (:tree (:home "program/blog-examples/lisp/package-management/hello-project")) <i class="conum" data-value="1"></i><b>(1)</b>
    :inherit-configuration))</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>`:home`を使うことで絶対パスに変換される．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>`:home`を使うことで絶対パスに変換される．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><a href="#listings-hello-builder.asd">コード 7</a>の14&#8212;&#8203;17行目を手動でREPLで評価してもパスが通りますが，<code>hello-builder</code> 開発ツールをシステムとして定義し <code>~/common-lisp</code> 以下に配置することで，開発ツールを <code>(require :hello-builder)</code> 一発でロードでき，source-registryも同時に設定できます．プロジェクト全体は任意の場所に配置し，開発者用ツールが入ったディレクトリだけ <code>~/common-lisp</code> に配置するのです．</p>
@@ -883,7 +884,7 @@ exec ros -Q -- $0 "$@"
 ;; Set up source-registry
 (asdf:initialize-source-registry
  '(:source-registry
-   (:tree (:home "program/blog-examples/lisp/package-management/hello-project")) <b class="conum">(1)</b>
+   (:tree (:home "program/blog-examples/lisp/package-management/hello-project")) <i class="conum" data-value="1"></i><b>(1)</b>
    :inherit-configuration))
 
 ;; load the application
@@ -895,11 +896,12 @@ exec ros -Q -- $0 "$@"
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p><code>:home</code> を使うことで絶対パスに変換される．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>:home</code> を使うことで絶対パスに変換される．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>実行結果は以下の通りです．source-registryでプロジェクトルートへの絶対パスを設定しているので，どのディレクトリからRosスクリプトを実行しても <code>hello</code> を実行することができます．</p>
@@ -978,6 +980,13 @@ Hello world! 2017年12月2日（土）19時9分25秒</code></pre>
 
 
   <aside class="read-next">
+  
+  <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/">
+          <section class="post">
+              <h2>コードリーディング: Lack の Session ミドルウェアを理解する</h2>
+              
+          </section>
+      </a>
   
   
       <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/db/couchdb-manual/getting-started/">

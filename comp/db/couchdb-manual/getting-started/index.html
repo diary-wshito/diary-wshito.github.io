@@ -100,7 +100,7 @@
     },
     "headline": Lisp で CouchDB の Getting Started を始めてみる,
     "name": Lisp で CouchDB の Getting Started を始めてみる,
-    "wordCount": 1570,
+    "wordCount": 1573,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -292,26 +292,29 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb get "/_all_dbs")   <b class="conum">(1)</b>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb get "/_all_dbs")   <i class="conum" data-value="1"></i><b>(1)</b>
 ;=&gt; nil
-(couchdb put "/baseball")   <b class="conum">(2)</b>
+(couchdb put "/baseball")   <i class="conum" data-value="2"></i><b>(2)</b>
 ;=&gt; (:|ok| T)
-(couchdb get "/_all_dbs")   <b class="conum">(3)</b>
+(couchdb get "/_all_dbs")   <i class="conum" data-value="3"></i><b>(3)</b>
 ;=&gt; ("baseball")</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p><code>/_all_dbs</code> でデータベース一覧を取得．まだデータベースは無いので空のJSONオブジェクトが返る．Lispでは <code>nil</code> となる．</p>
-</li>
-<li>
-<p><code>put</code> メソッドで <code>baseball</code> データベースを作成．成功すれば，<code>ok</code> キーに <code>true</code> が返される．</p>
-</li>
-<li>
-<p>データベース一覧を取得すると <code>baseball</code> データベースが作成されている．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>/_all_dbs</code> でデータベース一覧を取得．まだデータベースは無いので空のJSONオブジェクトが返る．Lispでは <code>nil</code> となる．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>put</code> メソッドで <code>baseball</code> データベースを作成．成功すれば，<code>ok</code> キーに <code>true</code> が返される．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>データベース一覧を取得すると <code>baseball</code> データベースが作成されている．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>もう一度同じ名前のデータベースの作成を試みる．</p>
