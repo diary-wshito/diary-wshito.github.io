@@ -703,7 +703,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <p><a href="#listings:default">コード 12</a>はデフォルト設定のままSessionミドルウェアを使ったサンプル・アプリで，Sessionミドルウェアの設定以外は例2と同じものになる（ <a href="https://github.com/wshito/blog-examples/blob/master/lisp/lack/middleware-session-default.lisp"><code>middleware-session-default.lisp</code></a> on GitHub ）．</p>
 </div>
 <div class="paragraph">
-<p>サンプルアプリの実行方法を説明しておく．<a href="#listings:default">コード 12</a>をREPLで評価するとHunchentootサーバーが起動する．REPL上のメッセージに従ってブラウザで <a href="http://localhost:5000">http://localhost:5000</a> にアクセスする．サーバーを終了するには，<a href="#listings:default">コード 12</a>の最終行でコメントアウトされている <code>(clack:stop <strong>handler</strong>)</code> をREPLで評価する．<a href="#sec-example2">（例2）</a>，<a href="#sec-example3">（例3）</a>の実行方法も同様である．</p>
+<p>サンプルアプリの実行方法を説明しておく．<a href="#listings:default">コード 12</a>をREPLで評価するとHunchentootサーバーが起動する．REPL上のメッセージに従ってブラウザで <a href="http://localhost:5000">http://localhost:5000</a> にアクセスする．サーバーを終了するには，<a href="#listings:default">コード 12</a>の最終行でコメントアウトされている <code>(clack:stop *handler*)</code> をREPLで評価する．<a href="#sec-example2">（例2）</a>，<a href="#sec-example3">（例3）</a>の実行方法も同様である．</p>
 </div>
 <div id="listings:default" class="listingblock">
 <div class="title">コード 12. デフォルト設定のサンプル・アプリ</div>
