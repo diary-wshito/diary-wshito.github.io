@@ -100,8 +100,8 @@
     },
     "headline": コードリーディング: Lack の Session ミドルウェアを理解する,
     "name": コードリーディング: Lack の Session ミドルウェアを理解する,
-    "wordCount": 10934,
-    "timeRequired": "PT22M",
+    "wordCount": 11225,
+    "timeRequired": "PT23M",
     "inLanguage": {
       "@type": "Language",
       "alternateName": en
@@ -559,10 +559,10 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <p>14行目で <code>env</code> 環境変数（ハッシュテーブル）に <code>:lack.session</code> をキーにセッション変数を代入する．既存セッションには無駄な処理のように見える．</p>
 </div>
 <div class="paragraph">
-<p>15行では，<code>env</code> に <code>:lack.session.options</code> をキーにオプションリストを設定する．ここでは，アクセス毎にセッションIDを変化させない（<code>:change-id nil</code>）と <code>:expire</code> を `nil`に設定している．</p>
+<p>15行では，<code>env</code> に <code>:lack.session.options</code> をキーにオプションリストを設定する．ここでは，新規セッション時にのみ <code>:new-session</code> キーを <code>t</code> に設定し，他のオプションをデフォルト設定に戻している．デフォルトでは（<code>:change-id nil</code>）と <code>:expire</code> を `nil`に設定している．</p>
 </div>
 <div class="paragraph">
-<p><code>:change-id</code> が <code>t</code> の場合，リクエストの度に新しいセッションIDが設定される．</p>
+<p>ミドルウェア・チェーンの後段が19行目の <code>(funcall app env)</code> で呼び出されるが，その中で <code>:change-id</code> を <code>t</code> に設定すれば，24行目の <code>(finalize store state env res)</code> 内で新しいセッションIDが生成される．ログイン時には必ずセッションIDを更新することが <a href="https://www.ipa.go.jp/security/vuln/websecurity.html">IPAの「安全なウェブサイトの作り方」</a> でも推奨されているので，その場合には後で示す <a href="#sec-example3">サンプルアプリ（例３）</a> ように後段のミドルウェアで <code>:change-id</code> を <code>t</code> に設定する．</p>
 </div>
 <div class="paragraph">
 <p><code>:expire</code> オプションはログアウト時など即座にセッションを切りたい時に使うフラグで，<code>:expire</code> を <code>t</code> に設定すると<a href="#listings:finalize">コード 8</a>の10&#8212;&#8203;11行目でセッションをexpireする処理が実行される．ちなみに，スペルが1文字違いの <code>:expires</code> オプションが別途あるので注意を要する．<code>:expires</code> オプションはクッキーの有効期間を秒数で指定するものである（後ほど説明）．</p>
@@ -664,7 +664,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><code>no-store</code> オプションが <code>t</code> か，または，新規セッション，セッションIDの変更，クッキーの期限切れのいずれでもなければ，クッキーはブラウザに送信されず直ちにレスポンスを返る．ちなみに <code>no-store</code> オプションはデフォルトでは設定されないオプションなので，Webアプリの方でクッキーを送信したくない時に使用する．</td>
+<td><code>no-store</code> オプションが <code>t</code> か，または，新規セッション，セッションIDの変更，クッキーの期限切れのいずれでもなければ（いずれも <code>nil</code> ならば），クッキーはブラウザに送信されず直ちにレスポンスを返る．ちなみに <code>no-store</code> オプションはデフォルトでは設定されないオプションなので，Webアプリの方でクッキーを送信したくない時に使用する．</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -681,7 +681,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </table>
 </div>
 <div class="paragraph">
-<p><code>finalize-state</code> は<a href="#listings:finalize-state">コード 11</a>の10行目の条件が成立しない時，クッキーをブラウザに送信する．すなわち，<code>env</code> 内の <code>:lack.session.options</code> で，<code>:no-store</code> オプションが <code>nil</code> で且つ，<code>:new-session</code>，<code>:change-id</code>，<code>:expire</code> オプション値のいずれか1つでも <code>t</code> の場合が <code>nil</code> に設定されていた場合にクッキーが送信される．</p>
+<p><code>finalize-state</code> は<a href="#listings:finalize-state">コード 11</a>の10行目の条件が成立しない時，クッキーをブラウザに送信する．すなわち，<code>env</code> 内の <code>:lack.session.options</code> で，<code>:no-store</code> オプションが <code>nil</code> で且つ，<code>:new-session</code>，<code>:change-id</code>，<code>:expire</code> オプション値の全てが <code>nil</code> の場合にクッキーが送信される．</p>
 </div>
 <div class="paragraph">
 <p><code>:expires</code> オプションはセッション有効期間を秒数で指定するもので，直ちにセッションを無効化する <code>:expire</code> オプションとは異なるので注意．次のリクエストが <code>:expires</code> で指定された秒数を超えた場合にはクッキーに保存されたセッション情報が無効になりセッションが切れる．</p>
@@ -1042,12 +1042,21 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
           (let* ((session (getf env :lack.session))
                  (url (gethash :prev-url session "/")))
             (setf (gethash :uid session "/") name)
+            (setf (getf (getf env :lack.session.options) :change-id) t) <i class="conum" data-value="1"></i><b>(1)</b>
             `(303 (:location ,url) ("")))
           (redirect-to-login-page)))))</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ログイン後は新しいセッションIDを割り当てる．次回アクセス時には <code>:change-id</code> の値は <code>nil</code> にリセットされるため，セッションIDの更新は1回限りである．</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>認証自体は <code>authenticate</code> 関数に委譲し，成功すればセッション変数から <code>:prev-url</code> に保存されている当初のアクセス先を取り出しリダイレクトする．失敗すればログインページへリダイレクトする．</p>
+<p>認証自体は <code>authenticate</code> 関数に委譲し，成功すればセッション変数から <code>:prev-url</code> に保存されている当初のアクセス先を取り出しリダイレクトする．失敗すればログインページへリダイレクトする．セッションの乗っ取りを避けるためにログイン時に新たなセッションIDを割り当てる設定をする（11行目）．</p>
 </div>
 <div class="paragraph">
 <p>ログアウトは，<code>:lack.session.options</code> の <code>:expire</code> キーの値を <code>t</code> に設定することで実現する．</p>
