@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Mon, 04 Dec 2017 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 11 Feb 2018 18:35:29 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LispのSequence型のまとめ</title>
+      <link>http://diary.wshito.com/comp/lisp/sequence/</link>
+      <pubDate>Sun, 11 Feb 2018 18:35:29 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/sequence/</guid>
+      <description>Common Lispではソートや探索関数の引数にシーケンス（SEQUENCE）型オブジェクトを取る．シーケンス型はベクトル（VECTOR）型とリスト（LIST）型の抽象型なので，ベクトルとリストのいずれにもそれらの関数を適用できる．では配列（ARRAY型）を引数に渡したい場合はどうか？Common Lispではベクトルは１次元配列のことを指すので，シーケンスを引数に取る関数に１次元配列を渡すのは問題ない． Common L</description>
+    </item>
     
     <item>
       <title>Roswell 環境下でのローカル・プロジェクト管理入門</title>

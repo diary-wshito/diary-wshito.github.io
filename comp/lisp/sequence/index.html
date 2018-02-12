@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="LispのSequence型のまとめ"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="LispのSequence型のまとめ &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/sequence/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2018-02-11T18:35:29&#43;09:00" />
+
+    
+    <meta property="article:tag" content="lisp" />
+    
+    <meta property="article:tag" content="programming" />
+    
+    
+
+    <title>LispのSequence型のまとめ &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="Common Lispではソートや探索関数の引数にシーケンス（SEQUENCE）型オブジェクトを取る．シーケンス型はベクトル（VECTOR）型とリスト（LIST）型の抽象型なので，ベクトルとリストのいずれにもそれらの関数を適用できる．では配列（ARRAY型）を引数に渡したい場合はどうか？Common Lispではベクト" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.30-DEV" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/sequence/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": LispのSequence型のまとめ,
+    "name": LispのSequence型のまとめ,
+    "wordCount": 1963,
+    "timeRequired": "PT4M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/lisp/sequence/,
+    "datePublished": 2018-02-11T18:35Z,
+    "dateModified": 2018-02-11T18:35Z,
+    
+    "keywords": lisp, programming,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/lisp/sequence/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+<main class="content" role="main">
+
+  
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">LispのSequence型のまとめ</h1>
+        
+        <section class="post-meta">
+          <time class="post-date" datetime="2018-02-11T18:35:29&#43;09:00">
+            February 11, 2018
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Common Lispではソートや探索関数の引数にシーケンス（SEQUENCE）型オブジェクトを取る．シーケンス型はベクトル（VECTOR）型とリスト（LIST）型の抽象型なので，ベクトルとリストのいずれにもそれらの関数を適用できる．では配列（ARRAY型）を引数に渡したい場合はどうか？Common Lispではベクトルは１次元配列のことを指すので，シーケンスを引数に取る関数に１次元配列を渡すのは問題ない．</p>
+</div>
+<div class="ulist">
+<div class="title">Common Lispにおける配列とベクトルの違い</div>
+<ul>
+<li>
+<p>VECTOR は1次元配列のこと．つまり１次元のARRAYを作成すればVECTORになる．</p>
+</li>
+<li>
+<p>SEQUENCE は1次元に並んだコレクションの総称ということになる．</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_シーケンス型のクラス階層">シーケンス型のクラス階層</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>シーケンス型は，ベクトル型とリスト型の親クラスで，ベクトルとリストの共通インタフェースを提供する．文字列（STRING）型はベクトル型のサブクラス（CHARACTER型を要素とするベクトル）なので，文字列型にもシーケンス型のインタフェースを適用できる．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 1. SEQUENCE型のクラス階層</div>
+<div class="content">
+<pre>sequence
+   +-- list  （要素のアクセスは線形時間 O(n) ）
+   +-- vector（要素のアクセスは定数時間 O(1) ） == 1次元配列（one-dimensional array）
+          +-- string     （要素がcharacter型のベクトル）
+          +-- bit-vector （要素がbit型のベクトル）</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>例としてSTRING型はVECTOR型の要素をCHARACTER型に特定化したものだが，VECTOR型は1次元のARRAY型と同じなので，STRING型も <code>make-array</code> で作成できる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(type-of (make-array 5 :element-type 'character))    ; -&gt; (SIMPLE-ARRAY CHARACTER (5))
+(typep (make-array 5 :element-type 'character) 'string)         ;-&gt; T
+(typep (make-array 5 :element-type 'character) 'simple-string)  ;-&gt; T</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>VECTOR型（1次元のARRAY型），STRING型，BIT-VECTOR型はさらに，SIMPLE版のデータ型が存在する．</p>
+</div>
+<table class="tableblock frame-all grid-all">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">通常版</th>
+<th class="tableblock halign-left valign-top">SIMPLE版</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1次元のARRAY型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-ARRAY</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VECTOR型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-VECTOR</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-STRING</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BIT-VECTOR型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-BIT-VECTOR型</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>SIMPLE版と通常版の違いは，SIMPLE版は <code>fill-pointer</code> がなく，<code>adjustable</code> ではなく，<code>displaced-to</code> が指定されていないデータ型である．</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>fill-pointer</code></dt>
+<dd>
+<p>現在の要素数を保持する機能．プッシュやポップといったスタックのインターフェースを使用する際に必要になる．</p>
+</dd>
+<dt class="hdlist1"><code>adjustable</code></dt>
+<dd>
+<p><code>adjust-array</code> で要素数を変更できる．</p>
+</dd>
+<dt class="hdlist1"><code>displaced-to</code></dt>
+<dd>
+<p>指定されたターゲットオブジェクトに要素が設定される．</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>以上がシーケンス型ファミリーの概観である．ソートや探索などコレクション・オブジェクトに対する関数は通常シーケンス型を引数に取る．シーケンス型の共通インタフェースは以下の通りである．</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. SEQUENCE型の共通インタフェース（sequence function）</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">concatenate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copy-seq</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">count</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">count-if</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">count-if-not</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete-duplicates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete-if</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete-if-not</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">elt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">every</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fill</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find-if</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find-if-not</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">length</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">map</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">map-into</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">merge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mismatch</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">notany</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">notevery</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nreverse</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nsubstitute</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nsubstitute-if</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nsubstitute-if-not</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position-if</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position-if-not</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reduce</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove-duplicates</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove-if</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove-if-not</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">replace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reverse</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">some</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stable-sort</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">subseq</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">substitute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">substitute-if</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">substitute-if-not</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<div class="title">要素へのアクセス</div>
+<ul>
+<li>
+<p>シーケンスに共通のアクセサはeltだが，各サブタイプ向けに最適化されたアクセサが用意されている．</p>
+</li>
+<li>
+<p>simple-が付いているのはフィルポインタがなく伸縮不可能なデータ構造．</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>以下にコンストラクタとアクセサをまとめた．表には代表的なコンストラクタを1つしか載せていないが，各オブジェクトは全て1次元配列の特殊版なので全て <code>make-array</code> で作成できる．表の後に別の作成方法についても解説している．</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">型</th>
+<th class="tableblock halign-left valign-top">コンストラクタ</th>
+<th class="tableblock halign-left valign-top">アクセサ</th>
+<th class="tableblock halign-left valign-top">フィルポインタ</th>
+<th class="tableblock halign-left valign-top">伸縮可能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sequence</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>make-sequence</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>elt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">有/無</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">可/不可</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vector（1次元array）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>make-array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>aref</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">有</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">可</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple-array（1次元のみ）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>make-array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>aref</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">無</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">不可</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple-vector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>svref</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">無</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">不可</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>make-array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>char</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">有</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">可</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple-string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>make-string</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schar</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">無</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">不可</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bit-vector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>make-array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">有</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">可</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple-bit-vector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simple-bit-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sbit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">無</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">不可</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<div class="title">作成方法（nは要素数）</div>
+<dl>
+<dt class="hdlist1">sequence</dt>
+<dd>
+<p><code>(make-sequence タイプ n)</code>  タイプは <code>list</code> か <code>vector</code> のサブタイプ．</p>
+</dd>
+<dt class="hdlist1">vector</dt>
+<dd>
+<p><code>(make-array n :fill-pointer t)</code></p>
+</dd>
+<dt class="hdlist1">simple-array</dt>
+<dd>
+<p><code>(make-array n :adjustable nil :fill-pointer nil :displaced-to nil)</code>, <code>simple-array</code> は <code>vector</code> と同じ構造だがクラス階層では <code>vector</code> のサブクラスではないので <code>make-sequence</code> は使えない．ただし，<code>typep</code> は <code>simple-array</code> 型のオブジェクトも <code>simple-vector</code> 型のオブジェクトも区別なく <code>t</code> を返す．</p>
+</dd>
+<dt class="hdlist1">simple-vector</dt>
+<dd>
+<p><code>(vector n)</code> ，<code>(make-sequence 'simple-vector n)</code>，<code>(make-sequence 'vector n)</code>，または <code>simple-array</code> と同じ作成方法．</p>
+</dd>
+<dt class="hdlist1">string</dt>
+<dd>
+<p><code>(make-array n :element-type 'character :fill-pointer t)</code></p>
+</dd>
+<dt class="hdlist1">simple-string</dt>
+<dd>
+<p><code>(make-string n)</code> ，<code>(make-sequence 'simple-string n)</code>，<code>(make-sequence 'string n)</code></p>
+</dd>
+<dt class="hdlist1">bit-vector</dt>
+<dd>
+<p><code>(make-array n :element-type 'bit :fill-pointer t)</code></p>
+</dd>
+<dt class="hdlist1">simple-bit-vector</dt>
+<dd>
+<p><code>(make-sequence 'simple-bit-vector n)</code>，<code>(make-sequence 'bit-vector n)</code></p>
+</dd>
+</dl>
+</div>
+<div class="ulist">
+<div class="title">留意点</div>
+<ul>
+<li>
+<p>SIMPLE版のデータ構造は通常版のサブクラスでもあるので，<code>fill-pointer</code> や <code>adjustable</code> を使わないならSIMPLE版のデータ構造を通常版のデータ構造として使える．</p>
+</li>
+<li>
+<p><code>fill-pointer</code> を使わないなら，<code>make-sequence</code> にサブタイプを指定して
+作成できる．</p>
+</li>
+<li>
+<p><code>make-sequence</code> は <code>fill-pointer</code> オプションを指定できないため，simpleではないシーケンスのサブタイプを作成するには <code>make-array</code> で型を指定して <code>:fill-pointer</code> を <code>t</code> に設定する．</p>
+</li>
+<li>
+<p>上のリストにはsimpleなデータ型に <code>make-array</code> を使った作成方法記述していな
+いが，<code>make-array</code> の <code>:fill-pointer</code> のデフォルト値は <code>nil</code> なので，
+<code>:fill-pointer</code> を省略すれば自動的にsimpleなデータ構造になる．</p>
+</li>
+<li>
+<p>シーケンスなら何でも作れる万能コンストラクタは <code>make-array</code>．</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=Lisp%e3%81%aeSequence%e5%9e%8b%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fsequence%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fsequence%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fsequence%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/">
+          <section class="post">
+              <h2>コードリーディング: Lack の Session ミドルウェアを理解する</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/toc.js"></script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    
+</body>
+</html>
+
