@@ -100,7 +100,7 @@
     },
     "headline": Lisp で CouchDB の Getting Started を始めてみる,
     "name": Lisp で CouchDB の Getting Started を始めてみる,
-    "wordCount": 1573,
+    "wordCount": 1612,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -108,7 +108,7 @@
     },
     "url": http://diary.wshito.com/comp/db/couchdb-manual/getting-started/,
     "datePublished": 2017-10-20T22:05Z,
-    "dateModified": 2017-10-20T22:05Z,
+    "dateModified": 2018-02-14T11:05Z,
     
     "keywords": lisp, db, CouchDB, NoSQL,
     "description": ,
@@ -262,7 +262,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>S式のリストが一つのオブジェクトか配列を表す．リストが，キーワードを含む連想配列の時はオブジェクト（key/value dictionaries）で，キーワードがなければ配列である．上のS式は以下のJSONをパースした結果である．</p>
+<p>S式のリストがJSONの1つのオブジェクトか配列を表す．リストがキーワードを含む連想配列の時はJSONのオブジェクト（key/value dictionaries）を表し，S式表現にキーワードがなければJSON内では配列データである．上のS式は以下のJSONをパースした結果である．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -277,7 +277,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>ここでタイプの手間を減らすためにマクロを定義．</p>
+<p>ここでタイプの手間を減らすためにマクロを定義する．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -304,7 +304,7 @@
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><code>/_all_dbs</code> でデータベース一覧を取得．まだデータベースは無いので空のJSONオブジェクトが返る．Lispでは <code>nil</code> となる．</td>
+<td><code>/_all_dbs</code> でデータベース一覧を取得．まだデータベースを作成していないので空のJSONオブジェクトが返る．Lispでは <code>nil</code> となる．</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -312,7 +312,7 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>データベース一覧を取得すると <code>baseball</code> データベースが作成されている．</td>
+<td>データベース一覧を取得すると <code>baseball</code> データベースが作成されているのが分かる．</td>
 </tr>
 </table>
 </div>
@@ -336,7 +336,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/fukamachi/dexador">Dexador</a> はErrorシグナルを発しデバッガが立ち上がる．エラーメッセージを見るとHTTPがStatus Code 412（Precondition Failed）を返したことがわかる．これはリクエスト先のリソースへのアクセスが拒否されたことを示すステータス・コード．</p>
+<p><a href="https://github.com/fukamachi/dexador">Dexador</a> はErrorシグナルを発しデバッガが立ち上がる．エラーメッセージを見るとHTTPがStatus Code 412（Precondition Failed）を返したことがわかる．これはリクエスト先のリソースへのアクセスが拒否されたことを示すステータス・コードだ．</p>
 </div>
 <div class="paragraph">
 <p>Dexadorの <a href="https://github.com/fukamachi/dexador/blob/450ffa7f5b5c6c4e52ac98499e43f443147f3a57/src/error.lisp#L46">エラー・コンディション・オブジェクトの定義</a> は以下の通り．</p>
