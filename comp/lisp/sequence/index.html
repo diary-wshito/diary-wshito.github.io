@@ -12,13 +12,13 @@
 
 
 
-<meta name="twitter:title" content="LispのSequence型のまとめ"/>
+<meta name="twitter:title" content="Lisp の Sequence 型のまとめ"/>
 <meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@waterloo_jp"/>
 
 
 
-  	<meta property="og:title" content="LispのSequence型のまとめ &middot; wshito&#39;s diary" />
+  	<meta property="og:title" content="Lisp の Sequence 型のまとめ &middot; wshito&#39;s diary" />
   	<meta property="og:site_name" content="wshito&#39;s diary" />
   	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/sequence/" />
 
@@ -38,10 +38,10 @@
     
     
 
-    <title>LispのSequence型のまとめ &middot; wshito&#39;s diary</title>
+    <title>Lisp の Sequence 型のまとめ &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="Common Lispではソートや探索関数の引数にシーケンス（SEQUENCE）型オブジェクトを取る．シーケンス型はベクトル（VECTOR）型とリスト（LIST）型の抽象型なので，ベクトルとリストのいずれにもそれらの関数を適用できる．では配列（ARRAY型）を引数に渡したい場合はどうか？Common Lispではベクト" />
+    <meta name="description" content="Common Lisp のソート関数や探索関数は，引数にシーケンス（SEQUENCE）型のオブジェクトを取る．シーケンス型はベクトル（VECTOR）型とリスト（LIST）型の抽象型なので，ベクトルとリストのいずれもそれら関数に渡すことが出来る．では配列（ARRAY型）を引数に渡したい場合はどうか？ Common Lis" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -94,9 +94,9 @@
             
         ]
     },
-    "headline": LispのSequence型のまとめ,
-    "name": LispのSequence型のまとめ,
-    "wordCount": 1963,
+    "headline": Lisp の Sequence 型のまとめ,
+    "name": Lisp の Sequence 型のまとめ,
+    "wordCount": 1832,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -104,7 +104,7 @@
     },
     "url": http://diary.wshito.com/comp/lisp/sequence/,
     "datePublished": 2018-02-11T18:35Z,
-    "dateModified": 2018-02-11T18:35Z,
+    "dateModified": 2018-03-12T00:33Z,
     
     "keywords": lisp, programming,
     "description": ,
@@ -197,7 +197,7 @@
   <article class="post comp">
 
     <header class="post-header">
-        <h1 class="post-title">LispのSequence型のまとめ</h1>
+        <h1 class="post-title">Lisp の Sequence 型のまとめ</h1>
         
         <section class="post-meta">
           <time class="post-date" datetime="2018-02-11T18:35:29&#43;09:00">
@@ -218,29 +218,29 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Common Lispではソートや探索関数の引数にシーケンス（SEQUENCE）型オブジェクトを取る．シーケンス型はベクトル（VECTOR）型とリスト（LIST）型の抽象型なので，ベクトルとリストのいずれにもそれらの関数を適用できる．では配列（ARRAY型）を引数に渡したい場合はどうか？Common Lispではベクトルは１次元配列のことを指すので，シーケンスを引数に取る関数に１次元配列を渡すのは問題ない．</p>
+<p>Common Lisp のソート関数や探索関数は，引数にシーケンス（SEQUENCE）型のオブジェクトを取る．シーケンス型はベクトル（VECTOR）型とリスト（LIST）型の抽象型なので，ベクトルとリストのいずれもそれら関数に渡すことが出来る．では配列（ARRAY型）を引数に渡したい場合はどうか？ Common Lisp ではベクトルは 1 次元配列と同じなので，シーケンスを引数に取る関数に 1 次元配列を渡すのは問題ない．</p>
 </div>
 <div class="ulist">
-<div class="title">Common Lispにおける配列とベクトルの違い</div>
+<div class="title">Common Lisp における配列とベクトルの違い</div>
 <ul>
 <li>
-<p>VECTOR は1次元配列のこと．つまり１次元のARRAYを作成すればVECTORになる．</p>
+<p>VECTOR は 1 次元配列のこと．つまり 1 次元の ARRAY を作成すれば VECTOR になる．</p>
 </li>
 <li>
-<p>SEQUENCE は1次元に並んだコレクションの総称ということになる．</p>
+<p>SEQUENCE は 1 次元に並んだコレクションの総称ということになる．</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_シーケンス型のクラス階層">シーケンス型のクラス階層</h2>
+<h2 id="_シーケンス_型のクラス階層">シーケンス 型のクラス階層</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>シーケンス型は，ベクトル型とリスト型の親クラスで，ベクトルとリストの共通インタフェースを提供する．文字列（STRING）型はベクトル型のサブクラス（CHARACTER型を要素とするベクトル）なので，文字列型にもシーケンス型のインタフェースを適用できる．</p>
+<p>シーケンス型は，ベクトル型とリスト型の親クラスで，ベクトルとリストの共通インタフェースを提供する．文字列（STRING）型はベクトル型のサブクラス（CHARACTER 型を要素とするベクトル）なので，文字列型にもシーケンス型のインタフェースを適用できる．</p>
 </div>
 <div class="listingblock">
-<div class="title">コード 1. SEQUENCE型のクラス階層</div>
+<div class="title">コード 1. SEQUENCE 型のクラス階層</div>
 <div class="content">
 <pre>sequence
    +-- list  （要素のアクセスは線形時間 O(n) ）
@@ -250,7 +250,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>例としてSTRING型はVECTOR型の要素をCHARACTER型に特定化したものだが，VECTOR型は1次元のARRAY型と同じなので，STRING型も <code>make-array</code> で作成できる．</p>
+<p>STRING 型は要素の型を CHARACTER 型に特定化した VECTOR 型だ．VECTOR 型は 1 次元の ARRAY 型と同じなので，STRING 型も <code>make-array</code> を使って作成できる．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -260,7 +260,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>VECTOR型（1次元のARRAY型），STRING型，BIT-VECTOR型はさらに，SIMPLE版のデータ型が存在する．</p>
+<p>VECTOR 型（1 次元の ARRAY 型），STRING 型，BIT-VECTOR 型はさらに，SIMPLE 版のデータ型が存在する．</p>
 </div>
 <table class="tableblock frame-all grid-all">
 <colgroup>
@@ -270,30 +270,30 @@
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">通常版</th>
-<th class="tableblock halign-left valign-top">SIMPLE版</th>
+<th class="tableblock halign-left valign-top">SIMPLE 版</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1次元のARRAY型</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-ARRAY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1次元のARRAY 型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-ARRAY 型</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">VECTOR型</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-VECTOR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VECTOR 型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-VECTOR 型</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING型</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING 型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-STRING 型</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BIT-VECTOR型</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-BIT-VECTOR型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BIT-VECTOR 型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIMPLE-BIT-VECTOR 型</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>SIMPLE版と通常版の違いは，SIMPLE版は <code>fill-pointer</code> がなく，<code>adjustable</code> ではなく，<code>displaced-to</code> が指定されていないデータ型である．</p>
+<p>SIMPLE 版と通常版の違いは，SIMPLE 版は <code>fill-pointer</code> がなく，<code>adjustable</code> ではなく，<code>displaced-to</code> が指定されていない点である．</p>
 </div>
 <div class="dlist">
 <dl>
@@ -315,7 +315,7 @@
 <p>以上がシーケンス型ファミリーの概観である．ソートや探索などコレクション・オブジェクトに対する関数は通常シーケンス型を引数に取る．シーケンス型の共通インタフェースは以下の通りである．</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. SEQUENCE型の共通インタフェース（sequence function）</caption>
+<caption class="title">Table 1. SEQUENCE 型の共通インタフェース（sequence function）</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -392,18 +392,18 @@
 </tbody>
 </table>
 <div class="ulist">
-<div class="title">要素へのアクセス</div>
+<div class="title">シーケンス型の留意点</div>
 <ul>
 <li>
-<p>シーケンスに共通のアクセサはeltだが，各サブタイプ向けに最適化されたアクセサが用意されている．</p>
+<p>シーケンスに共通のアクセサは <code>elt</code> だが，各サブタイプ向けに最適化されたアクセサが用意されている．</p>
 </li>
 <li>
-<p>simple-が付いているのはフィルポインタがなく伸縮不可能なデータ構造．</p>
+<p><strong>simple-</strong> が付いているデータ型はフィルポインタが無く*伸縮不可能*なデータ構造．</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>以下にコンストラクタとアクセサをまとめた．表には代表的なコンストラクタを1つしか載せていないが，各オブジェクトは全て1次元配列の特殊版なので全て <code>make-array</code> で作成できる．表の後に別の作成方法についても解説している．</p>
+<p>以下にコンストラクタとアクセサをまとめた．表には代表的なコンストラクタを 1 つだけ載せた．しかし，全て 1 次元配列の特殊版なので，どれも <code>make-array</code> で作成できる．表の後に別の作成方法の解説を付している．</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -482,7 +482,7 @@
 </tbody>
 </table>
 <div class="dlist">
-<div class="title">作成方法（nは要素数）</div>
+<div class="title">作成方法（n は要素数）</div>
 <dl>
 <dt class="hdlist1">sequence</dt>
 <dd>
@@ -522,19 +522,19 @@
 <div class="title">留意点</div>
 <ul>
 <li>
-<p>SIMPLE版のデータ構造は通常版のサブクラスでもあるので，<code>fill-pointer</code> や <code>adjustable</code> を使わないならSIMPLE版のデータ構造を通常版のデータ構造として使える．</p>
+<p>SIMPLE 版のデータ構造は通常版のサブクラスでもあるので，<code>fill-pointer</code> や <code>adjustable</code> を使わないなら SIMPLE 版のデータ構造を通常版のデータ構造として使える．</p>
 </li>
 <li>
 <p><code>fill-pointer</code> を使わないなら，<code>make-sequence</code> にサブタイプを指定して
 作成できる．</p>
 </li>
 <li>
-<p><code>make-sequence</code> は <code>fill-pointer</code> オプションを指定できないため，simpleではないシーケンスのサブタイプを作成するには <code>make-array</code> で型を指定して <code>:fill-pointer</code> を <code>t</code> に設定する．</p>
+<p><code>make-sequence</code> は <code>fill-pointer</code> オプションを指定できないため，simple ではないシーケンスのサブタイプを作成するには <code>make-array</code> で型を指定して <code>:fill-pointer</code> を <code>t</code> に設定する．</p>
 </li>
 <li>
-<p>上のリストにはsimpleなデータ型に <code>make-array</code> を使った作成方法記述していな
+<p>上のリストには simple なデータ型に <code>make-array</code> を使った作成方法記述していな
 いが，<code>make-array</code> の <code>:fill-pointer</code> のデフォルト値は <code>nil</code> なので，
-<code>:fill-pointer</code> を省略すれば自動的にsimpleなデータ構造になる．</p>
+<code>:fill-pointer</code> を省略すれば自動的に simple なデータ構造になる．</p>
 </li>
 <li>
 <p>シーケンスなら何でも作れる万能コンストラクタは <code>make-array</code>．</p>
@@ -577,7 +577,7 @@
     
 <section class="share">
   <h4>Share this post</h4>
-  <a class="icon-twitter" href="https://twitter.com/share?text=Lisp%e3%81%aeSequence%e5%9e%8b%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fsequence%2f"
+  <a class="icon-twitter" href="https://twitter.com/share?text=Lisp%20%e3%81%ae%20Sequence%20%e5%9e%8b%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fsequence%2f"
       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
       <span class="hidden">Twitter</span>
   </a>
