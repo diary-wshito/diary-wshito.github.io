@@ -94,7 +94,7 @@
     },
     "headline": Lispのダイナミック・スコープとスペシャル変数,
     "name": Lispのダイナミック・スコープとスペシャル変数,
-    "wordCount": 2598,
+    "wordCount": 2974,
     "timeRequired": "PT6M",
     "inLanguage": {
       "@type": "Language",
@@ -349,6 +349,55 @@ shadowing();   // -&gt; In shadowing: overriden!
 <div class="sect1">
 <h2 id="_スペシャル変数の使い道は">スペシャル変数の使い道は？</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_デフォルト値のオーバーライド">デフォルト値のオーバーライド</h3>
+<div class="paragraph">
+<p>スペシャル変数はアプリケーションのデフォルト値の設定に使うと便利だ．例えば，テキストをファイルに書き出すアプリケーションがあったとしよう．デフォルトの出力先は <code>output/</code> ディレクトリで，ユーザがオプションで出力先を変えられるようにしたいとする．</p>
+</div>
+<div class="paragraph">
+<p>この場合，出力先のパスを <code>*outdir*</code> スペシャル変数に保存しておく．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defparameter *outdir* "output/")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>アプリケーション内の全てのコードは，出力先ディレクトリとして <code>\*outdir</code> スペシャル変数を参照する．</p>
+</div>
+<div class="paragraph">
+<p>ユーザの出力先指定はアプリケーションの起動関数で処理する．出力先が与えられていたら <code>*outdir*</code> をオーバーライドする．これでアプリケーション内の全べての関数で，<code>*outdir*</code> の値がオーバーライドされる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun main (&amp;optional outdir)
+  (let ((*outdir* (if outdir outdir *outdir*)))  <b class="conum">(1)</b>
+    (format t "~a~%" *outdir*)))</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>outdir</code> が設定されていれば <code>outdir</code> を そうでなければデフォルトの <code>*outdir*</code> を設定する．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>以下が実行例だ．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (main)
+output/
+NIL
+&gt; (main "my-output/")
+my-output/
+NIL</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_入出力のコントロール">入出力のコントロール</h3>
 <div class="paragraph">
 <p>Lispのテキストで最もよく出てくるスペシャル変数の例は入出力先のコントロールだ．通常スペシャル変数はグローバル変数として使う．グローバル変数の利点はどこからでも参照できるため，関数に渡す引数を省略できる．Common Lispでは標準入出力のストリームがスペシャル変数として予め提供されているので，入出力系の関数内で入出力先のストリームを引数で渡す必要がない．しかし，ファイルに出力したい時もある．この時，新たにファイル出力用の関数を作成しなくても，同名のスペシャル変数をローカルで作成し，そこにファイル出力のストリームを代入すれば，そのローカル変数が有効な間，入出力をリダイレクトできる．既存の入出力系の関数をそのまま再利用できるのだ．</p>
 </div>
@@ -383,6 +432,7 @@ shadowing();   // -&gt; In shadowing: overriden!
 </div>
 <div class="paragraph">
 <p>すっきりとしていて美しい&#8230;&#8203;.</p>
+</div>
 </div>
 </div>
 </div>
