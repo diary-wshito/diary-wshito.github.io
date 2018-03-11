@@ -94,7 +94,7 @@
     },
     "headline": Lispのダイナミック・スコープとスペシャル変数,
     "name": Lispのダイナミック・スコープとスペシャル変数,
-    "wordCount": 2974,
+    "wordCount": 2988,
     "timeRequired": "PT6M",
     "inLanguage": {
       "@type": "Language",
@@ -258,7 +258,7 @@
 <p>まず，JavaScriptを使って，レキシカル・スコープの例を見てみよう．そのあと，同じコードをCommon Lispで記述し，ダイナミック・スコープとの違いを明らかにする．</p>
 </div>
 <div class="listingblock">
-<div class="title">JavaScriptのレキシカル・スコープ</div>
+<div class="title">コード 1. JavaScriptのレキシカル・スコープ</div>
 <div class="content">
 <pre class="highlight"><code class="language-javascript line-numbers" data-lang="javascript line-numbers">var glvar = "Global";
 
@@ -293,7 +293,7 @@ shadowing();   // -&gt; In shadowing: overriden!
 <p>コード1をLispに書き換えたものがコード2である．1行目で <code>*glvar*</code> に <code>"Global"</code> 文字列を設定している．トップレベルで作成された <code>*glvar*</code> はグローバル変数である．また，<code>defvar</code> で作成されたのでスペシャル変数でもある．Lispではスペシャル変数をアスタリスク（イヤーマフ）で囲む習慣がある．</p>
 </div>
 <div class="listingblock">
-<div class="title">Common Lispの例</div>
+<div class="title">コード 2. Common Lispの例</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defvar *glvar* "Global")
 
@@ -323,7 +323,7 @@ shadowing();   // -&gt; In shadowing: overriden!
 <p>Common Lispの規格ではレキシカル・スコープに従うグローバル変数は未定義である．トップレベルで <code>defvar</code> と <code>defparameter</code> を使わずに変数を作成できるかは実装系に依存する．SBCLではトップレベルでも <code>setf</code> によって変数を作成できる．以下のコード3では，レキシカル・スコープのグローバル変数 <code>glvar</code> を作成しコード2と同じ処理を実行した結果である．</p>
 </div>
 <div class="listingblock">
-<div class="title">レキシカル・スコープのグローバル変数</div>
+<div class="title">コード 3. レキシカル・スコープのグローバル変数</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(setf glvar "Global")
 
@@ -371,16 +371,17 @@ shadowing();   // -&gt; In shadowing: overriden!
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun main (&amp;optional outdir)
-  (let ((*outdir* (if outdir outdir *outdir*)))  <b class="conum">(1)</b>
+  (let ((*outdir* (if outdir outdir *outdir*)))  ; <i class="conum" data-value="1"></i><b>(1)</b>
     (format t "~a~%" *outdir*)))</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p><code>outdir</code> が設定されていれば <code>outdir</code> を そうでなければデフォルトの <code>*outdir*</code> を設定する．</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>outdir</code> が設定されていれば <code>outdir</code> を そうでなければデフォルトの <code>*outdir*</code> を設定する．</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>以下が実行例だ．</p>
