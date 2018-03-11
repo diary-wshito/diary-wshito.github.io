@@ -18,7 +18,7 @@
       <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/ros-local/</guid>
-      <description>この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は @waterloo_jp まで． 「 Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswellの導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）をRoswellの環境下で管理する方法を説明し</description>
+      <description>この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は @waterloo_jp まで． 「 Lisp のパッケージ管理入門．Quicklisp，ASDF，Roswell の違いなど 」では，Quicklisp，ASDF，Roswell の違いを説明し，Roswell の導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）を Roswell の環境下で管理する方法を説明します．本稿の最後で</description>
     </item>
     
     <item>

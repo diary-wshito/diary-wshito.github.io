@@ -51,7 +51,7 @@
     <title>Roswell 環境下でのローカル・プロジェクト管理入門 &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は @waterloo_jp まで． 「 Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswe" />
+    <meta name="description" content="この記事は Lisp Advent Calendar 2017 の4日目の記事として書かれました．コメント，質問等は @waterloo_jp まで． 「 Lisp のパッケージ管理入門．Quicklisp，ASDF，Roswell の違いなど 」では，Quicklisp，ASDF，Roswell の違いを説明し，Ro" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -106,7 +106,7 @@
     },
     "headline": Roswell 環境下でのローカル・プロジェクト管理入門,
     "name": Roswell 環境下でのローカル・プロジェクト管理入門,
-    "wordCount": 7927,
+    "wordCount": 7725,
     "timeRequired": "PT16M",
     "inLanguage": {
       "@type": "Language",
@@ -114,7 +114,7 @@
     },
     "url": http://diary.wshito.com/comp/lisp/ros-local/,
     "datePublished": 2017-12-04T00:00Z,
-    "dateModified": 2017-12-04T00:00Z,
+    "dateModified": 2013-03-12T00:45Z,
     
     "keywords": lisp, programming, development tool, roswell, ASDF, Quicklisp, roswell,
     "description": ,
@@ -241,18 +241,18 @@
 <p>この記事は <a href="https://qiita.com/advent-calendar/2017/lisp">Lisp Advent Calendar 2017</a> の4日目の記事として書かれました．コメント，質問等は <a href="https://twitter.com/waterloo_jp">@waterloo_jp</a> まで．</p>
 </div>
 <div class="paragraph">
-<p>「 <a href="../lisp-pm/">Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど</a> 」では，Quicklisp，ASDF，Roswellの違いを説明し，Roswellの導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）をRoswellの環境下で管理する方法を説明します．本稿の最後では，<a href="#sec-tutorial">ハンズオン・チュートリアル</a>で実際のプロジェクト設定例を示します．</p>
+<p>「 <a href="../lisp-pm/">Lisp のパッケージ管理入門．Quicklisp，ASDF，Roswell の違いなど</a> 」では，Quicklisp，ASDF，Roswell の違いを説明し，Roswell の導入部分を解説しました．ここでは，もう少し踏み込んで，自分で開発するプロジェクト（ローカル・プロジェクト）を Roswell の環境下で管理する方法を説明します．本稿の最後では，<a href="#sec-tutorial">ハンズオン・チュートリアル</a> で実際のプロジェクト設定例を示します．</p>
 </div>
 <div class="paragraph">
-<p>Roswellは背後でQuicklispとASDFを使用してライブラリをビルドしロードしています．ローカル・プロジェクトをRoswellで管理・使用するには，QuicklispとASDFの理解が欠かせません．Quicklispはネット上のリポジトリからパッケージをダウンロードするだけで，コンパイルとロードはASDFが担っています．そこで，ローカル・プロジェクトをASDFに認識させるための設定から見ていきましょう．</p>
+<p>Roswell は背後で Quicklisp と ASDF を使用してライブラリをビルドしロードしています．ローカル・プロジェクトを Roswell で管理・使用するには，Quicklisp と ASDF の理解が欠かせません．Quicklisp はネット上のリポジトリからパッケージをダウンロードするだけで，コンパイルとロードは ASDF が担っています．そこで，ローカル・プロジェクトを ASDF に認識させるための設定から見ていきましょう．</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_asdfにローカル_プロジェクトを認識させる方法">ASDFにローカル・プロジェクトを認識させる方法</h2>
+<h2 id="_asdf_にローカル_プロジェクトを認識させる方法">ASDF にローカル・プロジェクトを認識させる方法</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Roswellで実装系をインストールした場合，ASDF 3がインストールされているはずですが一応ASDFのバージョンを確認しておきます．</p>
+<p>Roswell で実装系をインストールした場合，ASDF 3 がインストールされているはずですが一応 ASDF のバージョンを確認しておきます．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -261,18 +261,18 @@
 </div>
 </div>
 <div class="paragraph">
-<p>手っ取り早くASDFに認識させる方法はローカル・プロジェクトを <code>~/common-lisp/</code> 以下に配置します．これで <code>(ql:quickload :foo)</code>，<code>(require :foo)</code>，<code>(asdf:load-system :foo)</code> のいずれでもロードできます．</p>
+<p>手っ取り早く ASDF に認識させるにはローカル・プロジェクトを <code>~/common-lisp/</code> 以下に配置します．これで <code>(ql:quickload :foo)</code>，<code>(require :foo)</code>，<code>(asdf:load-system :foo)</code> のいずれを使ってもプロジェクトをロードできます．</p>
 </div>
 <div class="paragraph">
-<p>しかし，複数プロジェクトで構成されるプログラムを配布する際には，インストール先を独自に設定する必要があるでしょう．ここでは，ASDF 3から採用されたsource-registryを使い，任意ディレクトリにロードパスを通す方法を解説します．source-registryはLispコードからも設定できるため，Rosスクリプト内で使うこともできます．</p>
+<p>しかし，複数プロジェクトで構成されるプログラムを配布する際には，インストール先を独自に設定する必要があるかもしれません．ここでは，ASDF 3 から採用された source-registry を使って，任意ディレクトリにロードパスを通す方法を解説します．source-registry は Lisp コードからも設定できるため，Ros スクリプト内で使うこともできます．</p>
 </div>
 <div class="paragraph">
-<p>source-registryの公式マニュアルは  <a href="https://common-lisp.net/project/asdf/asdf.html#Controlling-where-ASDF-searches-for-systems">ASDFマニュアル Sec 8</a> です．</p>
+<p>source-registry の公式マニュアルは  <a href="https://common-lisp.net/project/asdf/asdf.html#Controlling-where-ASDF-searches-for-systems">ASDFマニュアル Sec 8</a> です．</p>
 </div>
 <div class="sect2">
 <h3 id="_source_registry">SOURCE-REGISTRY</h3>
 <div class="paragraph">
-<p>source-registryは，ASDF 3から採用されたロードパスの設定方法です．旧バージョンでは <code>*central-rgistry*</code> 変数を使って設定していました．後方互換性を維持するため <code>*central-registry*</code> に設定されたパスはsource-registryの設定より前に検索されます．Roswell環境下では旧バージョン用の <code>*central-registry*</code> が以下のように設定されています．</p>
+<p>source-registry は，ASDF 3 から採用されたロードパスの設定方法です．旧バージョンでは <code>*central-rgistry*</code> 変数を使って設定していました．後方互換性を維持するため <code>*central-registry*</code> に設定されたパスは source-registry の設定より前に検索されます．Roswell 環境下では旧バージョン用の <code>*central-registry*</code> が以下のように設定されています．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -281,12 +281,12 @@
 </div>
 </div>
 <div class="paragraph">
-<p>source-registryは，設定ファイルに記述する方法と，Lispコードで設定する方法の2種類あります．どちらの方法でも <a href="https://common-lisp.net/project/asdf/asdf.html#Configuration-DSL">ASDFマニュアル Sec 8.5</a>で定義されているDSL文法にしたがって記述します．</p>
+<p>source-registryは，設定ファイルに記述する方法と，Lisp コードで設定する方法の2種類あります．どちらの方法でも <a href="https://common-lisp.net/project/asdf/asdf.html#Configuration-DSL">ASDFマニュアル Sec 8.5</a>で定義されている DSL 文法にしたがって記述します．</p>
 </div>
 <div class="sect3">
-<h4 id="_source_registry設定用dsl">SOURCE-REGISTRY設定用DSL</h4>
+<h4 id="_source_registry_設定用_dsl">SOURCE-REGISTRY 設定用 DSL</h4>
 <div class="paragraph">
-<p>source-registry設定用のDSLは <code>(:source-registory &#8230;&#8203;)</code> で始まります．<code>&#8230;&#8203;</code> の箇所にはディレクティヴが続きます．主に使うディレクティヴは下記の4つでしょう．</p>
+<p>source-registry 設定用の DSL は <code>(:source-registory &#8230;&#8203;)</code> で始まります．<code>&#8230;&#8203;</code> の箇所にはディレクティヴが続きます．主に使うディレクティヴは下記の 4 つです．</p>
 </div>
 <div class="ulist">
 <ul>
@@ -297,7 +297,7 @@
 <p><code>(:directory パス)</code> ディレクティヴは指定されたパスのみを <strong>再帰せずに</strong> 検索する．</p>
 </li>
 <li>
-<p><code>:inherit-configuration</code> ディレクティヴは既に設定済みのsource-registryを挿入する．</p>
+<p><code>:inherit-configuration</code> ディレクティヴは既に設定済みの source-registry を挿入する．</p>
 </li>
 <li>
 <p><code>:ignore-inherited-configuration</code> ディレクティヴを指定すると既存の設定が上書きされる．</p>
@@ -321,10 +321,10 @@
 </ol>
 </div>
 <div class="paragraph">
-<p>実際の記述例を<a href="#listings-DSL">コード 1</a>に示します．</p>
+<p>実際の記述例を<a href="#listings-DSL">コード 1</a> に示します．</p>
 </div>
 <div id="listings-DSL" class="listingblock">
-<div class="title">コード 1. source-registry DSL記述例</div>
+<div class="title">コード 1. source-registry DSL 記述例</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(:source-registry
     (:tree (:home "lisp/project1"))        ; /Users/home/wshito/lisp/project1 に展開される
@@ -334,15 +334,15 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_source_registry設定方法">SOURCE-REGISTRY設定方法</h4>
+<h4 id="_source_registry_設定方法">SOURCE-REGISTRY 設定方法</h4>
 <div class="paragraph">
-<p>ここでは前節で説明したDSLを使って，Lispコードと設定ファイルを併用してロードパスを設定する方法を解説します．</p>
+<p>ここでは前節で説明した DSL を使って，Lisp コードと設定ファイルを併用してロードパスを設定する方法を解説します．</p>
 </div>
 <div class="paragraph">
-<p>Lispコードから設定する場合は，<a href="#listings-DSL">コード 1</a>の記述をクォートして <code>asdf:initialize-source-registry</code> に渡します．</p>
+<p>Lisp コードから設定する場合は，<a href="#listings-DSL">コード 1</a> の記述をクォートして <code>asdf:initialize-source-registry</code> に渡します．</p>
 </div>
 <div id="listings-source-registry-api" class="listingblock">
-<div class="title">コード 2. Lispコードからのロードパス設定例</div>
+<div class="title">コード 2. Lisp コードからのロードパス設定例</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(asdf:initialize-source-registry
     '(:source-registry
@@ -352,7 +352,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p><a href="#listings-source-registry-api">コード 2</a>の3行目で <code>~/lisp/project1</code> 以下を再帰的に検索するように設定しています．プロジェクトフォルダ以下にLisp以外のディレクトリが多くある場合，全てのディレクトリを再帰的に検索するのは非効率です．例えば <code>~/lisp/project1</code> 以下で検索が必要なのは，<code>src/lisp</code> 以下の全ディレクトリと，<code>src/test/lisp</code> ディレクトリ直下だけだとします．この場合，プロジェクトフォルダに <code>asdf.conf</code> ファイルを配置し，その中で <code>:here</code> ディレクティヴを使った設定を書くことによって，ロードパスをさらに細かくコントロールすることができます．この例の場合，<code>~/lisp/project1/asdf.conf</code> ファイル内に<a href="#listings-asdconf">コード 3</a>を記述すると所望の結果が得られます．<code>:here</code> ディレクティヴは <code>asd.conf</code> があるディレクトリの絶対パスに展開されます．</p>
+<p><a href="#listings-source-registry-api">コード 2</a> の 3 行目で <code>~/lisp/project1</code> 以下を再帰的に検索するように設定しています．プロジェクトフォルダ以下に Lisp 以外のディレクトリが多くある場合，全てのディレクトリを再帰的に検索するのは非効率です．例えば <code>~/lisp/project1</code> 以下で検索が必要なのは，<code>src/lisp</code> 以下の全ディレクトリと，<code>src/test/lisp</code> ディレクトリ直下だけだとします．この場合，プロジェクトフォルダに <code>asdf.conf</code> ファイルを配置し，その中で <code>:here</code> ディレクティヴを使った設定を書くことによって，ロードパスをさらに細かくコントロールすることができます．この例の場合，<code>~/lisp/project1/asdf.conf</code> ファイル内に<a href="#listings-asdconf">コード 3</a> を記述すると所望の結果が得られます．<code>:here</code> ディレクティヴは <code>asd.conf</code> があるディレクトリの絶対パスに展開されます．</p>
 </div>
 <div id="listings-asdconf" class="listingblock">
 <div class="title">コード 3. <code>~/lisp/project1/asdf.conf</code> の設定内容</div>
@@ -363,7 +363,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>最終的なsource-registryの設定は以下の変数で確認出来ます．ただし，この変数を直接変更してはいけません．</p>
+<p>最終的な source-registry の設定は以下の変数で確認出来ます．ただし，この変数を直接変更してはいけません．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -387,23 +387,23 @@
 <p><a href="#sec-tutorial">ハンズオン・チュートリアル</a> では実際にプロジェクトを使って設定手順を示します．</p>
 </div>
 <div class="paragraph">
-<p>ASDF3は，source-registryで設定したロードパス内のシステム情報をキャッシュします．ファイル名やディレクトリ構成を変更した場合，<code>(asdf:clear-source-registry)</code> を実行するとキャッシュをクリアできます．</p>
+<p>ASDF 3 は，source-registry で設定したロードパス内のシステム情報をキャッシュします．ファイル名やディレクトリ構成を変更した場合，<code>(asdf:clear-source-registry)</code> を実行するとキャッシュをクリアできます．</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_asdfの検索パスとfasl保存ディレクトリの違い">ASDFの検索パスとfasl保存ディレクトリの違い</h4>
+<h4 id="_asdf_の検索パスと_fasl_保存ディレクトリの違い">ASDF の検索パスと fasl 保存ディレクトリの違い</h4>
 <div class="paragraph">
-<p>これまで説明してきたロードパスは，システム定義が書かれたASDファイルをASDFが探すパスです．ASDFによってコンパイルされたfaslファイルは，<code>~/.cache/common-lisp/[処理系名]/path-to-src-file/src-file.fasl</code> に保存されます（保存先は手動コンパイル時に画面に表示される）．例えば sbcl-1.4.1でコンパイルされた <code>/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/lack-20170830-git/src/lack.lisp</code> ファイルは，<code>~/.cache/common-lisp/sbcl-1.4.1-macosx-x64/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/lack-20170830-git/src/lack.fasl</code> に保存されます．</p>
+<p>これまで説明してきたロードパスは，システム定義が書かれた ASD ファイルを ASDF が探すパスです．ASDF によってコンパイルされた fasl ファイルは，<code>~/.cache/common-lisp/[処理系名]/path-to-src-file/src-file.fasl</code> に保存されます（保存先は手動コンパイル時に画面に表示される）．例えば sbcl-1.4.1 でコンパイルされた <code>/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/lack-20170830-git/src/lack.lisp</code> ファイルは，<code>~/.cache/common-lisp/sbcl-1.4.1-macosx-x64/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/lack-20170830-git/src/lack.fasl</code> に保存されます．</p>
 </div>
 <div class="paragraph">
-<p>当然ですが，<code>~/.cache/common-lisp/</code> 以下にfaslが存在しても，ASDファイルがロードパス上になければfaslファイルはロードされません．</p>
+<p>当然ですが，<code>~/.cache/common-lisp/</code> 以下に fasl が存在しても，ASD ファイルがロードパス上になければfaslファイルはロードされません．</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_quicklispを使ったローカル_プロジェクト管理">Quicklispを使ったローカル・プロジェクト管理</h2>
+<h2 id="_quicklisp_を使ったローカル_プロジェクト管理">Quicklisp を使ったローカル・プロジェクト管理</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>QuicklispはライブラリのコンパイルとロードをASDFに委譲するため，ASDFを使ったここまでの設定で <code>(ql:quickload :my-project)</code> とすると <code>my-project</code> をロードすることができます．一方で，Quicklispにもローカル・プロジェクトを認識させる設定方法があるため，ASDFのsource-registryを使わず，Quicklisp側の設定だけでローカル・プロジェクトを認識させることもできます．ここでは，Quicklispを中心としたローカル・プロジェクトの管理方法を説明します．</p>
