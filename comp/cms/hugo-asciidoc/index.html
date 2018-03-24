@@ -102,7 +102,7 @@
     },
     "headline": Hugo で AsciiDoc 原稿を書く際の留意点,
     "name": Hugo で AsciiDoc 原稿を書く際の留意点,
-    "wordCount": 1977,
+    "wordCount": 1986,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -394,7 +394,7 @@ isCJKLanguage: true
 <p>変換結果は次の通りです．</p>
 </div>
 <div class="listingblock">
-<div class="title">libuvのロード</div>
+<div class="title">コード 1. libuvのロード</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(cffi:define-foreign-library libuv
   (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
@@ -435,21 +435,22 @@ int main() {
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Idle basic</div>
+<div class="title">コード 2. Idle basic</div>
 <div class="content">
 <pre class="highlight"><code class="language-c line-numbers" data-lang="c line-numbers">#include &lt;stdio.h&gt;
 int main() {
-    printf("Hello World\n");   <b class="conum">(1)</b>
+    printf("Hello World\n");   <i class="conum" data-value="1"></i><b>(1)</b>
     return 0;
 }</code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>コールアウト</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>コールアウト</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
