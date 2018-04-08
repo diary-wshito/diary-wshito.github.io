@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Lisp マシンのアセンブリを事始め（1）"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="Lisp マシンのアセンブリを事始め（1） &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/as/nekketsu/ch01-01/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2018-03-26T20:29:11&#43;09:00" />
+
+    
+    <meta property="article:tag" content="lisp" />
+    
+    <meta property="article:tag" content="programming" />
+    
+    <meta property="article:tag" content="assembly" />
+    
+    
+
+    <title>Lisp マシンのアセンブリを事始め（1） &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="Lisp コードが吐くマシン語に翻訳されているか理解できたらいいなと思う．アセンブリは初心者なので，簡単な処理をアセンブリに変換して少しずつ読んでみることにする． マシンの確認 使用マシンは Mac OSX El Capitan 10.11，処理系は SBCL で詳細は以下の通り． (machine-type) ;=&amp;" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.30-DEV" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/as/nekketsu/ch01-01/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": Lisp マシンのアセンブリを事始め（1）,
+    "name": Lisp マシンのアセンブリを事始め（1）,
+    "wordCount": 4197,
+    "timeRequired": "PT9M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/as/nekketsu/ch01-01/,
+    "datePublished": 2018-03-26T20:29Z,
+    "dateModified": 2018-03-26T20:29Z,
+    
+    "keywords": lisp, programming, assembly,
+    "description": ,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/as/nekketsu/ch01-01/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+<main class="content" role="main">
+
+  
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">Lisp マシンのアセンブリを事始め（1）</h1>
+        
+        <section class="post-meta">
+          <time class="post-date" datetime="2018-03-26T20:29:11&#43;09:00">
+            March 26, 2018
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/assembly/">#assembly</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lisp コードが吐くマシン語に翻訳されているか理解できたらいいなと思う．アセンブリは初心者なので，簡単な処理をアセンブリに変換して少しずつ読んでみることにする．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_マシンの確認">マシンの確認</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>使用マシンは Mac OSX El Capitan 10.11，処理系は SBCL で詳細は以下の通り．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(machine-type)                 ;=&gt; "X86-64"
+(machine-version)              ;=&gt; "Intel(R) Core(TM) i7-5650U CPU @ 2.20GHz"
+(software-type)                ;=&gt; "Darwin"
+(software-version)             ;=&gt; "15.6.0"
+(lisp-implementation-type)     ;=&gt; "SBCL"
+(lisp-implementation-version)  ;=&gt; "1.4.1"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_nil_を返す関数">NIL を返す関数</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>nil</code> を返す <code>return-nil</code> 関数を定義する．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun return-nil () nil)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>逆アセンブルの結果は以下の通り．</p>
+</div>
+<div id="listing-return-nil" class="listingblock">
+<div class="title">コード 1. <code>return-nil</code> のアセンブリコード</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(disassemble 'return-nil)
+; disassembly for RETURN-NIL
+; Size: 23 bytes. Origin: #x1001BA828C
+; 8C:       498B4C2460       MOV RCX, [R12+96]   ; no-arg-parsing entry point
+                                              ; thread.binding-stack-pointer
+; 91:       48894DF8         MOV [RBP-8], RCX
+; 95:       BA17001020       MOV EDX, #x20100017 ; NIL
+; 9A:       488BE5           MOV RSP, RBP
+; 9D:       F8               CLC
+; 9E:       5D               POP RBP
+; 9F:       C3               RET
+; A0:       0F0B10           BREAK 16            ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>まず，<code>return-nil</code> のコードは 23 bytes のマシン語に変換されたことが分かる．2 進数のマシン語は上の 2 列目の 16 進数で表現されている．16 進数 2 桁で 1 バイトを表すので 23 bytes = 16 進数 46 桁になる．4 行目の，<code>498B4C2460</code> から <code>0F0B10</code> まで桁数を数えると 46 桁になる．</p>
+</div>
+<div class="paragraph">
+<p>左端の 2 桁の数字はマシン語のコードが格納されているベースアドレス <code>1001BA828C</code> からの相対アドレスの最下位 2 桁である．</p>
+</div>
+<div class="paragraph">
+<p>SBCL の dissembler が吐くコードは Intel シンタックスということで，<code>eax</code> に 5 を代入するコードは <code>mov eax, 5</code> と書かれる．1 番目のオペランドがターゲットで，2 番目のオペランドがソースだ．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_スタック">スタック</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://www.sbcl.org/sbcl-internals/Full-Calls.html#Full-Calls">Full Calls</a> の Calling Convention によれば各関数のスタックフレームは関数の呼び出し側がセットアップすると書いてある．ここの記述を x86-64 のレジスタに直すと，以下のようなレジスタの使われ方と考えられる．</p>
+</div>
+<div class="dlist">
+<div class="title">レジスタの使われ方．疑問符が付いている箇所はよく分かっていない箇所．</div>
+<dl>
+<dt class="hdlist1"><code>RAX</code></dt>
+<dd>
+<p>fdefinition, function, または closure．</p>
+</dd>
+<dt class="hdlist1"><code>ECX</code></dt>
+<dd>
+<p>引数の個数．</p>
+</dd>
+<dt class="hdlist1"><code>EDX</code></dt>
+<dd>
+<p>第 1 引数．引数が 64 bit の時は <code>RDX</code>．</p>
+</dd>
+<dt class="hdlist1"><code>EDI</code></dt>
+<dd>
+<p>第 2 引数．引数が 64 bit の時は <code>RDI</code>．</p>
+</dd>
+<dt class="hdlist1"><code>ESI</code></dt>
+<dd>
+<p>第 3 引数．引数が 64 bit の時は <code>RSI</code>．</p>
+</dd>
+<dt class="hdlist1"><code>RBP</code></dt>
+<dd>
+<p>スタックフレームの先頭の 1 つ手前のスロットを指し示す．<code>[RBP-8]</code> がスタックフレームの １ つ目のスロットを指すことになる（x86 のスタックは低アドレス側に伸びる）．</p>
+</dd>
+<dt class="hdlist1"><code>[RBP+8]</code></dt>
+<dd>
+<p>呼び出し側関数のリターンアドレスが設定されているスタックフレーム中の位置．</p>
+</dd>
+<dt class="hdlist1"><code>[RBP]</code></dt>
+<dd>
+<p>呼び出し側関数のスタックフレームの Red zone？</p>
+</dd>
+<dt class="hdlist1"><code>[RBP-8]</code></dt>
+<dd>
+<p>スタックフレームの先頭．</p>
+</dd>
+<dt class="hdlist1"><code>[RBP-16]</code></dt>
+<dd>
+<p>呼ばれた関数が返す値の設定先．</p>
+</dd>
+<dt class="hdlist1"><code>[RBP-24]</code></dt>
+<dd>
+<p>Red zone．</p>
+</dd>
+<dt class="hdlist1"><code>[RBP-32]</code></dt>
+<dd>
+<p>ここから呼ばれた関数のローカル変数の領域が確保される．</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_関数の入り口">関数の入り口</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="#listing-return-nil">コード 1</a> の先頭 2 行を見てみよう．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-nasm line-numbers" data-lang="nasm line-numbers">8C:       498B4C2460       MOV RCX, [R12+96]   ; no-arg-parsing entry point <i class="conum" data-value="1"></i><b>(1)</b>
+                                              ; thread.binding-stack-pointer
+91:       48894DF8         MOV [RBP-8], RCX    ; <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>R12</code> に格納されている値 \$+\$ 96 の値をアドレス値として，アドレスが指し示す先にある値を <code>RCX</code> に設定する．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>RCX</code> の値をスタックの先頭（<code>[RBP-8]</code>）に代入している．</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>mov</code> は メモリからメモリへの移動ができないので <code>RCX</code> レジスタを経由して <code>R12+96</code> が指し示すメモリ上の値を <code>RBP-8</code> の指し示すメモリ位置に移動している．<code>[RBP-8]</code> は <code>return-nil</code> 関数用のスタックフレームの先頭 1 つ目のスロットを指し示しているので，スタックフレームの先頭に <code>[R12+96]</code> が指し示す先にある情報を設定している．<code>[R12+96]</code> に何が設定されているのかは不明．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_関数の出口">関数の出口</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">コード 2. <code>return-nil</code> 関数の出口</div>
+<div class="content">
+<pre class="highlight"><code class="language-nasm line-numbers" data-lang="nasm line-numbers">9A:       488BE5           MOV RSP, RBP     ; <i class="conum" data-value="1"></i><b>(1)</b>
+9D:       F8               CLC              ; <i class="conum" data-value="2"></i><b>(2)</b>
+9E:       5D               POP RBP          ; <i class="conum" data-value="3"></i><b>(3)</b>
+9F:       C3               RET              ; <i class="conum" data-value="4"></i><b>(4)</b>
+A0:       0F0B10           BREAK 16         ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>現在の <code>RBP</code> の値をスタックポインタに設定する．現在の <code>RBP</code> の値はこの関数のスタックフレームの開始位置の 1 つ前のスロットを指している．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>戻り値が 1 つであることを示すフラグを設定する．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>スタックの先頭（1 行目で設定した <code>RSP</code> が指し示す先）の値を取り出し <code>RBP</code> に設定し，スタックポインタの値に 8 バイト加えてスタックを巻き戻す（スタックを縮める）．この時点で <code>RSP</code> の指し示す先は <code>[RBP+8]</code> と同じ．ここにはリターンアドレスが格納されている．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>RET</code> はスタックの先端から値（リターンアドレス）を取り出しインストラクション・レジスタ <code>RIP</code> に設定する．<code>RET</code> にオペランドがないのでスタックポインタは変化せず同じスロットを指し続ける．</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_nil_の返し方">NIL の返し方</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>NIL</code> の値は定数値としてメモリ番地 <code>20100017</code> に格納されている．その値を <code>EDX</code> に移動している．ということは，定数値を返す場合は <code>EDX</code> レジスタが使用されているようだ．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 3. <code>return-nil</code> 関数の NIL を返す部分</div>
+<div class="content">
+<pre class="highlight"><code class="language-nasm" data-lang="nasm">95:       BA17001020       MOV EDX, #x20100017 ; NIL</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>EDX</code> は第 1 引数を渡す際にも使われる．そこで，戻り値が <code>EDX</code> に入っていることを確認するために，2 回 <code>add</code> 関数を呼んでみる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun double-add () (add (add 3 7) 9))
+(disassemble 'double-add)
+; disassembly for DOUBLE-ADD
+; Size: 69 bytes. Origin: #x1001A1191C
+; 1C:       498B4C2460       MOV RCX, [R12+96]                ; no-arg-parsing entry point
+                                                              ; thread.binding-stack-pointer
+; 21:       48894DF8         MOV [RBP-8], RCX
+; 25:       4883EC10         SUB RSP, 16
+; 29:       BA06000000       MOV EDX, 6
+; 2E:       BF0E000000       MOV EDI, 14
+; 33:       B904000000       MOV ECX, 4
+; 38:       48892C24         MOV [RSP], RBP
+; 3C:       488BEC           MOV RBP, RSP
+; 3F:       B838995020       MOV EAX, #x20509938              ; #&lt;FDEFN ADD&gt;
+; 44:       FFD0             CALL RAX
+; 46:       480F42E3         CMOVB RSP, RBX
+; 4A:       BF12000000       MOV EDI, 18             ; <i class="conum" data-value="1"></i><b>(1)</b>
+; 4F:       B904000000       MOV ECX, 4              ; <i class="conum" data-value="2"></i><b>(2)</b>
+; 54:       FF7508           PUSH QWORD PTR [RBP+8]
+; 57:       B838995020       MOV EAX, #x20509938              ; #&lt;FDEFN ADD&gt;
+; 5C:       FFE0             JMP RAX
+; 5E:       0F0B10           BREAK 16                         ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>2 回目の <code>add</code> 呼び出し時には第 2 引数のみ設定され第 1 引数は設定されていない．つまり，第 1 引数を指定すべき <code>EDX</code> にすでに 1 回目の <code>add</code> 関数の戻り値が設定されているからだ．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>引数の数．</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>今度は引数の順番を逆にしてみよう．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun rev-double-add () (add 9 (add 3 7)))
+(disassemble 'rev-double-add)
+; disassembly for REV-DOUBLE-ADD
+; Size: 72 bytes. Origin: #x1001A119DC
+; 9DC:       498B4C2460       MOV RCX, [R12+96]               ; no-arg-parsing entry point
+                                                              ; thread.binding-stack-pointer
+; 9E1:       48894DF8         MOV [RBP-8], RCX
+; 9E5:       4883EC10         SUB RSP, 16
+; 9E9:       BA06000000       MOV EDX, 6
+; 9EE:       BF0E000000       MOV EDI, 14
+; 9F3:       B904000000       MOV ECX, 4
+; 9F8:       48892C24         MOV [RSP], RBP
+; 9FC:       488BEC           MOV RBP, RSP
+; 9FF:       B838995020       MOV EAX, #x20509938             ; #&lt;FDEFN ADD&gt;
+; A04:       FFD0             CALL RAX
+; A06:       480F42E3         CMOVB RSP, RBX
+; A0A:       488BFA           MOV RDI, RDX             ; <i class="conum" data-value="1"></i><b>(1)</b>
+; A0D:       BA12000000       MOV EDX, 18              ; <i class="conum" data-value="2"></i><b>(2)</b>
+; A12:       B904000000       MOV ECX, 4
+; A17:       FF7508           PUSH QWORD PTR [RBP+8]
+; A1A:       B838995020       MOV EAX, #x20509938             ; #&lt;FDEFN ADD&gt;
+; A1F:       FFE0             JMP RAX
+; A21:       0F0B10           BREAK 16                        ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>第 2 引数を渡す <code>RDI</code> には <code>RDX</code> の値を受け取っている．<code>RDX</code> は <code>EDX</code> の 64 bit 拡張版だから，やはり戻り値は <code>EDX</code> によってやり取りされている事が分かる．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>第 1 引数を渡す <code>EDX</code> に 9 が設定されている．</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_0_を返す関数">0 を返す関数</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(disassemble 'return-zero)
+; disassembly for RETURN-ZERO
+; Size: 20 bytes. Origin: #x1001BA830C
+; 0C:       498B4C2460       MOV RCX, [R12+96]   ; no-arg-parsing entry point
+                                              ; thread.binding-stack-pointer
+; 11:       48894DF8         MOV [RBP-8], RCX
+; 15:       31D2             XOR EDX, EDX
+; 17:       488BE5           MOV RSP, RBP
+; 1A:       F8               CLC
+; 1B:       5D               POP RBP
+; 1C:       C3               RET
+; 1D:       0F0B10           BREAK 16            ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div id="listings-return-one" class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(disassemble 'return-one)
+; disassembly for RETURN-ONE
+; Size: 23 bytes. Origin: #x1001BA837C
+; 7C:       498B4C2460       MOV RCX, [R12+96]   ; no-arg-parsing entry point
+                                              ; thread.binding-stack-pointer
+; 81:       48894DF8         MOV [RBP-8], RCX
+; 85:       BA02000000       MOV EDX, 2
+; 8A:       488BE5           MOV RSP, RBP
+; 8D:       F8               CLC
+; 8E:       5D               POP RBP
+; 8F:       C3               RET
+; 90:       0F0B10           BREAK 16            ; Invalid argument count trap</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_関数への入り口">関数への入り口</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>3 つのコードに共通の関数入り口部分を <a href="#listings-return-one">[listings-return-one]</a> から抜粋した．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 4. <code>return-one</code> 関数の入り口部分</div>
+<div class="content">
+<pre class="highlight"><code class="language-as line-numbers" data-lang="as line-numbers">7C:       498B4C2460       MOV RCX, [R12+96]   ; no-arg-parsing entry point
+                                           ; thread.binding-stack-pointer
+81:       48894DF8         MOV [RBP-8], RCX    ;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>return-one</code> 関数が呼び出される前に 1. 引数処理，2. リターンアドレスの保存がスタックフレームに行われるが，今回は引数がないのでリターンアドレスがスタックに保存されているはずだ．ただし，Lisp 処理系は GC など様々な処理がバックグラウンドで動いているため，スレッド毎にスタックが用意されている．<code>R12+96</code> の値が指し示すメモリ上に，このスレッド用スタックフレームの先頭を指すアドレスが格納されていると思われる．これが <code>return-one</code> のスタックフレームのベースアドレスとなる．</p>
+</div>
+<div class="paragraph">
+<p><code>return-one</code> に入った時点では <code>RBP</code> は呼び出し側関数のスタックフレーム先端アドレスを保持しているが，そこに新たに <code>return-one</code> のスタックフレームのベースアドレス（64 bit = 8 byte）を追加している．x86-64 のスタックフレーミはアドレスの低い方へ伸びていくので，8 byte 引いた先 <code>[RBP-8]</code> に <code>MOV</code> している．とりあえず，この時点でベースポインタスタックにこの関数のエントリーポイントのアドレスが入った．</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>をしているはずなので，スタックの処理をしていると思われる．<a href="https://stackoverflow.com/questions/41912684/what-is-the-purpose-of-the-rbp-register-in-x86-64-assembler">StackOverflow</a> の解説によれば <code>RBP</code> はスタックポインタ <code>RSP</code> のスナップショットを保持しているとのことだ．そしてスタックは下に（アドレスの低い方へ）伸びるということだ．この辺の詳しい読み込みはまた後日にして，今回は値の返し方を見ていく．</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_値の返し方">値の返し方</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>まず 3 つの違いをそれぞれ抜粋してみた．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-as" data-lang="as">95:       BA17001020       MOV EDX, #x20100017   ; NIL を返す場合
+
+15:       31D2             XOR EDX, EDX          ; 0を返す場合
+
+85:       BA02000000       MOV EDX, 2            ; 1を返す場合</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>まず直ぐ分かることは返り値は <code>EDX</code> に設定されるということだ．次に <code>#x20100017</code> 自身が <code>NIL</code> の値を表しているとは考えづらいので，アドレスは <code>#x</code> をプリフィクスにして表されるという事が分かる．0 を返す場合は，<code>EDX</code> 自身を <code>XOR</code> し <code>EDX</code> に結果を代入している．<code>XOR</code> 排他的論理和で異なるビットのみ真になるので，全てのビットが必ずゼロになる．問題は 1 を返す場合だ．なぜ 2 なのか．</p>
+</div>
+<div class="paragraph">
+<p>試しに 2 を返す関数を見てみる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers"> (disassemble (lambda () 2))
+; disassembly for (LAMBDA ())
+; Size: 23 bytes. Origin: #x1001BA852C
+; 2C:       498B4C2460       MOV RCX, [R12+96]   ; no-arg-parsing entry point
+                                              ; thread.binding-stack-pointer
+; 31:       48894DF8         MOV [RBP-8], RCX
+; 35:       BA04000000       MOV EDX, 4
+; 3A:       488BE5           MOV RSP, RBP
+; 3D:       F8               CLC
+; 3E:       5D               POP RBP
+; 3F:       C3               RET
+; 40:       0F0B10           BREAK 16            ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>今度は <code>EDX</code> に 4 が設定されている（7 行目）．このまま色々な数で試してみると <code>EDX</code> には返り値の 2 倍の値が設定される事がわかる．<a href="http://cl-www.msi.co.jp/solutions/knowledge/lisp-world/tutorial/compiler-eval.pdf">阿部正佳氏の資料</a> に理由が書いてあった．SBCL は下位 1 ビットをタグとして使っているため，値は 1 ビット左にシフトしているとのこと．それで値が 2 倍になってる．</p>
+</div>
+<div class="paragraph">
+<p><code>EDX</code> の値が設定された後の処理は全関数に共通で以下の通り．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-as" data-lang="as">8A:       488BE5           MOV RSP, RBP
+8D:       F8               CLC
+8E:       5D               POP RBP
+8F:       C3               RET
+90:       0F0B10           BREAK 16              ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>CLC</code> は<a href="https://stackoverflow.com/questions/21859232/understanding-the-sbcl-entry-exit-assembly-boiler-plate-code">ネット情報</a>によると値を 1 つだけ返す場合のフラグを設定するのに使うらしい．複数の値を返す場合は <code>STC</code> とのこと．<code>RET</code> 後の <code>BREAK 16</code> はよく分からない．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_引数の渡し方のチェック">引数の渡し方のチェック</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">コード 5. <code>add</code> 関数の定義</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun add (a b)
+	   (+ a b))</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">コード 6. <code>add</code> のアセンブリコード</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(disassemble 'add)
+; disassembly for ADD
+; Size: 41 bytes. Origin: #x1001A1132B
+; 2B:       498B4C2460       MOV RCX, [R12+96]    ; no-arg-parsing entry point
+                                              ; thread.binding-stack-pointer
+; 30:       48894DF8         MOV [RBP-8], RCX
+; 34:       488BD6           MOV RDX, RSI         ; <i class="conum" data-value="1"></i><b>(1)</b>
+; 37:       488BFB           MOV RDI, RBX         ; <i class="conum" data-value="2"></i><b>(2)</b>
+; 3A:       41BBF004B021     MOV R11D, #x21B004F0 ; GENERIC-+
+; 40:       41FFD3           CALL R11
+; 43:       488B5DE8         MOV RBX, [RBP-24]
+; 47:       488B75F0         MOV RSI, [RBP-16]    ; <i class="conum" data-value="3"></i><b>(3)</b>
+; 4B:       488BE5           MOV RSP, RBP
+; 4E:       F8               CLC
+; 4F:       5D               POP RBP
+; 50:       C3               RET
+; 51:       0F0B10           BREAK 16             ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>+</code> 関数に渡す第 1 引数を設定．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>+</code> 関数に渡す第 2 引数を設定．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>恐らく <code>[RBP-16]</code> の位置に <code>+</code> の返り値が設定されている．</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">コード 7. <code>sample</code> 関数の定義</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun sample () (add 3 7))</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">コード 8. <code>sample</code> のアセンブリコード</div>
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(disassemble 'sample)
+; disassembly for SAMPLE
+; Size: 37 bytes. Origin: #x1001A1146C
+; 6C:       498B4C2460       MOV RCX, [R12+96]    ; no-arg-parsing entry point
+                                              ; thread.binding-stack-pointer
+; 71:       48894DF8         MOV [RBP-8], RCX
+; 75:       BA06000000       MOV EDX, 6
+; 7A:       BF0E000000       MOV EDI, 14
+; 7F:       B904000000       MOV ECX, 4
+; 84:       FF7508           PUSH QWORD PTR [RBP+8] ; <i class="conum" data-value="1"></i><b>(1)</b>
+; 87:       B838995020       MOV EAX, #x20509938  ; #&lt;FDEFN ADD&gt;
+; 8C:       FFE0             JMP RAX
+; 8E:       0F0B10           BREAK 16             ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>ADD</code> から戻るためのリターンアドレスを <code>[RBP+8]</code> に設定．</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_戻り値をローカル変数に代入して使ってみる">戻り値をローカル変数に代入して使ってみる</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun sample2 () (let ((a (add 3 7)))
+			     a))</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(disassemble 'sample2)
+; disassembly for SAMPLE2
+; Size: 55 bytes. Origin: #x1001A1150C
+; 0C:       498B4C2460       MOV RCX, [R12+96]                ; no-arg-parsing entry point
+                                                              ; thread.binding-stack-pointer
+; 11:       48894DF8         MOV [RBP-8], RCX
+; 15:       4883EC10         SUB RSP, 16             ; <i class="conum" data-value="1"></i><b>(1)</b>
+; 19:       BA06000000       MOV EDX, 6              ; <i class="conum" data-value="2"></i><b>(2)</b>
+; 1E:       BF0E000000       MOV EDI, 14             ; <i class="conum" data-value="3"></i><b>(3)</b>
+; 23:       B904000000       MOV ECX, 4              ; <i class="conum" data-value="4"></i><b>(4)</b>
+; 28:       48892C24         MOV [RSP], RBP          ; <i class="conum" data-value="5"></i><b>(5)</b>
+; 2C:       488BEC           MOV RBP, RSP            ; <i class="conum" data-value="6"></i><b>(6)</b>
+; 2F:       B838995020       MOV EAX, #x20509938     ; #&lt;FDEFN ADD&gt;
+; 34:       FFD0             CALL RAX                ; <i class="conum" data-value="7"></i><b>(7)</b>
+; 36:       480F42E3         CMOVB RSP, RBX          ; <i class="conum" data-value="8"></i><b>(8)</b>
+; 3A:       488BE5           MOV RSP, RBP
+; 3D:       F8               CLC
+; 3E:       5D               POP RBP
+; 3F:       C3               RET
+; 40:       0F0B10           BREAK 16                         ; Invalid argument count trap</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>スタックを 64 bit x 2 つ分拡張．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>add</code> の第 1 引数に 3 を渡す準備．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>add</code> の第 2 引数に 7 を渡す準備．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>引数の数を 2 に設定．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>ローカル変数用に確保したスタックフレームの先頭に現在の <code>RBP</code> の値を一時退避．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>ローカル変数用に確保したスタックフレームの先頭アドレスを <code>RBP</code> に設定．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><code>add</code> 関数の呼び出し．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td><code>CMOVB</code> は conditional move if below で <code>EFLAGS</code> レジスタのキャリーフラグが <code>CF = 1</code> の時，<code>RBX</code> の値が <code>RSP</code> に設定される．スタックポインタに設定されるくらいだから <code>RBX</code> にはどこかを指し示すアドレスが入っていると考えられる．</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=Lisp%20%e3%83%9e%e3%82%b7%e3%83%b3%e3%81%ae%e3%82%a2%e3%82%bb%e3%83%b3%e3%83%96%e3%83%aa%e3%82%92%e4%ba%8b%e5%a7%8b%e3%82%81%ef%bc%881%ef%bc%89&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fas%2fnekketsu%2fch01-01%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2fas%2fnekketsu%2fch01-01%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fas%2fnekketsu%2fch01-01%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "http:\/\/diary.wshito.com\/comp\/as\/nekketsu\/ch01-01\/";  
+this.page.identifier = "http:\/\/diary.wshito.com\/comp\/as\/nekketsu\/ch01-01\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diary-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/sequence/">
+          <section class="post">
+              <h2>Lisp の Sequence 型のまとめ</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/toc.js"></script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    
+</body>
+</html>
+

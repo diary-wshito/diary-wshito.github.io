@@ -191,6 +191,45 @@
 	
 	   <article class="post comp">
     <header class="post-header">
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/as/nekketsu/ch01-01/">Lisp マシンのアセンブリを事始め（1）</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>Lisp コードが吐くマシン語に翻訳されているか理解できたらいいなと思う．アセンブリは初心者なので，簡単な処理をアセンブリに変換して少しずつ読んでみることにする． マシンの確認 使用マシンは Mac OSX El Capitan 10.11，処理系は SBCL で詳細は以下の通り． (machine-type) ;=&amp;gt; &#34;X86-64&#34; (machine-version) ;=&amp;gt; &#34;Intel(R) Core(TM) i7-5650U CPU @ 2.20GHz&#34; (software-type) ;=&amp;gt; &#34;Darwin&#34; (software-version) ;=&amp;gt; &#34;15.6.0&#34; (lisp-implementation-type) ;=&amp;gt; &#34;SBCL&#34; (lisp-implementation-version) ;=&amp;gt; &#34;1.4.1&#34; NIL を返す関数 nil を返す return-nil 関数を定義する． (defun return-nil () nil) 逆アセンブルの結果は以下の通り． コード 1. return-nil のアセンブリコード (disassemble &#39;return-nil) ; disassembly for RETURN-NIL ; Size: 23 bytes.
+        
+        <a class="read-more" href="http://diary.wshito.com/comp/as/nekketsu/ch01-01/">.... &raquo;</a>
+        
+    </section>
+    <footer class="post-meta">
+
+        
+            
+            
+
+            
+
+            
+            wshito
+            
+        
+
+        on
+            
+                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
+            
+                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
+            
+                <a href="http://diary.wshito.com//tags/assembly/">#assembly</a>,
+            
+        
+        <time class="post-date" datetime="2018-03-26T20:29:11&#43;09:00">
+            26 Mar 2018
+        </time>
+    </footer>
+</article>
+
+	
+	   <article class="post comp">
+    <header class="post-header">
         <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/sequence/">Lisp の Sequence 型のまとめ</a></h2>
     </header>
     <section class="post-excerpt">
@@ -949,43 +988,6 @@
             
         
         <time class="post-date" datetime="2016-11-14T21:49:25&#43;09:00">
-            14 Nov 2016
-        </time>
-    </footer>
-</article>
-
-	
-	   <article class="post comp">
-    <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/2/">「対話によるCommon Lisp入門」第2話まとめノート</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>関数と変数の作成 defun 関数定義 全ての引数は評価されない（マクロで通常の関数ではない）． setf 変数への代入 変数宣言なしで新たに変数が作れる．トップレベルで使えばスペシャル変数（大域変数），関数内で使えばレキシカル変数（ローカル変数）を作れる．第１引数は評価されない（マクロで通常の関数ではない）． 共通点 どちらも副作用がある．つまり処理をして値を返すだけでない． defunは関数を実行できるよう定義する副作用を持
-        
-        <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/2/">.... &raquo;</a>
-        
-    </section>
-    <footer class="post-meta">
-
-        
-            
-            
-
-            
-
-            
-            wshito
-            
-        
-
-        on
-            
-                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
-            
-                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
-            
-        
-        <time class="post-date" datetime="2016-11-14T19:27:25&#43;09:00">
             14 Nov 2016
         </time>
     </footer>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://diary.wshito.com/comp/as/nekketsu/ch01-01/</loc>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/comp/lisp/sequence/</loc>
     <lastmod>2018-03-12T00:33:29+09:00</lastmod>
   </url>
@@ -143,13 +148,13 @@
   
   <url>
     <loc>http://diary.wshito.com/tags/assembly/</loc>
-    <lastmod>2017-06-12T21:15:11+09:00</lastmod>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://diary.wshito.com/categories/assembly/</loc>
-    <lastmod>2017-06-12T21:15:11+09:00</lastmod>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -233,7 +238,7 @@
   
   <url>
     <loc>http://diary.wshito.com/comp/</loc>
-    <lastmod>2018-03-12T00:33:29+09:00</lastmod>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -329,13 +334,13 @@
   
   <url>
     <loc>http://diary.wshito.com/tags/lisp/</loc>
-    <lastmod>2018-03-12T00:33:29+09:00</lastmod>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://diary.wshito.com/categories/lisp/</loc>
-    <lastmod>2018-03-12T00:33:29+09:00</lastmod>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -401,13 +406,13 @@
   
   <url>
     <loc>http://diary.wshito.com/tags/programming/</loc>
-    <lastmod>2018-03-12T00:33:29+09:00</lastmod>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://diary.wshito.com/categories/programming/</loc>
-    <lastmod>2018-03-12T00:33:29+09:00</lastmod>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -473,7 +478,7 @@
   
   <url>
     <loc>http://diary.wshito.com/</loc>
-    <lastmod>2018-03-12T00:33:29+09:00</lastmod>
+    <lastmod>2018-03-26T20:29:11+09:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -264,6 +264,10 @@ p, ul, ol, dl {
     text-rendering: geometricPrecision;
 }
 
+div.dlist {
+  margin-bottom: 2.55em;
+}
+
 ol, ul {
     padding-left: 3rem;
 }
@@ -275,20 +279,29 @@ ul ol, ol ul {
 }
 
 dl dt {
-    float: left;
+  /* float: left; 
     width: 180px;
     overflow: hidden;
     clear: left;
-    text-align: right;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-weight: 700;
-    margin-bottom: 1em;
+     text-align: right; */
+  display: block;
+  text-width: 100%;
+  white-space: nowrap;
+  font-weight: 700;
+  margin-bottom: 0em;
+  margin-top: 0.2em;
+  padding-top: 0em;
+  padding-bottom: 0em;
 }
 
 dl dd {
-    margin-left: 200px;
-    margin-bottom: 1em
+  display: block;
+  text-width: 100%;
+  padding-bottom: 0em;
+  padding-top: 0em;
+  margin-left: 1.125em;
+  margin-top: 0em;
+  margin-bottom: -0.75em
 }
 
 li {

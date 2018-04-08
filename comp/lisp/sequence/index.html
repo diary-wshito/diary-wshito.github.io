@@ -96,7 +96,7 @@
     },
     "headline": Lisp の Sequence 型のまとめ,
     "name": Lisp の Sequence 型のまとめ,
-    "wordCount": 1832,
+    "wordCount": 1905,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -446,7 +446,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">simple-vector</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>make-array</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>svref</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">無</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">不可</p></td>
@@ -494,11 +494,11 @@
 </dd>
 <dt class="hdlist1">simple-array</dt>
 <dd>
-<p><code>(make-array n :adjustable nil :fill-pointer nil :displaced-to nil)</code>, <code>simple-array</code> は <code>vector</code> と同じ構造だがクラス階層では <code>vector</code> のサブクラスではないので <code>make-sequence</code> は使えない．ただし，<code>typep</code> は <code>simple-array</code> 型のオブジェクトも <code>simple-vector</code> 型のオブジェクトも区別なく <code>t</code> を返す．</p>
+<p><code>(make-array n)</code>．<code>:adjustable</code>，<code>:fill-pointer</code>，<code>:displaced-to</code> のデフォルト値は全て <code>nil</code> なので指定の必要はない．<code>simple-array</code> は <code>vector</code> と同じ構造だがクラス階層では <code>vector</code> のサブクラスではないので <code>make-sequence</code> は使えない．ただし，<code>typep</code> は <code>simple-array</code> 型のオブジェクトも <code>simple-vector</code> 型のオブジェクトも区別なく <code>t</code> を返す．</p>
 </dd>
 <dt class="hdlist1">simple-vector</dt>
 <dd>
-<p><code>(vector n)</code> ，<code>(make-sequence 'simple-vector n)</code>，<code>(make-sequence 'vector n)</code>，または <code>simple-array</code> と同じ作成方法．</p>
+<p><code>(vector 要素 要素 &#8230;&#8203;)</code> ，<code>(make-sequence 'simple-vector n)</code>，<code>(make-sequence 'vector n)</code>，または <code>simple-array</code> と同じ作成方法．</p>
 </dd>
 <dt class="hdlist1">string</dt>
 <dd>
@@ -606,6 +606,13 @@
 
 
   <aside class="read-next">
+  
+  <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/as/nekketsu/ch01-01/">
+          <section class="post">
+              <h2>Lisp マシンのアセンブリを事始め（1）</h2>
+              
+          </section>
+      </a>
   
   
       <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/">
