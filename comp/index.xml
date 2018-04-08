@@ -7,19 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Mon, 26 Mar 2018 20:29:11 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 11 Feb 2018 18:35:29 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/comp/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Lisp マシンのアセンブリを事始め（1）</title>
-      <link>http://diary.wshito.com/comp/as/nekketsu/ch01-01/</link>
-      <pubDate>Mon, 26 Mar 2018 20:29:11 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/comp/as/nekketsu/ch01-01/</guid>
-      <description>Lisp コードが吐くマシン語に翻訳されているか理解できたらいいなと思う．アセンブリは初心者なので，簡単な処理をアセンブリに変換して少しずつ読んでみることにする． マシンの確認 使用マシンは Mac OSX El Capitan 10.11，処理系は SBCL で詳細は以下の通り． (machine-type) ;=&amp;gt; &#34;X86-64&#34; (machine-version) ;=&amp;gt; &#34;Intel(R) Core(TM) i7-5650U CPU @ 2.20GHz&#34; (software-type) ;=&amp;gt; &#34;Darwin&#34; (software-version) ;=&amp;gt; &#34;15.6.0&#34; (lisp-implementation-type) ;=&amp;gt; &#34;SBCL&#34; (lisp-implementation-version) ;=&amp;gt; &#34;1.4.1&#34; NIL を返す関数 nil を返す return-nil 関数を定義する． (defun return-nil () nil) 逆アセンブルの結果は以下の通り． コード 1. return-nil のアセンブリコード (disassemble &#39;return-nil) ; disassembly for RETURN-NIL ; Size: 23 bytes.</description>
-    </item>
     
     <item>
       <title>Lisp の Sequence 型のまとめ</title>
