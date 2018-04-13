@@ -106,8 +106,8 @@
     },
     "headline": Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど,
     "name": Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど,
-    "wordCount": 4255,
-    "timeRequired": "PT9M",
+    "wordCount": 4521,
+    "timeRequired": "PT10M",
     "inLanguage": {
       "@type": "Language",
       "alternateName": en
@@ -251,7 +251,7 @@
 
 <h4 id="asdf">ASDF</h4>
 
-<p><a href="https://common-lisp.net/project/asdf/">ASDF</a>は，ローカルに存在するライブラリを，依存関係に基づいてロードします．実際には，ロードする前にコンパイルまで行ってくれます．依存関係を定義するファイルは.asdファイルで，プロジェクトトップに置かれます．</p>
+<p><a href="https://common-lisp.net/project/asdf/">ASDF</a>は，ローカルに存在するライブラリを，依存関係に基づいてロードします．実際には，ロードする前にコンパイルまで行ってくれます．依存関係を定義するファイルは.asdファイルで，通常プロジェクトトップに置かれます．</p>
 
 <p>Lisp標準の<code>require</code>関数で外部ファイルをロードする際，ほとんどの処理系がASDFを用いてファイルをロードするため，ASDF自体はLisp標準規格に含まれませんが，処理系と共に予めインストールされていることが多いです．</p>
 
@@ -312,27 +312,69 @@
 <pre><code class="language-bash">$ ros setup
 </code></pre>
 
-<p>を実行すると，Lisp処理系がダウンロードされインストールされます．デフォルトでインストールされた処理系のバージョンは，</p>
+<p>を実行すると，Lisp処理系がダウンロードされインストールされます．Roswell で管理される処理系とライブラリは全て <code>~/.roswell</code> 以下にインストールされます．もし，これまでインストールしたライブラリや処理系を全て削除して再インストールしたい場合は，<code>~/.roswell</code> を削除し，再度 <code>ros setup</code> を実行します．</p>
+
+<p>デフォルトでインストールされた処理系のバージョンは，</p>
 
 <pre><code class="language-bash">$ ros run -- --version
 </code></pre>
 
-<p>で確認できます．インストールしたい処理系のバージョンを指定したい場合，以下のように指定します．</p>
+<p>で確認できます．インストール可能な処理系の一覧は以下で取得できます．</p>
 
-<pre><code class="language-bash">$ ros install sbcl/1.3.12
+<pre><code class="language-bash">$ ros list versions
+candidates for ros list versions [impl] are:
+
+abcl-bin
+allegro
+asdf
+ccl-bin
+clasp
+clisp
+cmu-bin
+ecl
+quicklisp
+sbcl-bin
+sbcl
+slime
+sly
 </code></pre>
 
-<p>インストールされている処理系のリストは以下で得られます．</p>
+<p>例えば，Clozure CL をインストールしたい場合は，以下を実行します．</p>
+
+<pre><code class="language-bash">$ ros install ccl-bin
+</code></pre>
+
+<p>インストールしたい処理系のバージョンも指定したい場合，以下のように指定します．</p>
+
+<pre><code class="language-bash">$ ros install sbcl/1.4.4
+</code></pre>
+
+<p>ローカルにインストール済みの処理系リストは以下で得られます．</p>
 
 <pre><code class="language-bash">$ ros list installed
 </code></pre>
 
 <p>デフォルトで使用する処理系は以下のコマンドで指定できます．</p>
 
-<pre><code class="language-bash">$ ros use sbcl/1.3.12
+<pre><code class="language-bash">$ ros use sbcl/1.4.4
 </code></pre>
 
-<p>処理系の管理方法は<a href="https://github.com/roswell/roswell/wiki/3.-Roswell-as-an-implementation-manager">こちらを参照</a>してください．</p>
+<p><code>ros config</code> を実行してもインストール済みの処理系と <code>ros run</code> で起動されるデフォルトの処理系を知ることができます．</p>
+
+<pre><code class="language-bash">$ ros config
+sbcl.version=1.4.6
+ccl-bin.version=1.11.5
+slime.version=2018.03.28
+setup.time=3731917397
+sbcl-bin.version=1.4.4
+default.lisp=ccl-bin
+
+Possible subcommands:
+set
+show
+</code></pre>
+
+<p>処理系の管理方法は<a href="https://github.com/roswell/roswell/wiki/Roswell-as-an-implementation-manager">こちらを参照</a>してください．</p>
 
 <h5 id="roswellの処理系を使う">Roswellの処理系を使う</h5>
 
@@ -351,7 +393,7 @@
 </code></pre>
 
 <p><code>M-x slime</code>で起動し．<code>M-- M-x slime</code>で処理系を選択できます．
-さらに詳しい設定方法は<a href="https://github.com/roswell/roswell/wiki/1.1-Initial-Recommended-Setup">こちらを参照</a>してください．</p>
+さらに詳しい設定方法は<a href="https://github.com/roswell/roswell/wiki/Initial-Recommended-Setup">こちらを参照</a>してください．</p>
 
 <h5 id="ライブラリのインストール">ライブラリのインストール</h5>
 
