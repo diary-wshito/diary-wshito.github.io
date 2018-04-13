@@ -106,7 +106,7 @@
     },
     "headline": Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど,
     "name": Lispのパッケージ管理入門．Quicklisp，ASDF，Roswellの違いなど,
-    "wordCount": 4521,
+    "wordCount": 4617,
     "timeRequired": "PT10M",
     "inLanguage": {
       "@type": "Language",
@@ -383,16 +383,23 @@ show
 <pre><code class="language-bash">$ ros run
 </code></pre>
 
-<p>Emacsエディタを使って開発するには，slimeを以下のように設定します．</p>
+<p>Emacsエディタを使って開発するには，Roswell を使って最新の slime をインストールします．slime は <code>~/.roswell/lisp/slime</code> 以下にインストールされます．</p>
 
-<pre><code class="language-lisp">(setq slime-lisp-implementations
-      `((ros (&quot;ros&quot; &quot;run&quot;))
+<pre><code class="language-bash">$ ros install slime
+</code></pre>
+
+<p><code>~/.emacs.d/init.el</code> ファイルに slime 起動スクリプトと Roswell の起動設定を以下のように追加します．</p>
+
+<pre><code class="language-lisp">;;; Slime for common lisp
+(load (expand-file-name &quot;~/.roswell/helper.el&quot;))  ; slime 起動スクリプト
+(setq slime-lisp-implementations
+      `((ros (&quot;ros&quot; &quot;run&quot;))                       ; ros run の起動設定
         (sbcl (&quot;/opt/local/bin/sbcl&quot;))
         (abcl (&quot;/opt/local/bin/abcl&quot;))
         (clisp (&quot;/opt/local/bin/clisp&quot;))))
 </code></pre>
 
-<p><code>M-x slime</code>で起動し．<code>M-- M-x slime</code>で処理系を選択できます．
+<p><code>M-x slime</code>で <code>ros</code> を起動し．<code>M-- M-x slime</code>で別の処理系を選択できます．
 さらに詳しい設定方法は<a href="https://github.com/roswell/roswell/wiki/Initial-Recommended-Setup">こちらを参照</a>してください．</p>
 
 <h5 id="ライブラリのインストール">ライブラリのインストール</h5>
