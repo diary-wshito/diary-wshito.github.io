@@ -247,6 +247,8 @@
     
         
     
+        
+    
 
     
         
@@ -267,6 +269,52 @@
 </nav>
 
     </div>
+
+    
+        <article class="post comp">
+    <header class="post-header">
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/ccl-init/">ASDF3 on Clozure CL does not search the symbolic links recursively</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>I put all my lisp projects under the directory git-repos and set symbolic links to each projects from ~/common-lisp. ASDF3 on SBCL loads ASD files from those links recursively. However, on Clozure CL they do not get loaded. If you add those links to source-registry ASDF3 loads in on CCL. Here is the snipped for CCL to add all the links and directories under ~/common-lisp.
+
+        
+        <a class="read-more" href="http://diary.wshito.com/comp/lisp/ccl-init/">.... &raquo;</a>
+        
+    </section>
+    <footer class="post-meta">
+
+        
+            
+            
+
+            
+
+            
+            wshito
+            
+        
+
+        on
+            
+                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
+            
+                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
+            
+                <a href="http://diary.wshito.com//tags/ccl/">#ccl</a>,
+            
+                <a href="http://diary.wshito.com//tags/asdf/">#asdf</a>,
+            
+                <a href="http://diary.wshito.com//tags/source-registry/">#source-registry</a>,
+            
+                <a href="http://diary.wshito.com//tags/clozure-cl/">#clozure cl</a>,
+            
+        
+        <time class="post-date" datetime="2018-04-13T18:46:32&#43;09:00">
+            13 Apr 2018
+        </time>
+    </footer>
+</article>
 
     
         <article class="post comp">
@@ -1038,43 +1086,6 @@
         
         <time class="post-date" datetime="2016-11-15T22:11:47&#43;09:00">
             15 Nov 2016
-        </time>
-    </footer>
-</article>
-
-    
-        <article class="post comp">
-    <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/3/">「対話によるCommon Lisp入門」第3話まとめノート</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>Lispのデータ型 リスト以外はアトム（1つだけ例外あり？p.24）． NULL型はリストでありシンボルである． NULL型のリストは空リスト()でNILと同値． NULL型のデータはシンボルNILのみ． シンボルNILの値もNIL． フォームとデータ (p.32) Lispはプログラムもデータもリストで表現できるからややこしく見える． リストなどの表現をデータとしてではなく，プログラムのつもりで見ている時は，その表現を *フ
-        
-        <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/3/">.... &raquo;</a>
-        
-    </section>
-    <footer class="post-meta">
-
-        
-            
-            
-
-            
-
-            
-            wshito
-            
-        
-
-        on
-            
-                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
-            
-                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
-            
-        
-        <time class="post-date" datetime="2016-11-14T21:49:25&#43;09:00">
-            14 Nov 2016
         </time>
     </footer>
 </article>

@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Sun, 11 Feb 2018 18:35:29 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 13 Apr 2018 18:46:32 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/tags/lisp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ASDF3 on Clozure CL does not search the symbolic links recursively</title>
+      <link>http://diary.wshito.com/comp/lisp/ccl-init/</link>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/ccl-init/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;I put all my lisp projects under the directory &lt;code&gt;git-repos&lt;/code&gt; and set symbolic links to each projects from &lt;code&gt;~/common-lisp&lt;/code&gt;.  ASDF3 on SBCL loads ASD files from those links recursively.  However, on Clozure CL they do not get loaded.  If you add those links to source-registry ASDF3 loads in on CCL.  Here is the snipped for CCL to add all the links and directories under &lt;code&gt;~/common-lisp&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Lisp の Sequence 型のまとめ</title>

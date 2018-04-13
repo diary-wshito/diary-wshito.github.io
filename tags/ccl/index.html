@@ -11,15 +11,15 @@
 
 
 
-<meta name="twitter:title" content="Comps"/>
+<meta name="twitter:title" content="Ccl"/>
 <meta name="twitter:description" content="Thoughts, stories and ideas."/>
 <meta name="twitter:site" content="@waterloo_jp"/>
 
 
 
-  	<meta property="og:title" content="Comps &middot; wshito&#39;s diary" />
+  	<meta property="og:title" content="Ccl &middot; wshito&#39;s diary" />
   	<meta property="og:site_name" content="wshito&#39;s diary" />
-  	<meta property="og:url" content="http://diary.wshito.com/comp/" />
+  	<meta property="og:url" content="http://diary.wshito.com/tags/ccl/" />
 
     
         
@@ -30,7 +30,7 @@
     <meta property="og:description" content="Thoughts, stories and ideas." />
     
 
-    <title>Comps &middot; wshito&#39;s diary</title>
+    <title>Ccl &middot; wshito&#39;s diary</title>
 
     
     <meta name="description" content="My personal memorandom." />
@@ -54,12 +54,12 @@
           <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
       
       
-        <link href="http://diary.wshito.com/comp/index.xml" rel="alternate" type="application/rss+xml" title="Comps &middot; wshito&#39;s diary" />
+        <link href="http://diary.wshito.com/tags/ccl/index.xml" rel="alternate" type="application/rss+xml" title="Ccl &middot; wshito&#39;s diary" />
       
     
     <meta name="generator" content="Hugo 0.30-DEV" />
 
-    <link rel="canonical" href="http://diary.wshito.com/comp/" />
+    <link rel="canonical" href="http://diary.wshito.com/tags/ccl/" />
 
     
       
@@ -147,7 +147,7 @@
     </ul>
 
     
-    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/comp/index.xml">Subscribe</a>
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/tags/ccl/index.xml">Subscribe</a>
     
 </div>
 <span class="nav-cover"></span>
@@ -166,7 +166,7 @@
     </nav>
     <div class="vertical">
         <div class="main-header-content inner">
-            <h1 class="page-title">Comps</h1>
+            <h1 class="page-title">Ccl</h1>
             <h2 class="page-description">
                 
             </h2>
@@ -180,9 +180,7 @@
 	<div class="extra-pagination inner">
     <nav class="pagination" role="navigation">
 	
-	    <a class="newer-posts" href="http://diary.wshito.com/comp/">&larr; Newer Posts</a>
-	
-	<span class="page-number">Page 2 of 2</span>
+	<span class="page-number">Page 1 of 1</span>
 	
 </nav>
 
@@ -191,12 +189,13 @@
 	
 	   <article class="post comp">
     <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/2/">「対話によるCommon Lisp入門」第2話まとめノート</a></h2>
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/ccl-init/">ASDF3 on Clozure CL does not search the symbolic links recursively</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>関数と変数の作成 defun 関数定義 全ての引数は評価されない（マクロで通常の関数ではない）． setf 変数への代入 変数宣言なしで新たに変数が作れる．トップレベルで使えばスペシャル変数（大域変数），関数内で使えばレキシカル変数（ローカル変数）を作れる．第１引数は評価されない（マクロで通常の関数ではない）． 共通点 どちらも副作用がある．つまり処理をして値を返すだけでない． defunは関数を実行できるよう定義する副作用を持
+        <p>I put all my lisp projects under the directory git-repos and set symbolic links to each projects from ~/common-lisp. ASDF3 on SBCL loads ASD files from those links recursively. However, on Clozure CL they do not get loaded. If you add those links to source-registry ASDF3 loads in on CCL. Here is the snipped for CCL to add all the links and directories under ~/common-lisp.
+
         
-        <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/2/">.... &raquo;</a>
+        <a class="read-more" href="http://diary.wshito.com/comp/lisp/ccl-init/">.... &raquo;</a>
         
     </section>
     <footer class="post-meta">
@@ -213,51 +212,22 @@
         
 
         on
-            
-                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
             
                 <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
             
-        
-        <time class="post-date" datetime="2016-11-14T19:27:25&#43;09:00">
-            14 Nov 2016
-        </time>
-    </footer>
-</article>
-
-	
-	   <article class="post comp">
-    <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/">Buffered IO or Unbuffered IO</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，Unbuffered IOのread()，write()を使用している理由が気になって調べてみた．普通のIOならシステムコールを減らすためにBuffered IOを使用するがなぜネットワークプログラミングではどの例もUnbufferedなのか？調べた結果は後でブログにまとめるとして，見つけた解説記事を載せておきます． Buffered vs unbuffered IO (stack overflow) - バッフ
-        
-        <a class="read-more" href="http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/">.... &raquo;</a>
-        
-    </section>
-    <footer class="post-meta">
-
-        
-            
-            
-
-            
-
-            
-            wshito
-            
-        
-
-        on
-            
                 <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
             
-                <a href="http://diary.wshito.com//tags/network/">#network</a>,
+                <a href="http://diary.wshito.com//tags/ccl/">#ccl</a>,
+            
+                <a href="http://diary.wshito.com//tags/asdf/">#asdf</a>,
+            
+                <a href="http://diary.wshito.com//tags/source-registry/">#source-registry</a>,
+            
+                <a href="http://diary.wshito.com//tags/clozure-cl/">#clozure cl</a>,
             
         
-        <time class="post-date" datetime="2016-11-09T19:29:46&#43;09:00">
-            9 Nov 2016
+        <time class="post-date" datetime="2018-04-13T18:46:32&#43;09:00">
+            13 Apr 2018
         </time>
     </footer>
 </article>
@@ -266,9 +236,7 @@
 
 	<nav class="pagination" role="navigation">
 	
-	    <a class="newer-posts" href="http://diary.wshito.com/comp/">&larr; Newer Posts</a>
-	
-	<span class="page-number">Page 2 of 2</span>
+	<span class="page-number">Page 1 of 1</span>
 	
 </nav>
 

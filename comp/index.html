@@ -191,6 +191,52 @@
 	
 	   <article class="post comp">
     <header class="post-header">
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/ccl-init/">ASDF3 on Clozure CL does not search the symbolic links recursively</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>I put all my lisp projects under the directory git-repos and set symbolic links to each projects from ~/common-lisp. ASDF3 on SBCL loads ASD files from those links recursively. However, on Clozure CL they do not get loaded. If you add those links to source-registry ASDF3 loads in on CCL. Here is the snipped for CCL to add all the links and directories under ~/common-lisp.
+
+        
+        <a class="read-more" href="http://diary.wshito.com/comp/lisp/ccl-init/">.... &raquo;</a>
+        
+    </section>
+    <footer class="post-meta">
+
+        
+            
+            
+
+            
+
+            
+            wshito
+            
+        
+
+        on
+            
+                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
+            
+                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
+            
+                <a href="http://diary.wshito.com//tags/ccl/">#ccl</a>,
+            
+                <a href="http://diary.wshito.com//tags/asdf/">#asdf</a>,
+            
+                <a href="http://diary.wshito.com//tags/source-registry/">#source-registry</a>,
+            
+                <a href="http://diary.wshito.com//tags/clozure-cl/">#clozure cl</a>,
+            
+        
+        <time class="post-date" datetime="2018-04-13T18:46:32&#43;09:00">
+            13 Apr 2018
+        </time>
+    </footer>
+</article>
+
+	
+	   <article class="post comp">
+    <header class="post-header">
         <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/sequence/">Lisp の Sequence 型のまとめ</a></h2>
     </header>
     <section class="post-excerpt">
@@ -949,43 +995,6 @@
             
         
         <time class="post-date" datetime="2016-11-14T21:49:25&#43;09:00">
-            14 Nov 2016
-        </time>
-    </footer>
-</article>
-
-	
-	   <article class="post comp">
-    <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/2/">「対話によるCommon Lisp入門」第2話まとめノート</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>関数と変数の作成 defun 関数定義 全ての引数は評価されない（マクロで通常の関数ではない）． setf 変数への代入 変数宣言なしで新たに変数が作れる．トップレベルで使えばスペシャル変数（大域変数），関数内で使えばレキシカル変数（ローカル変数）を作れる．第１引数は評価されない（マクロで通常の関数ではない）． 共通点 どちらも副作用がある．つまり処理をして値を返すだけでない． defunは関数を実行できるよう定義する副作用を持
-        
-        <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/2/">.... &raquo;</a>
-        
-    </section>
-    <footer class="post-meta">
-
-        
-            
-            
-
-            
-
-            
-            wshito
-            
-        
-
-        on
-            
-                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
-            
-                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
-            
-        
-        <time class="post-date" datetime="2016-11-14T19:27:25&#43;09:00">
             14 Nov 2016
         </time>
     </footer>

@@ -24,7 +24,7 @@
     <item>
       <title>Asdf</title>
       <link>http://diary.wshito.com/tags/asdf/</link>
-      <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/asdf/</guid>
       <description></description>
@@ -76,6 +76,15 @@
     </item>
     
     <item>
+      <title>Ccl</title>
+      <link>http://diary.wshito.com/tags/ccl/</link>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/ccl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Cffi</title>
       <link>http://diary.wshito.com/tags/cffi/</link>
       <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
@@ -99,6 +108,15 @@
       <pubDate>Wed, 07 Feb 2018 15:36:34 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/clack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Clozure Cl</title>
+      <link>http://diary.wshito.com/tags/clozure-cl/</link>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/clozure-cl/</guid>
       <description></description>
     </item>
     
@@ -195,7 +213,7 @@
     <item>
       <title>Lisp</title>
       <link>http://diary.wshito.com/tags/lisp/</link>
-      <pubDate>Sun, 11 Feb 2018 18:35:29 +0900</pubDate>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/lisp/</guid>
       <description></description>
@@ -285,7 +303,7 @@
     <item>
       <title>Programming</title>
       <link>http://diary.wshito.com/tags/programming/</link>
-      <pubDate>Sun, 11 Feb 2018 18:35:29 +0900</pubDate>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/programming/</guid>
       <description></description>
@@ -324,6 +342,15 @@
       <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/simulation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Source Registry</title>
+      <link>http://diary.wshito.com/tags/source-registry/</link>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/source-registry/</guid>
       <description></description>
     </item>
     
