@@ -12,13 +12,13 @@
 
 
 
-<meta name="twitter:title" content="ASDF3 on Clozure CL does not search the symbolic links recursively"/>
+<meta name="twitter:title" content="ASDF3 on Clozure CL does not search ASD files under the symbolic links"/>
 <meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@waterloo_jp"/>
 
 
 
-  	<meta property="og:title" content="ASDF3 on Clozure CL does not search the symbolic links recursively &middot; wshito&#39;s diary" />
+  	<meta property="og:title" content="ASDF3 on Clozure CL does not search ASD files under the symbolic links &middot; wshito&#39;s diary" />
   	<meta property="og:site_name" content="wshito&#39;s diary" />
   	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/ccl-init/" />
 
@@ -46,7 +46,7 @@
     
     
 
-    <title>ASDF3 on Clozure CL does not search the symbolic links recursively &middot; wshito&#39;s diary</title>
+    <title>ASDF3 on Clozure CL does not search ASD files under the symbolic links &middot; wshito&#39;s diary</title>
 
     
     <meta name="description" content="&lt;div class=&#34;paragraph&#34;&gt;
@@ -103,9 +103,9 @@
             
         ]
     },
-    "headline": ASDF3 on Clozure CL does not search the symbolic links recursively,
-    "name": ASDF3 on Clozure CL does not search the symbolic links recursively,
-    "wordCount": 273,
+    "headline": ASDF3 on Clozure CL does not search ASD files under the symbolic links,
+    "name": ASDF3 on Clozure CL does not search ASD files under the symbolic links,
+    "wordCount": 272,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
@@ -206,7 +206,7 @@
   <article class="post comp">
 
     <header class="post-header">
-        <h1 class="post-title">ASDF3 on Clozure CL does not search the symbolic links recursively</h1>
+        <h1 class="post-title">ASDF3 on Clozure CL does not search ASD files under the symbolic links</h1>
         
         <section class="post-meta">
           <time class="post-date" datetime="2018-04-13T18:46:32&#43;09:00">
@@ -233,7 +233,7 @@
 
     <section class="post-content">
       <div class="paragraph">
-<p>I put all my lisp projects under the directory <code>git-repos</code> and set symbolic links to each projects from <code>~/common-lisp</code>.  ASDF3 on SBCL loads ASD files from those links recursively.  However, on Clozure CL they do not get loaded.  If you add those links to source-registry ASDF3 loads in on CCL.  Here is the snipped for CCL to add all the links and directories under <code>~/common-lisp</code>.</p>
+<p>I put all my lisp projects under the directory <code>git-repos</code> and set symbolic links to each projects from <code>~/common-lisp</code>.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn&#8217;t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under <code>~/common-lisp</code>.</p>
 </div>
 <div class="paragraph">
 <p></p>
@@ -331,7 +331,7 @@
     
 <section class="share">
   <h4>Share this post</h4>
-  <a class="icon-twitter" href="https://twitter.com/share?text=ASDF3%20on%20Clozure%20CL%20does%20not%20search%20the%20symbolic%20links%20recursively&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fccl-init%2f"
+  <a class="icon-twitter" href="https://twitter.com/share?text=ASDF3%20on%20Clozure%20CL%20does%20not%20search%20ASD%20files%20under%20the%20symbolic%20links&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fccl-init%2f"
       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
       <span class="hidden">Twitter</span>
   </a>
@@ -383,6 +383,13 @@ s.setAttribute('data-timestamp', +new Date());
 
 
   <aside class="read-next">
+  
+  <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/cg/eec277/">
+          <section class="post">
+              <h2>UC Davis の Introduction to Graphics Architecture (EEC 277)</h2>
+              
+          </section>
+      </a>
   
   
       <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/sequence/">

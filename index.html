@@ -249,6 +249,8 @@
     
         
     
+        
+    
 
     
         
@@ -273,10 +275,50 @@
     
         <article class="post comp">
     <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/ccl-init/">ASDF3 on Clozure CL does not search the symbolic links recursively</a></h2>
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/cg/eec277/">UC Davis の Introduction to Graphics Architecture (EEC 277)</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>I put all my lisp projects under the directory git-repos and set symbolic links to each projects from ~/common-lisp. ASDF3 on SBCL loads ASD files from those links recursively. However, on Clozure CL they do not get loaded. If you add those links to source-registry ASDF3 loads in on CCL. Here is the snipped for CCL to add all the links and directories under ~/common-lisp.
+        <p>YouTube で UC Davis の講義「Introduction to Graphics Architecture」を視聴し始めました．2009 年に撮影されたようなので今から約 10 年前の講義ということになります．コンピュータ・グラフィックスのハードウェア的側面を扱った講義で，第 1 回の講義を聞いたらとても良かったので，ここに感想とメモを残しておきます．全 14 回を制覇できるかわかりませんが，視聴する度にこのページを更新します．
+
+        
+        <a class="read-more" href="http://diary.wshito.com/comp/cg/eec277/">.... &raquo;</a>
+        
+    </section>
+    <footer class="post-meta">
+
+        
+            
+            
+
+            
+
+            
+            wshito
+            
+        
+
+        on
+            
+                <a href="http://diary.wshito.com//tags/computer-graphics/">#computer graphics</a>,
+            
+                <a href="http://diary.wshito.com//tags/opengl/">#opengl</a>,
+            
+                <a href="http://diary.wshito.com//tags/gpu/">#gpu</a>,
+            
+        
+        <time class="post-date" datetime="2018-04-14T18:32:22&#43;09:00">
+            14 Apr 2018
+        </time>
+    </footer>
+</article>
+
+    
+        <article class="post comp">
+    <header class="post-header">
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/ccl-init/">ASDF3 on Clozure CL does not search ASD files under the symbolic links</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>I put all my lisp projects under the directory git-repos and set symbolic links to each projects from ~/common-lisp. ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn&amp;#8217;t. If you add those links to source-registry they get loaded on CCL too. Here is the snipped for CCL to add all the links and directories under ~/common-lisp.
 
         
         <a class="read-more" href="http://diary.wshito.com/comp/lisp/ccl-init/">.... &raquo;</a>
@@ -1049,43 +1091,6 @@
         
         <time class="post-date" datetime="2016-11-17T23:34:58&#43;09:00">
             17 Nov 2016
-        </time>
-    </footer>
-</article>
-
-    
-        <article class="post comp">
-    <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/">「対話によるCommon Lisp入門」第４話まとめノート</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;#8230;&amp;#8203;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える． &amp;gt; (elt &#39;(0 1 2 3 4 5) 3) 3 last リストの末尾の要素を取り出す． 末
-        
-        <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/">.... &raquo;</a>
-        
-    </section>
-    <footer class="post-meta">
-
-        
-            
-            
-
-            
-
-            
-            wshito
-            
-        
-
-        on
-            
-                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
-            
-                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
-            
-        
-        <time class="post-date" datetime="2016-11-15T22:11:47&#43;09:00">
-            15 Nov 2016
         </time>
     </footer>
 </article>

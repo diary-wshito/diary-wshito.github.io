@@ -189,10 +189,10 @@
 	
 	   <article class="post comp">
     <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/ccl-init/">ASDF3 on Clozure CL does not search the symbolic links recursively</a></h2>
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/ccl-init/">ASDF3 on Clozure CL does not search ASD files under the symbolic links</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>I put all my lisp projects under the directory git-repos and set symbolic links to each projects from ~/common-lisp. ASDF3 on SBCL loads ASD files from those links recursively. However, on Clozure CL they do not get loaded. If you add those links to source-registry ASDF3 loads in on CCL. Here is the snipped for CCL to add all the links and directories under ~/common-lisp.
+        <p>I put all my lisp projects under the directory git-repos and set symbolic links to each projects from ~/common-lisp. ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn&amp;#8217;t. If you add those links to source-registry they get loaded on CCL too. Here is the snipped for CCL to add all the links and directories under ~/common-lisp.
 
         
         <a class="read-more" href="http://diary.wshito.com/comp/lisp/ccl-init/">.... &raquo;</a>
