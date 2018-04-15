@@ -105,7 +105,7 @@
     },
     "headline": ASDF3 on Clozure CL does not search ASD files under the symbolic links,
     "name": ASDF3 on Clozure CL does not search ASD files under the symbolic links,
-    "wordCount": 272,
+    "wordCount": 239,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
@@ -261,41 +261,39 @@
 <p>You can simply invoke <code>(update-search-path)</code> from REPL when you add more projects under <code>~/common-isp</code>.</p>
 </div>
 <div class="paragraph">
-<p>Unfortunately, <code>ccl-bin</code> managed by Roswell starts with <code>--no-init</code> option so <code>.ccl-init.lisp</code> is ignored.  You have to resort to the manually installed CCL until Roswell changes their default.</p>
-</div>
-<div class="paragraph">
-<p>It is always recommended to define it in some package to avoid the name conflicts.  My whole file is as follows.</p>
+<p>For <a href="https://github.com/roswell/roswell">Roswell</a> user, place the script as <code>~/.roswell/init.lisp</code> with feature as follows.</p>
 </div>
 <div class="listingblock">
-<div class="title">Listing 1. <code>.ccl-init.lisp</code> file for Clozure CL</div>
+<div class="title">Listing 1. <code>.roswell/init.lisp</code> for Roswell</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(require :asdf)
 
-(in-package :cl-user)
+#+ccl (in-package :cl-user)
 
-(defpackage wshito
-  (:use :cl :asdf)
-  (:export :update-search-path))
+#+ccl (defpackage wshito
+        (:use :cl :asdf)
+        (:export :update-search-path))
 
-(in-package :wshito)
+#+ccl (in-package :wshito)
 
 ;;;;
 ;;;; Since ASDF3 on CCL does not recursively search the symbolic links.
 ;;;; The following snippet adds symlinks under ~/common-lisp
 ;;;; to the search path manually to be recognized by ASDF3 on CCL.
 ;;;;
+#+ccl
 (defun update-search-path ()
   (let* ((dirs (set-difference (uiop:directory* "~/common-lisp/*")
                                (uiop:directory* "~/common-lisp/.*")
                                :test #'uiop::pathname-equal)))
     (asdf:initialize-source-registry
-      `(:source-registry
-        ,@(loop for p in dirs
-             collect
-               (list :tree (namestring p)))
-        :inherit-configuration))))
+     `(:source-registry
+       ,@(loop for p in dirs
+            collect
+              (list :tree (namestring p)))
+       :inherit-configuration))))
 
-(update-search-path)</code></pre>
+#+ccl (update-search-path)</code></pre>
 </div>
 </div>
     </section>
