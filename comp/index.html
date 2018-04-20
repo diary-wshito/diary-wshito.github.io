@@ -194,7 +194,7 @@
         <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/peek-char/">ストリームあれこれ</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>peek-char の便利な機能 ストリームから文字を peek する際，peek-char の第 1 引数に t を指定すると空白文字をスキップしてくれる．次に read-char を実行すると，スキップ後の 1 文字を返す． (with-input-from-string (in &#34; 1 2 3 4 5&#34;) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char t in) (read-char in)) ; (1) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in)) ; (2) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in))) ; (3) ;=&amp;gt; Peek: #\1 Read: #\1 ; Peek: #\ Read: #\ ; Peek: #\2 Read: #\2 1 peek-char の第 1 引数は t なので先頭の空白文字はスキップされ #\1 が返る．read-char は直前の peek-char が返したスキップ後の #\1
+        <p>peek-char の便利な機能 ストリームから文字を peek する際，peek-char の第 1 引数に t を指定すると空白文字をスキップしてくれる．次に read-char を実行すると，スキップ後の 1 文字を返す． 
         
         <a class="read-more" href="http://diary.wshito.com/comp/lisp/peek-char/">.... &raquo;</a>
         
