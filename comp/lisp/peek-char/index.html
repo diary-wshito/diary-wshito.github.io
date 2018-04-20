@@ -102,7 +102,7 @@
     },
     "headline": Lisp のストリームあれこれ,
     "name": Lisp のストリームあれこれ,
-    "wordCount": 709,
+    "wordCount": 860,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
@@ -263,7 +263,7 @@
 <h2 id="_ストリームから文字列を作成するときのバッファリング">ストリームから文字列を作成するときのバッファリング</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>字句解析などでストリームからキャラクタを読み込む際，読み込む文字列の長さが未確定の場合は伸縮可能な <code>CHARACTER</code> 型の配列に <code>vector-push-extend</code> で文字をプッシュしていく．その際，配列が全て文字列で埋まるように長さ 0 の配列を用意し，そこに文字をプッシュする必要はない．Lisp は <code>:fill-pointer</code> で管理している長さまでしか文字列として認識しないので，初期化した配列より短い文字列でも問題ない．したがって，用意する配列は，バッファとして十分な大きさを用意すれば良い．</p>
+<p>字句解析などでストリームからキャラクタを読み込む際，読み込む文字列の長さが未確定の場合は伸縮可能な <code>CHARACTER</code> 型の配列に <code>vector-push-extend</code> で文字をプッシュしていく．その際，配列が全て文字列で埋まるように長さ 0 の配列を用意し，そこに文字をプッシュする必要はない．Lisp は <code>fill-pointer</code> で管理している長さまでしか文字列として認識しないので，初期化した配列より短い文字列でも問題ない．したがって，用意する配列は，バッファとして十分な大きさを用意すれば良い．</p>
 </div>
 <div class="paragraph">
 <p>以下のコードはバファとして長さ 100 の配列を用意しているが，文字列を表示させると読み込んだ分しか表示されていない．また，同じ 3 文字から成る別の文字列と比較しても，等しい文字列として認識されているのがわかる．</p>
@@ -281,6 +281,21 @@
    (string= "今日は" str))
 ;=&gt; 今日は
 ;   T</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一方，<code>fill-pointer</code> の無い <code>simple-string</code> をバッファに使用した以下の例では，バッファの大きさ全てが文字列として扱われることになる．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(let ((str (make-string 10)))                      ; 初期バッファサイズ
+   (with-input-from-string (in "今日は晴れ．明日は雨．")
+      (dotimes (i 3)                               ; 最初の3文字のみ
+         (setf (schar str i) (read-char in))))     ; バッファに読み込む
+   (format t "~a" str)
+   (string= "今日は" str))
+;=&gt; 今日は^@^@^@^@^@^@^@
+    NIL</code></pre>
 </div>
 </div>
 </div>
