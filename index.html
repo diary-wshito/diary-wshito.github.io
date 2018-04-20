@@ -251,6 +251,8 @@
     
         
     
+        
+    
 
     
         
@@ -271,6 +273,45 @@
 </nav>
 
     </div>
+
+    
+        <article class="post comp">
+    <header class="post-header">
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/peek-char/">ストリームあれこれ</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>peek-char の便利な機能 ストリームから文字を peek する際，peek-char の第 1 引数に t を指定すると空白文字をスキップしてくれる．次に read-char を実行すると，スキップ後の 1 文字を返す． (with-input-from-string (in &#34; 1 2 3 4 5&#34;) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char t in) (read-char in)) ; (1) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in)) ; (2) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in))) ; (3) ;=&amp;gt; Peek: #\1 Read: #\1 ; Peek: #\ Read: #\ ; Peek: #\2 Read: #\2 1 peek-char の第 1 引数は t なので先頭の空白文字はスキップされ #\1 が返る．read-char は直前の peek-char が返したスキップ後の #\1
+        
+        <a class="read-more" href="http://diary.wshito.com/comp/lisp/peek-char/">.... &raquo;</a>
+        
+    </section>
+    <footer class="post-meta">
+
+        
+            
+            
+
+            
+
+            
+            wshito
+            
+        
+
+        on
+            
+                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
+            
+                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
+            
+                <a href="http://diary.wshito.com//tags/stream/">#stream</a>,
+            
+        
+        <time class="post-date" datetime="2018-04-20T10:10:40&#43;09:00">
+            20 Apr 2018
+        </time>
+    </footer>
+</article>
 
     
         <article class="post comp">
@@ -1054,43 +1095,6 @@
         
         <time class="post-date" datetime="2016-11-20T15:51:03&#43;09:00">
             20 Nov 2016
-        </time>
-    </footer>
-</article>
-
-    
-        <article class="post comp">
-    <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/5/">「対話によるCommon Lisp入門」第５話まとめノート</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>この章では再帰の基本から，末尾再帰への書き換え方について解説している．またエディタにプログラムを書いてLispインタプリタに読み込む方法も説明している． 末尾再帰とは 再帰的に定義された関数の末尾で，自分自身を呼び出した戻り値をそのままリターンする関数定義． 末尾再帰の例（ユークリッドの互除法） (defun gcd2 (m n) (if (= (mod m n) 0) n (gcd2 n (mod m n)))) 最後の行で自分自身`gcd2`への呼び出しで終わっている．すなわち，自分自身へ
-        
-        <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/5/">.... &raquo;</a>
-        
-    </section>
-    <footer class="post-meta">
-
-        
-            
-            
-
-            
-
-            
-            wshito
-            
-        
-
-        on
-            
-                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
-            
-                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
-            
-        
-        <time class="post-date" datetime="2016-11-17T23:34:58&#43;09:00">
-            17 Nov 2016
         </time>
     </footer>
 </article>

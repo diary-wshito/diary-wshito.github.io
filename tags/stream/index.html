@@ -11,15 +11,15 @@
 
 
 
-<meta name="twitter:title" content="Categories"/>
+<meta name="twitter:title" content="Stream"/>
 <meta name="twitter:description" content="Thoughts, stories and ideas."/>
 <meta name="twitter:site" content="@waterloo_jp"/>
 
 
 
-  	<meta property="og:title" content="Categories &middot; wshito&#39;s diary" />
+  	<meta property="og:title" content="Stream &middot; wshito&#39;s diary" />
   	<meta property="og:site_name" content="wshito&#39;s diary" />
-  	<meta property="og:url" content="http://diary.wshito.com/categories/" />
+  	<meta property="og:url" content="http://diary.wshito.com/tags/stream/" />
 
     
         
@@ -30,7 +30,7 @@
     <meta property="og:description" content="Thoughts, stories and ideas." />
     
 
-    <title>Categories &middot; wshito&#39;s diary</title>
+    <title>Stream &middot; wshito&#39;s diary</title>
 
     
     <meta name="description" content="My personal memorandom." />
@@ -54,12 +54,12 @@
           <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
       
       
-        <link href="http://diary.wshito.com/categories/index.xml" rel="alternate" type="application/rss+xml" title="Categories &middot; wshito&#39;s diary" />
+        <link href="http://diary.wshito.com/tags/stream/index.xml" rel="alternate" type="application/rss+xml" title="Stream &middot; wshito&#39;s diary" />
       
     
     <meta name="generator" content="Hugo 0.30-DEV" />
 
-    <link rel="canonical" href="http://diary.wshito.com/categories/" />
+    <link rel="canonical" href="http://diary.wshito.com/tags/stream/" />
 
     
       
@@ -134,7 +134,7 @@
             </li>
         
             
-            <li class="nav-opened nav-current" role="presentation">
+            <li class="nav-opened" role="presentation">
             	<a href="http://diary.wshito.com/categories/">Categories</a>
             </li>
         
@@ -147,7 +147,7 @@
     </ul>
 
     
-    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/categories/index.xml">Subscribe</a>
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/tags/stream/index.xml">Subscribe</a>
     
 </div>
 <span class="nav-cover"></span>
@@ -166,7 +166,7 @@
     </nav>
     <div class="vertical">
         <div class="main-header-content inner">
-            <h1 class="page-title">Categories</h1>
+            <h1 class="page-title">Stream</h1>
             <h2 class="page-description">
                 
             </h2>
@@ -175,49 +175,64 @@
 </header>
 
 <main class="content" role="main">
-  
-  <article class="post">
-  
-  
-  <li><a href="http://diary.wshito.com/categories/asciidoc">asciidoc</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/assembly">assembly</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/c">c</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/canvas">canvas</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/cg">cg</a> 2</li>
-  
-  <li><a href="http://diary.wshito.com/categories/cms">cms</a> 2</li>
-  
-  <li><a href="http://diary.wshito.com/categories/db">db</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/development-tool">development-tool</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/diary">diary</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/javascript">javascript</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/libuv">libuv</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/lisp">lisp</a> 17</li>
-  
-  <li><a href="http://diary.wshito.com/categories/network">network</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/opengl">opengl</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/programming">programming</a> 4</li>
-  
-  <li><a href="http://diary.wshito.com/categories/web-application">web-application</a> 3</li>
-  
-  <li><a href="http://diary.wshito.com/categories/%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AA%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">コードリーディング</a> 3</li>
-  
-  <li><a href="http://diary.wshito.com/categories/%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%E3%83%9E%E3%82%A6%E3%82%B9">マイクロマウス</a> 1</li>
-  
-  <li><a href="http://diary.wshito.com/categories/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88">ロボット</a> 1</li>
-  
-  </article>
+    
+
+	<div class="extra-pagination inner">
+    <nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 of 1</span>
+	
+</nav>
+
+	</div>
+
+	
+	   <article class="post comp">
+    <header class="post-header">
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/peek-char/">ストリームあれこれ</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>peek-char の便利な機能 ストリームから文字を peek する際，peek-char の第 1 引数に t を指定すると空白文字をスキップしてくれる．次に read-char を実行すると，スキップ後の 1 文字を返す． (with-input-from-string (in &#34; 1 2 3 4 5&#34;) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char t in) (read-char in)) ; (1) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in)) ; (2) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in))) ; (3) ;=&amp;gt; Peek: #\1 Read: #\1 ; Peek: #\ Read: #\ ; Peek: #\2 Read: #\2 1 peek-char の第 1 引数は t なので先頭の空白文字はスキップされ #\1 が返る．read-char は直前の peek-char が返したスキップ後の #\1
+        
+        <a class="read-more" href="http://diary.wshito.com/comp/lisp/peek-char/">.... &raquo;</a>
+        
+    </section>
+    <footer class="post-meta">
+
+        
+            
+            
+
+            
+
+            
+            wshito
+            
+        
+
+        on
+            
+                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
+            
+                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
+            
+                <a href="http://diary.wshito.com//tags/stream/">#stream</a>,
+            
+        
+        <time class="post-date" datetime="2018-04-20T10:10:40&#43;09:00">
+            20 Apr 2018
+        </time>
+    </footer>
+</article>
+
+	
+
+	<nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 of 1</span>
+	
+</nav>
+
 </main>
 
 

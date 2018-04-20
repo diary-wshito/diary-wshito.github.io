@@ -191,6 +191,45 @@
 	
 	   <article class="post comp">
     <header class="post-header">
+        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/peek-char/">ストリームあれこれ</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>peek-char の便利な機能 ストリームから文字を peek する際，peek-char の第 1 引数に t を指定すると空白文字をスキップしてくれる．次に read-char を実行すると，スキップ後の 1 文字を返す． (with-input-from-string (in &#34; 1 2 3 4 5&#34;) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char t in) (read-char in)) ; (1) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in)) ; (2) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in))) ; (3) ;=&amp;gt; Peek: #\1 Read: #\1 ; Peek: #\ Read: #\ ; Peek: #\2 Read: #\2 1 peek-char の第 1 引数は t なので先頭の空白文字はスキップされ #\1 が返る．read-char は直前の peek-char が返したスキップ後の #\1
+        
+        <a class="read-more" href="http://diary.wshito.com/comp/lisp/peek-char/">.... &raquo;</a>
+        
+    </section>
+    <footer class="post-meta">
+
+        
+            
+            
+
+            
+
+            
+            wshito
+            
+        
+
+        on
+            
+                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
+            
+                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
+            
+                <a href="http://diary.wshito.com//tags/stream/">#stream</a>,
+            
+        
+        <time class="post-date" datetime="2018-04-20T10:10:40&#43;09:00">
+            20 Apr 2018
+        </time>
+    </footer>
+</article>
+
+	
+	   <article class="post comp">
+    <header class="post-header">
         <h2 class="post-title"><a href="http://diary.wshito.com/comp/cg/eec277/">UC Davis の Introduction to Graphics Architecture (EEC 277)</a></h2>
     </header>
     <section class="post-excerpt">
@@ -962,43 +1001,6 @@
         
         <time class="post-date" datetime="2016-11-17T23:34:58&#43;09:00">
             17 Nov 2016
-        </time>
-    </footer>
-</article>
-
-	
-	   <article class="post comp">
-    <header class="post-header">
-        <h2 class="post-title"><a href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/">「対話によるCommon Lisp入門」第４話まとめノート</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;#8230;&amp;#8203;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える． &amp;gt; (elt &#39;(0 1 2 3 4 5) 3) 3 last リストの末尾の要素を取り出す． 末
-        
-        <a class="read-more" href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/">.... &raquo;</a>
-        
-    </section>
-    <footer class="post-meta">
-
-        
-            
-            
-
-            
-
-            
-            wshito
-            
-        
-
-        on
-            
-                <a href="http://diary.wshito.com//tags/programming/">#programming</a>,
-            
-                <a href="http://diary.wshito.com//tags/lisp/">#lisp</a>,
-            
-        
-        <time class="post-date" datetime="2016-11-15T22:11:47&#43;09:00">
-            15 Nov 2016
         </time>
     </footer>
 </article>

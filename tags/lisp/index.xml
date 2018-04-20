@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Fri, 13 Apr 2018 18:46:32 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 20 Apr 2018 10:10:40 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/tags/lisp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ストリームあれこれ</title>
+      <link>http://diary.wshito.com/comp/lisp/peek-char/</link>
+      <pubDate>Fri, 20 Apr 2018 10:10:40 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/peek-char/</guid>
+      <description>peek-char の便利な機能 ストリームから文字を peek する際，peek-char の第 1 引数に t を指定すると空白文字をスキップしてくれる．次に read-char を実行すると，スキップ後の 1 文字を返す． (with-input-from-string (in &#34; 1 2 3 4 5&#34;) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char t in) (read-char in)) ; (1) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in)) ; (2) (format t &#34;Peek: ~s Read: ~s~%&#34; (peek-char nil in) (read-char in))) ; (3) ;=&amp;gt; Peek: #\1 Read: #\1 ; Peek: #\ Read: #\ ; Peek: #\2 Read: #\2 1 peek-char の第 1 引数は t なので先頭の空白文字はスキップされ #\1 が返る．read-char は直前の peek-char が返したスキップ後の #\1</description>
+    </item>
     
     <item>
       <title>ASDF3 on Clozure CL does not search ASD files under the symbolic links</title>
