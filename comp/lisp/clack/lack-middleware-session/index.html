@@ -506,7 +506,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_code_keep_empty_code_引数"><code>keep-empty</code> 引数</h3>
+<h3 id="_keep_empty_引数"><code>keep-empty</code> 引数</h3>
 <div class="paragraph">
 <p>Sessionミドルウェアの最後の引数である <code>keep-empty</code> について見てみよう．<code>keep-empty</code> は <code>store</code> バックエンドにセッション変数を保存するか否かを指定するフラグである．<code>keep-empty</code> が <code>t</code> ならセッション変数は <code>store</code> に保存され，<code>nil</code> なら保存されない．</p>
 </div>
@@ -698,7 +698,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <p>ここではSessionミドルウェアを使った3つのサンプルアプリを示す．1つ目はデフォルト設定，2つ目は <code>:expires</code> オプションを使って最終アクセスから5秒後にセッションが切れる設定，3つ目はログイン・ログアウトを実現するアプリである．</p>
 </div>
 <div class="sect2">
-<h3 id="_例1_デフォルト設定のサンプル_アプリ">例1）デフォルト設定のサンプル・アプリ</h3>
+<h3 id="_例1デフォルト設定のサンプルアプリ">例1）デフォルト設定のサンプル・アプリ</h3>
 <div class="paragraph">
 <p><a href="#listings:default">コード 12</a>はデフォルト設定のままSessionミドルウェアを使ったサンプル・アプリで，Sessionミドルウェアの設定以外は例2と同じものになる（ <a href="https://github.com/wshito/blog-examples/blob/master/lisp/lack/middleware-session-default.lisp"><code>middleware-session-default.lisp</code></a> on GitHub ）．</p>
 </div>

@@ -238,7 +238,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_レキシカル_スコープとダイナミック_スコープ">レキシカル・スコープとダイナミック・スコープ</h2>
+<h2 id="_レキシカルスコープとダイナミックスコープ">レキシカル・スコープとダイナミック・スコープ</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>レキシカル・スコープでは，評価器がコードを読み込んだ時点で変数のスコープが決定する．つまり，書かれた通り（レキシカル）に変数のスコープが決まる．それに対し，ダイナミック・スコープでは実行時に変数の有効範囲が変わる．スコープが動的に決まるのだ．昨今のほとんどのプログラミング言語はレキシカル・スコープを採用している．</p>
@@ -252,7 +252,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_レキシカル_スコープの場合">レキシカル・スコープの場合</h2>
+<h2 id="_レキシカルスコープの場合">レキシカル・スコープの場合</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>まず，JavaScriptを使って，レキシカル・スコープの例を見てみよう．そのあと，同じコードをCommon Lispで記述し，ダイナミック・スコープとの違いを明らかにする．</p>
@@ -287,7 +287,7 @@ shadowing();   // -&gt; In shadowing: overriden!
 </div>
 </div>
 <div class="sect1">
-<h2 id="_common_lispのダイナミック_スコープ">Common Lispのダイナミック・スコープ</h2>
+<h2 id="_common_lispのダイナミックスコープ">Common Lispのダイナミック・スコープ</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>コード1をLispに書き換えたものがコード2である．1行目で <code>*glvar*</code> に <code>"Global"</code> 文字列を設定している．トップレベルで作成された <code>*glvar*</code> はグローバル変数である．また，<code>defvar</code> で作成されたのでスペシャル変数でもある．Lispではスペシャル変数をアスタリスク（イヤーマフ）で囲む習慣がある．</p>

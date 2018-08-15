@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Fri, 20 Apr 2018 10:10:40 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 15 Aug 2018 15:51:30 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ltk と Tk との接続</title>
+      <link>http://diary.wshito.com/comp/lisp/ltk/wish/</link>
+      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/lisp/ltk/wish/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;管理者権限の無いマシンで Common Lisp の GUI 開発をする場合，GUI ツールキットをローカル・ディレクトリにインストールせざるを得ない．管理者権限の無いマシンで &lt;a href=&#34;https://github.com/herth/ltk&#34;&gt;ltk&lt;/a&gt;を使う必要に迫られたので，Lisp コードからどのように Tk を呼び出しているのか調べてみた．&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Lisp のストリームあれこれ</title>
@@ -19,7 +30,7 @@
       
       <guid>http://diary.wshito.com/comp/lisp/peek-char/</guid>
       <description>&lt;div class=&#34;sect1&#34;&gt;
-&lt;h2 id=&#34;_code_peek_char_code_の便利な機能&#34;&gt;&lt;code&gt;peek-char&lt;/code&gt; の便利な機能&lt;/h2&gt;
+&lt;h2 id=&#34;_peek_char_の便利な機能&#34;&gt;&lt;code&gt;peek-char&lt;/code&gt; の便利な機能&lt;/h2&gt;
 &lt;div class=&#34;sectionbody&#34;&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
 &lt;p&gt;ストリームから文字を peek する際，&lt;code&gt;peek-char&lt;/code&gt; の第 1 引数に &lt;code&gt;t&lt;/code&gt; を指定すると空白文字をスキップしてくれる．次に &lt;code&gt;read-char&lt;/code&gt; を実行すると，スキップ後の 1 文字を返す．
