@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Package on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/tags/package/</link>
+    <description>Recent content in Package on wshito&#39;s diary</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-JP</language>
+    <copyright>All rights reserved 2016--</copyright>
+    <lastBuildDate>Mon, 03 Sep 2018 16:42:44 +0900</lastBuildDate>
+    
+	<atom:link href="http://diary.wshito.com/tags/package/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OpenMP に依存した R パッケージのインストール</title>
+      <link>http://diary.wshito.com/comp/r/openmp/</link>
+      <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/r/openmp/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;MacOS X 上の R で &lt;code&gt;caret&lt;/code&gt; パッケージをインストールしていたら OpenMP 関連のヘッダファイルが無いとためにパッケージのコンパイルに失敗しエラーとなった．対処法を記しておく．&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

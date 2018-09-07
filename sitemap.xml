@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://diary.wshito.com/comp/r/openmp/</loc>
+    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/comp/lisp/ltk/wish/</loc>
     <lastmod>2018-08-15T15:51:30+09:00</lastmod>
   </url>
@@ -265,7 +270,7 @@
   
   <url>
     <loc>http://diary.wshito.com/comp/</loc>
-    <lastmod>2018-08-15T15:51:30+09:00</lastmod>
+    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -344,6 +349,12 @@
   <url>
     <loc>http://diary.wshito.com/tags/hugo/</loc>
     <lastmod>2017-10-02T10:39:51+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/tags/install/</loc>
+    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -462,6 +473,18 @@
   </url>
   
   <url>
+    <loc>http://diary.wshito.com/tags/openmp/</loc>
+    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/tags/package/</loc>
+    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/tags/physics/</loc>
     <lastmod>2017-09-06T17:33:34+09:00</lastmod>
     <priority>0</priority>
@@ -488,6 +511,18 @@
   <url>
     <loc>http://diary.wshito.com/tags/quicklisp/</loc>
     <lastmod>2013-03-12T00:45:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/tags/r/</loc>
+    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/categories/r/</loc>
+    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -565,7 +600,7 @@
   
   <url>
     <loc>http://diary.wshito.com/</loc>
-    <lastmod>2018-08-15T15:51:30+09:00</lastmod>
+    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
     <priority>0</priority>
   </url>
   

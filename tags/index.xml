@@ -202,6 +202,15 @@
     </item>
     
     <item>
+      <title>Install</title>
+      <link>http://diary.wshito.com/tags/install/</link>
+      <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/install/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Javascript</title>
       <link>http://diary.wshito.com/tags/javascript/</link>
       <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
@@ -328,6 +337,24 @@
     </item>
     
     <item>
+      <title>Openmp</title>
+      <link>http://diary.wshito.com/tags/openmp/</link>
+      <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/openmp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Package</title>
+      <link>http://diary.wshito.com/tags/package/</link>
+      <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/package/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Physics</title>
       <link>http://diary.wshito.com/tags/physics/</link>
       <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
@@ -360,6 +387,15 @@
       <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/quicklisp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>http://diary.wshito.com/tags/r/</link>
+      <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/r/</guid>
       <description></description>
     </item>
     

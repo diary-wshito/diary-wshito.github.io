@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Wed, 15 Aug 2018 15:51:30 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 03 Sep 2018 16:42:44 +0900</lastBuildDate>
     
 	<atom:link href="http://diary.wshito.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenMP に依存した R パッケージのインストール</title>
+      <link>http://diary.wshito.com/comp/r/openmp/</link>
+      <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/comp/r/openmp/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;MacOS X 上の R で &lt;code&gt;caret&lt;/code&gt; パッケージをインストールしていたら OpenMP 関連のヘッダファイルが無いとためにパッケージのコンパイルに失敗しエラーとなった．対処法を記しておく．&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>ltk と Tk との接続</title>
