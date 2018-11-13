@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Javascript on wshito&#39;s diary</title>
-    <link>http://diary.wshito.com/tags/javascript/</link>
-    <description>Recent content in Javascript on wshito&#39;s diary</description>
+    <title>Functional Programming on wshito&#39;s diary</title>
+    <link>http://diary.wshito.com/tags/functional-programming/</link>
+    <description>Recent content in Functional Programming on wshito&#39;s diary</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
     <lastBuildDate>Tue, 13 Nov 2018 22:37:03 +0900</lastBuildDate>
     
-	<atom:link href="http://diary.wshito.com/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://diary.wshito.com/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,15 +23,6 @@
 &lt;div class=&#34;paragraph&#34;&gt;
 &lt;p&gt;最近，JavaScript の関数型プログラミングにはまっているので，&lt;a href=&#34;https://github.com/fantasyland/fantasy-land&#34;&gt;Fantasy Land&lt;/a&gt; を実装した &lt;a href=&#34;https://sanctuary.js.org&#34;&gt;Sanctuary.js&lt;/a&gt; の使い方をサーベイして行きたいと思います．今回は基本中の基本，Functor から．間違いなどありましたらコメントお願いします．&lt;/p&gt;
 &lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>AsciiDocでBouncing Ball</title>
-      <link>http://diary.wshito.com/comp/js/canvas/bouncing-ball/</link>
-      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/comp/js/canvas/bouncing-ball/</guid>
-      <description>HTML5のCanvasを画面いっぱいに表示して，Webページにアニメーションを重ねる方法を説明します．実際のデモであるこのページは，AsciiDoc原稿にCanvasを埋め込んで作成したので，AsciiDocでの設定方法についても説明したいと思います．アニメーションのバウンシング・ボールは，中1の息子が夏休みの自由研究で作った Scratchプロジェクトへのオマージュです（笑）． ソースコードはこち</description>
     </item>
     
   </channel>
