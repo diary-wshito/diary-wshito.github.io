@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://diary.wshito.com/comp/js/fp/sanctuary1/</loc>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/comp/r/openmp/</loc>
     <lastmod>2018-09-03T16:42:44+09:00</lastmod>
   </url>
@@ -270,7 +275,7 @@
   
   <url>
     <loc>http://diary.wshito.com/comp/</loc>
-    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -329,6 +334,24 @@
   </url>
   
   <url>
+    <loc>http://diary.wshito.com/tags/fantasyland/</loc>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/tags/functional-programming/</loc>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/categories/functional-programming/</loc>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/tags/gpu/</loc>
     <lastmod>2018-04-14T18:32:22+09:00</lastmod>
     <priority>0</priority>
@@ -360,13 +383,13 @@
   
   <url>
     <loc>http://diary.wshito.com/tags/javascript/</loc>
-    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://diary.wshito.com/categories/javascript/</loc>
-    <lastmod>2017-09-06T17:33:34+09:00</lastmod>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -504,7 +527,7 @@
   
   <url>
     <loc>http://diary.wshito.com/categories/programming/</loc>
-    <lastmod>2018-08-15T15:51:30+09:00</lastmod>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -535,6 +558,12 @@
   <url>
     <loc>http://diary.wshito.com/tags/roswell/</loc>
     <lastmod>2013-03-12T00:45:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/tags/sanctuary/</loc>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -600,7 +629,7 @@
   
   <url>
     <loc>http://diary.wshito.com/</loc>
-    <lastmod>2018-09-03T16:42:44+09:00</lastmod>
+    <lastmod>2018-12-04T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   

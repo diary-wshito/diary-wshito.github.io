@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="ファンタジー・ランドの保護地区をゆく Part 1"/>
+<meta name="twitter:description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．"/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  	<meta property="og:title" content="ファンタジー・ランドの保護地区をゆく Part 1 &middot; wshito&#39;s diary" />
+  	<meta property="og:site_name" content="wshito&#39;s diary" />
+  	<meta property="og:url" content="http://diary.wshito.com/comp/js/fp/sanctuary1/" />
+
+    
+        
+    
+
+    
+    <meta property="og:description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2018-12-04T00:00:00&#43;09:00" />
+
+    
+    <meta property="article:tag" content="sanctuary" />
+    
+    <meta property="article:tag" content="fantasyland" />
+    
+    <meta property="article:tag" content="javascript" />
+    
+    <meta property="article:tag" content="functional programming" />
+    
+    
+
+    <title>ファンタジー・ランドの保護地区をゆく Part 1 &middot; wshito&#39;s diary</title>
+
+    
+    <meta name="description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+    
+
+    
+      
+          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.30-DEV" />
+
+    <link rel="canonical" href="http://diary.wshito.com/comp/js/fp/sanctuary1/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": W.Shito
+    },
+    "author": {
+        "@type": "Person",
+        "name": W.Shito,
+        
+        "url": http://diary.wshito.com,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": ファンタジー・ランドの保護地区をゆく Part 1,
+    "name": ファンタジー・ランドの保護地区をゆく Part 1,
+    "wordCount": 4076,
+    "timeRequired": "PT9M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": en
+    },
+    "url": http://diary.wshito.com/comp/js/fp/sanctuary1/,
+    "datePublished": 2018-12-04T00:00Z,
+    "dateModified": 2018-12-04T00:00Z,
+    
+    "keywords": sanctuary, fantasyland, javascript, functional programming,
+    "description": JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．,
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": http://diary.wshito.com/comp/js/fp/sanctuary1/
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-422028-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+
+    
+    <script src="https://use.fontawesome.com/0268256572.js"></script>
+</head>
+
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+<main class="content" role="main">
+
+  
+
+  <article class="post comp">
+
+    <header class="post-header">
+        <h1 class="post-title">ファンタジー・ランドの保護地区をゆく Part 1</h1>
+        
+        <div id="description">JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．</div>
+        
+        <section class="post-meta">
+          <time class="post-date" datetime="2018-12-04T00:00:00&#43;09:00">
+            December 4, 2018
+          </time>
+	  
+	  on
+	  
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/sanctuary/">#sanctuary</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/fantasyland/">#fantasyland</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/javascript/">#javascript</a></span>
+         
+          <span class="post-tag small"><a href="http://diary.wshito.com//tags/functional-programming/">#functional programming</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>この記事は <a href="https://qiita.com/advent-calendar/2018/javascript_02">JavaScript2 Advent Calendar 2018</a> の 4 日目の記事として書かれました．コードは <a href="https://github.com/wshito/blog-examples/tree/master/JavaScript/fp">GitHub</a> にまとめてあります．</p>
+</div>
+<div class="paragraph">
+<p>最近，JavaScript の関数型プログラミングにはまっているので，<a href="https://github.com/fantasyland/fantasy-land">Fantasy Land</a> を実装した <a href="https://sanctuary.js.org">Sanctuary.js</a> の使い方をサーベイして行きたいと思います．今回は基本中の基本，Functor から．</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_functor_とは何か">Functor とは何か</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ざっくばらんに言えば，<code>map</code> メソッドを提供する型のことです．JavaScript の配列も <code>map</code> メソッドを持つので，配列も Functor と言えます．配列を例に Functor の特徴を見てみましょう．</p>
+</div>
+<div class="paragraph">
+<p>まず，配列は内部に値を保持するコンテナです．Functor も内部に値を保持します．Functor は内部に値を保持するラッパー，もしくは箱であると説明されることがよくあります．</p>
+</div>
+<div class="paragraph">
+<p>配列の <code>map</code> メソッドで各要素に関数を適用すると，適用結果は再び配列に格納されて返ります．Functor も内部に保持する値に <code>map</code> を使って関数を適用すると，その結果は再び Functor でラッピングされて返ります．ちなみに，Functor が内部に保持するのは通常のデータだけでなく関数も保持できます（関数は第1級オブジェクトなので当然ですが&#8230;&#8203;.）．</p>
+</div>
+<div class="paragraph">
+<p>Sanctuary ライブラリでは JavaScript のオブジェクト <code>{}</code> も Functor に分類されています．つまり，オブジェクト <code>{}</code> にも <code>map</code> 関数が使えるということです．配列もオブジェクトも <code>map</code> が使えるので，もはや <code>for</code> ループが不要になります．</p>
+</div>
+<div class="paragraph">
+<p>Sanctuary で提供する型は，<a href="https://github.com/sanctuary-js/sanctuary-type-classes/tree/v9.0.0">ここのページ</a>まとめられています．Functor のサブクラスが色々ありますね．多くのメソッドが Functor を引数に取ります．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_何が_functor_になり得るの">何が Functor になり得るの？</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Functor か否かは <code>Functor.test()</code> メソッドを使って調べることができます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ node
+&gt; let Z = require('sanctuary-type-classes')  // 型の定義
+&gt; let S = require('sanctuary')               // Sanctuary本体
+
+&gt; Z.Functor.test(S.Maybe)          // Maybe型はFunctorのサブクラス
+true
+&gt; Z.Functor.test(S.toMabye(5))     // Just型もFunctor
+true
+&gt; Z.Functor.test(S.Just)
+true
+&gt; Z.Functor.test(S.toMabye(null))  // Nothing型もFunctor
+true
+&gt; Z.Functor.test(S.Nothing)
+true
+
+&gt; Z.Functor.test({})   // オブジェクトもFunctor
+true
+
+&gt; Z.Functor.test([])   // 配列もFunctor
+true
+
+&gt; Z.Functor.test(5)    // ただの値はFunctorではない
+false</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_map_メソッドを見てみよう">map メソッドを見てみよう</h2>
+<div class="sectionbody">
+<div id="mapdef" class="listingblock">
+<div class="title">コード 1. <code>map</code> の型定義</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">map :: Functor f =&gt; f a ~&gt; (a -&gt; b) -&gt; f b</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>型定義を読めないと，Sancutary で迷子になってしまうので，まずは<a href="#mapdef">コード 1</a>の型定義を一つずつ見ていきましょう．</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Functor f &#8658;</code> の部分で <code>f</code> に Functor 型の制約を置いている．</p>
+</li>
+<li>
+<p><code>f a ~&gt;</code> の部分は，<code>map</code> メソッドが帰属するオブジェクトの型を表す．例えば，<code>x.map(Math.sqrt)</code> というコードの <code>x</code> の部分の型を規定している．<code>f a</code> は <code>a</code> に関数 <code>f</code> を適用することを意味する．つまり <code>x</code> はファンクター <code>f</code> の型で内部に <code>a</code> の型を値として保持していることを表す．</p>
+</li>
+<li>
+<p><code>(a &#8594; b)</code> は <code>map</code> の第 1 引数が Type <code>a</code> から Type <code>b</code> への関数であることを表す．</p>
+</li>
+<li>
+<p>最後の <code>f b</code> は <code>map</code> の戻り値の型を表す．Type <code>b</code> を格納する Functor 型が返る．</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>例として，<a href="#array-map1">コード 2</a> の配列への <code>map</code> 呼び出しを，<a href="#mapdef">コード 1</a> の型定義に照らし合わせて見てみましょう．</p>
+</div>
+<div id="array-map1" class="listingblock">
+<div class="title">コード 2. 配列への <code>map</code></div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">[4].map(Math.sqrt)
+//=&gt; [ 2 ]</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>map</code> 関数が呼び出されるオブジェクトの型は配列で，配列の中は <code>number</code> 型なので，<code>f a ~&gt;</code> の部分は <code>f</code> が配列型で，<code>a</code> が <code>number</code> 型になる．</p>
+</li>
+<li>
+<p><code>map</code> の第 1 引数 <code>Math.sqrt</code> は <code>number &#8594; number</code> の関数で，<a href="#mapdef">コード 1</a> の <code>(a &#8594; b
+)</code> 部分に対応する．したがって <code>b</code> も <code>number</code> 型になる．</p>
+</li>
+<li>
+<p><a href="#array-map1">コード 2</a> の戻り値は <code>[2]</code> で <code>number</code> を内部にもつ配列なので，確かに <code>f a</code> を満たす．</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Sancturay.js では，オブジェクト・メソッドとして <code>map</code> を呼び出す以外に，独立した関数として <code>map</code> を呼び出すこともできます．独立した <code>map</code> 関数はカリー化されているので，下のように第 1 引数から順に関数呼び出しする必要があります．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">S.map(Math.sqrt)([4])  // fantasy-land/mapのカリー化バージョン
+//=&gt; [ 2 ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>もう少し，例を見てみましょう．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">[1, 2, 3, 4, 5].map(Math.sqrt)
+//=&gt; [ 1, 1.4142135623730951, 1.7320508075688772, 2, 2.23606797749979 ]
+
+S.map(Math.sqrt)([1, 2, 3, 4, 5])  // fantasy-land/mapのカリー化バージョン
+//=&gt; [ 1, 1.4142135623730951, 1.7320508075688772, 2, 2.23606797749979 ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>次に，オブジェクトも Functor として扱えるので，オブジェクトに対しても <code>map</code> を実行してみましょう．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Z.Functor.test({a: " 1 ", b: " 2 "});
+//=&gt; true
+
+{a: " 1 ", b: " 2 "}.map(Math.sqrt)    // Object.prototype.map はないのでエラー
+//=&gt; エラー！
+
+S.map(Math.sqrt)({a: " 1 ", b: " 2 "}) // こちらを使いましょう．
+//=&gt; { a: 1, b: 1.4142135623730951 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>上の例を見て分かる通り，オブジェクトには <code>map</code> メソッドがないので，独立した <code>map</code> 関数を使う方法しかありません．</p>
+</div>
+<div class="paragraph">
+<p>当然，Functor の定義を満たしてないやんか！と突っ込みたくなりますが，まぁ，メソッドが提供されてなくとも <code>map</code> 関数は適用できるということで大目に見ましょう．似たようなケースとして，<a href="https://stackoverflow.com/questions/50774333/sanctuary-js-and-defining-a-contravariant-functor">StackOverflow</a> では Contravariant Functor のインスタンスに <code>contramap</code> メソッドが定義されていないという指摘がありましたが，皆さん，独立した関数で OK やんかというお答えのようです．</p>
+</div>
+<div class="paragraph">
+<p>関数型プログラミングではフルーエントよりもポイントフリーで書くことが多いでしょうから，独立した <code>map</code> 関数が使えれば十分ですね．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_コード例">コード例</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>オブジェクトに <code>map</code> を適用する例として，オブジェクトに格納された試験の点数データを成績に変換する処理を考えてみましょう．まずは Sanctuary だけを使用したバージョンです．</p>
+</div>
+<div id="markEach1" class="listingblock">
+<div class="title">コード 3. 成績処理のコード例</div>
+<div class="content">
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">const S = require('sanctuary')
+
+const students = [
+  { name: "太朗", exams: { midterm: 80, endterm: 65 } },
+  { name: "花子", exams: { midterm: 93, endterm: 38 } },
+  { name: "謙太", exams: { midterm: 55, endterm: 65 } },
+  { name: "春子", exams: { midterm: 92, endterm: 78 } },
+  { name: "五朗", exams: { midterm: 48, endterm: 25 } },
+  { name: "郁子", exams: { midterm: 73, endterm: 82 } },
+]
+
+const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x); <i class="conum" data-value="1"></i><b>(1)</b>
+const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "C")(x =&gt; "欠席"))))
+
+markEach = student =&gt; {
+  return {...student, grade: S.map(grade)(student.exams)}; <i class="conum" data-value="2"></i><b>(2)</b>
+};
+
+console.log(students.map(markEach));  <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ボーダーラインと <code>grade</code> を引数に取り，ボーダーライン以上なら <code>grade</code> を返し，そうでなければ 第 3 引数に与えられる関数に処理を委譲する．パラメータ <code>x</code> が数字でないと <code>S.map</code> が例外を投げるので，<code>grade</code> 関数の "欠席" はここでは呼び出されない．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>各学生の <code>exams</code> オブジェクトに対するマップ．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>全学生の配列データに <code>map</code> を使って <code>grade</code> 関数を適用．</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>上のコードを <code>grade.js</code> に保存して実行した結果は以下のとおり．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ node grade.js
+[ { name: '太朗',
+    exams: { midterm: 80, endterm: 65 },
+    grade: { midterm: 'B', endterm: 'C' } },
+  { name: '花子',
+    exams: { midterm: 93, endterm: 38 },
+    grade: { midterm: 'A', endterm: 'C' } },
+  { name: '謙太',
+    exams: { midterm: 55, endterm: 65 },
+    grade: { midterm: 'C', endterm: 'C' } },
+  { name: '春子',
+    exams: { midterm: 92, endterm: 78 },
+    grade: { midterm: 'A', endterm: 'C' } },
+  { name: '五朗',
+    exams: { midterm: 48, endterm: 25 },
+    grade: { midterm: 'C', endterm: 'C' } },
+  { name: '郁子',
+    exams: { midterm: 73, endterm: 82 },
+    grade: { midterm: 'C', endterm: 'B' } } ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#markEach1">コード 3</a> の <code>markEach</code> 関数では副作用が生じないように，destructuring を使って新たなオブジェクトを生成して結果を返しています．Ramda.js を使えばもう少し宣言的に <code>markEach</code> 関数を純粋化できます．Ramda の <code>set</code> 関数は値を設定した新たなオブジェクトを返します．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const S = require('sanctuary')
+const R = require('ramda')
+
+// studentsオブジェクトの定義は省略．
+
+const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x);
+const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "C")(x =&gt; "欠席"))))
+
+const gradeLens = R.lensProp("grade");   <i class="conum" data-value="1"></i><b>(1)</b>
+const markEach = student =&gt; R.set(gradeLens, S.map(grade)(student.exams), student) <i class="conum" data-value="2"></i><b>(2)</b>
+
+console.log(students.map(markEach))
+console.log("----------------")
+console.log(students)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>プロパティ・レンズで値の設定先を指定．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>これで <code>mark</code> 関数は引数を変更しない．</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_手っ取り早い_null_対策">手っ取り早い NULL 対策</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JavaScript は動的型付け言語で，型の違いに対して寛容なところが良いところで，仕様を理解していれば，型定義に面倒な追加的定義をしなくてもうまく動かすことができます．</p>
+</div>
+<div class="paragraph">
+<p>しかし，Sanctuary.js はちょっと Haskell かぶれしているところがあって，型定義が厳密です．デフォルトでは開発モードになっており，型チェックが入り，オブジェクトの中に数値型とそれ以外のものが混在していると，Sancutary.js の <code>map</code> が <a href="#mapdef">コード 1</a> の型定義に従わないと例外を投げます．本番モードに設定すれば型チェックが入りませんが，そうすると型に関する詳細なエラーメッセージが出なくなるので，間違った使い方をしている時に困ります．</p>
+</div>
+<div class="paragraph">
+<p>JavaScript の仕様を理解した上で，<code>null</code> や文字列をデータに混在させている場合，<code>S.map</code> 関数の代わりに <code>S.unchecked.map</code> を使うことで型チェックを部分的に回避することができます．</p>
+</div>
+<div class="paragraph">
+<p>例えば，成績データに <code>"欠席"</code> や <code>"NA"</code> などの文字列か <code>null</code> が含まれている場合，上の <code>grade</code> 関数は，<code>null</code> のとき <code>"D"</code> が返り，<code>"欠席"</code> や <code>"NA"</code> などの文字列のとき最後の <code>"欠席"</code> が返ります．もし，これが意図している動作なら，以下のように <code>S.unchecked.map</code> を使うことで解決できます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">const S = require('sanctuary')
+const R = require('ramda')
+
+// setting for swank-js
+console.log = (typeof inspect === "undefined") ? console.log : inspect;
+
+const students = [
+  { name: "太朗", exams: { midterm: 'NA', endterm: 65 } },
+  { name: "花子", exams: { midterm: 93, endterm: 38 } },
+  { name: "謙太", exams: { midterm: null, endterm: 65 } },
+  { name: "春子", exams: { midterm: 92, endterm: 78 } },
+  { name: "五朗", exams: { midterm: 48, endterm: 25 } },
+  { name: "郁子", exams: { midterm: 73, endterm: null } }
+]
+
+const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x);
+const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "D")(x =&gt; "欠席"))))
+
+const gradeLens = R.lensProp("grade");
+const markEach = student =&gt; R.set(gradeLens, S.unchecked.map(grade)(student.exams), student)
+
+console.log(students.map(markEach));
+console.log("----------------");
+console.log(students);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>もちろん，これは本来の関数型プログラミングのやり方ではありません．もっとエレガントなやり方は，モナドの紹介記事のためにとっておきましょう．モナドを使えば，<code>null</code> でも <code>'NA'</code> 同様に <code>"欠席"</code> として扱うことができるようになります．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_余談">余談</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>一応，functor の定義は以下のように定められています．関数型で書かれたコードを数学の計算法則に従って簡約化する場合以外は，通常のプログラミングで代数法則を意識する必要はないでしょう．</p>
+</div>
+<div class="olist arabic">
+<div class="title"><a href="https://github.com/fantasyland/fantasy-land/tree/v3.5.0#functor">Functor の定義</a></div>
+<ol class="arabic">
+<li>
+<p><code>map</code> メソッドを持つこと．</p>
+</li>
+<li>
+<p><code>u.map(a &#8658; a)</code> は自分自信 <code>u</code> と同値であること．</p>
+</li>
+<li>
+<p><code>u.map(x &#8658; f(g(x)))</code> は <code>u.map(g).map(f)</code> と同値であること．</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>結局のところ <code>map</code> は数学の「写像（map）」に対応しているので，上の定義の最後の 2 つは数学の関数が満たす当たり前の性質です．</p>
+</div>
+<div class="paragraph">
+<p>例えばファンクター <code>u</code> の中身を数学の関数 \(u(x) = x^2 +4\) と考えると \(x = x\) という恒等写像を \(u(x)\) に適用（恒等写像の右辺に \(u\) を代入）すれば \(x = u = x^2 + 4\) で元の \(u\) を得るということです．</p>
+</div>
+<div class="paragraph">
+<p>同様に定義の 3 番目も数学の関数に置き換えるために，\(f(x) = x + 1\)，\(g(x) = 2x^2\) を使って考えてみましょう．</p>
+</div>
+<div class="paragraph">
+<p><code>u.map(x &#8658; f(g(x)))</code> は \(f(g(x)) = g + 1 = 2x^2 + 1\) を先に計算し，これを \(u(x)\) に適用することを意味しているので，\(f(g(u(x))) = 2u^2 + 1 = 2(x^2 + 4)^2 + 1\) を得ます．</p>
+</div>
+<div class="paragraph">
+<p><code>u.map(g).map(f)</code> は，先に \(g(u(x)) = 2u^2 = 2(x^2 + 4)^2\) を計算し，その結果に \(f\) を適用するので \(f(g(u(x)))) =  g(u(x)) + 1 = 2(x^2 + 4)^2 + 1\) を得ます．</p>
+</div>
+<div class="paragraph">
+<p>つまり 3 つ目の定義は，合成写像が結合法則 \((f \circ g) \circ u = f \circ (g \circ u)\) を満たすことを表しています．</p>
+</div>
+<div class="paragraph">
+<p>もし，Functor <code>u</code> に恒等写像 <code>x &#8658; x</code> が格納されている場合，<code>u.map(g).map(f)</code> は \(f \circ (g \circ u) = f \circ g\) で \(f\) と \(g\) の合成写像になるので，<code>u</code> は関数を合成する combinator になります（B Combinator または Compose）．</p>
+</div>
+</div>
+</div>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%83%95%e3%82%a1%e3%83%b3%e3%82%bf%e3%82%b8%e3%83%bc%e3%83%bb%e3%83%a9%e3%83%b3%e3%83%89%e3%81%ae%e4%bf%9d%e8%ad%b7%e5%9c%b0%e5%8c%ba%e3%82%92%e3%82%86%e3%81%8f%20Part%201&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2ffp%2fsanctuary1%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2ffp%2fsanctuary1%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2ffp%2fsanctuary1%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "http:\/\/diary.wshito.com\/comp\/js\/fp\/sanctuary1\/";  
+this.page.identifier = "http:\/\/diary.wshito.com\/comp\/js\/fp\/sanctuary1\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diary-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/r/openmp/">
+          <section class="post">
+              <h2>OpenMP に依存した R パッケージのインストール</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/toc.js"></script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    
+</body>
+</html>
+

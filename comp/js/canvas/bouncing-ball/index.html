@@ -104,7 +104,7 @@
     },
     "headline": AsciiDocでBouncing Ball,
     "name": AsciiDocでBouncing Ball,
-    "wordCount": 3656,
+    "wordCount": 3666,
     "timeRequired": "PT8M",
     "inLanguage": {
       "@type": "Language",
@@ -313,16 +313,16 @@ mycanvas.init();</code></pre>
   var ball;
   var prevTime;
 
-  function setup(context) {                    <b class="conum">(1)</b>
+  function setup(context) {                    // <b class="conum">(1)</b>
     ball = new Ball(25, "#0000ff", context);
   }
 
-  function draw(dt, context) {                 <b class="conum">(2)</b>
+  function draw(dt, context) {                 // <b class="conum">(2)</b>
     if (ball.isStopped()) {
-      ball = new Ball(25, "#0000ff", context); <b class="conum">(3)</b>
+      ball = new Ball(25, "#0000ff", context); // <b class="conum">(3)</b>
     }
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height); <b class="conum">(4)</b>
-    ball.draw(dt);                             <b class="conum">(5)</b>
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height); // <b class="conum">(4)</b>
+    ball.draw(dt);                             // <b class="conum">(5)</b>
   }
 
   return {
@@ -393,7 +393,7 @@ mycanvas.init();</code></pre>
 <pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">  var _init = function() {
     canvas = $(id)[0];
     context = this.canvas.getContext("2d");
-    canvas.width = $(window).width(); <b class="conum">(1)</b>
+    canvas.width = $(window).width(); // <b class="conum">(1)</b>
     canvas.height = $(window).height();
     prevTime = new Date().getTime();
   };</code></pre>
@@ -414,8 +414,8 @@ mycanvas.init();</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">if (typeof jQuery == 'undefined') {
   document.addEventListener("DOMContentLoaded", function invokeLater() {
-    _registerEventHandlers();   <b class="conum">(1)</b>
-    start();                    <b class="conum">(2)</b>
+    _registerEventHandlers();   // <b class="conum">(1)</b>
+    start();                    // <b class="conum">(2)</b>
   });
 } else {
   _registerEventHandlers();
@@ -514,10 +514,10 @@ function Ball(radius, color, context) {
   this.context = context;
   this.radius = radius;
   this.color = color;
-  this.x = Math.random() * (context.canvas.width - radius) + radius;   <b class="conum">(1)</b>
+  this.x = Math.random() * (context.canvas.width - radius) + radius;   // <b class="conum">(1)</b>
   this.y = radius;
   this.dir = [1, -1];
-  this.vx = 8 * this.dir[Math.floor(Math.random() * this.dir.length)]; <b class="conum">(2)</b>
+  this.vx = 8 * this.dir[Math.floor(Math.random() * this.dir.length)]; // <b class="conum">(2)</b>
   this.vy = 0;
   this.ax = 0;
   this.ay = gravity;
