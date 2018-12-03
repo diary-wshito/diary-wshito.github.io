@@ -100,7 +100,7 @@
     },
     "headline": ファンタジー・ランドの保護地区をゆく Part 1,
     "name": ファンタジー・ランドの保護地区をゆく Part 1,
-    "wordCount": 4045,
+    "wordCount": 4042,
     "timeRequired": "PT9M",
     "inLanguage": {
       "@type": "Language",
@@ -248,7 +248,7 @@
 <p>まず，配列は内部に値を保持するコンテナです．Functor も内部に値を保持します．Functor は内部に値を保持するラッパー，もしくは箱であると説明されることがよくあります．</p>
 </div>
 <div class="paragraph">
-<p>配列の <code>map</code> メソッドで各要素に関数を適用すると，適用結果は再び配列に格納されて返ります．Functor も内部に保持する値に <code>map</code> を使って関数を適用すると，その結果は再び Functor でラッピングされて返ります．ちなみに，Functor が内部に保持するのは通常のデータだけでなく関数も保持できます（関数は第1級オブジェクトなので当然ですが&#8230;&#8203;.）．</p>
+<p>配列の <code>map</code> メソッドで各要素に関数を適用すると，適用結果は再び配列に格納されて返ります．Functor も内部に保持する値に <code>map</code> を使って関数を適用すると，その結果は再び Functor でラッピングされて返ります．ちなみに，Functor が内部に保持するのはデータだけでなく関数も保持できます（関数は第1級オブジェクトなので当然ですが&#8230;&#8203;.）．</p>
 </div>
 <div class="paragraph">
 <p>Sanctuary ライブラリでは JavaScript のオブジェクト <code>{}</code> も Functor に分類されています．つまり，オブジェクト <code>{}</code> にも <code>map</code> 関数が使えるということです．配列もオブジェクトも <code>map</code> が使えるので，もはや <code>for</code> ループが不要になります．</p>
