@@ -475,7 +475,7 @@ const R = require('ramda')
 // studentsオブジェクトの定義は省略．
 
 const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x);
-const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "C")(x =&gt; "欠席"))))
+const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "D")(x =&gt; "欠席"))))
 
 const gradeLens = R.lensProp("grade");   <i class="conum" data-value="1"></i><b>(1)</b>
 const markEach = student =&gt; R.set(gradeLens, S.map(grade)(student.exams), student) <i class="conum" data-value="2"></i><b>(2)</b>
