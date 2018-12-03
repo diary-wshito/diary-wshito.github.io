@@ -100,7 +100,7 @@
     },
     "headline": ファンタジー・ランドの保護地区をゆく Part 1,
     "name": ファンタジー・ランドの保護地区をゆく Part 1,
-    "wordCount": 4076,
+    "wordCount": 4045,
     "timeRequired": "PT9M",
     "inLanguage": {
       "@type": "Language",
@@ -509,7 +509,7 @@ console.log(students)</code></pre>
 <p>しかし，Sanctuary.js はちょっと Haskell かぶれしているところがあって，型定義が厳密です．デフォルトでは開発モードになっており，型チェックが入り，オブジェクトの中に数値型とそれ以外のものが混在していると，Sancutary.js の <code>map</code> が <a href="#mapdef">コード 1</a> の型定義に従わないと例外を投げます．本番モードに設定すれば型チェックが入りませんが，そうすると型に関する詳細なエラーメッセージが出なくなるので，間違った使い方をしている時に困ります．</p>
 </div>
 <div class="paragraph">
-<p>JavaScript の仕様を理解した上で，<code>null</code> や文字列をデータに混在させている場合，<code>S.map</code> 関数の代わりに <code>S.unchecked.map</code> を使うことで型チェックを部分的に回避することができます．</p>
+<p>JavaScript の仕様を理解した上で，部分的に型チェックを回避したい場合は <code>S.map</code> 関数の代わりに <code>S.unchecked.map</code> を使います．</p>
 </div>
 <div class="paragraph">
 <p>例えば，成績データに <code>"欠席"</code> や <code>"NA"</code> などの文字列か <code>null</code> が含まれている場合，上の <code>grade</code> 関数は，<code>null</code> のとき <code>"D"</code> が返り，<code>"欠席"</code> や <code>"NA"</code> などの文字列のとき最後の <code>"欠席"</code> が返ります．もし，これが意図している動作なら，以下のように <code>S.unchecked.map</code> を使うことで解決できます．</p>
