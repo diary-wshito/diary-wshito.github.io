@@ -100,7 +100,7 @@
     },
     "headline": ファンタジー・ランドの保護地区をゆく Part 1  --- Functor,
     "name": ファンタジー・ランドの保護地区をゆく Part 1  --- Functor,
-    "wordCount": 4083,
+    "wordCount": 4121,
     "timeRequired": "PT9M",
     "inLanguage": {
       "@type": "Language",
@@ -586,7 +586,7 @@ console.log(students);</code></pre>
 <p>つまり 3 つ目の定義は，合成写像が結合法則 \((f \circ g) \circ u = f \circ (g \circ u)\) を満たすことを表しています．</p>
 </div>
 <div class="paragraph">
-<p>もし，Functor <code>u</code> に恒等写像 <code>x &#8658; x</code> が格納されている場合，<code>u.map(g).map(f)</code> は \(f \circ (g \circ u) = f \circ g\) で \(f\) と \(g\) の合成写像になるので，<code>u</code> は関数を合成する combinator になります（B Combinator または Compose）．</p>
+<p>もし，Functor <code>u</code> に恒等写像 <code>x &#8658; x</code> が格納されている場合，<code>u.map(g).map(f)</code> は \(f \circ (g \circ u) = f \circ g\) で \(f\) と \(g\) の合成写像になるので，<code>u</code> は関数を合成する combinator になります（B Combinator または Compose）．つまり恒等写像を内部に持つ Functor に，関数を続けて <code>map</code> すると関数合成が実現できます．</p>
 </div>
 </div>
 </div>
