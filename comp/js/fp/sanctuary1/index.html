@@ -12,13 +12,13 @@
 
 
 
-<meta name="twitter:title" content="ファンタジー・ランドの保護地区をゆく Part 1"/>
+<meta name="twitter:title" content="ファンタジー・ランドの保護地区をゆく Part 1  --- Functor"/>
 <meta name="twitter:description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．"/>
 <meta name="twitter:site" content="@waterloo_jp"/>
 
 
 
-  	<meta property="og:title" content="ファンタジー・ランドの保護地区をゆく Part 1 &middot; wshito&#39;s diary" />
+  	<meta property="og:title" content="ファンタジー・ランドの保護地区をゆく Part 1  --- Functor &middot; wshito&#39;s diary" />
   	<meta property="og:site_name" content="wshito&#39;s diary" />
   	<meta property="og:url" content="http://diary.wshito.com/comp/js/fp/sanctuary1/" />
 
@@ -42,7 +42,7 @@
     
     
 
-    <title>ファンタジー・ランドの保護地区をゆく Part 1 &middot; wshito&#39;s diary</title>
+    <title>ファンタジー・ランドの保護地区をゆく Part 1  --- Functor &middot; wshito&#39;s diary</title>
 
     
     <meta name="description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．" />
@@ -98,9 +98,9 @@
             
         ]
     },
-    "headline": ファンタジー・ランドの保護地区をゆく Part 1,
-    "name": ファンタジー・ランドの保護地区をゆく Part 1,
-    "wordCount": 4042,
+    "headline": ファンタジー・ランドの保護地区をゆく Part 1  --- Functor,
+    "name": ファンタジー・ランドの保護地区をゆく Part 1  --- Functor,
+    "wordCount": 4083,
     "timeRequired": "PT9M",
     "inLanguage": {
       "@type": "Language",
@@ -201,7 +201,7 @@
   <article class="post comp">
 
     <header class="post-header">
-        <h1 class="post-title">ファンタジー・ランドの保護地区をゆく Part 1</h1>
+        <h1 class="post-title">ファンタジー・ランドの保護地区をゆく Part 1  --- Functor</h1>
         
         <div id="description">JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．</div>
         
@@ -341,7 +341,7 @@ false</code></pre>
 )</code> 部分に対応する．したがって <code>b</code> も <code>number</code> 型になる．</p>
 </li>
 <li>
-<p><a href="#array-map1">コード 2</a> の戻り値は <code>[2]</code> で <code>number</code> を内部にもつ配列なので，確かに <code>f a</code> を満たす．</p>
+<p><a href="#array-map1">コード 2</a> の戻り値は <code>[2]</code> で <code>number</code> を内部にもつ配列なので，確かに <code>f b</code> を満たす．</p>
 </li>
 </ul>
 </div>
@@ -509,7 +509,7 @@ console.log(students)</code></pre>
 <p>しかし，Sanctuary.js はちょっと Haskell かぶれしているところがあって，型定義が厳密です．デフォルトでは開発モードになっており，型チェックが入り，オブジェクトの中に数値型とそれ以外のものが混在していると，Sancutary.js の <code>map</code> が <a href="#mapdef">コード 1</a> の型定義に従わないと例外を投げます．本番モードに設定すれば型チェックが入りませんが，そうすると型に関する詳細なエラーメッセージが出なくなるので，間違った使い方をしている時に困ります．</p>
 </div>
 <div class="paragraph">
-<p>JavaScript の仕様を理解した上で，部分的に型チェックを回避したい場合は <code>S.map</code> 関数の代わりに <code>S.unchecked.map</code> を使います．</p>
+<p>JavaScript の仕様を理解した上で，部分的に型チェックを回避したい場合は <code>S.map</code> 関数の代わりに <code>S.unchecked.map</code> を使います．（もっと手っ取り早い方法は <a href="https://ramdajs.com">Ramda</a> の <code>map</code> を使います．Ramda は型チェックがありません．）</p>
 </div>
 <div class="paragraph">
 <p>例えば，成績データに <code>"欠席"</code> や <code>"NA"</code> などの文字列か <code>null</code> が含まれている場合，上の <code>grade</code> 関数は，<code>null</code> のとき <code>"D"</code> が返り，<code>"欠席"</code> や <code>"NA"</code> などの文字列のとき最後の <code>"欠席"</code> が返ります．もし，これが意図している動作なら，以下のように <code>S.unchecked.map</code> を使うことで解決できます．</p>
@@ -623,7 +623,7 @@ console.log(students);</code></pre>
     
 <section class="share">
   <h4>Share this post</h4>
-  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%83%95%e3%82%a1%e3%83%b3%e3%82%bf%e3%82%b8%e3%83%bc%e3%83%bb%e3%83%a9%e3%83%b3%e3%83%89%e3%81%ae%e4%bf%9d%e8%ad%b7%e5%9c%b0%e5%8c%ba%e3%82%92%e3%82%86%e3%81%8f%20Part%201&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2ffp%2fsanctuary1%2f"
+  <a class="icon-twitter" href="https://twitter.com/share?text=%e3%83%95%e3%82%a1%e3%83%b3%e3%82%bf%e3%82%b8%e3%83%bc%e3%83%bb%e3%83%a9%e3%83%b3%e3%83%89%e3%81%ae%e4%bf%9d%e8%ad%b7%e5%9c%b0%e5%8c%ba%e3%82%92%e3%82%86%e3%81%8f%20Part%201%20%20---%20Functor&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2ffp%2fsanctuary1%2f"
       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
       <span class="hidden">Twitter</span>
   </a>
