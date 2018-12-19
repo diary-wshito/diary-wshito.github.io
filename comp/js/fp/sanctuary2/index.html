@@ -100,8 +100,8 @@
     },
     "headline": ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド,
     "name": ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド,
-    "wordCount": 2056,
-    "timeRequired": "PT5M",
+    "wordCount": 3276,
+    "timeRequired": "PT7M",
     "inLanguage": {
       "@type": "Language",
       "alternateName": en
@@ -296,27 +296,30 @@ grade('NA')  //=&gt; '欠席'</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript line-numbers" data-lang="javascript line-numbers">const S = require('sanctuary');
-const greet = console.log;
+const greet = console.log;     // console.logをgreet関数と命名
 
-const monad1 = S.toMaybe('Merry Christmas!');
-S.map(greet)(monad1);
+const monad1 = S.toMaybe('Merry Christmas!'); // モナドに文字列を格納
+S.map(greet)(monad1);                         // モナドにgreet関数を適用
 //=&gt; Merry Christmas!
 //   Just (undefined)
 
-const monad2 = S.toMaybe(null);
-S.map(greet)(monad2);
+const monad2 = S.toMaybe(null);  // nullをモナドに格納するとNothingが返る
+S.map(greet)(monad2);            // Nothingには関数を適用しても何も実行されない
 //=&gt; Nothing
 
-const monad3 = S.toMaybe(undefined);
+const monad3 = S.toMaybe(undefined); // undefinedでもNothingが返る
 S.map(greet)(monad3)
 //=&gt; Nothing</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>S.map()</code> の結果から 4 行目で文字列をラップする Maybe モナドを作成した場合は <code>Just</code> インスタンスが作成され，9 行目で <code>null</code> から作成された Maybe モナドは <code>Nothing</code> インスタンスが作成されていることがわかります．</p>
+<p>4 行目の <code>monad1</code> には，文字列が格納された Maybe モナドである <code>Just</code> 型インスタンスが設定されます．5 行目の <code>map</code> で <code>greet</code> 関数がモナド内の値に適用されるため，Merry Christmas が副作用として画面に表示されます．モナドは，コンテナ内の値に関数が適用されたら，結果を再びモナドに格納して返します．ここでは <code>console.log</code> 関数の返り値が <code>undefined</code> なため，内部に <code>undefined</code> を持つモナドが返っていることがわかります．</p>
 </div>
 <div class="paragraph">
-<p>つまり，処理したい値を全て一度 Maybe モナドに格納してから，処理関数を <code>map</code> で適用することで <code>null</code> チェックが不要になります．</p>
+<p>9 行目で <code>null</code> から作成された Maybe モナドは <code>Nothing</code> インスタンスを返すため，<code>monad2</code> に対して <code>map</code> された <code>greet</code> 関数は実行されていません．13 行目の <code>undefined</code> から作成したモナドも同様です．</p>
+</div>
+<div class="paragraph">
+<p>このように，処理したい値を全て一度 Maybe モナドに格納してから，処理関数を <code>map</code> で適用することで，処理関数側での <code>null</code> チェックが不要になります．</p>
 </div>
 </div>
 </div>
@@ -344,9 +347,9 @@ const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : 
 const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "D")(x =&gt; "欠席"))));
 
 const grade2 = R.compose(
-  S.fromMaybe("欠席"), // getOrElse()と同じ．
-  S.map(grade),
-  S.toMaybe);
+  S.fromMaybe("欠席"), // モナドから値を取り出す．Nothingなら欠席が返る
+  S.map(grade),        // Nothingはこのmapをスルーする
+  S.toMaybe);          // Maybeモナドに値を格納．JustかNothingが返る
 
 const gradeLens = R.lensProp("grade");
 // student.examsの値が同じ型ではないのでS.map()の型制約を満たさない．unchecked.map()を使う．
@@ -357,20 +360,11 @@ console.log("----------------");
 console.log(students);</code></pre>
 </div>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-ただいま熱を出して寝込んでいるので，ここから下は書き途中です．治り次第，更新します．
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p><a href="../sanctuary1">前回</a>の成績処理プログラムでは <code>null</code> は <code>'D'</code> に，<code>'NA'</code> は <code>'欠席'</code> に変換されました．今回変更点の核心は <code>grade2</code> 関数で，まず <code>S.toMaybe</code> で得点データを Maybe モナドにリフトし（ラッピングすること），Maybe モナドに対して <code>grade</code> 関数をマップしています．これによって得点が <code>null</code> の場合は <code>grade</code> 関数による処理がスルーされます．最後の <code>S.fromMaybe('欠席')</code> でモナドから値を取り出しています．モナドが <code>Nothing</code> インスタンスの場合は引数の <code>'欠席'</code> が返ります．</p>
 </div>
 <div class="paragraph">
-<p>前回の&#8230;&#8203;ではnullはD，'NA' は '欠席'．今回の核心は <code>grade2</code> 関数．</p>
+<p>上のコードでは，<code>null</code> は Maybe モナドで欠席に変換され，<code>'NA'</code> などの文字列は <code>grade</code> 関数によって欠席に変換されており，ちぐはぐ感があります．<code>grade</code> 関数は数値データのみを扱い，A から D までの成績付けを行い，数値以外は全て Maybe モナド側で欠席に変換したい場合は，以下のようにします．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -379,10 +373,40 @@ const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(x =&gt; "D")));
 
 // sanctuaryのcomposeは2引数までなのでramdaを使う
 const grade2 = R.compose(
-  S.fromMaybe("欠席"), // getOrElse()と同じ．
+  S.fromMaybe("欠席"),
   S.map(grade),        // Nothingはこのmapをスルーする
-  S.ifElse(_.isNumber)(S.toMaybe)(x =&gt; S.Nothing));</code></pre>
+  S.ifElse(_.isNumber)(S.toMaybe)(x =&gt; S.Nothing)); // lodashのisNumberを使う</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><code>grade2</code> 関数の一番最初に <code>S.ifElse</code> があり，ここで引数が Number 型なら <code>S.toMaybe</code> を起動しモナド化し，そうでなければ <code>x &#8658; S.Nothing</code> を実行し <code>Nothing</code> を生成するように変更しています．Maybe モナドはデフォルトでは <code>null</code> と <code>undefined</code> に対して <code>Nothing</code> を返すので，自分で条件を設定して <code>Nothing</code> を返します．</p>
+</div>
+<div class="paragraph">
+<p>引数が数値か否かの判定はいろいろ面倒なので <a href="https://lodash.com">lodash</a> の <code>isNumber</code> 関数を使うのが良いでしょう．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_その他">その他</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sanctuary の解説なのにところどころで ramda を使っています．Sanctuary は可変引数をサポートしていないので，関数合成によって新たな関数を作成するには ramda の <code>compose</code> 関数を使う方が私は好きです．例えば，<code>grade2</code> 関数を Sanctuary の <code>compose</code> を使うと以下のようになります．Sanctuary の <code>compose</code> は 2 引数までしかサポートしておらず，カリー化されているため，以下のような難解な呼び出しになってしまいます．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const grade2 = S.compose(
+  S.fromMaybe("欠席")) // getOrElse()と同じ．
+(S.compose((S.map(grade)))        // Nothingはこのmapをスルーする
+ (S.ifElse(_.isNumber)(S.toMaybe)(x =&gt; S.Nothing)));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_おわりに">おわりに</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Maybe モナドを使えば <code>null</code> を含むデータの複雑なパイプライン処理も，簡潔に美しく書くことができます．あとは例外処理をうまく抽象化する Either モナドをマスターすれば，全ての実用的処理を関数合成のみで美しく書き上げることができます．Either モナドについてはいずれ取り上げましょう．次回は，Functor のすぐサブクラスに位置する Apply について解説する予定です．Apply をマスターすると 2 重ループを簡潔に表現することが可能になります．</p>
 </div>
 </div>
 </div>
