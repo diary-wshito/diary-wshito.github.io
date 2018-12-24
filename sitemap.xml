@@ -350,6 +350,12 @@
   </url>
   
   <url>
+    <loc>http://diary.wshito.com/tags/emacs/</loc>
+    <lastmod>2018-12-25T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/tags/fantasyland/</loc>
     <lastmod>2018-12-18T00:00:00+09:00</lastmod>
     <priority>0</priority>
@@ -405,7 +411,7 @@
   
   <url>
     <loc>http://diary.wshito.com/tags/javascript/</loc>
-    <lastmod>2018-12-18T00:00:00+09:00</lastmod>
+    <lastmod>2018-12-25T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -596,6 +602,12 @@
   </url>
   
   <url>
+    <loc>http://diary.wshito.com/tags/slime/</loc>
+    <lastmod>2018-12-25T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://diary.wshito.com/tags/source-registry/</loc>
     <lastmod>2018-04-13T18:46:32+09:00</lastmod>
     <priority>0</priority>
@@ -610,6 +622,12 @@
   <url>
     <loc>http://diary.wshito.com/tags/stream/</loc>
     <lastmod>2018-04-20T10:10:40+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://diary.wshito.com/tags/swank/</loc>
+    <lastmod>2018-12-25T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   

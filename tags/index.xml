@@ -184,6 +184,15 @@
     </item>
     
     <item>
+      <title>Emacs</title>
+      <link>http://diary.wshito.com/tags/emacs/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Fantasyland</title>
       <link>http://diary.wshito.com/tags/fantasyland/</link>
       <pubDate>Tue, 18 Dec 2018 00:00:00 +0900</pubDate>
@@ -249,7 +258,7 @@
     <item>
       <title>Javascript</title>
       <link>http://diary.wshito.com/tags/javascript/</link>
-      <pubDate>Tue, 18 Dec 2018 00:00:00 +0900</pubDate>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/javascript/</guid>
       <description></description>
@@ -472,6 +481,15 @@
     </item>
     
     <item>
+      <title>Slime</title>
+      <link>http://diary.wshito.com/tags/slime/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/slime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Source Registry</title>
       <link>http://diary.wshito.com/tags/source-registry/</link>
       <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
@@ -495,6 +513,15 @@
       <pubDate>Fri, 20 Apr 2018 10:10:40 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/stream/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Swank</title>
+      <link>http://diary.wshito.com/tags/swank/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/swank/</guid>
       <description></description>
     </item>
     
