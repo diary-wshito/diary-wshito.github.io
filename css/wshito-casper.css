@@ -144,6 +144,11 @@ div.colist {
 a > code {
   border: none;
 }
+
+li > p + .listingblock {
+  margin-top: 1.3em;
+}
+
 /* toc */
 .toc * {
   margin: 0;
