@@ -70,7 +70,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/" />
 
@@ -83,13 +83,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -101,23 +101,23 @@
             
         ]
     },
-    "headline": コードリーディング: Lack の Mount ミドルウエアを理解する,
-    "name": コードリーディング: Lack の Mount ミドルウエアを理解する,
-    "wordCount": 1494,
+    "headline": "コードリーディング: Lack の Mount ミドルウエアを理解する",
+    "name": "コードリーディング: Lack の Mount ミドルウエアを理解する",
+    "wordCount":  1494 ,
     "timeRequired": "PT3M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/,
-    "datePublished": 2017-10-14T23:13Z,
-    "dateModified": 2017-10-14T23:13Z,
+    "url": "http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/",
+    "datePublished": "2017-10-14T23:13Z",
+    "dateModified": "2017-10-14T23:13Z",
     
-    "keywords": lisp, clack, lack, webapp,
-    "description": ,
+    "keywords": "lisp, clack, lack, webapp",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/
+        "@id": "http://diary.wshito.com/comp/lisp/clack/lack-middleware-mount/"
     }
 }
     </script>
@@ -142,7 +142,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -229,8 +230,7 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="../app">前回</a> は <a href="https://github.com/fukamachi/lack">Lack</a> のアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げるのはMountミドルウェア（<code>lack-middleware-mount</code>）で，リクエスト・パスに応じたルーティングを司る．最初にミドルウェアのソースを読み，最後にMountミドルウェアを使ったサンプルWebアプリを作成する．コメント，間違いのご指摘等は [@waterloo_jp](<a href="https://twitter.com/waterloo_jp" class="bare">https://twitter.com/waterloo_jp</a>) まで．
-</p>
+<p><a href="../app">前回</a> は <a href="https://github.com/fukamachi/lack">Lack</a> のアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げるのはMountミドルウェア（<code>lack-middleware-mount</code>）で，リクエスト・パスに応じたルーティングを司る．最初にミドルウェアのソースを読み，最後にMountミドルウェアを使ったサンプルWebアプリを作成する．コメント，間違いのご指摘等は [@waterloo_jp](<a href="https://twitter.com/waterloo_jp" class="bare">https://twitter.com/waterloo_jp</a>) まで．</p>
 </div>
 <div class="paragraph">
 <p>コード1は <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/middleware/mount.lisp#L9">lack-middleware-mountのソースコード</a> である．</p>
@@ -245,7 +245,7 @@
         (let ((path-info (getf env :path-info)))
           (cond
             ((string= path-info path)
-             (setf (getf env :path-info) "/")
+             (setf (getf env :path-info) &#34;/&#34;)
              (funcall (to-app mount-app) env))
             ((and (&lt; len (length path-info))
                   (string= path-info path :end1 len)
@@ -255,12 +255,12 @@
              (funcall (to-app mount-app) env))
             (t
              (funcall app env)))))))
-  "Middleware for attaching another Lack application on a specific URL")</code></pre>
+  &#34;Middleware for attaching another Lack application on a specific URL&#34;)</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>アプリケーションbuilderによってビルド時に１回だけ呼び出される関数．共通設定として <code>path</code> と <code>mount-app</code> を引数に取る．</td>
 </tr>
@@ -268,7 +268,7 @@
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Webサーバー・ハンドラから呼び出されるミドルウェア本体．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p><a href="../adoc">前回</a> 見たように，一番外側のラムダ式はビルダによってアプリケーション生成時に1度だけ呼び出される．3行目でマウントするパスの長さを事前に取得しておく．</p>
@@ -313,8 +313,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(require 'clack)
-(require 'lack)</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(require &#39;clack)
+(require &#39;lack)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -325,7 +325,7 @@
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf my-echo
       (lambda (env)
-	      `(200 (:content-type "text/plain") ,(list (getf env :path-info)))))</code></pre>
+	      `(200 (:content-type &#34;text/plain&#34;) ,(list (getf env :path-info)))))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -336,19 +336,19 @@
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defparameter *app*
   (lack:builder
-    (:mount "/echo" my-echo)                                        <i class="conum" data-value="1"></i><b>(1)</b>
-    (:mount "/hello"                                                <i class="conum" data-value="2"></i><b>(2)</b>
+    (:mount &#34;/echo&#34; my-echo)                                        <i class="conum" data-value="1"></i><b>(1)</b>
+    (:mount &#34;/hello&#34;                                                <i class="conum" data-value="2"></i><b>(2)</b>
 	    (lambda (env)
 	      (declare (ignore env))
-	      '(200 (:content-type "text/plain") ("Hello world!"))))
+	      &#39;(200 (:content-type &#34;text/plain&#34;) (&#34;Hello world!&#34;))))
     (lambda (env)
       (declare (ignore env))
-      '(404 (:content-type "text/plain") ("Not found, mate!")))))    <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+      &#39;(404 (:content-type &#34;text/plain&#34;) (&#34;Not found, mate!&#34;)))))    <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>/echo</code> 以下のアクセスでpath-infoを表示するアプリケーションが呼び出される．</td>
 </tr>
@@ -358,9 +358,9 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>それ以外のアクセスは "Not found, mate!" を表示．</td>
+<td>それ以外のアクセスは &#34;Not found, mate!&#34; を表示．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>これで準備完了．REPLで以下を実行してWebサーバーを起動．</p>
@@ -381,16 +381,16 @@ Listening on localhost:5000.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://localhost:5000/echo/hello/from/fukuoka" class="bare">http://localhost:5000/echo/hello/from/fukuoka</a> <strong>&#8658; /hello/from/fukuoka</strong></p>
+<p><a href="http://localhost:5000/echo/hello/from/fukuoka" class="bare">http://localhost:5000/echo/hello/from/fukuoka</a> <strong>⇒ /hello/from/fukuoka</strong></p>
 </li>
 <li>
-<p><a href="http://localhost:5000/echo/abc?my-query" class="bare">http://localhost:5000/echo/abc?my-query</a> <strong>&#8658; /abc</strong></p>
+<p><a href="http://localhost:5000/echo/abc?my-query" class="bare">http://localhost:5000/echo/abc?my-query</a> <strong>⇒ /abc</strong></p>
 </li>
 <li>
-<p><a href="http://localhost:5000/hello/everybody!/howareyou?" class="bare">http://localhost:5000/hello/everybody!/howareyou?</a> <strong>&#8658; Hello world!</strong></p>
+<p><a href="http://localhost:5000/hello/everybody!/howareyou?" class="bare">http://localhost:5000/hello/everybody!/howareyou?</a> <strong>⇒ Hello world!</strong></p>
 </li>
 <li>
-<p><a href="http://localhost:5000" class="bare">http://localhost:5000</a> <strong>&#8658; Not found, mate!</strong></p>
+<p><a href="http://localhost:5000" class="bare">http://localhost:5000</a> <strong>⇒ Not found, mate!</strong></p>
 </li>
 </ul>
 </div>

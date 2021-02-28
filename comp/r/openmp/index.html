@@ -69,7 +69,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/r/openmp/" />
 
@@ -82,13 +82,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -100,23 +100,23 @@
             
         ]
     },
-    "headline": OpenMP に依存した R パッケージのインストール,
-    "name": OpenMP に依存した R パッケージのインストール,
-    "wordCount": 686,
+    "headline": "OpenMP に依存した R パッケージのインストール",
+    "name": "OpenMP に依存した R パッケージのインストール",
+    "wordCount":  686 ,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/r/openmp/,
-    "datePublished": 2018-09-03T16:42Z,
-    "dateModified": 2018-09-03T16:42Z,
+    "url": "http://diary.wshito.com/comp/r/openmp/",
+    "datePublished": "2018-09-03T16:42Z",
+    "dateModified": "2018-09-03T16:42Z",
     
-    "keywords": R, OpenMP, package, install,
-    "description": ,
+    "keywords": "R, OpenMP, package, install",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/r/openmp/
+        "@id": "http://diary.wshito.com/comp/r/openmp/"
     }
 }
     </script>
@@ -141,7 +141,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -229,15 +230,12 @@
 <p>MacOS X 上の R で <code>caret</code> パッケージをインストールしていたら OpenMP 関連のヘッダファイルが無いとためにパッケージのコンパイルに失敗しエラーとなった．対処法を記しておく．</p>
 </div>
 <div class="paragraph">
-<p></p>
-</div>
-<div class="paragraph">
 <p><code>caret</code> パッケージのインストール中に以下のエラーが発生．OpenMP ライブラリ用の <code>omp.h</code> ヘッダファイルが見つからないというエラーだ．Mac のデフォルトコンパイラ <code>clang</code> の version 8.0.0 は OpenMP をサポートしていなかった．</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">/usr/bin/clang++  -I"/opt/local/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/shito/Library/R/3.5/library/Rcpp/include" -I/opt/local/include   -fPIC  -pipe -Os -stdlib=libc++ -arch x86_64  -c auc_.cpp -o auc_.o
-auc_.cpp:2:10: fatal error: 'omp.h' file not found
+<pre class="highlight"><code class="language-bash" data-lang="bash">/usr/bin/clang++  -I&#34;/opt/local/Library/Frameworks/R.framework/Resources/include&#34; -DNDEBUG  -I&#34;/Users/shito/Library/R/3.5/library/Rcpp/include&#34; -I/opt/local/include   -fPIC  -pipe -Os -stdlib=libc++ -arch x86_64  -c auc_.cpp -o auc_.o
+auc_.cpp:2:10: fatal error: &#39;omp.h&#39; file not found
 #include &lt;omp.h&gt;
          ^
 1 error generated.
@@ -295,8 +293,8 @@ CXXFLAGS= -DNDEBUG  -fPIC  -pipe -Os -arch x86_64</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">/opt/local/bin/g++-mp-6 -I"/opt/local/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I"/Users/shito/Library/R/3.5/library/Rcpp/include" -I/opt/local/include   -fPIC  -pipe -Os -stdlib=libc++ -arch x86_64  -c RcppExports.cpp -o RcppExports.o
-g++-mp-6: error: unrecognized command line option '-stdlib=libc++'
+<pre class="highlight"><code class="language-bash" data-lang="bash">/opt/local/bin/g++-mp-6 -I&#34;/opt/local/Library/Frameworks/R.framework/Resources/include&#34; -DNDEBUG  -I&#34;/Users/shito/Library/R/3.5/library/Rcpp/include&#34; -I/opt/local/include   -fPIC  -pipe -Os -stdlib=libc++ -arch x86_64  -c RcppExports.cpp -o RcppExports.o
+g++-mp-6: error: unrecognized command line option &#39;-stdlib=libc++&#39;
 make: *** [RcppExports.o] Error 1</code></pre>
 </div>
 </div>

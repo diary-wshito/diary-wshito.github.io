@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Clack on wshito&#39;s diary</title>
+    <title>clack on wshito&#39;s diary</title>
     <link>http://diary.wshito.com/tags/clack/</link>
-    <description>Recent content in Clack on wshito&#39;s diary</description>
+    <description>Recent content in clack on wshito&#39;s diary</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Wed, 07 Feb 2018 15:36:34 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/tags/clack/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 07 Feb 2018 15:36:34 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/tags/clack/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>コードリーディング: Lack の Session ミドルウェアを理解する</title>
       <link>http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/</link>
@@ -30,8 +26,7 @@
       <description>&lt;div id=&#34;preamble&#34;&gt;
 &lt;div class=&#34;sectionbody&#34;&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;../app&#34;&gt;前回&lt;/a&gt; は &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; のアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げるのはMountミドルウェア（&lt;code&gt;lack-middleware-mount&lt;/code&gt;）で，リクエスト・パスに応じたルーティングを司る．最初にミドルウェアのソースを読み，最後にMountミドルウェアを使ったサンプルWebアプリを作成する．コメント，間違いのご指摘等は [@waterloo_jp](&lt;a href=&#34;https://twitter.com/waterloo_jp&#34; class=&#34;bare&#34;&gt;https://twitter.com/waterloo_jp&lt;/a&gt;) まで．
-&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../app&#34;&gt;前回&lt;/a&gt; は &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; のアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げるのはMountミドルウェア（&lt;code&gt;lack-middleware-mount&lt;/code&gt;）で，リクエスト・パスに応じたルーティングを司る．最初にミドルウェアのソースを読み，最後にMountミドルウェアを使ったサンプルWebアプリを作成する．コメント，間違いのご指摘等は [@waterloo_jp](&lt;a href=&#34;https://twitter.com/waterloo_jp&#34; class=&#34;bare&#34;&gt;https://twitter.com/waterloo_jp&lt;/a&gt;) まで．&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -44,8 +39,7 @@
       <description>&lt;div id=&#34;preamble&#34;&gt;
 &lt;div class=&#34;sectionbody&#34;&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;http://blog.8arrow.org&#34;&gt;深町氏&lt;/a&gt; のウェブアプリケーション・ツール &lt;a href=&#34;https://github.com/fukamachi/clack&#34;&gt;Clack&lt;/a&gt; のソースコード・リーディング．今回は，Clackが起動時に受け取る &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; アプリケーションを理解するために，その構築プロセスと使われ方をコードで追ってみる．
- &lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.8arrow.org&#34;&gt;深町氏&lt;/a&gt; のウェブアプリケーション・ツール &lt;a href=&#34;https://github.com/fukamachi/clack&#34;&gt;Clack&lt;/a&gt; のソースコード・リーディング．今回は，Clackが起動時に受け取る &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; アプリケーションを理解するために，その構築プロセスと使われ方をコードで追ってみる．&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     

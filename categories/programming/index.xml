@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on wshito&#39;s diary</title>
@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Slime と Swank-js でサクサク JavaScript 開発</title>
       <link>http://diary.wshito.com/comp/js/ide/swank-js/</link>
@@ -40,8 +36,7 @@
 &lt;p&gt;この記事は &lt;a href=&#34;https://qiita.com/advent-calendar/2018/javascript_02&#34;&gt;JavaScript2 Advent Calendar 2018&lt;/a&gt; の 19 日目の記事として書かれました．コードは &lt;a href=&#34;https://github.com/wshito/blog-examples/tree/master/JavaScript/fp&#34;&gt;GitHub&lt;/a&gt; にまとめてあります．&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/fantasyland/fantasy-land&#34;&gt;Fantasy Land&lt;/a&gt; を実装した &lt;a href=&#34;https://sanctuary.js.org&#34;&gt;Sanctuary.js&lt;/a&gt; の使い方サーベイの第 2 弾．今回は &lt;code&gt;null&lt;/code&gt; 対策として Maybe モナドの使い方を見ていきましょう．Functor を扱った Part 1 は &lt;a href=&#34;../sanctuary1&#34;&gt;こちら．&lt;/a&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/fantasyland/fantasy-land&#34;&gt;Fantasy Land&lt;/a&gt; を実装した &lt;a href=&#34;https://sanctuary.js.org&#34;&gt;Sanctuary.js&lt;/a&gt; の使い方サーベイの第 2 弾．今回は &lt;code&gt;null&lt;/code&gt; 対策として Maybe モナドの使い方を見ていきましょう．Functor を扱った Part 1 は &lt;a href=&#34;../sanctuary1&#34;&gt;こちら．&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -82,8 +77,7 @@
 &lt;h2 id=&#34;_peek_char_の便利な機能&#34;&gt;&lt;code&gt;peek-char&lt;/code&gt; の便利な機能&lt;/h2&gt;
 &lt;div class=&#34;sectionbody&#34;&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;ストリームから文字を peek する際，&lt;code&gt;peek-char&lt;/code&gt; の第 1 引数に &lt;code&gt;t&lt;/code&gt; を指定すると空白文字をスキップしてくれる．次に &lt;code&gt;read-char&lt;/code&gt; を実行すると，スキップ後の 1 文字を返す．
-&lt;/p&gt;
+&lt;p&gt;ストリームから文字を peek する際，&lt;code&gt;peek-char&lt;/code&gt; の第 1 引数に &lt;code&gt;t&lt;/code&gt; を指定すると空白文字をスキップしてくれる．次に &lt;code&gt;read-char&lt;/code&gt; を実行すると，スキップ後の 1 文字を返す．&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     

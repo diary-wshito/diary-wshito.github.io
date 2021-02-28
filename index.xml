@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>wshito&#39;s diary</title>
@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Slime と Swank-js でサクサク JavaScript 開発</title>
       <link>http://diary.wshito.com/comp/js/ide/swank-js/</link>
@@ -40,8 +36,7 @@
 &lt;p&gt;この記事は &lt;a href=&#34;https://qiita.com/advent-calendar/2018/javascript_02&#34;&gt;JavaScript2 Advent Calendar 2018&lt;/a&gt; の 19 日目の記事として書かれました．コードは &lt;a href=&#34;https://github.com/wshito/blog-examples/tree/master/JavaScript/fp&#34;&gt;GitHub&lt;/a&gt; にまとめてあります．&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/fantasyland/fantasy-land&#34;&gt;Fantasy Land&lt;/a&gt; を実装した &lt;a href=&#34;https://sanctuary.js.org&#34;&gt;Sanctuary.js&lt;/a&gt; の使い方サーベイの第 2 弾．今回は &lt;code&gt;null&lt;/code&gt; 対策として Maybe モナドの使い方を見ていきましょう．Functor を扱った Part 1 は &lt;a href=&#34;../sanctuary1&#34;&gt;こちら．&lt;/a&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/fantasyland/fantasy-land&#34;&gt;Fantasy Land&lt;/a&gt; を実装した &lt;a href=&#34;https://sanctuary.js.org&#34;&gt;Sanctuary.js&lt;/a&gt; の使い方サーベイの第 2 弾．今回は &lt;code&gt;null&lt;/code&gt; 対策として Maybe モナドの使い方を見ていきましょう．Functor を扱った Part 1 は &lt;a href=&#34;../sanctuary1&#34;&gt;こちら．&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -93,8 +88,7 @@
 &lt;h2 id=&#34;_peek_char_の便利な機能&#34;&gt;&lt;code&gt;peek-char&lt;/code&gt; の便利な機能&lt;/h2&gt;
 &lt;div class=&#34;sectionbody&#34;&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;ストリームから文字を peek する際，&lt;code&gt;peek-char&lt;/code&gt; の第 1 引数に &lt;code&gt;t&lt;/code&gt; を指定すると空白文字をスキップしてくれる．次に &lt;code&gt;read-char&lt;/code&gt; を実行すると，スキップ後の 1 文字を返す．
-&lt;/p&gt;
+&lt;p&gt;ストリームから文字を peek する際，&lt;code&gt;peek-char&lt;/code&gt; の第 1 引数に &lt;code&gt;t&lt;/code&gt; を指定すると空白文字をスキップしてくれる．次に &lt;code&gt;read-char&lt;/code&gt; を実行すると，スキップ後の 1 文字を返す．&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -118,7 +112,7 @@
       
       <guid>http://diary.wshito.com/comp/lisp/ccl-init/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;I put all my lisp projects under the directory &lt;code&gt;git-repos&lt;/code&gt; and set symbolic links to each projects from &lt;code&gt;~/common-lisp&lt;/code&gt;.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn&amp;#8217;t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under &lt;code&gt;~/common-lisp&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I put all my lisp projects under the directory &lt;code&gt;git-repos&lt;/code&gt; and set symbolic links to each projects from &lt;code&gt;~/common-lisp&lt;/code&gt;.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn’t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under &lt;code&gt;~/common-lisp&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -167,8 +161,7 @@
       <description>&lt;div id=&#34;preamble&#34;&gt;
 &lt;div class=&#34;sectionbody&#34;&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;../app&#34;&gt;前回&lt;/a&gt; は &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; のアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げるのはMountミドルウェア（&lt;code&gt;lack-middleware-mount&lt;/code&gt;）で，リクエスト・パスに応じたルーティングを司る．最初にミドルウェアのソースを読み，最後にMountミドルウェアを使ったサンプルWebアプリを作成する．コメント，間違いのご指摘等は [@waterloo_jp](&lt;a href=&#34;https://twitter.com/waterloo_jp&#34; class=&#34;bare&#34;&gt;https://twitter.com/waterloo_jp&lt;/a&gt;) まで．
-&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../app&#34;&gt;前回&lt;/a&gt; は &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; のアプリケーションのコードを追い，ミドルウェアの使われ方を理解した．今回はミドルウェアを一つ取り上げる．今回取り上げるのはMountミドルウェア（&lt;code&gt;lack-middleware-mount&lt;/code&gt;）で，リクエスト・パスに応じたルーティングを司る．最初にミドルウェアのソースを読み，最後にMountミドルウェアを使ったサンプルWebアプリを作成する．コメント，間違いのご指摘等は [@waterloo_jp](&lt;a href=&#34;https://twitter.com/waterloo_jp&#34; class=&#34;bare&#34;&gt;https://twitter.com/waterloo_jp&lt;/a&gt;) まで．&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -181,8 +174,7 @@
       <description>&lt;div id=&#34;preamble&#34;&gt;
 &lt;div class=&#34;sectionbody&#34;&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;http://blog.8arrow.org&#34;&gt;深町氏&lt;/a&gt; のウェブアプリケーション・ツール &lt;a href=&#34;https://github.com/fukamachi/clack&#34;&gt;Clack&lt;/a&gt; のソースコード・リーディング．今回は，Clackが起動時に受け取る &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; アプリケーションを理解するために，その構築プロセスと使われ方をコードで追ってみる．
- &lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.8arrow.org&#34;&gt;深町氏&lt;/a&gt; のウェブアプリケーション・ツール &lt;a href=&#34;https://github.com/fukamachi/clack&#34;&gt;Clack&lt;/a&gt; のソースコード・リーディング．今回は，Clackが起動時に受け取る &lt;a href=&#34;https://github.com/fukamachi/lack&#34;&gt;Lack&lt;/a&gt; アプリケーションを理解するために，その構築プロセスと使われ方をコードで追ってみる．&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -192,7 +184,7 @@
       <pubDate>Mon, 02 Oct 2017 21:20:13 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/binding/</guid>
-      <description>David S. Touretzkyの&#34;COMMON LISP: A Gentle Introduction to Symbolic Computation&#34;では，変数に値を代入するという言葉を使い，束縛という言葉を使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）」と，意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました． まず，ANSI X3J13のFinal Draftによる</description>
+      <description>David S. Touretzkyの&amp;#34;COMMON LISP: A Gentle Introduction to Symbolic Computation&amp;#34;では，変数に値を代入するという言葉を使い，束縛という言葉を使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）」と，意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました． まず，ANSI X3J13のFinal</description>
     </item>
     
     <item>
@@ -300,7 +292,7 @@
       <pubDate>Tue, 15 Nov 2016 22:11:47 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/cl-dialogue/4/</guid>
-      <description>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;#8230;&amp;#8203;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える． &amp;gt; (elt &#39;(0 1 2 3 4 5) 3) 3 last リストの末尾の要素を取り出す． 末</description>
+      <description>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, …​., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える． &amp;gt; (elt &amp;#39;(0 1 2 3 4 5) 3) 3 last リストの末尾の要素を取り出</description>
     </item>
     
     <item>
@@ -309,7 +301,7 @@
       <pubDate>Mon, 14 Nov 2016 21:49:25 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/cl-dialogue/3/</guid>
-      <description>Lispのデータ型 リスト以外はアトム（1つだけ例外あり？p.24）． NULL型はリストでありシンボルである． NULL型のリストは空リスト()でNILと同値． NULL型のデータはシンボルNILのみ． シンボルNILの値もNIL． フォームとデータ (p.32) Lispはプログラムもデータもリストで表現できるからややこしく見える． リストなどの表現をデータとしてではなく，プログラムのつもりで見ている時は，その表現を *フ</description>
+      <description>Lispのデータ型 リスト以外はアトム（1つだけ例外あり？p.24）． NULL型はリストでありシンボルである． NULL型のリストは空リスト()でNILと同値． NULL型のデータはシンボルNILのみ． シンボルNILの値もNIL． フォームとデータ (p.32) Lispはプログラムもデータもリストで表現できるからややこしく見える． リストなどの表現をデータとしてではなく，プログラムのつもりで見ている時は，その表現を フォ</description>
     </item>
     
     <item>
@@ -318,7 +310,7 @@
       <pubDate>Mon, 14 Nov 2016 19:27:25 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/cl-dialogue/2/</guid>
-      <description>関数と変数の作成 defun 関数定義 全ての引数は評価されない（マクロで通常の関数ではない）． setf 変数への代入 変数宣言なしで新たに変数が作れる．トップレベルで使えばスペシャル変数（大域変数），関数内で使えばレキシカル変数（ローカル変数）を作れる．第１引数は評価されない（マクロで通常の関数ではない）． 共通点 どちらも副作用がある．つまり処理をして値を返すだけでない． defunは関数を実行できるよう定義する副作用を持</description>
+      <description>関数と変数の作成 defun 関数定義全ての引数は評価されない（マクロで通常の関数ではない）． setf 変数への代入変数宣言なしで新たに変数が作れる．トップレベルで使えばスペシャル変数（大域変数），関数内で使えばレキシカル変数（ローカル変数）を作れる．第１引数は評価されない（マクロで通常の関数ではない）． 共通点 どちらも副作用がある．つまり処理をして値を返すだけでない． defunは関数を実行できるよう定義する副作用を持</description>
     </item>
     
     <item>

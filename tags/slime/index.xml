@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Slime on wshito&#39;s diary</title>
+    <title>slime on wshito&#39;s diary</title>
     <link>http://diary.wshito.com/tags/slime/</link>
-    <description>Recent content in Slime on wshito&#39;s diary</description>
+    <description>Recent content in slime on wshito&#39;s diary</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/tags/slime/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/tags/slime/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Slime と Swank-js でサクサク JavaScript 開発</title>
       <link>http://diary.wshito.com/comp/js/ide/swank-js/</link>

@@ -41,7 +41,7 @@
     <title>「対話によるCommon Lisp入門」第４話まとめノート &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;#8230;&amp;#8203;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されて" />
+    <meta name="description" content="この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, …​., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Elem" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -63,7 +63,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/cl-dialogue/4/" />
 
@@ -76,13 +76,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -94,23 +94,23 @@
             
         ]
     },
-    "headline": 「対話によるCommon Lisp入門」第４話まとめノート,
-    "name": 「対話によるCommon Lisp入門」第４話まとめノート,
-    "wordCount": 690,
+    "headline": "「対話によるCommon Lisp入門」第４話まとめノート",
+    "name": "「対話によるCommon Lisp入門」第４話まとめノート",
+    "wordCount":  715 ,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/cl-dialogue/4/,
-    "datePublished": 2016-11-15T22:11Z,
-    "dateModified": 2016-11-15T22:11Z,
+    "url": "http://diary.wshito.com/comp/lisp/cl-dialogue/4/",
+    "datePublished": "2016-11-15T22:11Z",
+    "dateModified": "2016-11-15T22:11Z",
     
-    "keywords": programming, lisp,
-    "description": ,
+    "keywords": "programming, lisp",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/cl-dialogue/4/
+        "@id": "http://diary.wshito.com/comp/lisp/cl-dialogue/4/"
     }
 }
     </script>
@@ -135,7 +135,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -228,7 +229,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p><code>first</code>, <code>second</code>, &#8230;&#8203;., <code>tenth</code><br>
+<p><code>first</code>, <code>second</code>, …​., <code>tenth</code><br/>
 第1要素から第10要素まで簡単に取りだす関数が用意されている．</p>
 </li>
 <li>
@@ -238,7 +239,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (elt '(0 1 2 3 4 5) 3)
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (elt &#39;(0 1 2 3 4 5) 3)
 3</code></pre>
 </div>
 </div>
@@ -263,7 +264,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (set x '(0 1 2 3 4 5))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (set x &#39;(0 1 2 3 4 5))
 &gt; (elt x (- (length x) 1))
 5</code></pre>
 </div>
@@ -288,11 +289,11 @@
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (cons '(a b) '(c d))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (cons &#39;(a b) &#39;(c d))
 ((A B) C D)
-&gt; (append '(a b) '(c d))
+&gt; (append &#39;(a b) &#39;(c d))
 (A B C D)
-&gt; (list '(a b) '(c d))
+&gt; (list &#39;(a b) &#39;(c d))
 ((A B) (C D))</code></pre>
 </div>
 </div>
@@ -301,9 +302,9 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (list '(a) '(b c) nil '(d))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (list &#39;(a) &#39;(b c) nil &#39;(d))
 ((A) (B C) NIL (D))
-&gt; (append '(a) '(b c) nil '(d))
+&gt; (append &#39;(a) &#39;(b c) nil &#39;(d))
 (A B C D)</code></pre>
 </div>
 </div>
@@ -314,7 +315,7 @@
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (append '(ape bear cat) '(dog))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (append &#39;(ape bear cat) &#39;(dog))
 (APE BEAR CAT DOG)</code></pre>
 </div>
 </div>
@@ -323,8 +324,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (setf x 'dog)
-&gt; (append '(ape bear cat) (list x))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (setf x &#39;dog)
+&gt; (append &#39;(ape bear cat) (list x))
 (APE BEAR CAT DOG)</code></pre>
 </div>
 </div>
@@ -338,7 +339,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (butlast '(a b c d e))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (butlast &#39;(a b c d e))
 (A B C D)</code></pre>
 </div>
 </div>
@@ -365,7 +366,7 @@
 <p><code>rest</code> --- <code>cdr</code> と同じ．</p>
 </li>
 <li>
-<p><code>first</code>, <code>second</code>,&#8230;&#8203;, <code>tenth</code> ---1番目から10番目まで要素を簡単に取り出せる関数．</p>
+<p><code>first</code>, <code>second</code>,…​, <code>tenth</code> ---1番目から10番目まで要素を簡単に取り出せる関数．</p>
 </li>
 <li>
 <p><code>elt</code> --- <code>(elt (リスト) i)</code> でリストのi番目の要素を取り出す関数．</p>

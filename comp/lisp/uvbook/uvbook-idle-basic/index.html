@@ -69,7 +69,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/" />
 
@@ -82,13 +82,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -100,23 +100,23 @@
             
         ]
     },
-    "headline": uvbook -- libuvの仕組みとidle-basicの解説,
-    "name": uvbook -- libuvの仕組みとidle-basicの解説,
-    "wordCount": 5677,
+    "headline": "uvbook -- libuvの仕組みとidle-basicの解説",
+    "name": "uvbook -- libuvの仕組みとidle-basicの解説",
+    "wordCount":  5691 ,
     "timeRequired": "PT12M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/,
-    "datePublished": 2017-01-06T00:05Z,
-    "dateModified": 2017-01-06T00:05Z,
+    "url": "http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/",
+    "datePublished": "2017-01-06T00:05Z",
+    "dateModified": "2017-01-06T00:05Z",
     
-    "keywords": libuv, uvbook, c, asynchronous programming, nonblocking IO,
-    "description": ,
+    "keywords": "libuv, uvbook, c, asynchronous programming, nonblocking IO",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/
+        "@id": "http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/"
     }
 }
     </script>
@@ -141,7 +141,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -227,13 +228,9 @@
     </header>
 
     <section class="post-content">
-      
-
-<p><a href="http://libuv.org">libuv</a>のチュートリアル<a href="http://nikhilm.github.io/uvbook/index.html">uvbook</a>，第２節の<a href="http://nikhilm.github.io/uvbook/basics.html#idling">Idlingプログラム</a>を解説します．<code>libuv</code>は<a href="https://nodejs.org/ja/">Node.js</a>の根幹部分を担うCライブラリです．IdlingプログラムのLispによる実装例は後ほど別ページとして投稿します．間違い，コメント等は<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>まで．</p>
-
+      <p><a href="http://libuv.org">libuv</a>のチュートリアル<a href="http://nikhilm.github.io/uvbook/index.html">uvbook</a>，第２節の<a href="http://nikhilm.github.io/uvbook/basics.html#idling">Idlingプログラム</a>を解説します．<code>libuv</code>は<a href="https://nodejs.org/ja/">Node.js</a>の根幹部分を担うCライブラリです．IdlingプログラムのLispによる実装例は後ほど別ページとして投稿します．間違い，コメント等は<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>まで．</p>
 <p>下のコードは，<a href="http://nikhilm.github.io/uvbook/index.html">uvbook</a>のIdleハンドル使用例です．ここでは下のコード例を追いながら，Idleハンドルの使い方と，<code>libuv</code>内の仕組みについて説明します．コードとMakefileは<a href="https://github.com/wshito/blog-examples/tree/master/uvbook/2-4_idle-basic">GitHub</a>に置いています．</p>
-
-<pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
+<pre><code class="language-{c" data-lang="{c">#include &lt;stdio.h&gt;
 #include &lt;uv.h&gt;
 
 int64_t counter = 0;
@@ -257,129 +254,71 @@ int main() {
     uv_loop_close(uv_default_loop());
     return 0;
 }
-</code></pre>
-
-<p><code>libuv</code>の基本はイベントループと非同期処理です．イベントループの実態は単なる<code>while</code>ループです．イベントループに登録されている「ハンドル」や「リクエスト」を<code>while</code>ループ内で起動していきます．多くの入出力系「ハンドル」が非同期で処理され，処理の終了とともにコールバックが起動されます．</p>
-
+</code></pre><p><code>libuv</code>の基本はイベントループと非同期処理です．イベントループの実態は単なる<code>while</code>ループです．イベントループに登録されている「ハンドル」や「リクエスト」を<code>while</code>ループ内で起動していきます．多くの入出力系「ハンドル」が非同期で処理され，処理の終了とともにコールバックが起動されます．</p>
 <p>上のコード例では非同期処理は使われていませんが，20行目の<code>uv_run()</code>がイベントループを開始ます．イベントループは登録されている処理がなくなるまでループを続けます．</p>
-
 <p>イベントループ内で処理するタスクは「ハンドル」と「リクエスト」にカプセル化します．この例では，Idleハンドルにタスクをカプセル化しています．Idleハンドルは，イベントループの周回毎にタスクを起動したい時に使います．</p>
-
 <p>14行目で宣言されている<code>uv_idle_t idler</code>がIdleハンドル・オブジェクトです．後ほど，ハンドルの初期化からコールバックの登録まで詳細を見ていきますが，今のところ17行目でコールバックを登録し，6&ndash;11行目で定義される<code>wait_for_a_while()</code>関数がコールバックとしてイベントループの周回毎に呼び出されることを理解していれば十分です．</p>
-
 <p><code>libuv</code>の基本的プログラミング手順は以下のとおりです．</p>
-
 <ol>
 <li>ループの初期化（16行目の<code>uv_default_loop()</code>）．</li>
 <li>イベントループ内で実行するハンドルの準備（16&ndash;17行目でIdleハンドルをセットアップ）．</li>
 <li>イベントループを開始（20行目の<code>uv_run()</code>）．</li>
 <li>ループ・オブジェクトの後処理（22行目の<code>uv_loop_close()</code>）．</li>
 </ol>
-
-<h2 id="ループ-オブジェクトの初期化">ループ・オブジェクトの初期化</h2>
-
+<h2 id="ループオブジェクトの初期化">ループ・オブジェクトの初期化</h2>
 <p>まず始めに，<code>libuv</code>の根幹であるイベント・ループを管理するループ・オブジェクトを初期化する必要があります．</p>
-
 <p><a href="http://diary.wshito.com/uv-lisp-helloworld/">uvbook for Lisp &ndash; Hello World</a>のコード例6&ndash;7行目では<code>uv_loop_init()</code>を呼び出し，自分でループ・オブジェクトを初期化しました．しかし，ここの例ではループ・オブジェクトの初期化コードが見当たりません．それは，16行目の<code>uv_idle_init()</code>の第1引数の<code>uv_default_loop()</code>で行われています．</p>
-
-<pre><code class="language-c">    uv_idle_init(uv_default_loop(), &amp;idler);
-</code></pre>
-
-<p><code>uv_default_loop()</code>は最初の呼び出しでループ・オブジェクトを初期化しそのポインタを返し，2度目以降の呼び出しでは，初期化済みオブジェクトへのポインタを返します．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    uv_idle_init(uv_default_loop(), <span style="color:#f92672">&amp;</span>idler);
+</code></pre></div><p><code>uv_default_loop()</code>は最初の呼び出しでループ・オブジェクトを初期化しそのポインタを返し，2度目以降の呼び出しでは，初期化済みオブジェクトへのポインタを返します．</p>
 <h2 id="ハンドルとリクエスト">ハンドルとリクエスト</h2>
-
 <p>コード例で使われているIdleハンドルを見ていく前に，<code>libuv</code>における「ハンドル」と「リクエスト」の違いについて説明します．</p>
-
 <p>非同期処理の実行はイベントループに依頼します．libuvでは，何度もイベントループから起動される処理を「ハンドル」オブジェクトで管理し，１回で終える処理を「リクエスト」オブジェクトで管理します．</p>
-
 <p>これを書いている時点ではまだ全てのハンドルとリクエストを調べていませんが，ハンドルとリクエストを合わせて非同期処理を管理する場合もあるようです（この辺はuvbookを読み進めてまた更新します）．</p>
-
-<p>「ハンドル」にバインドされているコールバック関数は，「ハンドル」が有効化（activate）されている間定期的に起動されます．つまり，「ハンドル」はイベントを発し続けるevent emitterのような役割を果たします．それに対し「リクエスト」は，非同期処理が終了した時に１回だけ呼ばれるコールバックを保持しているので，Promiseオブジェクトの様な役割を果たします<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>．</p>
-
+<p>「ハンドル」にバインドされているコールバック関数は，「ハンドル」が有効化（activate）されている間定期的に起動されます．つまり，「ハンドル」はイベントを発し続けるevent emitterのような役割を果たします．それに対し「リクエスト」は，非同期処理が終了した時に１回だけ呼ばれるコールバックを保持しているので，Promiseオブジェクトの様な役割を果たします<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>．</p>
 <h2 id="idleハンドル">Idleハンドル</h2>
-
 <p>Idleハンドル（<code>uv_idle_t</code>オブジェクト）は，イベントループ１周毎に必ず起動されます．必ず呼ばれるのにIdleという名称はちょっとおかしな気もしますが，IO処理がメインスレッドをブロックしないように，あえてIdleコールバックを挿入して，ループをアイドリング状態にして並列処理を前に進めるために使ったりするからです．後ほどループの説明をしますが，Idleハンドルが有効化（active）されている時は，イベントループはIOのポーリング処理を待たずに処理を継続します．</p>
-
 <p>Idleハンドルの初期化は16行目で行われます．</p>
-
-<pre><code class="language-c">    uv_idle_init(uv_default_loop(), &amp;idler);
-</code></pre>
-
-<p>ここで，<code>idler</code>にイベントループのポインタが登録されます．「libuvの内部実装を覗く」のセクションで<code>uv_idle_init()</code>関数の中身を説明しますが，ここでは特にメモリの割当は行われず，<code>uv_idle_t</code>型構造体のフィールドに必要な情報を設定するだけです．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    uv_idle_init(uv_default_loop(), <span style="color:#f92672">&amp;</span>idler);
+</code></pre></div><p>ここで，<code>idler</code>にイベントループのポインタが登録されます．「libuvの内部実装を覗く」のセクションで<code>uv_idle_init()</code>関数の中身を説明しますが，ここでは特にメモリの割当は行われず，<code>uv_idle_t</code>型構造体のフィールドに必要な情報を設定するだけです．</p>
 <p>「ハンドル」はジョブの完了とともに実行すべきコールバックを保持しています．Idleハンドルの場合は，実行すべきジョブがないので，直ちにコールバックが呼び出されます．</p>
-
 <p>Idleハンドルの有効化（activation）とコールバックの登録は17行目で行われます．</p>
-
-<pre><code class="language-c">    uv_idle_start(&amp;idler, wait_for_a_while);
-</code></pre>
-
-<p><code>uv_idle_start()</code>内で，イベントループ<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>が管理するIdleハンドル用キューにIdleハンドルが追加されます．キューと言っても実態はリンクリストです．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    uv_idle_start(<span style="color:#f92672">&amp;</span>idler, wait_for_a_while);
+</code></pre></div><p><code>uv_idle_start()</code>内で，イベントループ<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>が管理するIdleハンドル用キューにIdleハンドルが追加されます．キューと言っても実態はリンクリストです．</p>
 <p><code>uv_idle_start()</code>はすでに有効化されているハンドルに対しては何もせず処理を返すので，複数回呼んでも問題ありません．</p>
-
 <h2 id="イベントループの開始">イベントループの開始</h2>
-
 <p><code>uv_run()</code>関数の内部には<code>while</code>ループがあります．この<code>while</code>ループが，<code>libuv</code>のイベントループの正体です．<code>uv_run()</code>の第2引数にはランモード（<code>uv_run_mode</code>型のenum）を指定します．ランモードは以下の3種類があります．</p>
-
 <ul>
 <li><code>UV_RUN_DEFAULT</code>: 有効なハンドルとリクエストが無くなり<code>while</code>ループが終了するまで<code>uv_run()</code>関数は返りません．<code>while</code>ループの終了はイベントループの終了を意味します．</li>
 <li><code>UV_RUN_ONCE</code>: イベントループ1回で終了します．実装を調べてからここの記述を後日更新しますが，入出力のハンドルが<code>process.nextTick()</code>を起動しコールバックを次のループにペンディングしない限り，イベントループのスレッドは入出力処理の終了までブロックされるようです．</li>
 <li><code>UV_RUN_NOWAIT</code>: これも実装を調べてから更新しますが，<code>UV_RUN_ONCE</code>と違い，コールバックがペンディングされなくてもブロックせずすぐにループから脱するようです．動作中の非同期処理がどうなるのか後日実装を調べてみます．</li>
 </ul>
-
 <p>GUIプログラミングでは，全ての処理をイベントループの前に書き，イベントループが始まったら，プログラムはイベント・ドリブンで動きますが，libuvも同じで，<code>uv_run()</code>の前に全てのプログラム・ロジックを記述しておきます．</p>
-
 <h2 id="イベントループ内の動作">イベントループ内の動作</h2>
-
 <p>経過時間で起動するTimerハンドルのために，イベントループはまず始めに経過時間をアップデートします．その後，Timerハンドルを処理します．</p>
-
 <p>次に，前のループで残っていた（pendingされていた）非同期処理を実行します．その後，Idleハンドルを処理します．イベントループオブジェクトに管理されているIdleハンドル用Queueから，Idleハンドルが取り出され，コールバック関数が呼び出されます．この呼び出しはブロッキング処理なので，コールバック関数内の処理に時間をかけてはいけません．</p>
-
 <p>ファイル読込みのような１回で終了するリクエストの場合，ハンドルの役目はタスクと共に終了し，イベント・キューから削除されますが，Idleハンドルは<code>uv_idle_stop()</code>関数が呼ばれるまで生き続けます．上のidle-basicプログラムでは10,000,000回コールバックが呼ばれた時点でIdleハンドルが終了します．それまでは，コールバックが終了する度にIdleハンドルは一旦Queueから取り除から，再びQueueに追加され次のループに備えます．</p>
-
 <p>この後いよいよ，ブロッキングが生じるIO系の処理が起動されるのですが，その前後に必要な処理を記述できるように，IO処理の前にPrepareハンドルが，そして後にCheckハンドルがそれぞれ処理されます．これらは形式的にはIdleハンドルと似ていますが，呼び出されるタイミングがIO処理を挟む形で呼び出されます．</p>
-
 <p>IO系の処理は，libuvによって別スレッドで並列処理されます．これについての詳しい解説はまた別ページで行います．</p>
-
 <h2 id="イベントループの終了">イベントループの終了</h2>
-
 <p>イベントループは順次イベント・キューからハンドルを取り出し，ハンドルにバインドされたコールバックを呼び出します．イベントループが<code>UV_RUN_DEFAULT</code>モードで開始された場合，イベント・キューが空になるとイベントループは終了し，アプリケーションが終了します．</p>
-
-<h2 id="ループ-オブジェクトの後片付け">ループ・オブジェクトの後片付け</h2>
-
+<h2 id="ループオブジェクトの後片付け">ループ・オブジェクトの後片付け</h2>
 <p>22行目でループ・オブジェクトのクリーンアップが行われます．ここではループ内で起動されたスレッドの停止や，排他制御のロックがクリーンアップされます．</p>
-
-<pre><code class="language-c">    uv_loop_close(uv_default_loop());
-</code></pre>
-
-<h2 id="libuvの内部実装を覗く">libuvの内部実装を覗く</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    uv_loop_close(uv_default_loop());
+</code></pre></div><h2 id="libuvの内部実装を覗く">libuvの内部実装を覗く</h2>
 <p>ここでもう少しlibuvの内部実装を見てみましょう．まずIdleハンドルの初期化と有効化は<code>loop_watcher.c</code>ファイルの引数付きマクロ<code>UV_LOOP_WATCHER_DEFINE(idle, IDLE)</code>で定義されています．</p>
-
-<h3 id="uv-idle-init-の処理"><code>uv_idle_init()</code>の処理</h3>
-
+<h3 id="uv_idle_initの処理"><code>uv_idle_init()</code>の処理</h3>
 <p>まず初期化の<code>uv_idle_init()</code>が呼ばれると，<code>uv__handle__init()</code>が内部で呼び出されます．これは<code>uv_common.h</code>で以下のように定義されたマクロです．ただし，<code>(h)</code>はハンドルオブジェクトへの，<code>loop_</code>はループオブジェクトへのポインタで，<code>type_</code>は<code>UV_IDLE</code>定数です．</p>
-
 <p><code>uv_idle_init()</code>では<code>uv_idle_t</code>型構造体のフィールドに適切な情報を設定し，イベントループのオブジェクトが管理しているハンドラのキューにIdleハンドラを登録します．メモリの割当てなどは行われません．</p>
-
-<pre><code class="language-c">(h)-&gt;loop = (loop_);
-(h)-&gt;type = (type_);
-(h)-&gt;flags = UV__HANDLE\_REF;  /* Ref the loop when active. */
-QUEUE_INSERT_TAIL(&amp;(loop_)-&gt;handle_queue, &amp;(h)-&gt;handle_queue);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">(h)<span style="color:#f92672">-&gt;</span>loop <span style="color:#f92672">=</span> (loop_);
+(h)<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> (type_);
+(h)<span style="color:#f92672">-&gt;</span>flags <span style="color:#f92672">=</span> UV__HANDLE<span style="color:#960050;background-color:#1e0010">\</span>_REF;  <span style="color:#75715e">/* Ref the loop when active. */</span>
+QUEUE_INSERT_TAIL(<span style="color:#f92672">&amp;</span>(loop_)<span style="color:#f92672">-&gt;</span>handle_queue, <span style="color:#f92672">&amp;</span>(h)<span style="color:#f92672">-&gt;</span>handle_queue);
 uv__handle_platform_init(h);
-</code></pre>
-
-<p>最初の3行でハンドルに，ループオブジェクトのポインタ，ハンドルタイプ，ハンドルが初期化されたフラグ，をそれぞれ設定しています．<code>UV__HANDLE_REF</code>は0x20の定数でビット演算子でハンドルの状態をテストできるようにしています．</p>
-
+</code></pre></div><p>最初の3行でハンドルに，ループオブジェクトのポインタ，ハンドルタイプ，ハンドルが初期化されたフラグ，をそれぞれ設定しています．<code>UV__HANDLE_REF</code>は0x20の定数でビット演算子でハンドルの状態をテストできるようにしています．</p>
 <p><code>QUEUE_INSERT_TAIL()</code>では，ループオブジェクトが管理しているハンドル用キュー（<code>(loop_)-&gt;handle_queue</code>）の最後尾にこのハンドル（<code>&amp;(h)-&gt;handle_queue</code>）を追加しています．キューは<code>queue.h</code>内のマクロで実装されています．キューという名が付いていますが，実際にはリンク・リストで，キュー内の任意の位置のハンドルがアクセスされたり，取り出されたりします．</p>
-
-<h3 id="uv-idle-start-の処理"><code>uv_idle_start()</code>の処理</h3>
-
+<h3 id="uv_idle_startの処理"><code>uv_idle_start()</code>の処理</h3>
 <p>次にハンドルの有効化手続きを見てみましょう．<code>uv_idle_start()</code>の定義は以下の通りです．</p>
-
-<pre><code class="language-c line-numbers">int uv_idle_start(uv_idle_t* handle, uv_idle_cb cb) {
+<pre><code class="language-{c" data-lang="{c">int uv_idle_start(uv_idle_t* handle, uv_idle_cb cb) {
   if (uv__is_active(handle)) return 0;
   if (cb == NULL) return -EINVAL;
   QUEUE_INSERT_HEAD(&amp;handle-&gt;loop-&gt;idle_handles, &amp;handle-&gt;queue);
@@ -387,26 +326,15 @@ uv__handle_platform_init(h);
   uv__handle_start(handle);
   return 0;
 }
-</code></pre>
-
-<p>ハンドルが有効化されると，先ほど設定した<code>UV__HANDLE_REF</code>に加えて<code>UV__HANDLE_ACTIVE</code>のビット(0x40)が立ちます．そこで最初に起動済みハンドルかどうかチェックしています（2行目）．コールバックが指定されていない場合はエラー値を返します（3行目）．</p>
-
-<p>次に<code>QUEUE_INSERT_HEAD()</code>で<code>loop-&gt;idle_handles</code>を先頭とするキューの頭にこのハンドルを挿入します（4行目）．<code>idle_handles</code>キューは以下のように変化します．
-<pre>
-loop-&gt;idle_handles  &mdash;- 既存Idleハンドル
-                ↓
-loop-&gt;idle_handles  &mdash;- handle &mdash;- 既存Idleハンドル
-                         ^^^^^^
-</pre>
-したがって今回有効化するIdleハンドルは，初期化時に追加された<code>loop-&gt;handle_queue</code>と，今回挿入された<code>loop-&gt;idle_handles</code>の，2つのキューに存在することになります．</p>
-
+</code></pre><p>ハンドルが有効化されると，先ほど設定した<code>UV__HANDLE_REF</code>に加えて<code>UV__HANDLE_ACTIVE</code>のビット(0x40)が立ちます．そこで最初に起動済みハンドルかどうかチェックしています（2行目）．コールバックが指定されていない場合はエラー値を返します（3行目）．</p>
+<p>次に<code>QUEUE_INSERT_HEAD()</code>で<code>loop-&gt;idle_handles</code>を先頭とするキューの頭にこのハンドルを挿入します（4行目）．<code>idle_handles</code>キューは以下のように変化します．</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>したがって今回有効化するIdleハンドルは，初期化時に追加された<code>loop-&gt;handle_queue</code>と，今回挿入された<code>loop-&gt;idle_handles</code>の，2つのキューに存在することになります．</p>
 <p>最後の<code>uv__handle_start(handle)</code>で，ループが管理しているアクティブ・ハンドル数<code>loop-&gt;active_handles</code>が１インクリメントされます．アクティブ・ハンドル数はイベントループの終了条件に使われます．</p>
-
-<h3 id="uv-run-の処理"><code>uv_run()</code>の処理</h3>
-
+<h3 id="uv_runの処理"><code>uv_run()</code>の処理</h3>
 <p><code>uv_run()</code>関数内部の<code>while</code>ループがイベントループの実体です．<code>uv_run()</code>は<code>core.c</code>ファイル内で定義されています．<code>while</code>ループの実装は以下のようになっています．</p>
-
-<pre><code class="language-c line-numbers">  while (r != 0 &amp;&amp; loop-&gt;stop_flag == 0) {
+<pre><code class="language-{c" data-lang="{c">  while (r != 0 &amp;&amp; loop-&gt;stop_flag == 0) {
     uv__update_time(loop);
     uv__run_timers(loop);
     ran_pending = uv__run_pending(loop);
@@ -438,30 +366,23 @@ loop-&gt;idle_handles  &mdash;- handle &mdash;- 既存Idleハンドル
     if (mode == UV_RUN_ONCE || mode == UV_RUN_NOWAIT)
       break;
   }
-</code></pre>
-
-<p>（執筆中&hellip;.）</p>
-
-<h3 id="uv-loop-close-の処理"><code>uv_loop_close()</code>の処理</h3>
-
+</code></pre><p>（執筆中&hellip;.）</p>
+<h3 id="uv_loop_closeの処理"><code>uv_loop_close()</code>の処理</h3>
 <p><code>uv_loop_close()</code>は<code>uv_common.c</code>で定義され，機種依存のクリティカルな処理は<code>loop.c</code>内の<code>uv__loop_close()</code>関数に委譲しています．</p>
-
 <p>ここではハンドルのキューを走査し，未終了のハンドルがないかチェックし，起動したスレッドを終了し，排他制御のロックを後片付けします．</p>
-
 <p>(続く&hellip;..）</p>
-
 <h2 id="注釈">注釈</h2>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">Event emitterとPromiseの比喩はLXJS2012での<a href="https://www.youtube.com/watch?v=nGn60vDSxQ4">Bert Belderの講演</a>に拠ります．
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">uv_default_loop() が返すポインタの参照先で uv_loop_t 型の構造体．
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>Event emitterとPromiseの比喩はLXJS2012での<a href="https://www.youtube.com/watch?v=nGn60vDSxQ4">Bert Belderの講演</a>に拠ります． <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>uv_default_loop() が返すポインタの参照先で uv_loop_t 型の構造体． <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
     </section>
 

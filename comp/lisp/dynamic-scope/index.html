@@ -61,7 +61,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/dynamic-scope/" />
 
@@ -74,13 +74,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -92,23 +92,23 @@
             
         ]
     },
-    "headline": Lispのダイナミック・スコープとスペシャル変数,
-    "name": Lispのダイナミック・スコープとスペシャル変数,
-    "wordCount": 2988,
+    "headline": "Lispのダイナミック・スコープとスペシャル変数",
+    "name": "Lispのダイナミック・スコープとスペシャル変数",
+    "wordCount":  2994 ,
     "timeRequired": "PT6M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/dynamic-scope/,
-    "datePublished": 2017-09-22T18:05Z,
-    "dateModified": 2017-09-22T18:05Z,
+    "url": "http://diary.wshito.com/comp/lisp/dynamic-scope/",
+    "datePublished": "2017-09-22T18:05Z",
+    "dateModified": "2017-09-22T18:05Z",
     
-    "keywords": lisp,
-    "description": ,
+    "keywords": "lisp",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/dynamic-scope/
+        "@id": "http://diary.wshito.com/comp/lisp/dynamic-scope/"
     }
 }
     </script>
@@ -133,7 +133,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -260,15 +261,15 @@
 <div class="listingblock">
 <div class="title">コード 1. JavaScriptのレキシカル・スコープ</div>
 <div class="content">
-<pre class="highlight"><code class="language-javascript line-numbers" data-lang="javascript line-numbers">var glvar = "Global";
+<pre class="highlight"><code class="language-javascript line-numbers" data-lang="javascript line-numbers">var glvar = &#34;Global&#34;;
 
 var inner = function () {
-   console.log("In inner: " + glvar); // グローバル変数
+   console.log(&#34;In inner: &#34; + glvar); // グローバル変数
 }
 
 var shadowing = function () {
-   var glvar = "overriden!";
-   console.log("In shadowing: " + glvar);
+   var glvar = &#34;overriden!&#34;;
+   console.log(&#34;In shadowing: &#34; + glvar);
    inner();  // この中のglvarには上のローカルglvarは影響を及ぼせない．
 }
 
@@ -290,25 +291,25 @@ shadowing();   // -&gt; In shadowing: overriden!
 <h2 id="_common_lispのダイナミックスコープ">Common Lispのダイナミック・スコープ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>コード1をLispに書き換えたものがコード2である．1行目で <code>*glvar*</code> に <code>"Global"</code> 文字列を設定している．トップレベルで作成された <code>*glvar*</code> はグローバル変数である．また，<code>defvar</code> で作成されたのでスペシャル変数でもある．Lispではスペシャル変数をアスタリスク（イヤーマフ）で囲む習慣がある．</p>
+<p>コード1をLispに書き換えたものがコード2である．1行目で <code>*glvar*</code> に <code>&#34;Global&#34;</code> 文字列を設定している．トップレベルで作成された <code>*glvar*</code> はグローバル変数である．また，<code>defvar</code> で作成されたのでスペシャル変数でもある．Lispではスペシャル変数をアスタリスク（イヤーマフ）で囲む習慣がある．</p>
 </div>
 <div class="listingblock">
 <div class="title">コード 2. Common Lispの例</div>
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defvar *glvar* "Global")
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defvar *glvar* &#34;Global&#34;)
 
 (defun inner ()
-  (format t "In inner: ~s~%" *glvar*))
+  (format t &#34;In inner: ~s~%&#34; *glvar*))
 
 (defun shadowing ()
-  (let ((*glvar* "overriden!"))
-     (format t "In shadowig: ~s~%" *glvar*)
+  (let ((*glvar* &#34;overriden!&#34;))
+     (format t &#34;In shadowig: ~s~%&#34; *glvar*)
      (inner)))
 
-(inner)      ; -&gt; In inner: "Global"
+(inner)      ; -&gt; In inner: &#34;Global&#34;
 
-(shadowing)  ; -&gt; In shadowig: "overriden!"
-             ;    In inner: "overriden!"</code></pre>
+(shadowing)  ; -&gt; In shadowig: &#34;overriden!&#34;
+             ;    In inner: &#34;overriden!&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -325,20 +326,20 @@ shadowing();   // -&gt; In shadowing: overriden!
 <div class="listingblock">
 <div class="title">コード 3. レキシカル・スコープのグローバル変数</div>
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(setf glvar "Global")
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(setf glvar &#34;Global&#34;)
 
 (defun inner2 ()
-  (format t "In inner: ~s~%" glvar))
+  (format t &#34;In inner: ~s~%&#34; glvar))
 
 (defun shadowing2 ()
-  (let ((glvar "overriden!"))
-     (format t "In shadowig: ~s~%" glvar)
+  (let ((glvar &#34;overriden!&#34;))
+     (format t &#34;In shadowig: ~s~%&#34; glvar)
      (inner)))
 
-(inner2)      ; -&gt; In inner: "Global"
+(inner2)      ; -&gt; In inner: &#34;Global&#34;
 
-(shadowing2)  ; -&gt; In shadowig: "overriden!"
-              ;    In inner: "Global"</code></pre>
+(shadowing2)  ; -&gt; In shadowig: &#34;overriden!&#34;
+              ;    In inner: &#34;Global&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -359,7 +360,7 @@ shadowing();   // -&gt; In shadowing: overriden!
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defparameter *outdir* "output/")</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defparameter *outdir* &#34;output/&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -372,16 +373,16 @@ shadowing();   // -&gt; In shadowing: overriden!
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun main (&amp;optional outdir)
   (let ((*outdir* (if outdir outdir *outdir*)))  ; <i class="conum" data-value="1"></i><b>(1)</b>
-    (format t "~a~%" *outdir*)))</code></pre>
+    (format t &#34;~a~%&#34; *outdir*)))</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>outdir</code> が設定されていれば <code>outdir</code> を そうでなければデフォルトの <code>*outdir*</code> を設定する．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>以下が実行例だ．</p>
@@ -391,7 +392,7 @@ shadowing();   // -&gt; In shadowing: overriden!
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (main)
 output/
 NIL
-&gt; (main "my-output/")
+&gt; (main &#34;my-output/&#34;)
 my-output/
 NIL</code></pre>
 </div>
@@ -403,12 +404,12 @@ NIL</code></pre>
 <p>Lispのテキストで最もよく出てくるスペシャル変数の例は入出力先のコントロールだ．通常スペシャル変数はグローバル変数として使う．グローバル変数の利点はどこからでも参照できるため，関数に渡す引数を省略できる．Common Lispでは標準入出力のストリームがスペシャル変数として予め提供されているので，入出力系の関数内で入出力先のストリームを引数で渡す必要がない．しかし，ファイルに出力したい時もある．この時，新たにファイル出力用の関数を作成しなくても，同名のスペシャル変数をローカルで作成し，そこにファイル出力のストリームを代入すれば，そのローカル変数が有効な間，入出力をリダイレクトできる．既存の入出力系の関数をそのまま再利用できるのだ．</p>
 </div>
 <div class="paragraph">
-<p>コード2では <code>(format t &#8230;&#8203;</code> で標準出力に結果を表示した．試しに標準出力のストリーム型オブジェクトを格納したスペシャル変数 <code>*standard-output*</code> をファイルに結びつけて出力をリダイレクトしてみよう．</p>
+<p>コード2では <code>(format t …​</code> で標準出力に結果を表示した．試しに標準出力のストリーム型オブジェクトを格納したスペシャル変数 <code>*standard-output*</code> をファイルに結びつけて出力をリダイレクトしてみよう．</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defun print-&gt;file ()
-  (let ((*standard-output* (open "shadow.txt"  ;; スペシャル変数をファイルストリームで一時的に上書き
+  (let ((*standard-output* (open &#34;shadow.txt&#34;  ;; スペシャル変数をファイルストリームで一時的に上書き
                                  :direction :output
                                  :if-exists :supersede)))
     (shadowing)                                ;; shadowing関数内のスペシャル変数もシャドウイングされる
@@ -423,7 +424,7 @@ NIL</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defun print-&gt;file ()
-  (with-open-file (*standard-output* "shadow.txt"
+  (with-open-file (*standard-output* &#34;shadow.txt&#34;
                                      :direction :output
                                      :if-exists :supersede)
     (shadowing)))
@@ -432,7 +433,7 @@ NIL</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>すっきりとしていて美しい&#8230;&#8203;.</p>
+<p>すっきりとしていて美しい…​.</p>
 </div>
 </div>
 </div>

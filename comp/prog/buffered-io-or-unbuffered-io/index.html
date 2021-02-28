@@ -63,7 +63,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/" />
 
@@ -76,13 +76,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -94,23 +94,23 @@
             
         ]
     },
-    "headline": Buffered IO or Unbuffered IO,
-    "name": Buffered IO or Unbuffered IO,
-    "wordCount": 242,
+    "headline": "Buffered IO or Unbuffered IO",
+    "name": "Buffered IO or Unbuffered IO",
+    "wordCount":  271 ,
     "timeRequired": "PT1M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/,
-    "datePublished": 2016-11-09T19:29Z,
-    "dateModified": 2016-11-09T19:29Z,
+    "url": "http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/",
+    "datePublished": "2016-11-09T19:29Z",
+    "dateModified": "2016-11-09T19:29Z",
     
-    "keywords": programming, network,
-    "description": ,
+    "keywords": "programming, network",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/
+        "@id": "http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/"
     }
 }
     </script>
@@ -135,7 +135,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -216,7 +217,6 @@
 
     <section class="post-content">
       <p>ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，<strong>Unbuffered IO</strong>の<code>read()</code>，<code>write()</code>を使用している理由が気になって調べてみた．普通のIOならシステムコールを減らすために<strong>Buffered IO</strong>を使用するがなぜネットワークプログラミングではどの例も<strong>Unbuffered</strong>なのか？調べた結果は後でブログにまとめるとして，見つけた解説記事を載せておきます．</p>
-
 <ul>
 <li><a href="http://stackoverflow.com/questions/1450551/buffered-vs-unbuffered-io">Buffered vs unbuffered IO (stack overflow)</a> - バッファドとアンバッファドの違いについての基礎知識の確認のため．</li>
 <li><a href="http://alas.matf.bg.ac.rs/manuals/lspe/snode=88.html">Defining Buffer Operation (Linux Socket Programming by Example - Warren Gay)</a> - ネットワークプログラミングでアンバッファドを使う理由はここ．</li>

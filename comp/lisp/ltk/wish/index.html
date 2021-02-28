@@ -70,7 +70,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/ltk/wish/" />
 
@@ -83,13 +83,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -101,23 +101,23 @@
             
         ]
     },
-    "headline": ltk と Tk との接続,
-    "name": ltk と Tk との接続,
-    "wordCount": 587,
+    "headline": "ltk と Tk との接続",
+    "name": "ltk と Tk との接続",
+    "wordCount":  575 ,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/ltk/wish/,
-    "datePublished": 2018-08-15T15:51Z,
-    "dateModified": 2018-08-15T15:51Z,
+    "url": "http://diary.wshito.com/comp/lisp/ltk/wish/",
+    "datePublished": "2018-08-15T15:51Z",
+    "dateModified": "2018-08-15T15:51Z",
     
-    "keywords": lisp, programming, gui, ltk, tcl/tk,
-    "description": ,
+    "keywords": "lisp, programming, gui, ltk, tcl/tk",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/ltk/wish/
+        "@id": "http://diary.wshito.com/comp/lisp/ltk/wish/"
     }
 }
     </script>
@@ -142,7 +142,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -232,20 +233,17 @@
 <p>管理者権限の無いマシンで Common Lisp の GUI 開発をする場合，GUI ツールキットをローカル・ディレクトリにインストールせざるを得ない．管理者権限の無いマシンで <a href="https://github.com/herth/ltk">ltk</a> を使う必要に迫られたので，Lisp コードからどのように <a href="https://tkdocs.com">Tk</a> を呼び出しているのか調べてみた．</p>
 </div>
 <div class="paragraph">
-<p></p>
-</div>
-<div class="paragraph">
 <p><a href="https://github.com/herth/ltk">ltk</a> は Tk インタプリタである <code>wish</code> を起動し，プロセス間通信を行っている．従って，ローカルインストールであろうと <code>wish</code> へのパスが通っていれば <a href="https://github.com/herth/ltk">ltk</a> は機能するはずだ．</p>
 </div>
 <div class="paragraph">
-<p>もう少し細部を見てみよう．<code>wish</code> の起動は <code>start-wish</code> 関数内（<a href="https://github.com/herth/ltk/blob/6a84febe9968389639629086a436129a779d084b/ltk/ltk.lisp#L782">GitHub 参照</a>）の<br>
+<p>もう少し細部を見てみよう．<code>wish</code> の起動は <code>start-wish</code> 関数内（<a href="https://github.com/herth/ltk/blob/6a84febe9968389639629086a436129a779d084b/ltk/ltk.lisp#L782">GitHub 参照</a>）の<br/>
 <code>(do-execute *wish-pathname* *wish-args*)</code>（<a href="https://github.com/herth/ltk/blob/6a84febe9968389639629086a436129a779d084b/ltk/ltk.lisp#L786">GitHub 参照</a>）で行われる．<code>*wish-pathname*</code> は以下のように設定されている（<a href="https://github.com/herth/ltk/blob/6a84febe9968389639629086a436129a779d084b/ltk/ltk.lisp#L571">GitHub 参照</a>）．</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defvar *wish-pathname*
-  #+freebsd "wish8.5"
-  #-freebsd "wish")</code></pre>
+  #+freebsd &#34;wish8.5&#34;
+  #-freebsd &#34;wish&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -255,7 +253,7 @@
 <p><code>wish</code> の起動を担当する <code>do-execute</code> 関数は別のプロジェクトでも再利用可能な興味深い関数だ（<a href="https://github.com/herth/ltk/blob/6a84febe9968389639629086a436129a779d084b/ltk/ltk.lisp#L442">GitHub 参照</a>）．この関数は，起動するプログラムと Lisp とを標準入出力を介してつなぐ <code>stream</code> を返す．このストリームの読み書きは <code>read-wish</code> と <code>send-wish</code> 関数が担っている．</p>
 </div>
 <div class="paragraph">
-<p>余談だが， <a href="https://github.com/crategus/cl-cffi-gtk">GTK+3</a> は CFFI を使って直接 C ライブラリを呼び出しているので，ソースコードから <code>define-foreign-library</code> を検索して必要なライブラリのファイルを自分で指定し直すか，ライブラリのロードパスを適切に設定すれば良いと思われる（まだ試していないが&#8230;&#8203;）．</p>
+<p>余談だが， <a href="https://github.com/crategus/cl-cffi-gtk">GTK+3</a> は CFFI を使って直接 C ライブラリを呼び出しているので，ソースコードから <code>define-foreign-library</code> を検索して必要なライブラリのファイルを自分で指定し直すか，ライブラリのロードパスを適切に設定すれば良いと思われる（まだ試していないが…​）．</p>
 </div>
     </section>
 

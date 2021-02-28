@@ -72,7 +72,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/ccl-init/" />
 
@@ -85,13 +85,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -103,23 +103,23 @@
             
         ]
     },
-    "headline": ASDF3 on Clozure CL does not search ASD files under the symbolic links,
-    "name": ASDF3 on Clozure CL does not search ASD files under the symbolic links,
-    "wordCount": 239,
+    "headline": "ASDF3 on Clozure CL does not search ASD files under the symbolic links",
+    "name": "ASDF3 on Clozure CL does not search ASD files under the symbolic links",
+    "wordCount":  239 ,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/ccl-init/,
-    "datePublished": 2018-04-13T18:46Z,
-    "dateModified": 2018-04-13T18:46Z,
+    "url": "http://diary.wshito.com/comp/lisp/ccl-init/",
+    "datePublished": "2018-04-13T18:46Z",
+    "dateModified": "2018-04-13T18:46Z",
     
-    "keywords": lisp, programming, ccl, asdf, source-registry, clozure cl,
-    "description": ,
+    "keywords": "lisp, programming, ccl, asdf, source-registry, clozure cl",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/ccl-init/
+        "@id": "http://diary.wshito.com/comp/lisp/ccl-init/"
     }
 }
     </script>
@@ -144,7 +144,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -233,10 +234,7 @@
 
     <section class="post-content">
       <div class="paragraph">
-<p>I put all my lisp projects under the directory <code>git-repos</code> and set symbolic links to each projects from <code>~/common-lisp</code>.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn&#8217;t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under <code>~/common-lisp</code>.</p>
-</div>
-<div class="paragraph">
-<p></p>
+<p>I put all my lisp projects under the directory <code>git-repos</code> and set symbolic links to each projects from <code>~/common-lisp</code>.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn’t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under <code>~/common-lisp</code>.</p>
 </div>
 <div class="paragraph">
 <p>CCL loads <code>~/ccl-init.lisp</code> or <code>~/.ccl-init.lisp</code> (post 1.2 versions only) upon startup (see <a href="https://ccl.clozure.com/manual/chapter2.4.html">CCL manual</a>).  So by putting the following snippet in either of those files ASDF3 on CCL can load the ASD files under the projects with symbolic links.</p>
@@ -244,9 +242,9 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defun update-search-path ()
-  (let* ((dirs (set-difference (uiop:directory* "~/common-lisp/*")
-                               (uiop:directory* "~/common-lisp/.*")
-                               :test #'uiop::pathname-equal)))
+  (let* ((dirs (set-difference (uiop:directory* &#34;~/common-lisp/*&#34;)
+                               (uiop:directory* &#34;~/common-lisp/.*&#34;)
+                               :test #&#39;uiop::pathname-equal)))
     (asdf:initialize-source-registry
       `(:source-registry
         ,@(loop for p in dirs
@@ -283,9 +281,9 @@
 ;;;;
 #+ccl
 (defun update-search-path ()
-  (let* ((dirs (set-difference (uiop:directory* "~/common-lisp/*")
-                               (uiop:directory* "~/common-lisp/.*")
-                               :test #'uiop::pathname-equal)))
+  (let* ((dirs (set-difference (uiop:directory* &#34;~/common-lisp/*&#34;)
+                               (uiop:directory* &#34;~/common-lisp/.*&#34;)
+                               :test #&#39;uiop::pathname-equal)))
     (asdf:initialize-source-registry
      `(:source-registry
        ,@(loop for p in dirs

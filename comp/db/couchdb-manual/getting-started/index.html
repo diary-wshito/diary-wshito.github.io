@@ -67,7 +67,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/db/couchdb-manual/getting-started/" />
 
@@ -80,13 +80,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -98,23 +98,23 @@
             
         ]
     },
-    "headline": Lisp で CouchDB の Getting Started を始めてみる,
-    "name": Lisp で CouchDB の Getting Started を始めてみる,
-    "wordCount": 1612,
+    "headline": "Lisp で CouchDB の Getting Started を始めてみる",
+    "name": "Lisp で CouchDB の Getting Started を始めてみる",
+    "wordCount":  1621 ,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/db/couchdb-manual/getting-started/,
-    "datePublished": 2017-10-20T22:05Z,
-    "dateModified": 2018-02-14T11:05Z,
+    "url": "http://diary.wshito.com/comp/db/couchdb-manual/getting-started/",
+    "datePublished": "2017-10-20T22:05Z",
+    "dateModified": "2018-02-14T11:05Z",
     
-    "keywords": lisp, db, CouchDB, NoSQL,
-    "description": ,
+    "keywords": "lisp, db, CouchDB, NoSQL",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/db/couchdb-manual/getting-started/
+        "@id": "http://diary.wshito.com/comp/db/couchdb-manual/getting-started/"
     }
 }
     </script>
@@ -139,7 +139,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -230,8 +231,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:quickload 'dexador)
-(ql:quickload 'jonathan)</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:quickload &#39;dexador)
+(ql:quickload &#39;jonathan)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -239,13 +240,13 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (dex:get "http://localhost:5984")
-;=&gt; "{\"couchdb\":\"Welcome\",\"version\":\"2.1.0\",\"features\":[\"scheduler\"],\"vendor\":{\"name\":\"The Apache Software Foundation\"}}
-;   "
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (dex:get &#34;http://localhost:5984&#34;)
+;=&gt; &#34;{\&#34;couchdb\&#34;:\&#34;Welcome\&#34;,\&#34;version\&#34;:\&#34;2.1.0\&#34;,\&#34;features\&#34;:[\&#34;scheduler\&#34;],\&#34;vendor\&#34;:{\&#34;name\&#34;:\&#34;The Apache Software Foundation\&#34;}}
+;   &#34;
 ;   200
 ;   #&lt;HASH-TABLE :TEST EQUAL :COUNT 7 {10041F28C3}&gt;
 ;   #&lt;QURI.URI.HTTP:URI-HTTP http://localhost:5984&gt;
-;   #&lt;SB-SYS:FD-STREAM for "socket 127.0.0.1:52372, peer: 127.0.0.1:5984"
+;   #&lt;SB-SYS:FD-STREAM for &#34;socket 127.0.0.1:52372, peer: 127.0.0.1:5984&#34;
 ;   {1004112FE3}&gt;</code></pre>
 </div>
 </div>
@@ -254,11 +255,11 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(jonathan:parse (dex:get "http://localhost:5984"))
-;=&gt; (:|vendor|   (:|name| "The Apache Software Foundation")
-;    :|features| ("scheduler")
-;    :|version|  "2.1.0"
-;    :|couchdb|  "Welcome")</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(jonathan:parse (dex:get &#34;http://localhost:5984&#34;))
+;=&gt; (:|vendor|   (:|name| &#34;The Apache Software Foundation&#34;)
+;    :|features| (&#34;scheduler&#34;)
+;    :|version|  &#34;2.1.0&#34;
+;    :|couchdb|  &#34;Welcome&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -267,11 +268,11 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-	"couchdb": "Welcome",
-	"version": "2.1.0",
-	"features": ["scheduler"],
-	"vendor": {
-		  "name": "The Apache Software Foundation"
+	&#34;couchdb&#34;: &#34;Welcome&#34;,
+	&#34;version&#34;: &#34;2.1.0&#34;,
+	&#34;features&#34;: [&#34;scheduler&#34;],
+	&#34;vendor&#34;: {
+		  &#34;name&#34;: &#34;The Apache Software Foundation&#34;
 	}
 }</code></pre>
 </div>
@@ -284,7 +285,7 @@
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defmacro couchdb (method path)
        `(jonathan:parse (
        			,(intern (symbol-name method) :dex)
-			,(concatenate 'string "http://localhost:5984" path))))</code></pre>
+			,(concatenate &#39;string &#34;http://localhost:5984&#34; path))))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -292,17 +293,17 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb get "/_all_dbs")   <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb get &#34;/_all_dbs&#34;)   <i class="conum" data-value="1"></i><b>(1)</b>
 ;=&gt; nil
-(couchdb put "/baseball")   <i class="conum" data-value="2"></i><b>(2)</b>
+(couchdb put &#34;/baseball&#34;)   <i class="conum" data-value="2"></i><b>(2)</b>
 ;=&gt; (:|ok| T)
-(couchdb get "/_all_dbs")   <i class="conum" data-value="3"></i><b>(3)</b>
-;=&gt; ("baseball")</code></pre>
+(couchdb get &#34;/_all_dbs&#34;)   <i class="conum" data-value="3"></i><b>(3)</b>
+;=&gt; (&#34;baseball&#34;)</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>/_all_dbs</code> でデータベース一覧を取得．まだデータベースを作成していないので空のJSONオブジェクトが返る．Lispでは <code>nil</code> となる．</td>
 </tr>
@@ -314,25 +315,25 @@
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>データベース一覧を取得すると <code>baseball</code> データベースが作成されているのが分かる．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>もう一度同じ名前のデータベースの作成を試みる．</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put "/baseball")
-;=&gt; An HTTP request to "http://localhost:5984/baseball" returned 412 precondition failed.
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put &#34;/baseball&#34;)
+;=&gt; An HTTP request to &#34;http://localhost:5984/baseball&#34; returned 412 precondition failed.
 ;
-;   {"error":"file_exists","reason":"The database could not be created, the file already exists."}
+;   {&#34;error&#34;:&#34;file_exists&#34;,&#34;reason&#34;:&#34;The database could not be created, the file already exists.&#34;}
 ;      [Condition of type DEXADOR.ERROR:HTTP-REQUEST-PRECONDITION-FAILED]
 ;
 ;   Restarts:
 ;    0: [RETRY-REQUEST] Retry the same request.
 ;    1: [IGNORE-AND-CONTINUE] Ignore the error and continue.
 ;    2: [RETRY] Retry SLIME REPL evaluation request.
-;    3: [*ABORT] Return to SLIME's top level.
-;    4: [ABORT] abort thread (#&lt;THREAD "new-repl-thread" RUNNING {1002AB5BA3}&gt;)</code></pre>
+;    3: [*ABORT] Return to SLIME&#39;s top level.
+;    4: [ABORT] abort thread (#&lt;THREAD &#34;new-repl-thread&#34; RUNNING {1002AB5BA3}&gt;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -356,7 +357,7 @@
            :reader request-method))
   (:report (lambda (condition stream)
              (with-slots (uri status) condition
-               (format stream "An HTTP request to ~S has failed (status=~D)."
+               (format stream &#34;An HTTP request to ~S has failed (status=~D).&#34;
                        (quri:render-uri uri)
                        status)))))</code></pre>
 </div>
@@ -378,7 +379,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(handler-case (jonathan:parse (dex:put "http://localhost:5984/baseball"))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(handler-case (jonathan:parse (dex:put &#34;http://localhost:5984/baseball&#34;))
   (dex:http-request-failed (err)
     (jonathan:parse (dex:response-body err))))</code></pre>
 </div>
@@ -390,7 +391,7 @@
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defmacro couchdb (method path)
   `(handler-case (jonathan:parse (,(intern (symbol-name method) :dex)
-				                  ,(concatenate 'string "http://localhost:5984" path)))
+				                  ,(concatenate &#39;string &#34;http://localhost:5984&#34; path)))
      (dex:http-request-failed (err)
        (jonathan:parse (dex:response-body err)))))</code></pre>
 </div>
@@ -400,9 +401,9 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put "/baseball")
-;=&gt; (:|reason| "The database could not be created, the file already exists."
-;    :|error| "file_exists")</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put &#34;/baseball&#34;)
+;=&gt; (:|reason| &#34;The database could not be created, the file already exists.&#34;
+;    :|error| &#34;file_exists&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -410,7 +411,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put "/plankton")
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb put &#34;/plankton&#34;)
 ;=&gt; (:|ok| T)</code></pre>
 </div>
 </div>
@@ -419,8 +420,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb get "/_all_dbs")
-;=&gt; ("baseball" "plankton")</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb get &#34;/_all_dbs&#34;)
+;=&gt; (&#34;baseball&#34; &#34;plankton&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -428,10 +429,10 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb delete "/plankton")
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(couchdb delete &#34;/plankton&#34;)
 ;=&gt; (:|ok| T)
-(couchdb get "/_all_dbs")
-;=&gt; ("baseball")</code></pre>
+(couchdb get &#34;/_all_dbs&#34;)
+;=&gt; (&#34;baseball&#34;)</code></pre>
 </div>
 </div>
 </div>
@@ -445,16 +446,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p><code>"GET /"</code> CouchDBのバージョンが得られる．</p>
+<p><code>&#34;GET /&#34;</code> CouchDBのバージョンが得られる．</p>
 </li>
 <li>
-<p><code>"PUT /database"</code> databaseの作成．</p>
+<p><code>&#34;PUT /database&#34;</code> databaseの作成．</p>
 </li>
 <li>
-<p><code>"DELETE /database"</code> databaseの削除．</p>
+<p><code>&#34;DELETE /database&#34;</code> databaseの削除．</p>
 </li>
 <li>
-<p><code>"GET /__all_dbs"</code> データベース一覧．</p>
+<p><code>&#34;GET /__all_dbs&#34;</code> データベース一覧．</p>
 </li>
 </ul>
 </div>

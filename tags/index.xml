@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on wshito&#39;s diary</title>
@@ -7,157 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Wed, 06 Sep 2017 17:33:34 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 25 Dec 2018 00:00:00 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Asciidoc</title>
-      <link>http://diary.wshito.com/tags/asciidoc/</link>
-      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/asciidoc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Asdf</title>
-      <link>http://diary.wshito.com/tags/asdf/</link>
-      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/asdf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Assembly</title>
-      <link>http://diary.wshito.com/tags/assembly/</link>
-      <pubDate>Mon, 12 Jun 2017 21:15:11 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/assembly/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Async</title>
-      <link>http://diary.wshito.com/tags/async/</link>
-      <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/async/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Asynchronous Programming</title>
-      <link>http://diary.wshito.com/tags/asynchronous-programming/</link>
-      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/asynchronous-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C</title>
-      <link>http://diary.wshito.com/tags/c/</link>
-      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/c/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Canvas</title>
-      <link>http://diary.wshito.com/tags/canvas/</link>
-      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/canvas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ccl</title>
-      <link>http://diary.wshito.com/tags/ccl/</link>
-      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/ccl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cffi</title>
-      <link>http://diary.wshito.com/tags/cffi/</link>
-      <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/cffi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cg</title>
-      <link>http://diary.wshito.com/tags/cg/</link>
-      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/cg/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Clack</title>
-      <link>http://diary.wshito.com/tags/clack/</link>
-      <pubDate>Wed, 07 Feb 2018 15:36:34 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/clack/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Clozure Cl</title>
-      <link>http://diary.wshito.com/tags/clozure-cl/</link>
-      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/clozure-cl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cms</title>
-      <link>http://diary.wshito.com/tags/cms/</link>
-      <pubDate>Mon, 02 Oct 2017 10:39:51 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/cms/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Computer Graphics</title>
-      <link>http://diary.wshito.com/tags/computer-graphics/</link>
-      <pubDate>Sat, 14 Apr 2018 18:32:22 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/computer-graphics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Couchdb</title>
-      <link>http://diary.wshito.com/tags/couchdb/</link>
-      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/couchdb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Db</title>
-      <link>http://diary.wshito.com/tags/db/</link>
-      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/db/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dev Tool</title>
+      <title>dev-tool</title>
       <link>http://diary.wshito.com/tags/dev-tool/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
       
@@ -166,25 +18,7 @@
     </item>
     
     <item>
-      <title>Development Tool</title>
-      <link>http://diary.wshito.com/tags/development-tool/</link>
-      <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/development-tool/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Diary</title>
-      <link>http://diary.wshito.com/tags/diary/</link>
-      <pubDate>Sun, 06 Nov 2016 20:43:33 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/diary/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Emacs</title>
+      <title>emacs</title>
       <link>http://diary.wshito.com/tags/emacs/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
       
@@ -193,52 +27,7 @@
     </item>
     
     <item>
-      <title>Fantasyland</title>
-      <link>http://diary.wshito.com/tags/fantasyland/</link>
-      <pubDate>Tue, 18 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/fantasyland/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Functional Programming</title>
-      <link>http://diary.wshito.com/tags/functional-programming/</link>
-      <pubDate>Tue, 18 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/functional-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gpu</title>
-      <link>http://diary.wshito.com/tags/gpu/</link>
-      <pubDate>Sat, 14 Apr 2018 18:32:22 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/gpu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gui</title>
-      <link>http://diary.wshito.com/tags/gui/</link>
-      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/gui/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>http://diary.wshito.com/tags/hugo/</link>
-      <pubDate>Mon, 02 Oct 2017 10:39:51 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ide</title>
+      <title>ide</title>
       <link>http://diary.wshito.com/tags/ide/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
       
@@ -247,16 +36,7 @@
     </item>
     
     <item>
-      <title>Install</title>
-      <link>http://diary.wshito.com/tags/install/</link>
-      <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/install/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Javascript</title>
+      <title>javascript</title>
       <link>http://diary.wshito.com/tags/javascript/</link>
       <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
       
@@ -265,124 +45,61 @@
     </item>
     
     <item>
-      <title>Kicad</title>
-      <link>http://diary.wshito.com/tags/kicad/</link>
-      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
+      <title>slime</title>
+      <link>http://diary.wshito.com/tags/slime/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/kicad/</guid>
+      <guid>http://diary.wshito.com/tags/slime/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Lack</title>
-      <link>http://diary.wshito.com/tags/lack/</link>
-      <pubDate>Wed, 07 Feb 2018 15:36:34 +0900</pubDate>
+      <title>swank</title>
+      <link>http://diary.wshito.com/tags/swank/</link>
+      <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/lack/</guid>
+      <guid>http://diary.wshito.com/tags/swank/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Libuv</title>
-      <link>http://diary.wshito.com/tags/libuv/</link>
-      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
+      <title>fantasyland</title>
+      <link>http://diary.wshito.com/tags/fantasyland/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/libuv/</guid>
+      <guid>http://diary.wshito.com/tags/fantasyland/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Lisp</title>
-      <link>http://diary.wshito.com/tags/lisp/</link>
-      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
+      <title>functional programming</title>
+      <link>http://diary.wshito.com/tags/functional-programming/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/lisp/</guid>
+      <guid>http://diary.wshito.com/tags/functional-programming/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>List</title>
-      <link>http://diary.wshito.com/tags/list/</link>
-      <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
+      <title>sanctuary</title>
+      <link>http://diary.wshito.com/tags/sanctuary/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/list/</guid>
+      <guid>http://diary.wshito.com/tags/sanctuary/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Ltk</title>
-      <link>http://diary.wshito.com/tags/ltk/</link>
-      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
+      <title>install</title>
+      <link>http://diary.wshito.com/tags/install/</link>
+      <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/ltk/</guid>
+      <guid>http://diary.wshito.com/tags/install/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Mathjax</title>
-      <link>http://diary.wshito.com/tags/mathjax/</link>
-      <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/mathjax/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Micromouse</title>
-      <link>http://diary.wshito.com/tags/micromouse/</link>
-      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/micromouse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Network</title>
-      <link>http://diary.wshito.com/tags/network/</link>
-      <pubDate>Wed, 09 Nov 2016 19:29:46 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Node.js</title>
-      <link>http://diary.wshito.com/tags/node.js/</link>
-      <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/node.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nonblocking Io</title>
-      <link>http://diary.wshito.com/tags/nonblocking-io/</link>
-      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/nonblocking-io/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nosql</title>
-      <link>http://diary.wshito.com/tags/nosql/</link>
-      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/nosql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Opengl</title>
-      <link>http://diary.wshito.com/tags/opengl/</link>
-      <pubDate>Sat, 14 Apr 2018 18:32:22 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/opengl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Openmp</title>
+      <title>OpenMP</title>
       <link>http://diary.wshito.com/tags/openmp/</link>
       <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
       
@@ -391,47 +108,11 @@
     </item>
     
     <item>
-      <title>Package</title>
+      <title>package</title>
       <link>http://diary.wshito.com/tags/package/</link>
       <pubDate>Mon, 03 Sep 2018 16:42:44 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/package/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Physics</title>
-      <link>http://diary.wshito.com/tags/physics/</link>
-      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/physics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Prism</title>
-      <link>http://diary.wshito.com/tags/prism/</link>
-      <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/prism/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Programming</title>
-      <link>http://diary.wshito.com/tags/programming/</link>
-      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Quicklisp</title>
-      <link>http://diary.wshito.com/tags/quicklisp/</link>
-      <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/quicklisp/</guid>
       <description></description>
     </item>
     
@@ -445,70 +126,43 @@
     </item>
     
     <item>
-      <title>Robot</title>
-      <link>http://diary.wshito.com/tags/robot/</link>
-      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
+      <title>gui</title>
+      <link>http://diary.wshito.com/tags/gui/</link>
+      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/robot/</guid>
+      <guid>http://diary.wshito.com/tags/gui/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Roswell</title>
-      <link>http://diary.wshito.com/tags/roswell/</link>
-      <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
+      <title>lisp</title>
+      <link>http://diary.wshito.com/tags/lisp/</link>
+      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/roswell/</guid>
+      <guid>http://diary.wshito.com/tags/lisp/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Sanctuary</title>
-      <link>http://diary.wshito.com/tags/sanctuary/</link>
-      <pubDate>Tue, 18 Dec 2018 00:00:00 +0900</pubDate>
+      <title>ltk</title>
+      <link>http://diary.wshito.com/tags/ltk/</link>
+      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/sanctuary/</guid>
+      <guid>http://diary.wshito.com/tags/ltk/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Simulation</title>
-      <link>http://diary.wshito.com/tags/simulation/</link>
-      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      <title>programming</title>
+      <link>http://diary.wshito.com/tags/programming/</link>
+      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/simulation/</guid>
+      <guid>http://diary.wshito.com/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Slime</title>
-      <link>http://diary.wshito.com/tags/slime/</link>
-      <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/slime/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Source Registry</title>
-      <link>http://diary.wshito.com/tags/source-registry/</link>
-      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/source-registry/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Stm32</title>
-      <link>http://diary.wshito.com/tags/stm32/</link>
-      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
-      
-      <guid>http://diary.wshito.com/tags/stm32/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Stream</title>
+      <title>stream</title>
       <link>http://diary.wshito.com/tags/stream/</link>
       <pubDate>Fri, 20 Apr 2018 10:10:40 +0900</pubDate>
       
@@ -517,25 +171,169 @@
     </item>
     
     <item>
-      <title>Swank</title>
-      <link>http://diary.wshito.com/tags/swank/</link>
-      <pubDate>Tue, 25 Dec 2018 00:00:00 +0900</pubDate>
+      <title>computer graphics</title>
+      <link>http://diary.wshito.com/tags/computer-graphics/</link>
+      <pubDate>Sat, 14 Apr 2018 18:32:22 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/swank/</guid>
+      <guid>http://diary.wshito.com/tags/computer-graphics/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Tcl/Tk</title>
-      <link>http://diary.wshito.com/tags/tcl/tk/</link>
-      <pubDate>Wed, 15 Aug 2018 15:51:30 +0900</pubDate>
+      <title>gpu</title>
+      <link>http://diary.wshito.com/tags/gpu/</link>
+      <pubDate>Sat, 14 Apr 2018 18:32:22 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/tcl/tk/</guid>
+      <guid>http://diary.wshito.com/tags/gpu/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Theme</title>
+      <title>opengl</title>
+      <link>http://diary.wshito.com/tags/opengl/</link>
+      <pubDate>Sat, 14 Apr 2018 18:32:22 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/opengl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>asdf</title>
+      <link>http://diary.wshito.com/tags/asdf/</link>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/asdf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ccl</title>
+      <link>http://diary.wshito.com/tags/ccl/</link>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/ccl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>clozure cl</title>
+      <link>http://diary.wshito.com/tags/clozure-cl/</link>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/clozure-cl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>source-registry</title>
+      <link>http://diary.wshito.com/tags/source-registry/</link>
+      <pubDate>Fri, 13 Apr 2018 18:46:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/source-registry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>clack</title>
+      <link>http://diary.wshito.com/tags/clack/</link>
+      <pubDate>Wed, 07 Feb 2018 15:36:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/clack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lack</title>
+      <link>http://diary.wshito.com/tags/lack/</link>
+      <pubDate>Wed, 07 Feb 2018 15:36:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/lack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webapp</title>
+      <link>http://diary.wshito.com/tags/webapp/</link>
+      <pubDate>Wed, 07 Feb 2018 15:36:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/webapp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>development tool</title>
+      <link>http://diary.wshito.com/tags/development-tool/</link>
+      <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/development-tool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Quicklisp</title>
+      <link>http://diary.wshito.com/tags/quicklisp/</link>
+      <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/quicklisp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>roswell</title>
+      <link>http://diary.wshito.com/tags/roswell/</link>
+      <pubDate>Mon, 04 Dec 2017 00:00:00 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/roswell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CouchDB</title>
+      <link>http://diary.wshito.com/tags/couchdb/</link>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/couchdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>db</title>
+      <link>http://diary.wshito.com/tags/db/</link>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/db/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NoSQL</title>
+      <link>http://diary.wshito.com/tags/nosql/</link>
+      <pubDate>Fri, 20 Oct 2017 22:05:59 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/nosql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cms</title>
+      <link>http://diary.wshito.com/tags/cms/</link>
+      <pubDate>Mon, 02 Oct 2017 10:39:51 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/cms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>http://diary.wshito.com/tags/hugo/</link>
+      <pubDate>Mon, 02 Oct 2017 10:39:51 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>theme</title>
       <link>http://diary.wshito.com/tags/theme/</link>
       <pubDate>Mon, 02 Oct 2017 10:39:51 +0900</pubDate>
       
@@ -544,20 +342,110 @@
     </item>
     
     <item>
-      <title>Uvbook</title>
-      <link>http://diary.wshito.com/tags/uvbook/</link>
-      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
+      <title>asciidoc</title>
+      <link>http://diary.wshito.com/tags/asciidoc/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/uvbook/</guid>
+      <guid>http://diary.wshito.com/tags/asciidoc/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Webapp</title>
-      <link>http://diary.wshito.com/tags/webapp/</link>
-      <pubDate>Wed, 07 Feb 2018 15:36:34 +0900</pubDate>
+      <title>canvas</title>
+      <link>http://diary.wshito.com/tags/canvas/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
       
-      <guid>http://diary.wshito.com/tags/webapp/</guid>
+      <guid>http://diary.wshito.com/tags/canvas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CG</title>
+      <link>http://diary.wshito.com/tags/cg/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/cg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>physics</title>
+      <link>http://diary.wshito.com/tags/physics/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/physics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>simulation</title>
+      <link>http://diary.wshito.com/tags/simulation/</link>
+      <pubDate>Wed, 06 Sep 2017 17:33:34 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/simulation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mathjax</title>
+      <link>http://diary.wshito.com/tags/mathjax/</link>
+      <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/mathjax/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>prism</title>
+      <link>http://diary.wshito.com/tags/prism/</link>
+      <pubDate>Fri, 25 Aug 2017 23:20:41 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/prism/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>assembly</title>
+      <link>http://diary.wshito.com/tags/assembly/</link>
+      <pubDate>Mon, 12 Jun 2017 21:15:11 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/assembly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>KiCad</title>
+      <link>http://diary.wshito.com/tags/kicad/</link>
+      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/kicad/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>micromouse</title>
+      <link>http://diary.wshito.com/tags/micromouse/</link>
+      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/micromouse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>robot</title>
+      <link>http://diary.wshito.com/tags/robot/</link>
+      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/robot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>STM32</title>
+      <link>http://diary.wshito.com/tags/stm32/</link>
+      <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/stm32/</guid>
       <description></description>
     </item>
     
@@ -576,6 +464,114 @@
       <pubDate>Thu, 16 Feb 2017 19:59:57 +0900</pubDate>
       
       <guid>http://diary.wshito.com/tags/%E9%9B%BB%E5%AD%90%E5%B7%A5%E4%BD%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>asynchronous programming</title>
+      <link>http://diary.wshito.com/tags/asynchronous-programming/</link>
+      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/asynchronous-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c</title>
+      <link>http://diary.wshito.com/tags/c/</link>
+      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>libuv</title>
+      <link>http://diary.wshito.com/tags/libuv/</link>
+      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/libuv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nonblocking IO</title>
+      <link>http://diary.wshito.com/tags/nonblocking-io/</link>
+      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/nonblocking-io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>uvbook</title>
+      <link>http://diary.wshito.com/tags/uvbook/</link>
+      <pubDate>Fri, 06 Jan 2017 00:05:25 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/uvbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>async</title>
+      <link>http://diary.wshito.com/tags/async/</link>
+      <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/async/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CFFI</title>
+      <link>http://diary.wshito.com/tags/cffi/</link>
+      <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/cffi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>list</title>
+      <link>http://diary.wshito.com/tags/list/</link>
+      <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/list/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node.js</title>
+      <link>http://diary.wshito.com/tags/node.js/</link>
+      <pubDate>Sun, 01 Jan 2017 01:21:32 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>network</title>
+      <link>http://diary.wshito.com/tags/network/</link>
+      <pubDate>Wed, 09 Nov 2016 19:29:46 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>diary</title>
+      <link>http://diary.wshito.com/tags/diary/</link>
+      <pubDate>Sun, 06 Nov 2016 20:43:33 +0900</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/diary/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tcl/tk</title>
+      <link>http://diary.wshito.com/tags/tcl/tk/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://diary.wshito.com/tags/tcl/tk/</guid>
       <description></description>
     </item>
     

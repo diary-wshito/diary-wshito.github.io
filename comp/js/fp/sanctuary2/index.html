@@ -67,7 +67,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/js/fp/sanctuary2/" />
 
@@ -80,13 +80,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -98,23 +98,23 @@
             
         ]
     },
-    "headline": ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド,
-    "name": ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド,
-    "wordCount": 3276,
+    "headline": "ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド",
+    "name": "ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド",
+    "wordCount":  3412 ,
     "timeRequired": "PT7M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/js/fp/sanctuary2/,
-    "datePublished": 2018-12-18T00:00Z,
-    "dateModified": 2018-12-18T00:00Z,
+    "url": "http://diary.wshito.com/comp/js/fp/sanctuary2/",
+    "datePublished": "2018-12-18T00:00Z",
+    "dateModified": "2018-12-18T00:00Z",
     
-    "keywords": sanctuary, fantasyland, javascript, functional programming,
-    "description": JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 2．,
+    "keywords": "sanctuary, fantasyland, javascript, functional programming",
+    "description": "JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 2．",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/js/fp/sanctuary2/
+        "@id": "http://diary.wshito.com/comp/js/fp/sanctuary2/"
     }
 }
     </script>
@@ -139,7 +139,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -231,8 +232,7 @@
 <p>この記事は <a href="https://qiita.com/advent-calendar/2018/javascript_02">JavaScript2 Advent Calendar 2018</a> の 19 日目の記事として書かれました．コードは <a href="https://github.com/wshito/blog-examples/tree/master/JavaScript/fp">GitHub</a> にまとめてあります．</p>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/fantasyland/fantasy-land">Fantasy Land</a> を実装した <a href="https://sanctuary.js.org">Sanctuary.js</a> の使い方サーベイの第 2 弾．今回は <code>null</code> 対策として Maybe モナドの使い方を見ていきましょう．Functor を扱った Part 1 は <a href="../sanctuary1">こちら．</a>
-</p>
+<p><a href="https://github.com/fantasyland/fantasy-land">Fantasy Land</a> を実装した <a href="https://sanctuary.js.org">Sanctuary.js</a> の使い方サーベイの第 2 弾．今回は <code>null</code> 対策として Maybe モナドの使い方を見ていきましょう．Functor を扱った Part 1 は <a href="../sanctuary1">こちら．</a></p>
 </div>
 </div>
 </div>
@@ -264,13 +264,13 @@ null &lt; 0;  //=&gt; false</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">// 'NA' は欠席になるが null は D になる．
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">// &#39;NA&#39; は欠席になるが null は D になる．
 const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x);
-const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "D")(x =&gt; "欠席"))));
+const grade = geqAlt(90, &#34;A&#34;)(geqAlt(80, &#34;B&#34;)(geqAlt(60, &#34;C&#34;)(geqAlt(0, &#34;D&#34;)(x =&gt; &#34;欠席&#34;))));
 
-grade(0)     //=&gt; 'D'
-grade(null)  //=&gt; 'D'
-grade('NA')  //=&gt; '欠席'</code></pre>
+grade(0)     //=&gt; &#39;D&#39;
+grade(null)  //=&gt; &#39;D&#39;
+grade(&#39;NA&#39;)  //=&gt; &#39;欠席&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -295,10 +295,10 @@ grade('NA')  //=&gt; '欠席'</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript line-numbers" data-lang="javascript line-numbers">const S = require('sanctuary');
+<pre class="highlight"><code class="language-javascript line-numbers" data-lang="javascript line-numbers">const S = require(&#39;sanctuary&#39;);
 const greet = console.log;     // console.logをgreet関数と命名
 
-const monad1 = S.toMaybe('Merry Christmas!'); // モナドに文字列を格納
+const monad1 = S.toMaybe(&#39;Merry Christmas!&#39;); // モナドに文字列を格納
 S.map(greet)(monad1);                         // モナドにgreet関数を適用
 //=&gt; Merry Christmas!
 //   Just (undefined)
@@ -331,55 +331,55 @@ S.map(greet)(monad3)
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">const S = require('sanctuary');
-const R = require('ramda');
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const S = require(&#39;sanctuary&#39;);
+const R = require(&#39;ramda&#39;);
 
 const students = [
-  { name: "太朗", exams: { midterm: 'NA', endterm: 65 } },
-  { name: "花子", exams: { midterm: 93, endterm: 38 } },
-  { name: "謙太", exams: { midterm: null, endterm: 65 } },
-  { name: "春子", exams: { midterm: 92, endterm: 78 } },
-  { name: "五朗", exams: { midterm: 0, endterm: 25 } },
-  { name: "郁子", exams: { midterm: 73, endterm: null } },
+  { name: &#34;太朗&#34;, exams: { midterm: &#39;NA&#39;, endterm: 65 } },
+  { name: &#34;花子&#34;, exams: { midterm: 93, endterm: 38 } },
+  { name: &#34;謙太&#34;, exams: { midterm: null, endterm: 65 } },
+  { name: &#34;春子&#34;, exams: { midterm: 92, endterm: 78 } },
+  { name: &#34;五朗&#34;, exams: { midterm: 0, endterm: 25 } },
+  { name: &#34;郁子&#34;, exams: { midterm: 73, endterm: null } },
 ];
 
 const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x);
-const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "D")(x =&gt; "欠席"))));
+const grade = geqAlt(90, &#34;A&#34;)(geqAlt(80, &#34;B&#34;)(geqAlt(60, &#34;C&#34;)(geqAlt(0, &#34;D&#34;)(x =&gt; &#34;欠席&#34;))));
 
 const grade2 = R.compose(
-  S.fromMaybe("欠席"), // モナドから値を取り出す．Nothingなら欠席が返る
+  S.fromMaybe(&#34;欠席&#34;), // モナドから値を取り出す．Nothingなら欠席が返る
   S.map(grade),        // Nothingはこのmapをスルーする
   S.toMaybe);          // Maybeモナドに値を格納．JustかNothingが返る
 
-const gradeLens = R.lensProp("grade");
+const gradeLens = R.lensProp(&#34;grade&#34;);
 // student.examsの値が同じ型ではないのでS.map()の型制約を満たさない．unchecked.map()を使う．
 const mark = student =&gt; R.set(gradeLens, S.unchecked.map(grade2)(student.exams), student);
 
 console.log(students.map(mark));
-console.log("----------------");
+console.log(&#34;----------------&#34;);
 console.log(students);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><a href="../sanctuary1">前回</a>の成績処理プログラムでは <code>null</code> は <code>'D'</code> に，<code>'NA'</code> は <code>'欠席'</code> に変換されました．今回変更点の核心は <code>grade2</code> 関数で，まず <code>S.toMaybe</code> で得点データを Maybe モナドにリフトし（ラッピングすること），Maybe モナドに対して <code>grade</code> 関数をマップしています．これによって得点が <code>null</code> の場合は <code>grade</code> 関数による処理がスルーされます．最後の <code>S.fromMaybe('欠席')</code> でモナドから値を取り出しています．モナドが <code>Nothing</code> インスタンスの場合は引数の <code>'欠席'</code> が返ります．</p>
+<p><a href="../sanctuary1">前回</a>の成績処理プログラムでは <code>null</code> は <code>&#39;D&#39;</code> に，<code>&#39;NA&#39;</code> は <code>&#39;欠席&#39;</code> に変換されました．今回変更点の核心は <code>grade2</code> 関数で，まず <code>S.toMaybe</code> で得点データを Maybe モナドにリフトし（ラッピングすること），Maybe モナドに対して <code>grade</code> 関数をマップしています．これによって得点が <code>null</code> の場合は <code>grade</code> 関数による処理がスルーされます．最後の <code>S.fromMaybe(&#39;欠席&#39;)</code> でモナドから値を取り出しています．モナドが <code>Nothing</code> インスタンスの場合は引数の <code>&#39;欠席&#39;</code> が返ります．</p>
 </div>
 <div class="paragraph">
-<p>上のコードでは，<code>null</code> は Maybe モナドで欠席に変換され，<code>'NA'</code> などの文字列は <code>grade</code> 関数によって欠席に変換されており，ちぐはぐ感があります．<code>grade</code> 関数は数値データのみを扱い，A から D までの成績付けを行い，数値以外は全て Maybe モナド側で欠席に変換したい場合は，以下のようにします．</p>
+<p>上のコードでは，<code>null</code> は Maybe モナドで欠席に変換され，<code>&#39;NA&#39;</code> などの文字列は <code>grade</code> 関数によって欠席に変換されており，ちぐはぐ感があります．<code>grade</code> 関数は数値データのみを扱い，A から D までの成績付けを行い，数値以外は全て Maybe モナド側で欠席に変換したい場合は，以下のようにします．</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x);
-const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(x =&gt; "D")));
+const grade = geqAlt(90, &#34;A&#34;)(geqAlt(80, &#34;B&#34;)(geqAlt(60, &#34;C&#34;)(x =&gt; &#34;D&#34;)));
 
 // sanctuaryのcomposeは2引数までなのでramdaを使う
 const grade2 = R.compose(
-  S.fromMaybe("欠席"),
+  S.fromMaybe(&#34;欠席&#34;),
   S.map(grade),        // Nothingはこのmapをスルーする
   S.ifElse(_.isNumber)(S.toMaybe)(x =&gt; S.Nothing)); // lodashのisNumberを使う</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>grade2</code> 関数の一番最初に <code>S.ifElse</code> があり，ここで引数が Number 型なら <code>S.toMaybe</code> を起動しモナド化し，そうでなければ <code>x &#8658; S.Nothing</code> を実行し <code>Nothing</code> を生成するように変更しています．Maybe モナドはデフォルトでは <code>null</code> と <code>undefined</code> に対して <code>Nothing</code> を返すので，自分で条件を設定して <code>Nothing</code> を返します．</p>
+<p><code>grade2</code> 関数の一番最初に <code>S.ifElse</code> があり，ここで引数が Number 型なら <code>S.toMaybe</code> を起動しモナド化し，そうでなければ <code>x ⇒ S.Nothing</code> を実行し <code>Nothing</code> を生成するように変更しています．Maybe モナドはデフォルトでは <code>null</code> と <code>undefined</code> に対して <code>Nothing</code> を返すので，自分で条件を設定して <code>Nothing</code> を返します．</p>
 </div>
 <div class="paragraph">
 <p>引数が数値か否かの判定はいろいろ面倒なので <a href="https://lodash.com">lodash</a> の <code>isNumber</code> 関数を使うのが良いでしょう．</p>
@@ -395,7 +395,7 @@ const grade2 = R.compose(
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">const grade2 = S.compose(
-  S.fromMaybe("欠席")) // getOrElse()と同じ．
+  S.fromMaybe(&#34;欠席&#34;)) // getOrElse()と同じ．
 (S.compose((S.map(grade)))        // Nothingはこのmapをスルーする
  (S.ifElse(_.isNumber)(S.toMaybe)(x =&gt; S.Nothing)));</code></pre>
 </div>

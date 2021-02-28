@@ -39,7 +39,7 @@
     <title>Lispの変数とシンボルは同じか？ &middot; wshito&#39;s diary</title>
 
     
-    <meta name="description" content="David S. Touretzkyの&#34;COMMON LISP: A Gentle Introduction to Symbolic Computation&#34;では，変数に値を代入するという言葉を使い，束縛という言葉を使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols" />
+    <meta name="description" content="David S. Touretzkyの&amp;#34;COMMON LISP: A Gentle Introduction to Symbolic Computation&amp;#34;では，変数に値を代入するという言葉を使い，束縛という言葉を使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる" />
     
 
     <meta name="HandheldFriendly" content="True" />
@@ -61,7 +61,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/binding/" />
 
@@ -74,13 +74,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -92,23 +92,23 @@
             
         ]
     },
-    "headline": Lispの変数とシンボルは同じか？,
-    "name": Lispの変数とシンボルは同じか？,
-    "wordCount": 2023,
+    "headline": "Lispの変数とシンボルは同じか？",
+    "name": "Lispの変数とシンボルは同じか？",
+    "wordCount":  2091 ,
     "timeRequired": "PT5M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/binding/,
-    "datePublished": 2017-10-02T21:20Z,
-    "dateModified": 2017-10-02T21:20Z,
+    "url": "http://diary.wshito.com/comp/lisp/binding/",
+    "datePublished": "2017-10-02T21:20Z",
+    "dateModified": "2017-10-02T21:20Z",
     
-    "keywords": lisp,
-    "description": ,
+    "keywords": "lisp",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/binding/
+        "@id": "http://diary.wshito.com/comp/lisp/binding/"
     }
 }
     </script>
@@ -133,7 +133,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -214,7 +215,7 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>David S. Touretzkyの"COMMON LISP: A Gentle Introduction to Symbolic Computation"では，変数に値を代入するという言葉を使い，束縛という言葉を使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）」と，意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました．</p>
+<p>David S. Touretzkyの&#34;COMMON LISP: A Gentle Introduction to Symbolic Computation&#34;では，変数に値を代入するという言葉を使い，束縛という言葉を使いません．同書158ページには「シンボルは値と束縛されない．変数だけが値と束縛されうる（Symbols are never bound; only variables can be bound）」と，意味深なことを言っています．そこで，シンボル，変数，束縛について調べてみました．</p>
 </div>
 <div class="paragraph">
 <p>まず，ANSI X3J13のFinal Draftによると，束縛は「名前」と「名前が指し示すもの」を結びつけることと記されています（an association between a name and that which the name denotes）．</p>
@@ -232,7 +233,7 @@
 </div>
 <div id="fig-symbol" class="imageblock">
 <div class="content">
-<img src="symbol.png" alt="symbol">
+<img src="symbol.png" alt="symbol"/>
 </div>
 <div class="title">図 1. シンボル・オブジェクトの概念図</div>
 </div>
@@ -241,21 +242,21 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf car 'ロールスロイス)   <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf car &#39;ロールスロイス)   <i class="conum" data-value="1"></i><b>(1)</b>
 
 car                        <i class="conum" data-value="2"></i><b>(2)</b>
 ;; =&gt; ロールスロイス
 
-(symbol-value 'car)        <i class="conum" data-value="3"></i><b>(3)</b>
+(symbol-value &#39;car)        <i class="conum" data-value="3"></i><b>(3)</b>
 ;; =&gt; ロールスロイス
 
-(symbol-function 'car)     <i class="conum" data-value="4"></i><b>(4)</b>
+(symbol-function &#39;car)     <i class="conum" data-value="4"></i><b>(4)</b>
 ;; =&gt; #&lt;FUNCTION CAR&gt;</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>carシンボルに「ロールスロイス」シンボルを代入．</td>
 </tr>
@@ -271,7 +272,7 @@ car                        <i class="conum" data-value="2"></i><b>(2)</b>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
 <td>carシンボルの「関数」属性を取り出す．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p><code>SETF</code> 関数を使って <code>car</code> シンボルに <code>ロールスロイス</code> というシンボルを代入したのだから，<code>car</code> シンボルは変数と同じじゃないか，と思いますよね．ここではその通りです．シンボルは変数に「名前付け」するのに使われます．しかし常に「変数＝シンボル」ではありません．ローカル変数はシンボルではないからです．</p>
@@ -292,10 +293,10 @@ car                        <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf X "グローバル変数")
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(setf X &#34;グローバル変数&#34;)
 (defun foo ()
-  (let ((X "局所変数"))
-    (format t "X=~a, ~a~%" X (eql X 'X))))  <i class="conum" data-value="1"></i><b>(1)</b>
+  (let ((X &#34;局所変数&#34;))
+    (format t &#34;X=~a, ~a~%&#34; X (eql X &#39;X))))  <i class="conum" data-value="1"></i><b>(1)</b>
 
 (foo)
 ;; =&gt; X=局所変数, NIL
@@ -304,14 +305,14 @@ car                        <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>局所変数 <code>X</code> とシンボル <code>X</code> は同じではないので，<code>eql</code> は <code>NIL</code> を返す．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
-<p>シンボル型オブジェクトは名前の一意性から，同じパッケージ内であれば <code>'X</code> は常に同じシンボル型オブジェクトを指すことが保証されています．したがって，シンボル <code>'X</code> はグローバル変数 'X' を指します．<code>let</code> バインディングで作成された <code>X</code> は局所変数なので当然シンボル <code>X</code> とは別物です．</p>
+<p>シンボル型オブジェクトは名前の一意性から，同じパッケージ内であれば <code>&#39;X</code> は常に同じシンボル型オブジェクトを指すことが保証されています．したがって，シンボル <code>&#39;X</code> はグローバル変数 &#39;X&#39; を指します．<code>let</code> バインディングで作成された <code>X</code> は局所変数なので当然シンボル <code>X</code> とは別物です．</p>
 </div>
 <div class="paragraph">
 <p>それでは，局所変数 <code>X</code> とは一体何者なのだ，と思いますが，これは調べる術がありません．なぜなら，<code>let</code> ブロック内で，</p>
@@ -326,7 +327,7 @@ car                        <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(class-of 'X)</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(class-of &#39;X)</code></pre>
 </div>
 </div>
 <div class="paragraph">

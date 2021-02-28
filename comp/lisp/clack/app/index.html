@@ -70,7 +70,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/clack/app/" />
 
@@ -83,13 +83,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -101,23 +101,23 @@
             
         ]
     },
-    "headline": コードリーディング: Lack アプリケーションを理解する,
-    "name": コードリーディング: Lack アプリケーションを理解する,
-    "wordCount": 2931,
+    "headline": "コードリーディング: Lack アプリケーションを理解する",
+    "name": "コードリーディング: Lack アプリケーションを理解する",
+    "wordCount":  2921 ,
     "timeRequired": "PT6M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/clack/app/,
-    "datePublished": 2017-10-11T21:25Z,
-    "dateModified": 2017-10-11T21:25Z,
+    "url": "http://diary.wshito.com/comp/lisp/clack/app/",
+    "datePublished": "2017-10-11T21:25Z",
+    "dateModified": "2017-10-11T21:25Z",
     
-    "keywords": lisp, clack, lack, webapp,
-    "description": ,
+    "keywords": "lisp, clack, lack, webapp",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/clack/app/
+        "@id": "http://diary.wshito.com/comp/lisp/clack/app/"
     }
 }
     </script>
@@ -142,7 +142,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -229,8 +230,7 @@
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://blog.8arrow.org">深町氏</a> のウェブアプリケーション・ツール <a href="https://github.com/fukamachi/clack">Clack</a> のソースコード・リーディング．今回は，Clackが起動時に受け取る <a href="https://github.com/fukamachi/lack">Lack</a> アプリケーションを理解するために，その構築プロセスと使われ方をコードで追ってみる．
- </p>
+<p><a href="http://blog.8arrow.org">深町氏</a> のウェブアプリケーション・ツール <a href="https://github.com/fukamachi/clack">Clack</a> のソースコード・リーディング．今回は，Clackが起動時に受け取る <a href="https://github.com/fukamachi/lack">Lack</a> アプリケーションを理解するために，その構築プロセスと使われ方をコードで追ってみる．</p>
 </div>
 <div class="paragraph">
 <p>以下は， <a href="https://github.com/fukamachi/clack">Clack</a> ページのサンプルコードである．</p>
@@ -242,7 +242,7 @@
   (clack:clackup
     (lambda (env)
       (declare (ignore env))
-        '(200 (:content-type "text/plain") ("Hello, Clack!")))))</code></pre>
+        &#39;(200 (:content-type &#34;text/plain&#34;) (&#34;Hello, Clack!&#34;)))))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -265,7 +265,7 @@
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>8行目で使われるローカル関数 <code>buildapp</code> を定義．</td>
 </tr>
@@ -285,7 +285,7 @@
 <td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>ここでローカル関数 <code>buildapp</code> を呼んで <code>app</code> を構築．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>上の4行目で呼ばれるLackの <code>builder</code> マクロの定義は以下の通り．</p>
@@ -295,9 +295,9 @@
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defmacro builder (&amp;rest app-or-middlewares)
   (let ((middlewares (butlast app-or-middlewares)))
-    `(reduce #'funcall
+    `(reduce #&#39;funcall
              (remove-if
-              #'null
+              #&#39;null
               (list
                ,@(loop for mw in middlewares
                        when mw
@@ -312,11 +312,11 @@
 <div id="listings:builder-macro-expansion" class="listingblock">
 <div class="title">コード 4. <code>builder</code> マクロの展開結果</div>
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (require 'lack)
-CL-USER&gt; (require 'clack)
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (require &#39;lack)
+CL-USER&gt; (require &#39;clack)
 CL-USER&gt; (in-package :lack.builder)
-BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
-(REDUCE #'FUNCALL (REMOVE-IF #'NULL (LIST (FIND-MIDDLEWARE :BACKTRACE)))
+BUILDER&gt; (macroexpand-1 &#39;(builder :backtrace app))
+(REDUCE #&#39;FUNCALL (REMOVE-IF #&#39;NULL (LIST (FIND-MIDDLEWARE :BACKTRACE)))
         :INITIAL-VALUE (TO-APP APP) :FROM-END T)</code></pre>
 </div>
 </div>
@@ -344,7 +344,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>to-app</code> の引数がLackのコンポーネントなら，「<code>env</code> を引数にしてコンポーネントを呼び出す」ラムダ関数でラップする．</td>
 </tr>
@@ -352,13 +352,13 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>我らが <code>app</code> はただのラムダ式なのでこちらが呼び出され，ラムダ式がそのまま返される．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>これで<a href="#listings:builder-macro">コード 3</a>の6行目の <code>(to-app app)</code> がラムダ式になることが分かった．なんだかごちゃごちゃしてきたが，要は，<a href="#listings:builder-macro">コード 3</a>の5-6行目の評価結果が<a href="#listings:buildapp">コード 2</a>，8行目の <code>app</code> に代入されるということだ．</p>
 </div>
 <div class="paragraph">
-<p>ここで，<a href="#listings:builder-macro">コード 3</a>の <code>builder</code> マクロの展開結果に出てくる <code>reduce</code> のおさらい．関数 <code>f</code> をリスト <code>'(a b c)</code> にreduceで適用すると，リストの左から <code>f</code> を2項演算子として適用する．その際，最初の引数は前の演算結果が使われる．つまり前の適用結果で引数の位置を揃えると下のようになる．</p>
+<p>ここで，<a href="#listings:builder-macro">コード 3</a>の <code>builder</code> マクロの展開結果に出てくる <code>reduce</code> のおさらい．関数 <code>f</code> をリスト <code>&#39;(a b c)</code> にreduceで適用すると，リストの左から <code>f</code> を2項演算子として適用する．その際，最初の引数は前の演算結果が使われる．つまり前の適用結果で引数の位置を揃えると下のようになる．</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -372,7 +372,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(reduce #'list '(a b c d))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(reduce #&#39;list &#39;(a b c d))
 ; =&gt; (((A B) C) D)</code></pre>
 </div>
 </div>
@@ -381,7 +381,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(REDUCE #'FUNCALL (REMOVE-IF #'NULL (LIST (FIND-MIDDLEWARE :BACKTRACE)))
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(REDUCE #&#39;FUNCALL (REMOVE-IF #&#39;NULL (LIST (FIND-MIDDLEWARE :BACKTRACE)))
         :INITIAL-VALUE (TO-APP APP) :FROM-END T)</code></pre>
 </div>
 </div>
@@ -394,7 +394,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 </div>
 <div class="paragraph">
-<p>というコードが<a href="#listings:buildapp">コード 2</a>の5-7行目の <code>(builder (if &#8230;&#8203;) app)</code> に置きかわり，この実行結果が8行目の <code>app</code> に代入される．今回はミドルウェアに <code>:backtrace</code> しか与えていないので，<code>(find-middleware :backtrace)</code> は <code>*lack-middleware-backtrace*</code> に設定されている値を返す（ <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/util.lisp#L27">lack/src/util.lisp</a> 参照）．つまり，backtraceミドルウェアのラムダ式だ．したがって上のreduceは以下のコードを実行する．</p>
+<p>というコードが<a href="#listings:buildapp">コード 2</a>の5-7行目の <code>(builder (if …​) app)</code> に置きかわり，この実行結果が8行目の <code>app</code> に代入される．今回はミドルウェアに <code>:backtrace</code> しか与えていないので，<code>(find-middleware :backtrace)</code> は <code>*lack-middleware-backtrace*</code> に設定されている値を返す（ <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/util.lisp#L27">lack/src/util.lisp</a> 参照）．つまり，backtraceミドルウェアのラムダ式だ．したがって上のreduceは以下のコードを実行する．</p>
 </div>
 <div id="listings:our-app" class="listingblock">
 <div class="title">コード 6. 今回buildされるLackアプリケーション</div>
@@ -415,7 +415,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>一番外側をラップしているミドルウェア．</td>
 </tr>
@@ -423,7 +423,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td><code>env</code> を引数に取るユーザ指定のラムダ式．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p><a href="#listings:our-app">コード 6</a>の実行結果を得るために，backtraceミドルウェアの定義を見る．</p>
@@ -433,7 +433,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defparameter *lack-middleware-backtrace*
   (lambda (app &amp;key
-            (output '*error-output*)
+            (output &#39;*error-output*)
             result-on-error)
     (check-type output (or symbol stream pathname string))
     (check-type result-on-error (or function cons null))
@@ -459,7 +459,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
                                   (when result-on-error
                                     (return (error-handler condition))))))
             (funcall app env))))))
-  "Middleware for outputting backtraces when an error occured")</code></pre>
+  &#34;Middleware for outputting backtraces when an error occured&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -469,7 +469,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 <p>さて，<a href="#listings:our-app">コード 6</a>の実行によって返されのは22行目の <code>env</code> を引数に取るラムダ関数だ．そのラムダ関数は28行目でユーザが定義したレスポンスを返すラムダ関数をコールする．ユーザ定義のラムダ関数をラップしたbacktraceのラムダ関数が最終的に<a href="#listings:buildapp">コード 2</a>の8行目の <code>app</code> に設定され，Webサーバーに渡される．</p>
 </div>
 <div class="paragraph">
-<p>したがって，ミドルウェアの役割は，サーバーから様々なパラメータをカプセル化した <code>env</code> を受け取り，それをユーザ定義のアプリケーションに渡す前に，何らかの事前処理（<a href="#listings:backtrace">コード 7</a>，23&#8212;&#8203;27行目）を実行し，そしてユーザ定義のアプリケーションを呼び出すことだ．ちなみにbacktraceは事前処理しかないが，28行目以降に事後処理を追加することもできる．</p>
+<p>したがって，ミドルウェアの役割は，サーバーから様々なパラメータをカプセル化した <code>env</code> を受け取り，それをユーザ定義のアプリケーションに渡す前に，何らかの事前処理（<a href="#listings:backtrace">コード 7</a>，23—​27行目）を実行し，そしてユーザ定義のアプリケーションを呼び出すことだ．ちなみにbacktraceは事前処理しかないが，28行目以降に事後処理を追加することもできる．</p>
 </div>
 </div>
 </div>
@@ -516,7 +516,7 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
 <div class="title">コード 9. <code>src/clack.lisp</code> のサーバー呼び出し部分</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(prog1
-    (apply #'clack.handler:run app server
+    (apply #&#39;clack.handler:run app server
            :port port
            :debug debug
            :use-thread use-thread
@@ -535,17 +535,17 @@ BUILDER&gt; (macroexpand-1 '(builder :backtrace app))
                                          (*error-output* . ,*error-output*)
                                          ,@bt:*default-special-bindings*)))
     (flet ((run-server ()
-             (apply (intern #.(string '#:run) handler-package)
+             (apply (intern #.(string &#39;#:run) handler-package)
                     app
                     :allow-other-keys t
                     args)))
       (make-handler
        :server server
        :acceptor (if use-thread
-                     (bt:make-thread #'run-server
-                                     :name (format nil "clack-handler-~(~A~)" server)
+                     (bt:make-thread #&#39;run-server
+                                     :name (format nil &#34;clack-handler-~(~A~)&#34; server)
                                      :initial-bindings
-                                     `((bt:*default-special-bindings* . ',bt:*default-special-bindings*)
+                                     `((bt:*default-special-bindings* . &#39;,bt:*default-special-bindings*)
                                        ,@bt:*default-special-bindings*))
                      (run-server))))))</code></pre>
 </div>

@@ -71,7 +71,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/" />
 
@@ -84,13 +84,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -102,23 +102,23 @@
             
         ]
     },
-    "headline": uvbook for Lisp -- Hello World,
-    "name": uvbook for Lisp -- Hello World,
-    "wordCount": 3733,
+    "headline": "uvbook for Lisp -- Hello World",
+    "name": "uvbook for Lisp -- Hello World",
+    "wordCount":  3730 ,
     "timeRequired": "PT8M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/,
-    "datePublished": 2017-01-01T01:21Z,
-    "dateModified": 2017-01-01T01:21Z,
+    "url": "http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/",
+    "datePublished": "2017-01-01T01:21Z",
+    "dateModified": "2017-01-01T01:21Z",
     
-    "keywords": list, programming, async, node.js, uvbook, CFFI,
-    "description": ,
+    "keywords": "list, programming, async, node.js, uvbook, CFFI",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/
+        "@id": "http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/"
     }
 }
     </script>
@@ -143,7 +143,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -232,8 +233,7 @@
 
     <section class="post-content">
       <p>ここでは，<a href="https://github.com/libuv/libuv">libuv</a>のチュートリアル本，<a href="http://nikhilm.github.io/uvbook/basics.html#hello-world">uvbookの第2.2節</a>に載っている以下のHello WorldコードをLispで実装する手順を解説します．まず始めに<a href="https://common-lisp.net/project/cffi/">CFFI</a>を使って直接libuvの関数を呼び出す方法を解説し，最後にlibuvラッパーの<a href="https://github.com/orthecreedence/cl-libuv">cl-libuv</a>を使った実装方法を解説します．間違い，コメント等ありましたら，<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>までお願いします．</p>
-
-<pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
+<pre><code class="language-{c" data-lang="{c">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;uv.h&gt;
 
@@ -248,175 +248,99 @@ int main() {
     free(loop);
     return 0;
 }
-</code></pre>
-
-<h2 id="ライブラリのロード">ライブラリのロード</h2>
-
+</code></pre><h2 id="ライブラリのロード">ライブラリのロード</h2>
 <p>Cで書かれた<code>libuv</code>の関数を呼び出す前に，<code>libuv</code>ライブラリをロードする必要があります．<code>libuv</code>がシステムにインストールされている場合，<code>cffi:load-foreign-library</code>関数を使ってロードすることができます．ファイル名を直接指定するよりも，拡張子を省略して<code>:default</code>指定すると，環境に応じてライブラリがロードされます．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;cffi</span>)
+(cffi:load-foreign-library <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">:default</span> <span style="color:#e6db74">&#34;libuv&#34;</span>))
+</code></pre></div><p>OSに応じてロードするライブラリを細かく指定したい場合は，<code>cffi:define-foreign-library</code>関数でライブラリを定義した後，<code>cffi:use-foreign-library</code>を使ってロードします．<code>cffi:use-foreign-library</code>で複数回ロードするとエラーが出るので下の例のようにロード済みかどうか確認します．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:define-foreign-library libuv
+  (<span style="color:#e6db74">:darwin</span>  (<span style="color:#e6db74">:or</span> <span style="color:#e6db74">&#34;libuv.1.dylib&#34;</span> <span style="color:#e6db74">&#34;libuv.dylib&#34;</span>))
+  (<span style="color:#e6db74">:unix</span>    (<span style="color:#e6db74">:or</span> <span style="color:#e6db74">&#34;libuv.so.1&#34;</span> <span style="color:#e6db74">&#34;libuv.so&#34;</span>))
+  (<span style="color:#e6db74">:windows</span> (<span style="color:#e6db74">:or</span> <span style="color:#e6db74">&#34;libuv.dll&#34;</span> <span style="color:#e6db74">&#34;libuv-1.dll&#34;</span>))
+  (<span style="color:#66d9ef">t</span>        (<span style="color:#e6db74">:default</span> <span style="color:#e6db74">&#34;libuv&#34;</span>)))
 
-<pre><code class="language-lisp">(require 'cffi)
-(cffi:load-foreign-library '(:default &quot;libuv&quot;))
-</code></pre>
-
-<p>OSに応じてロードするライブラリを細かく指定したい場合は，<code>cffi:define-foreign-library</code>関数でライブラリを定義した後，<code>cffi:use-foreign-library</code>を使ってロードします．<code>cffi:use-foreign-library</code>で複数回ロードするとエラーが出るので下の例のようにロード済みかどうか確認します．</p>
-
-<pre><code class="language-lisp">(cffi:define-foreign-library libuv
-  (:darwin  (:or &quot;libuv.1.dylib&quot; &quot;libuv.dylib&quot;))
-  (:unix    (:or &quot;libuv.so.1&quot; &quot;libuv.so&quot;))
-  (:windows (:or &quot;libuv.dll&quot; &quot;libuv-1.dll&quot;))
-  (t        (:default &quot;libuv&quot;)))
-
-(unless (cffi:foreign-library-loaded-p 'libuv)
+(unless (cffi:foreign-library-loaded-p <span style="color:#e6db74">&#39;libuv</span>)
   (cffi:use-foreign-library libuv))
-</code></pre>
-
-<h2 id="uv-loop-t-構造体変数の準備"><code>uv_loop_t</code>構造体変数の準備</h2>
-
+</code></pre></div><h2 id="uv_loop_t構造体変数の準備"><code>uv_loop_t</code>構造体変数の準備</h2>
 <p>Cのサンプルコード6行目にある以下のコードを実装します．</p>
-
-<pre class="language-c line-numbers" data-start="6"><code>    uv_loop_t *loop = malloc(sizeof(uv_loop_t));
-</code></pre>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>まず始めに，<code>size_t</code>型をCFFIで使えるように設定し，次にメモリの割当方法を学び，最後にポインタ変数を作成します．</p>
-
 <h4 id="型の定義方法">型の定義方法</h4>
-
 <p>libuvの<a href="http://docs.libuv.org/en/v1.x/loop.html">APIドキュメント</a>には<code>uv_loop_t</code>構造体の詳細は示されていませんが，代わりに同じページの下の方に，<code>uv_loop_t</code>の大きさを<code>size_t</code>で返す<code>uv_loop_size(void)</code>関数があります．Cの組込み型は通常CFFIから利用可能ですが，<code>size_t</code>は何故か利用できないので，まず<code>size_t</code>と同じ大きさの<code>unsigned int</code>型をエイリアスとしてCFFI版teypdefしておきましょう．</p>
-
-<pre><code class="language-lisp">(cffi:defctype size_t :uint)
-</code></pre>
-
-<h4 id="c関数のコール方法">C関数のコール方法</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:defctype size_t <span style="color:#e6db74">:uint</span>)
+</code></pre></div><h4 id="c関数のコール方法">C関数のコール方法</h4>
 <p>Cの関数をcallするには2通りの方法があります．CFFIを使って直接関数を起動する方法と，CFFIでCの関数にLispシンボルをバインドしてLisp関数として起動する方法です．</p>
-
 <p>１つ目の直接起動する方法は<code>cffi:foreign-funcall</code>を使う方法です．下の例の様に<code>cffi:foreign-funcall</code>に関数名，戻り値型，(引数型 引数値)から成る引数リストを指定して呼びます．</p>
-
-<pre><code class="language-lisp">(cffi:foreign-funcall &quot;uv_loop_size&quot; size_t)
-</code></pre>
-
-<p>２つ目のLispシンボルにバインドして呼ぶ方法は<code>cffi:defcfun</code>マクロを使います．，<code>cffi:defcfun</code>マクロを使って以下のように定義すると，<strong>アンダースコアがハイフンに変わった</strong>Lisp関数が定義されます．</p>
-
-<pre><code class="language-lisp">(cffi:defcfun &quot;uv_loop_size&quot; size_t)  ; uv-loop-sizeにバインド
-(uv-loop-size)                        ; Lisp関数として起動
-</code></pre>
-
-<p><code>uv_loop_size</code>は何回も呼ばないので，ここでは<code>cffi:foreign-funcall</code>を使った１番目の方法を採用することにします．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:foreign-funcall <span style="color:#e6db74">&#34;uv_loop_size&#34;</span> size_t)
+</code></pre></div><p>２つ目のLispシンボルにバインドして呼ぶ方法は<code>cffi:defcfun</code>マクロを使います．，<code>cffi:defcfun</code>マクロを使って以下のように定義すると，<strong>アンダースコアがハイフンに変わった</strong>Lisp関数が定義されます．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:defcfun <span style="color:#e6db74">&#34;uv_loop_size&#34;</span> size_t)  <span style="color:#75715e">; uv-loop-sizeにバインド</span>
+(uv-loop-size)                        <span style="color:#75715e">; Lisp関数として起動</span>
+</code></pre></div><p><code>uv_loop_size</code>は何回も呼ばないので，ここでは<code>cffi:foreign-funcall</code>を使った１番目の方法を採用することにします．</p>
 <h3 id="メモリの割当て方法">メモリの割当て方法</h3>
-
 <p>Lispからメモリを割り当てる場合，型に合わせたメモリ割り当てと，バイトサイズを指定したメモリ割り当ての２通りの方法があります．型を指定してその大きさのメモリを割り当てる場合には，<code>cffi:foreign-alloc</code>か<code>with-foreign-objects</code>を使います．バイトサイズを指定してメモリを割り当てるには，<code>with-foreign-pointer</code>を使います．</p>
-
 <p>CFFIでメモリを割り当てる際にはバイト（8bit）単位で指定します．そこで，<code>size_t</code>型のバイト数を取得する必要があります．CFFIから利用可能なCの組込み型は，例えば<code>(cffi:foreign-type-size :int)</code>でバイト数を取得できますが，先ほど作成したエイリアス<code>size_t</code>を使う場合にはクォートが必要です．後でコードが読みやすくなるように，ここでは<code>uv_loop_t</code>型のバイト数を<code>*size*</code>に格納しておきましょう．</p>
-
-<pre><code class="language-lisp">(* (cffi:foreign-type-size 'size_t)
-   (cffi:foreign-funcall &quot;uv_loop_size&quot; size_t))
-</code></pre>
-
-<p>バイト数を指定してメモリを割り当てるには<code>cffi:with-foreign-pointer</code>マクロを使います．以下のコードで本体処理部分でのみ<code>*size*</code>バイトのメモリが<code>uvloop</code>にバインドされます．メモリは通常スタックに割り当てられ<code>with</code>ブロックを抜けると解放されます．</p>
-
-<pre><code class="language-lisp">(cffi:with-foreign-pointer (uvloop *size*)
-   '処理本体)
-</code></pre>
-
-<p>バイト数を指定する代わりに型を指定してメモリを割り当てる<code>cffi:with-foreign-object</code>もあります．型の後ろに整数を指定すると，与えられた型が連続した領域を確保することができます．</p>
-
-<pre><code class="language-lisp">(cffi:with-foreign-object
-    (uvloop 'size_t (cffi:foreign-funcall &quot;uv_loop_size&quot; size_t))
-  '処理本体)
-</code></pre>
-
-<p><code>malloc()</code>の様にヒープにメモリを割り当てたい時には<code>cffi:foreign-alloc</code>を使います．この関数はバイト数ではなく型をとるので，任意の大きさを得るには<code>:count</code>キーワードで連続した領域数を指定します．この方法でメモリを割り当てた場合，<code>cffi:foreign-free</code>で解放する必要があります．</p>
-
-<pre><code class="language-lisp">;; メモリを割当てポインタを*uvloop*にバインド
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">*</span> (cffi:foreign-type-size <span style="color:#e6db74">&#39;size_t</span>)
+   (cffi:foreign-funcall <span style="color:#e6db74">&#34;uv_loop_size&#34;</span> size_t))
+</code></pre></div><p>バイト数を指定してメモリを割り当てるには<code>cffi:with-foreign-pointer</code>マクロを使います．以下のコードで本体処理部分でのみ<code>*size*</code>バイトのメモリが<code>uvloop</code>にバインドされます．メモリは通常スタックに割り当てられ<code>with</code>ブロックを抜けると解放されます．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:with-foreign-pointer (uvloop *size*)
+   <span style="color:#e6db74">&#39;処理本体</span>)
+</code></pre></div><p>バイト数を指定する代わりに型を指定してメモリを割り当てる<code>cffi:with-foreign-object</code>もあります．型の後ろに整数を指定すると，与えられた型が連続した領域を確保することができます．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:with-foreign-object
+    (uvloop <span style="color:#e6db74">&#39;size_t</span> (cffi:foreign-funcall <span style="color:#e6db74">&#34;uv_loop_size&#34;</span> size_t))
+  <span style="color:#e6db74">&#39;処理本体</span>)
+</code></pre></div><p><code>malloc()</code>の様にヒープにメモリを割り当てたい時には<code>cffi:foreign-alloc</code>を使います．この関数はバイト数ではなく型をとるので，任意の大きさを得るには<code>:count</code>キーワードで連続した領域数を指定します．この方法でメモリを割り当てた場合，<code>cffi:foreign-free</code>で解放する必要があります．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;; メモリを割当てポインタを*uvloop*にバインド</span>
 (defparameter *uvloop*
-  (cffi:foreign-alloc 'size_t
-		      :count (cffi:foreign-funcall &quot;uv_loop_size&quot; size_t)))
-;; メモリ解放
+  (cffi:foreign-alloc <span style="color:#e6db74">&#39;size_t</span>
+		      <span style="color:#e6db74">:count</span> (cffi:foreign-funcall <span style="color:#e6db74">&#34;uv_loop_size&#34;</span> size_t)))
+<span style="color:#75715e">;; メモリ解放</span>
 (cffi:foreign-free *uvloop*)
-</code></pre>
-
-<p>ここでは，１番始めに紹介した，<code>cffi:with-foreign-pointer</code>を使って実装することにします．</p>
-
+</code></pre></div><p>ここでは，１番始めに紹介した，<code>cffi:with-foreign-pointer</code>を使って実装することにします．</p>
 <h2 id="イベントループの初期化">イベントループの初期化</h2>
-
 <p>ここまでで<code>uv_loop_t</code>型へのポインタ変数を用意できました．次はサンプルCプログラムの7行目の以下のコードを実装します．</p>
-
-<pre class="language-c line-numbers" data-start="7"><code>    uv_loop_init(loop);</code></pre>
-
+<!-- raw HTML omitted -->
 <p><code>uv_loop_init</code>関数の定義は，<code>int uv_loop_init(uv_loop_t* loop)</code>です．引数がポインタの場合，CFFIでの型指定は<code>:pointer</code>を使います．Lispシンボルとバインドして呼び出したいなら，</p>
-
-<pre><code class="language-lisp">(cffi:defcfun &quot;uv_loop_init&quot; :int (loop :pointer))
-</code></pre>
-
-<p>で，ポインタを引数<code>loop</code>に取り，<code>int</code>を返す<code>uv-loop-init</code>関数が定義できます．呼び出し方法はハイフンに注意して<code>(uv-loop-init uvloop)</code>です（<code>uvloop</code>は前節でメモリ割当てしたポインタ変数）．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:defcfun <span style="color:#e6db74">&#34;uv_loop_init&#34;</span> <span style="color:#e6db74">:int</span> (loop <span style="color:#e6db74">:pointer</span>))
+</code></pre></div><p>で，ポインタを引数<code>loop</code>に取り，<code>int</code>を返す<code>uv-loop-init</code>関数が定義できます．呼び出し方法はハイフンに注意して<code>(uv-loop-init uvloop)</code>です（<code>uvloop</code>は前節でメモリ割当てしたポインタ変数）．</p>
 <p>直接呼ぶ場合には，引数と戻り値の記述順序が<code>cffi:defcfun</code>と逆で，</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:foreign-funcall <span style="color:#e6db74">&#34;uv_loop_init&#34;</span> <span style="color:#e6db74">:pointer</span> uvloop <span style="color:#e6db74">:int</span>)
+</code></pre></div><p>で呼出せます．先ほどのメモリ割当てコードと合わせるとここまでの処理は以下の通りです．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;; install libuv and cffi first.</span>
+(<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;cffi</span>)
 
-<pre><code class="language-lisp">(cffi:foreign-funcall &quot;uv_loop_init&quot; :pointer uvloop :int)
-</code></pre>
+(cffi:load-foreign-library <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">:default</span> <span style="color:#e6db74">&#34;libuv&#34;</span>))
 
-<p>で呼出せます．先ほどのメモリ割当てコードと合わせるとここまでの処理は以下の通りです．</p>
+(cffi:defctype size_t <span style="color:#e6db74">:uint</span>)
 
-<pre><code class="language-lisp">;; install libuv and cffi first.
-(require 'cffi)
-
-(cffi:load-foreign-library '(:default &quot;libuv&quot;))
-
-(cffi:defctype size_t :uint)
-
-(defparameter *size* (* (cffi:foreign-type-size :uint)
-			(cffi:foreign-funcall &quot;uv_loop_size&quot; size_t)))
+(defparameter *size* (<span style="color:#a6e22e">*</span> (cffi:foreign-type-size <span style="color:#e6db74">:uint</span>)
+			(cffi:foreign-funcall <span style="color:#e6db74">&#34;uv_loop_size&#34;</span> size_t)))
 
 (cffi:with-foreign-pointer (uvloop *size*)
-  (cffi:foreign-funcall &quot;uv_loop_init&quot; :pointer uvloop :int))
-</code></pre>
-
-<h2 id="ポインタ変数について">ポインタ変数について</h2>
-
+  (cffi:foreign-funcall <span style="color:#e6db74">&#34;uv_loop_init&#34;</span> <span style="color:#e6db74">:pointer</span> uvloop <span style="color:#e6db74">:int</span>))
+</code></pre></div><h2 id="ポインタ変数について">ポインタ変数について</h2>
 <p>上の例ではポインタを取る関数に<code>uvloop</code>を渡しました．この例では出て来ませんが，ポインタが指し示す先を得る方法も説明しておきましょう．ポインタの参照先を得るには<code>cffi:mem-ref</code>を使います．例えば，<code>char</code>型のポインタ変数<code>ptr</code>の参照先は以下で得られます．</p>
-
-<pre><code class="language-lisp">(cffi:mem-ref ptr :char)
-</code></pre>
-
-<p><code>ptr</code>が<code>char</code>配列の場合，<code>ptr[3]</code>は<code>(cffi:mem-ref ptr :char 3)</code>でアクセスします．参照先に値を設定する場合は以下のように書きます．</p>
-
-<pre><code class="language-lisp">(setf (cffi:mem-ref ptr :char 3) (char-code #\a))
-</code></pre>
-
-<h2 id="cffiによる実装仕上げ">CFFIによる実装仕上げ</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:mem-ref ptr <span style="color:#e6db74">:char</span>)
+</code></pre></div><p><code>ptr</code>が<code>char</code>配列の場合，<code>ptr[3]</code>は<code>(cffi:mem-ref ptr :char 3)</code>でアクセスします．参照先に値を設定する場合は以下のように書きます．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(setf (cffi:mem-ref ptr <span style="color:#e6db74">:char</span> <span style="color:#ae81ff">3</span>) (<span style="color:#a6e22e">char-code</span> <span style="color:#e6db74">#\a</span>))
+</code></pre></div><h2 id="cffiによる実装仕上げ">CFFIによる実装仕上げ</h2>
 <p>残りのCコードは以下の通りです．</p>
-
-<pre class="language-c line-numbers" data-start="9"><code>    printf("Now quitting.\n");
-    uv_run(loop, UV_RUN_DEFAULT);
-
-    uv_loop_close(loop);
-    free(loop);
-</code></pre>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>最後のメモリ解放は<code>cffi:with-foreign-pointer</code>を使った場合，自動的に行われるので必要ありません．</p>
-
 <p><code>uv_run()</code>関数のシグニチャは<code>int uv_run(uv_loop_t* loop, uv_run_mode mode)</code>で，<code>uv_run_mode</code>型は<a href="http://docs.libuv.org/en/v1.x/loop.html#c.uv_run_mode">ここで</a>以下の様に定義されている<code>enum</code>型です．</p>
-
-<pre><code class="language-c">typedef enum {
-    UV_RUN_DEFAULT = 0,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> {
+    UV_RUN_DEFAULT <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
     UV_RUN_ONCE,
     UV_RUN_NOWAIT
 } uv_run_mode;
-</code></pre>
-
-<p>Cの<code>uv_run</code>を起動するときに引数で<code>UV_RUN_DEFAULT</code>の値を渡さなければいけないので，CFFIからCのenum型を定義し用意します．</p>
-
-<pre><code class="language-lisp">(cffi:defcenum :uv-run-mode
-  (:uv-run-default 0)
-  :uv-run-once
-  :uv-run-nowait)
-</code></pre>
-
-<p><code>uv_loop_close(loop)</code>は<code>int</code>を返す関数です．以上をまとめるとHello WorldサンプルコードのLisp版は以下のようになります．</p>
-
-<pre><code class="language-lisp line-numbers">;; install libuv and cffi first.
+</code></pre></div><p>Cの<code>uv_run</code>を起動するときに引数で<code>UV_RUN_DEFAULT</code>の値を渡さなければいけないので，CFFIからCのenum型を定義し用意します．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(cffi:defcenum <span style="color:#e6db74">:uv-run-mode</span>
+  (<span style="color:#e6db74">:uv-run-default</span> <span style="color:#ae81ff">0</span>)
+  <span style="color:#e6db74">:uv-run-once</span>
+  <span style="color:#e6db74">:uv-run-nowait</span>)
+</code></pre></div><p><code>uv_loop_close(loop)</code>は<code>int</code>を返す関数です．以上をまとめるとHello WorldサンプルコードのLisp版は以下のようになります．</p>
+<pre><code class="language-{lisp" data-lang="{lisp">;; install libuv and cffi first.
 (require 'cffi)
 (cffi:load-foreign-library '(:default &quot;libuv&quot;))
 
@@ -433,17 +357,11 @@ int main() {
   (format t &quot;Now quitting.~%&quot;)
   (cffi:foreign-funcall &quot;uv_run&quot; :pointer uvloop :uv-run-mode :uv-run-default)
   (cffi:foreign-funcall &quot;uv_loop_close&quot; :pointer uvloop :int))
-</code></pre>
-
-<h2 id="cl-libuvを使った実装">cl-libuvを使った実装</h2>
-
+</code></pre><h2 id="cl-libuvを使った実装">cl-libuvを使った実装</h2>
 <p>CFFIの実装を理解していれば基本的には同じです．cl-libuvではアンダースコアの関数名をハイフンに変えているだけです．</p>
-
 <p>CFFIを用いた前節までの実装では，<code>malloc(sizeof(uv_loop_t))</code>を実装しました．libuvには他言語からの利用を考慮して<code>uv_loop_t</code>インスタンスを初期化してポインタを返す<code>uv_default_loop()</code>関数が用意されています．ここではこの関数を用いてメモリアロケーションを回避しています．</p>
-
 <p><code>uv_run_mode</code>型は<code>cl-libuv/bindings.lisp</code>ファイルでCのenum型として定義されています．Cのenum変数にアクセスするには，<code>cffi:foreign-enum-value</code>に型名を指定してアクセスします．cl-libuvでは，<code>lispify</code>マクロ（<code>cl-libuv/wrapper.lisp</code>で定義）でenum変数名の先頭から<code>uv-</code>を取り除き<code>:keyword</code>パッケージにinternするので，<code>UV_RUN_DEFAULT</code>は<code>:RUN_DEFAULT</code>でアクセスできます．</p>
-
-<pre><code class="language-lisp line-numbers">(require 'cl-libuv)
+<pre><code class="language-{lisp" data-lang="{lisp">(require 'cl-libuv)
 
 (defparameter *loop* (uv:uv-default-loop))
 (uv:uv-run *loop* (cffi:foreign-enum-value

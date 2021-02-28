@@ -63,7 +63,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/cl-dialogue/6/" />
 
@@ -76,13 +76,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -94,23 +94,23 @@
             
         ]
     },
-    "headline": 「対話によるCommon Lisp入門」第６話まとめノート,
-    "name": 「対話によるCommon Lisp入門」第６話まとめノート,
-    "wordCount": 3261,
+    "headline": "「対話によるCommon Lisp入門」第６話まとめノート",
+    "name": "「対話によるCommon Lisp入門」第６話まとめノート",
+    "wordCount":  3143 ,
     "timeRequired": "PT7M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/cl-dialogue/6/,
-    "datePublished": 2016-11-20T15:51Z,
-    "dateModified": 2016-11-20T15:51Z,
+    "url": "http://diary.wshito.com/comp/lisp/cl-dialogue/6/",
+    "datePublished": "2016-11-20T15:51Z",
+    "dateModified": "2016-11-20T15:51Z",
     
-    "keywords": programming, lisp,
-    "description": ,
+    "keywords": "programming, lisp",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/cl-dialogue/6/
+        "@id": "http://diary.wshito.com/comp/lisp/cl-dialogue/6/"
     }
 }
     </script>
@@ -135,7 +135,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -215,226 +216,120 @@
     </header>
 
     <section class="post-content">
-      
-
-<p>本章ではリスト処理を行う関数を再帰を使って書く練習をしながら，関数の処理時間の見積もり方と最適なコードのへの書き換え方を学ぶ．本ページではまず第５話と６話の間に挿入されたLispのコンパイル方法と，第６話で説明されている関数のトレースの仕方についてまとめ，その後，処理時間の見積もり方と，効率的なコードへの書き換えについてまとめる．</p>
-
+      <p>本章ではリスト処理を行う関数を再帰を使って書く練習をしながら，関数の処理時間の見積もり方と最適なコードのへの書き換え方を学ぶ．本ページではまず第５話と６話の間に挿入されたLispのコンパイル方法と，第６話で説明されている関数のトレースの仕方についてまとめ，その後，処理時間の見積もり方と，効率的なコードへの書き換えについてまとめる．</p>
 <h2 id="lispのコンパイル方法">Lispのコンパイル方法</h2>
-
 <p>REPLで作業をしている時，定義済みの関数や外部ファイルに書かれたプログラムをコンパイルする方法についてまとめる．</p>
-
 <h3 id="関数ごとのコンパイル">関数ごとのコンパイル</h3>
-
 <p><code>foo</code>という名の関数を定義したら，REPLで<code>(compile 'foo)</code>を実行すると関数単位でコンパイルされる．コンパイルされている関数とされていない関数が混在しても問題なく動作する．当然コンパイル済みの関数は早く動く．</p>
-
-<pre><code class="language-lisp">(defun foo ....)
-(compile 'foo)
-</code></pre>
-
-<p>slimeを使っている場合，「C-c C-c」でカーソル位置のトップレベルをcomplileする．この場合出力はない．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun foo <span style="color:#f92672">....</span>)
+(<span style="color:#a6e22e">compile</span> <span style="color:#e6db74">&#39;foo</span>)
+</code></pre></div><p>slimeを使っている場合，「C-c C-c」でカーソル位置のトップレベルをcomplileする．この場合出力はない．</p>
 <h3 id="ファイル単位でのコンパイル">ファイル単位でのコンパイル</h3>
-
 <p>ファイルの内容をすべてコンパイルするにはファイル名を指定して<code>(compile-file &quot;foo.lisp&quot;)</code>でコンパイルした後，拡張子を省略したファイル名でプログラムをロードする．</p>
-
-<pre><code class="language-lisp">(compile-file &quot;foo.lisp&quot;)
-(load &quot;foo&quot;)
-</code></pre>
-
-<p>slimeでは「C-c C-k」でバッファ全体（ファイル）をcompileする．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">compile-file</span> <span style="color:#e6db74">&#34;foo.lisp&#34;</span>)
+(<span style="color:#a6e22e">load</span> <span style="color:#e6db74">&#34;foo&#34;</span>)
+</code></pre></div><p>slimeでは「C-c C-k」でバッファ全体（ファイル）をcompileする．</p>
 <h3 id="逆アセンブル">逆アセンブル</h3>
-
 <p>コンパイラが変換した機械語は，<code>disassemble</code>関数で逆アセンブルすることができる．</p>
-
-<pre><code class="language-lisp">(defun foo .....)
-(compile 'foo)
-(disassemble 'foo)
-</code></pre>
-
-<p>slimeでは定義した関数のシンボル上で「C-c M-d (slime-disassemble-symbol)」を実行すると，一時バッファに逆アセンブルした結果が表示される．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun foo <span style="color:#f92672">.....</span>)
+(<span style="color:#a6e22e">compile</span> <span style="color:#e6db74">&#39;foo</span>)
+(<span style="color:#a6e22e">disassemble</span> <span style="color:#e6db74">&#39;foo</span>)
+</code></pre></div><p>slimeでは定義した関数のシンボル上で「C-c M-d (slime-disassemble-symbol)」を実行すると，一時バッファに逆アセンブルした結果が表示される．</p>
 <h3 id="関数処理のトレース">関数処理のトレース</h3>
-
 <p><code>trace</code>関数を使うと関数に入る時と出る時の情報が表示される．組込み関数を<code>trace</code>の引数に渡すとエラーが出るが，自分で定義した関数なら問題ない．</p>
-
-<pre><code class="language-lisp">&gt; (defun length$ (lst)
-     (length-loop lst 0))
-&gt; (defun length-loop (lst count)
-     (if (null lst) count
-         (length-loop (cdr lst) (+ count 1))))
-&gt; (trace length$)      ; length$関数のトレース開始
-&gt; (length$ '(a b c))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#a6e22e">&gt;</span> (defun length$ (lst)
+     (length-loop lst <span style="color:#ae81ff">0</span>))
+<span style="color:#a6e22e">&gt;</span> (defun length-loop (lst <span style="color:#a6e22e">count</span>)
+     (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">null</span> lst) <span style="color:#a6e22e">count</span>
+         (length-loop (<span style="color:#a6e22e">cdr</span> lst) (<span style="color:#a6e22e">+</span> <span style="color:#a6e22e">count</span> <span style="color:#ae81ff">1</span>))))
+<span style="color:#a6e22e">&gt;</span> (trace length$)      <span style="color:#75715e">; length$関数のトレース開始</span>
+<span style="color:#a6e22e">&gt;</span> (length$ <span style="color:#f92672">&#39;</span>(a b c))
   0: (LENGTH$ (A B C))
-  0: LENGTH$ returned 3
-3
-&gt; (trace length-loop)  ; length-loop関数のトレース追加
-&gt; (length$ '(a b c))
+  0: LENGTH$ returned <span style="color:#ae81ff">3</span>
+<span style="color:#ae81ff">3</span>
+<span style="color:#a6e22e">&gt;</span> (trace length-loop)  <span style="color:#75715e">; length-loop関数のトレース追加</span>
+<span style="color:#a6e22e">&gt;</span> (length$ <span style="color:#f92672">&#39;</span>(a b c))
   0: (LENGTH$ (A B C))
-    1: (LENGTH-LOOP (A B C) 0)
-      2: (LENGTH-LOOP (B C) 1)
-        3: (LENGTH-LOOP (C) 2)
-          4: (LENGTH-LOOP NIL 3)
-          4: LENGTH-LOOP returned 3
-        3: LENGTH-LOOP returned 3
-      2: LENGTH-LOOP returned 3
-    1: LENGTH-LOOP returned 3
-  0: LENGTH$ returned 3
-3
-&gt; (untrace)     ; 全関数のトレース終了．
-T
-</code></pre>
-
-<h2 id="計算時間の見積もり方">計算時間の見積もり方</h2>
-
+    1: (LENGTH-LOOP (A B C) <span style="color:#ae81ff">0</span>)
+      2: (LENGTH-LOOP (B C) <span style="color:#ae81ff">1</span>)
+        3: (LENGTH-LOOP (C) <span style="color:#ae81ff">2</span>)
+          4: (LENGTH-LOOP <span style="color:#66d9ef">NIL</span> <span style="color:#ae81ff">3</span>)
+          4: LENGTH-LOOP returned <span style="color:#ae81ff">3</span>
+        3: LENGTH-LOOP returned <span style="color:#ae81ff">3</span>
+      2: LENGTH-LOOP returned <span style="color:#ae81ff">3</span>
+    1: LENGTH-LOOP returned <span style="color:#ae81ff">3</span>
+  0: LENGTH$ returned <span style="color:#ae81ff">3</span>
+<span style="color:#ae81ff">3</span>
+<span style="color:#a6e22e">&gt;</span> (untrace)     <span style="color:#75715e">; 全関数のトレース終了．</span>
+<span style="color:#66d9ef">T</span>
+</code></pre></div><h2 id="計算時間の見積もり方">計算時間の見積もり方</h2>
 <p>オーダー記法と同様，データのサイズに対しどれ位のオーダーで処理時間が増加していくかに興味があるため，以下の方法で見積もる．</p>
-
 <ul>
 <li>データの長さ<code>n</code>に比例しない一定時間処理は，何ステップかかっても１と数える．</li>
 <li><code>car</code>, <code>car</code>, <code>cons</code>, <code>null</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> 等の基本関数は一定時間で実行できると考える．</li>
 <li>長さ<code>n</code>のデータ（リスト）に比例してかかる計算時間は<code>n</code>と数える．</li>
 <li>同様に長さ<code>n^2</code>のデータ（リスト）に比例してかかる計算時間は<code>n^2</code>で数える．</li>
 </ul>
-
 <p>例）リストの長さを求める<code>length$</code>関数の計算時間の見積もり．</p>
-
-<pre><code class="language-lisp">(defun length$ (lst)
-   (length-loop lst 0))
-(defun length-loop (lst count)
-   (if (null lst) count
-       (length-loop (cdr lst) (+ count 1))))
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun length$ (lst)
+   (length-loop lst <span style="color:#ae81ff">0</span>))
+(defun length-loop (lst <span style="color:#a6e22e">count</span>)
+   (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">null</span> lst) <span style="color:#a6e22e">count</span>
+       (length-loop (<span style="color:#a6e22e">cdr</span> lst) (<span style="color:#a6e22e">+</span> <span style="color:#a6e22e">count</span> <span style="color:#ae81ff">1</span>))))
+</code></pre></div><ul>
 <li>2行目の<code>length-loop</code>の呼び出し，4行目の<code>null</code>判断，最終行の<code>length-loop</code>に渡す引数準備計算は全てリストの長さに依存しないので一定時間と考え，計算時間は合わせて１とカウントする．</li>
 <li>リスト<code>lst</code>の<code>cdr</code>部分を渡して再帰処理している<code>length-loop</code>は引数の長さに依存して処理が決まる．リストの長さ<code>n</code>に依存して決まる<code>length-loop</code>の計算時間を\(T(n)\)で表すと，一定時間の処理と合わせて，\(T(n) = 1 + T(n-1)\)で表せる．\(T(0)\)は<code>null</code>テストだけで処理時間は１であることを考慮すると以下を得る．</li>
 </ul>
-
-<div>
-\[
-\begin{align}
-T(n) &= 1 + T(n-1) \\
-&= 1 + (1 + T(n-2)) = 2 + T(n-2)\\
-&= 2 + (1 + T(n-3)) = 3 + T(n-3)\\
-&= \cdots \\
-&= n + T(n-n) = n + T(0)\\
-&= n + 1
-\end{align}
-\]
-</div>
-
+<!-- raw HTML omitted -->
 <p><code>length$</code>の一定時間処理と合わせても定数処理時間は１とカウントするので，<code>length$</code>の処理時間は\(1+n\)である．</p>
-
 <p>定数時間はいくら合わせても１とする理由は，データ数（リスト長）が増加して行った時，どれくらいのオーダーで処理時間が増えるかに興味があるからだ．結局，<code>length$</code>関数はリスト長<code>n</code>に比例して計算時間が増加していくことを示している．</p>
-
-<h2 id="append-の処理時間"><code>append</code>の処理時間</h2>
-
+<h2 id="appendの処理時間"><code>append</code>の処理時間</h2>
 <p><code>append</code>の処理時間を考えるために<code>append$</code>を実装してみる．</p>
-
-<pre><code class="language-lisp">(defun append$ (lst1 lst2)
-   (if (null lst1) lst2
-       (cons (car lst1) (append$ (cdr lst1) lst2))))
-</code></pre>
-
-<p><code>lst1</code>の長さ<code>n</code>だけ<code>append$</code>が再帰的に呼び出されるので<code>append$</code>の処理時間は<code>n</code>の関数になる．これを\(T(n)\)とおくと，2行目の<code>if</code>のテストと3行目の<code>(cons (car lst1)</code>部分は一定時間なので1，再帰呼び出しは\(T(n-1)\)となるので，\(T(n)\)は以下を満たす．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun append$ (lst1 lst2)
+   (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">null</span> lst1) lst2
+       (<span style="color:#a6e22e">cons</span> (<span style="color:#a6e22e">car</span> lst1) (append$ (<span style="color:#a6e22e">cdr</span> lst1) lst2))))
+</code></pre></div><p><code>lst1</code>の長さ<code>n</code>だけ<code>append$</code>が再帰的に呼び出されるので<code>append$</code>の処理時間は<code>n</code>の関数になる．これを\(T(n)\)とおくと，2行目の<code>if</code>のテストと3行目の<code>(cons (car lst1)</code>部分は一定時間なので1，再帰呼び出しは\(T(n-1)\)となるので，\(T(n)\)は以下を満たす．</p>
 <p>\[
 \begin{align}
 T(n) = 1 + T(n-1)
 \end{align}
 \]</p>
-
 <p>上式右辺に再帰的に\(T(0)\)まで代入し，\(T(0) = 1\)を用いて解くか，以下のように解けば，\(T(n) = 1 + n\)を得る．</p>
-
-<div>
-\[
-\begin{align}
-& T(n) = 1 + T(n-1) \\
-\leftrightarrow \quad
-& T(n) - T(n-1) = 1 \\
-\leftrightarrow \quad
-& \sum_{k=1}^n (T(k) - T(k-1)) = \sum_{k=1}^n 1 \\
-\leftrightarrow \quad
-& T(n) - T(0) = n \\
-\leftrightarrow \quad
-& T(n) = 1 + n
-\end{align}
-\]
-</div>
-
-<h2 id="効率的な-reverse-の実装">効率的な<code>reverse</code>の実装．</h2>
-
+<!-- raw HTML omitted -->
+<h2 id="効率的なreverseの実装">効率的な<code>reverse</code>の実装．</h2>
 <p>リストの要素を逆順に並び替えるには，先頭要素を取り出して，残りの要素を再帰的に<code>reverse</code>で並び替えて，その後ろに最初に取り出した先頭要素を加えれば良い．この時，<code>append</code>で両者をつなげるか，<code>cons</code>で繋げるかで実行時間が変わってくる．
 先ほど計算したように<code>append</code>の計算時間は要素の長さ<code>n</code>に比例するが，<code>cons</code>なら一定時間で処理できる．</p>
-
 <p>まず，悪い例を挙げて，実際に計算時間を求めてみる．</p>
-
-<pre><code class="language-lisp">(defun reverse1 (lst)
-   (if (null lst) nil
-       (append (reverse1 (cdr lst)) (list (car lst)))))
-</code></pre>
-
-<p><code>append</code>は第１引数の長さに比例するので<code>n-1</code>の時間がかかる．また，<code>append</code>に渡す第１引数の準備で<code>reverse1</code>自身が<code>n-1</code>の長さで呼び出される．他の処理は全て一定時間なので１とする．以上を合わせると，<code>reverse1</code>の処理時間\(T(n)\)は以下を満たす．</p>
-
-<div>
-\[
-\begin{align}
-& T(n) = (n - 1) + T(n-1) + 1 = n + T(n-1)
-\\
-\leftrightarrow \quad
-& T(n) - T(n-1) = n
-\\
-\leftrightarrow \quad
-& \sum_{k=1}^n T(k) - T(k-1) = \sum_{k=1}^n k
-\\
-\leftrightarrow \quad
-& T(n) - T(0) = (1 + n)n/2
-\\
-\leftrightarrow \quad
-& T(n) = (n^2 + n + 1)/2
-\end{align}
-\]
-</div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun reverse1 (lst)
+   (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">null</span> lst) <span style="color:#66d9ef">nil</span>
+       (<span style="color:#a6e22e">append</span> (reverse1 (<span style="color:#a6e22e">cdr</span> lst)) (<span style="color:#a6e22e">list</span> (<span style="color:#a6e22e">car</span> lst)))))
+</code></pre></div><p><code>append</code>は第１引数の長さに比例するので<code>n-1</code>の時間がかかる．また，<code>append</code>に渡す第１引数の準備で<code>reverse1</code>自身が<code>n-1</code>の長さで呼び出される．他の処理は全て一定時間なので１とする．以上を合わせると，<code>reverse1</code>の処理時間\(T(n)\)は以下を満たす．</p>
+<!-- raw HTML omitted -->
 <p>従って<code>reverse1</code>を用いた実装では\(n^2\)に比例した時間がかかる．</p>
-
 <p>次は良い例． <code>append</code>ではなく一定時間でリスト操作する<code>cons</code>を使う．</p>
-
-<pre><code class="language-lisp">(defun reverse2 (let)
-   (reverse-loop lst nil))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun reverse2 (<span style="color:#66d9ef">let</span>)
+   (reverse-loop lst <span style="color:#66d9ef">nil</span>))
 (defun reverse-loop (lst reversed)
-   (if (null lst) reversed
-       (reverse-loop (cdr lst)
-		     (cons (car lst) reversed))))
-</code></pre>
-
-<p>この場合の処理時間は，\(T(n) = 1 + T(n-1)\)になるので，<code>append</code>の処理時間の計算と同じで，\(T(n) = 1 + n\)となる．</p>
-
+   (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">null</span> lst) reversed
+       (reverse-loop (<span style="color:#a6e22e">cdr</span> lst)
+		     (<span style="color:#a6e22e">cons</span> (<span style="color:#a6e22e">car</span> lst) reversed))))
+</code></pre></div><p>この場合の処理時間は，\(T(n) = 1 + T(n-1)\)になるので，<code>append</code>の処理時間の計算と同じで，\(T(n) = 1 + n\)となる．</p>
 <h3 id="計算効率に関する教訓">計算効率に関する教訓</h3>
-
 <ul>
 <li>リストの長さ<code>n</code>に比例する関数を入れ子にしない！</li>
 <li><code>append</code>より<code>cons</code>や<code>list</code>を使う！</li>
 </ul>
-
-<h2 id="eq-eql-equal-の違い"><code>eq</code>, <code>eql</code>, <code>equal</code>の違い</h2>
-
+<h2 id="eq-eql-equalの違い"><code>eq</code>, <code>eql</code>, <code>equal</code>の違い</h2>
 <p>包含関係でいくと\(\text{eq}\subset\text{eql}\subset\text{equal}\)で，<code>eq</code>で真を返す関係は他の2つでも真となり，<code>eql</code>で真となる関係は<code>equal</code>でも真となる．すなわち，左から「等しさ」基準が厳しい順に並んでいると考えてよい．</p>
-
 <ul>
 <li><code>eq</code>&mdash;メモリ上で等しいオブジェクトなら<code>T</code>を返す．シンボルが同じかどうかをテストする時はこれを使う．Javaオブジェクトの<code>==</code>比較と同じ．</li>
 <li><code>eql</code>&mdash;アトムの値が等しければ<code>T</code>を返す．数値の場合は型も同じでなければ等しいとはみなされない． Javaの<code>equals()</code>と似ている．</li>
 <li><code>equal</code>&mdash;リストの見かけが同じならば<code>T</code>を返す．</li>
 </ul>
-
 <p>シンボルが同じなら同じメモリ上のアドレスを指すので，当然シンボルの値も等しいし，見かけも等しいので，<code>eq</code>で<code>T</code>なら<code>eql</code>でも<code>equal</code>でも<code>T</code>である．</p>
-
 <p>ちなみに<code>=</code>は数値が等しいかどうかを判定するときに使う．<code>==</code>じゃない点に注意！</p>
-
 <h2 id="述語関数">述語関数</h2>
-
 <p>`真偽を返す述語関数が幾つか紹介された．</p>
-
 <ul>
 <li><code>atom</code></li>
 <li><code>consp</code></li>
@@ -444,27 +339,20 @@ T(n) = 1 + T(n-1)
 <li><code>integerp</code></li>
 <li><code>null</code></li>
 </ul>
-
 <h2 id="連想配列">連想配列</h2>
-
 <p>「<code>car</code>がキーで<code>cdr</code>が値とみなしたリスト」から成るリストを連想配列（association list, alist）と呼ぶ．</p>
-
 <ul>
 <li><code>(assoc キー alist)</code>で連想配列<code>alis</code>の先頭（左）から探して最初に見つかるキーの要素を返す．</li>
 </ul>
-
-<h2 id="sublis-関数"><code>sublis</code>関数</h2>
-
+<h2 id="sublis関数"><code>sublis</code>関数</h2>
 <p><code>(sublis alist lst)</code>で<code>lst</code>内のアトムを連想配列内の値と置き換える．</p>
-
-<pre><code class="language-lisp">CL-USER&gt; (sublis '((first-name . 太朗)
-                   (last-name . 鈴木)
-                   (telno . 03-432-323))
-                 '((last-name first-name) tel telno))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">CL-USER&gt; (<span style="color:#a6e22e">sublis</span> <span style="color:#f92672">&#39;</span>((first-name <span style="color:#f92672">.</span> 太朗)
+                   (last-name <span style="color:#f92672">.</span> 鈴木)
+                   (telno <span style="color:#f92672">.</span> 03-432-323))
+                 <span style="color:#f92672">&#39;</span>((last-name first-name) tel telno))
 
 ((鈴木 太朗) TEL |03-432-323|)
-</code></pre>
-
+</code></pre></div>
     </section>
 
 

@@ -71,7 +71,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/elec/micromouse/micromouse2017/" />
 
@@ -84,13 +84,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -102,23 +102,23 @@
             
         ]
     },
-    "headline": 次のマイクロマウス製作に向けて,
-    "name": 次のマイクロマウス製作に向けて,
-    "wordCount": 1105,
+    "headline": "次のマイクロマウス製作に向けて",
+    "name": "次のマイクロマウス製作に向けて",
+    "wordCount":  1122 ,
     "timeRequired": "PT3M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/elec/micromouse/micromouse2017/,
-    "datePublished": 2017-02-16T19:59Z,
-    "dateModified": 2017-02-16T19:59Z,
+    "url": "http://diary.wshito.com/elec/micromouse/micromouse2017/",
+    "datePublished": "2017-02-16T19:59Z",
+    "dateModified": "2017-02-16T19:59Z",
     
-    "keywords": 組み込み, 電子工作, robot, micromouse, STM32, KiCad,
-    "description": ,
+    "keywords": "組み込み, 電子工作, robot, micromouse, STM32, KiCad",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/elec/micromouse/micromouse2017/
+        "@id": "http://diary.wshito.com/elec/micromouse/micromouse2017/"
     }
 }
     </script>
@@ -143,7 +143,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -231,57 +232,40 @@
     </header>
 
     <section class="post-content">
-      
-
-<p>初出場の2016年九州地区大会では完走できなかった．今年は初号機を調整して完走を目指すと同時に，もっと速いマウスの製作にも挑戦したい．DCマウスも作ってみたいが，まだ完走も出来ていないので，今年も基本に忠実にステッパーでいこうと思う．</p>
-
+      <p>初出場の2016年九州地区大会では完走できなかった．今年は初号機を調整して完走を目指すと同時に，もっと速いマウスの製作にも挑戦したい．DCマウスも作ってみたいが，まだ完走も出来ていないので，今年も基本に忠実にステッパーでいこうと思う．</p>
 <p>今年は新しいスキルを身につけるために，以下のことにチャレンジしたい．</p>
-
 <ul>
 <li>3D CADを使って機体を設計する．</li>
 <li>KiCadを使って基板を設計する．</li>
 <li>新しいMPUを採用する．</li>
 <li>マウスのコントロールを物理量ベースで行う．</li>
 </ul>
-
 <h2 id="3d-cadの選定">3D CADの選定</h2>
-
 <p>フリーのCADで評判が良いのは，Fusion360やDesignSpark Mechanicalだ．しかし，多少使いづらかったり機能面で劣っていても，未来永劫フリーで何の縛りもない方が性に合うので，<a href="https://www.freecadweb.org">FreeCAD</a>に決まり．</p>
-
 <ul>
 <li><a href="https://www.freecadweb.org">FreeCAD公式ページ</a></li>
 <li><a href="https://www.freecadweb.org/wiki/Main_Page">FreeCAD 公式ドキュメント</a> （<a href="https://www.freecadweb.org/wiki/Online_Help_Toc/jp">日本語</a>）</li>
 <li><a href="http://freecad.vdlz.xyz/tutorial/tutorial.html">FreeCADのチュートリアル</a></li>
 </ul>
-
 <h2 id="基板cad">基板CAD</h2>
-
 <p>昨年はEagleを使って基板を製作した．随分多くのパーツを自分で作って登録したので愛着もあるが，今後長く使っていくならやはり何の縛りもないフリーのCADに早めに乗り換えた方が良いと考え，今年は<a href="http://kicad.jp">KiCad</a>を一から勉強し直そうと思う．</p>
-
 <ul>
 <li><a href="http://kicad-pcb.org">KiCAD公式サイト</a></li>
 <li><a href="http://kicad.jp">KiCAD日本ユーザコミニティ</a></li>
 <li><a href="https://youtu.be/JN_Y93RTdSo?list=PL5iUxv3Op2fOpVASHvcpM2O4UO0yMfKJi">Contextual Electronicsのチュートリアルビデオシリーズ</a></li>
 </ul>
-
 <h2 id="mpuの選定">MPUの選定</h2>
-
 <p>昨年はNXPのLPC1114を使用した．プロトタイプ製作ではDIPパッケージを使い，基板に実装する際はLPC1114FDH28/102（TSSOP 28pin）を使い，とても便利だった．しかしFPUがないため，浮動小数点の計算が続くとマシンの動きがギクシャクした．今年は昨年よりも速いステッピングモーターを使いたいので，FPUが付いたMPUにしたい．また色々なセンサを追加できるように，最低8つのADチャンネルは欲しい．PSoCも魅力的だが現時点でFPU付きのモデルが発売されていないので残念ながら今回は見送り．</p>
-
 <p>色々と物色した結果，ARMコアの中で入手の容易性と手頃な値段からSTMのMPUに乗り換えることにした．FPU付きだとARM Coretex M4以上となるので，STM32F4，STM32F3，STM32L4あたりから選ぶのが妥当だろう．</p>
-
-<p><img src="skitch.png" alt="STM32ラインナップ" /></p>
-
+<p><img src="skitch.png" alt="STM32ラインナップ"></p>
 <p>上位シリーズのSTM32F4なら<a href="http://www.st.com/content/st_com/ja/products/microcontrollers/stm32-32-bit-arm-cortex-mcus/stm32f4-series/stm32f407-417/stm32f407vg.html">STM32F4Discovery</a>評価ボードが<a href="http://akizukidenshi.com/catalog/g/gM-05313/">秋月</a> で2,800円で買える．まずはこの評価ボードを使ってSTM32コアの使い方を学ぼうと思う．この評価ボードに載っている
 <a href="http://jp.rs-online.com/web/p/microcontrollers/7468226/">STM32F407VGT6</a> （RSオンラインで1,489円）は，Ethernetコントローラーまで付いていてオーバースペックなので，実際に使用するのは以下の中のどれかとなるだろう．大きさは64pinのLQFPパッケージとする予定だ．</p>
-
 <ul>
 <li><a href="http://www.st.com/content/st_com/en/products/microcontrollers/stm32-32-bit-arm-cortex-mcus/stm32f4-series/stm32f401.html?querycriteria=productId=LN1810">STM32F401</a></li>
 <li><a href="http://www.st.com/content/st_com/en/products/microcontrollers/stm32-32-bit-arm-cortex-mcus/stm32f4-series/stm32f410.html?querycriteria=productId=LN1938">STM32F410</a></li>
 <li><a href="http://www.st.com/content/st_com/en/products/microcontrollers/stm32-32-bit-arm-cortex-mcus/stm32f4-series/stm32f411.html?querycriteria=productId=LN1877">STM32F411</a></li>
 </ul>
-
-<p><img src="skitch-1.png" alt="" /></p>
+<p><img src="skitch-1.png" alt=""></p>
 
     </section>
 

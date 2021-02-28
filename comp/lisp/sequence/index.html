@@ -63,7 +63,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/sequence/" />
 
@@ -76,13 +76,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -94,23 +94,23 @@
             
         ]
     },
-    "headline": Lisp の Sequence 型のまとめ,
-    "name": Lisp の Sequence 型のまとめ,
-    "wordCount": 1905,
+    "headline": "Lisp の Sequence 型のまとめ",
+    "name": "Lisp の Sequence 型のまとめ",
+    "wordCount":  1912 ,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/sequence/,
-    "datePublished": 2018-02-11T18:35Z,
-    "dateModified": 2018-03-12T00:33Z,
+    "url": "http://diary.wshito.com/comp/lisp/sequence/",
+    "datePublished": "2018-02-11T18:35Z",
+    "dateModified": "2018-03-12T00:33Z",
     
-    "keywords": lisp, programming,
-    "description": ,
+    "keywords": "lisp, programming",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/sequence/
+        "@id": "http://diary.wshito.com/comp/lisp/sequence/"
     }
 }
     </script>
@@ -135,7 +135,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -254,9 +255,9 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(type-of (make-array 5 :element-type 'character))    ; -&gt; (SIMPLE-ARRAY CHARACTER (5))
-(typep (make-array 5 :element-type 'character) 'string)         ;-&gt; T
-(typep (make-array 5 :element-type 'character) 'simple-string)  ;-&gt; T</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(type-of (make-array 5 :element-type &#39;character))    ; -&gt; (SIMPLE-ARRAY CHARACTER (5))
+(typep (make-array 5 :element-type &#39;character) &#39;string)         ;-&gt; T
+(typep (make-array 5 :element-type &#39;character) &#39;simple-string)  ;-&gt; T</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -264,8 +265,8 @@
 </div>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
-<col>
-<col>
+<col/>
+<col/>
 </colgroup>
 <thead>
 <tr>
@@ -317,10 +318,10 @@
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. SEQUENCE 型の共通インタフェース（sequence function）</caption>
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -407,11 +408,11 @@
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
 </colgroup>
 <thead>
 <tr>
@@ -498,23 +499,23 @@
 </dd>
 <dt class="hdlist1">simple-vector</dt>
 <dd>
-<p><code>(vector 要素 要素 &#8230;&#8203;)</code> ，<code>(make-sequence 'simple-vector n)</code>，<code>(make-sequence 'vector n)</code>，または <code>simple-array</code> と同じ作成方法．</p>
+<p><code>(vector 要素 要素 …​)</code> ，<code>(make-sequence &#39;simple-vector n)</code>，<code>(make-sequence &#39;vector n)</code>，または <code>simple-array</code> と同じ作成方法．</p>
 </dd>
 <dt class="hdlist1">string</dt>
 <dd>
-<p><code>(make-array n :element-type 'character :fill-pointer t)</code></p>
+<p><code>(make-array n :element-type &#39;character :fill-pointer t)</code></p>
 </dd>
 <dt class="hdlist1">simple-string</dt>
 <dd>
-<p><code>(make-string n)</code> ，<code>(make-sequence 'simple-string n)</code>，<code>(make-sequence 'string n)</code></p>
+<p><code>(make-string n)</code> ，<code>(make-sequence &#39;simple-string n)</code>，<code>(make-sequence &#39;string n)</code></p>
 </dd>
 <dt class="hdlist1">bit-vector</dt>
 <dd>
-<p><code>(make-array n :element-type 'bit :fill-pointer t)</code></p>
+<p><code>(make-array n :element-type &#39;bit :fill-pointer t)</code></p>
 </dd>
 <dt class="hdlist1">simple-bit-vector</dt>
 <dd>
-<p><code>(make-sequence 'simple-bit-vector n)</code>，<code>(make-sequence 'bit-vector n)</code></p>
+<p><code>(make-sequence &#39;simple-bit-vector n)</code>，<code>(make-sequence &#39;bit-vector n)</code></p>
 </dd>
 </dl>
 </div>

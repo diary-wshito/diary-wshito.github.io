@@ -67,7 +67,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/" />
 
@@ -80,13 +80,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -98,23 +98,23 @@
             
         ]
     },
-    "headline": コードリーディング: Lack の Session ミドルウェアを理解する,
-    "name": コードリーディング: Lack の Session ミドルウェアを理解する,
-    "wordCount": 11225,
+    "headline": "コードリーディング: Lack の Session ミドルウェアを理解する",
+    "name": "コードリーディング: Lack の Session ミドルウェアを理解する",
+    "wordCount":  11198 ,
     "timeRequired": "PT23M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/,
-    "datePublished": 2018-02-07T15:36Z,
-    "dateModified": 2018-02-07T15:36Z,
+    "url": "http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/",
+    "datePublished": "2018-02-07T15:36Z",
+    "dateModified": "2018-02-07T15:36Z",
     
-    "keywords": lisp, clack, lack, webapp,
-    "description": ,
+    "keywords": "lisp, clack, lack, webapp",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/
+        "@id": "http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/"
     }
 }
     </script>
@@ -139,7 +139,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -291,7 +292,7 @@
 <p><code>:keep-empty</code> キーワードが <code>t</code> の場合，セッション情報が <code>store</code> バックエンドに保存される．</p>
 </div>
 <div class="paragraph">
-<p><a href="#listings:session-middleware-1">コード 1</a>の2&#8212;&#8203;4行目は，Webアプリケーション構築時に1回だけ実行される．したがって，セッションを管理する <code>store</code> もクッキーの雛形になる <code>state</code> も，全てのリクエストで共有される．</p>
+<p><a href="#listings:session-middleware-1">コード 1</a>の2—​4行目は，Webアプリケーション構築時に1回だけ実行される．したがって，セッションを管理する <code>store</code> もクッキーの雛形になる <code>state</code> も，全てのリクエストで共有される．</p>
 </div>
 <div class="sect2">
 <h3 id="_セッション保存方法の設定">セッション保存方法の設定</h3>
@@ -302,7 +303,7 @@
 <div class="title">コード 2. <code>memory-store</code> 構造体の定義</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defstruct (memory-store (:include store))
-  (stash (make-hash-table :test 'equal)))			<i class="conum" data-value="1"></i><b>(1)</b>
+  (stash (make-hash-table :test &#39;equal)))			<i class="conum" data-value="1"></i><b>(1)</b>
 
 (defmethod fetch-session ((store memory-store) sid)
   (gethash sid (memory-store-stash store)))
@@ -317,7 +318,7 @@
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>stash</code> スロットにセッション変数を格納するハッシュテーブルを用意．キーは文字列から成るセッションIDなので，テスト関数は <code>equal</code> を指定している．</td>
 </tr>
@@ -325,7 +326,7 @@
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>セッションIDをキーとしてセッション変数を保存する．保存されるセッション変数も文字列をキーとしたハッシュテーブルである．<code>memory-store-stash</code> は <code>stash</code> スロットへのアクセサ関数で <code>defstruct</code> 時に自動的に定義される．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p><code>memory-store</code> 構造体は，<code>stash</code> スロットの初期値として，文字列キーで比較するハッシュテーブルを設定する．<code>memory-store</code> が継承する <code>store</code> 構造体はスロットのない抽象構造で <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/middleware/session/store.lisp#L11"> <code>src/middleware/session/store.lisp</code> </a> で以下のように定義されている．</p>
@@ -348,7 +349,7 @@
 </div>
 <div class="admonitionblock warning">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-warning" title="Warning"></i>
 </td>
@@ -358,7 +359,7 @@
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -377,7 +378,7 @@
                    (declare (ignore env))
                    (generate-random-id)))
   (sid-validator (lambda (sid)
-                   (not (null (ppcre:scan "\\A[0-9a-f]{40}\\Z" sid))))))
+                   (not (null (ppcre:scan &#34;\\A[0-9a-f]{40}\\Z&#34; sid))))))
 
 (defun generate-sid (state env)					<i class="conum" data-value="2"></i><b>(2)</b>
   (funcall (state-sid-generator state) env))
@@ -396,7 +397,7 @@
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>sid-generator</code> スロットにセッションIDを生成する関数を設定する．デフォルトの生成関数はこの後<a href="#listings:id-generation">コード 5</a>で詳しく見ていく．</td>
 </tr>
@@ -406,7 +407,7 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td><code>state</code> 構造体インスタンスと環境変数 <code>env</code> から，セッションIDを抽出する総称関数を宣言．12&#8212;&#8203;16行目がその実装．<code>:around</code> 修飾子が付いているので，ユーザ実装のメソッドより前に12&#8212;&#8203;16行目のメソッドが実行される．この実装は <code>call-next-method</code> でユーザーによる実装を呼び出しセッションIDを取得し，妥当性を検査して返す．妥当でない場合は <code>nil</code> が返る．</td>
+<td><code>state</code> 構造体インスタンスと環境変数 <code>env</code> から，セッションIDを抽出する総称関数を宣言．12—​16行目がその実装．<code>:around</code> 修飾子が付いているので，ユーザ実装のメソッドより前に12—​16行目のメソッドが実行される．この実装は <code>call-next-method</code> でユーザーによる実装を呼び出しセッションIDを取得し，妥当性を検査して返す．妥当でない場合は <code>nil</code> が返る．</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -416,7 +417,7 @@
 <td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>セッションのfinalizeを担う総称関数を宣言．<code>src/middleware/session/state/cookie.lisp</code> 内で実装されている．同ファイル内と <code>src/middleware/session.lisp</code> 内から呼び出される．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p><a href="#listings:state-structure">コード 4</a>の9行目で呼び出される <code>generate-random-id</code> の定義は以下のとおり．</p>
@@ -425,12 +426,12 @@
 <div class="title">コード 5. デフォルトのセッションID生成関数</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defun generate-random-id ()
-  "Generates a random token."
+  &#34;Generates a random token.&#34;
   (byte-array-to-hex-string
    (digest-sequence
     (make-digest :SHA1)
     (ascii-string-to-byte-array
-     (format nil "~A~A"
+     (format nil &#34;~A~A&#34;
       (random 1.0) (get-universal-time))))))</code></pre>
 </div>
 </div>
@@ -444,17 +445,17 @@
 <div class="title">コード 6. <code>cookie-state</code> 構造体の定義</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defstruct (cookie-state (:include state))
-  (path "/" :type string)						<i class="conum" data-value="1"></i><b>(1)</b>
+  (path &#34;/&#34; :type string)						<i class="conum" data-value="1"></i><b>(1)</b>
   (domain nil :type (or string null))			<i class="conum" data-value="2"></i><b>(2)</b>
   (expires (get-universal-time) :type integer)	<i class="conum" data-value="3"></i><b>(3)</b>
   (secure nil :type boolean)	      			<i class="conum" data-value="4"></i><b>(4)</b>
   (httponly nil :type boolean)					<i class="conum" data-value="5"></i><b>(5)</b>
-  (cookie-key "lack.session" :type string))		<i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+  (cookie-key &#34;lack.session&#34; :type string))		<i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Path属性．クライアントがクッキーをサーバーに送信できるサーバーのパスを指定する．デフォルト値はWebアプリのルートになる．</td>
 </tr>
@@ -476,9 +477,9 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>セッションIDを保持するクッキーのキー名を指定．デフォルト値は <code>"lack.session"</code>．リスポンスヘッダは <code>Set-Cookie: lack.session=セッションID</code> となる．</td>
+<td>セッションIDを保持するクッキーのキー名を指定．デフォルト値は <code>&#34;lack.session&#34;</code>．リスポンスヘッダは <code>Set-Cookie: lack.session=セッションID</code> となる．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>以上がSessionミドルウェアの引数でデフォルトで渡される <code>cookie-state</code> 構造体インスタンスの中身である．デフォルト設定に関して幾つか注意点を挙げておく．</p>
@@ -494,7 +495,7 @@
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -502,7 +503,7 @@
 Sessionミドルウェアを使用するアプリケーション側からはクッキー情報を保持する <code>cookie-state</code> 構造体インスタンスにアクセスする術がない．ミドルウェアとアプリケーションの間の情報のやり取りは <code>env</code> 環境変数を通してのみ行われるからだ（<a href="../app">「Lackアプリケーションを理解する」参照</a>）．従って，リクエストごとにクッキーの設定を変更することはできない．唯一変更できるのはExpires属性で，後で説明するように <code>env</code> 環境変数内に格納されている <code>:lack.session.options</code> を使って変更する．
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -537,7 +538,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
              (sid (or sid
                       (generate-sid state env)))
              (new-session-p (not session))
-             (session (or session (make-hash-table :test 'equal))))
+             (session (or session (make-hash-table :test &#39;equal))))
         (setf (getf env :lack.session) session)
         (setf (getf env :lack.session.options)
               (if new-session-p
@@ -549,7 +550,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
                    (zerop (hash-table-count session)))
               res
               (finalize store state env res))))))
-  "Middleware for session management")</code></pre>
+  &#34;Middleware for session management&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -565,7 +566,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <p>ミドルウェア・チェーンの後段が19行目の <code>(funcall app env)</code> で呼び出されるが，その中で <code>:change-id</code> を <code>t</code> に設定すれば，24行目の <code>(finalize store state env res)</code> 内で新しいセッションIDが生成される．ログイン時には必ずセッションIDを更新することが <a href="https://www.ipa.go.jp/security/vuln/websecurity.html">IPAの「安全なウェブサイトの作り方」</a> でも推奨されているので，その場合には後で示す <a href="#sec-example3">サンプルアプリ（例３）</a> ように後段のミドルウェアで <code>:change-id</code> を <code>t</code> に設定する．</p>
 </div>
 <div class="paragraph">
-<p><code>:expire</code> オプションはログアウト時など即座にセッションを切りたい時に使うフラグで，<code>:expire</code> を <code>t</code> に設定すると<a href="#listings:finalize">コード 8</a>の10&#8212;&#8203;11行目でセッションをexpireする処理が実行される．ちなみに，スペルが1文字違いの <code>:expires</code> オプションが別途あるので注意を要する．<code>:expires</code> オプションはクッキーの有効期間を秒数で指定するものである（後ほど説明）．</p>
+<p><code>:expire</code> オプションはログアウト時など即座にセッションを切りたい時に使うフラグで，<code>:expire</code> を <code>t</code> に設定すると<a href="#listings:finalize">コード 8</a>の10—​11行目でセッションをexpireする処理が実行される．ちなみに，スペルが1文字違いの <code>:expires</code> オプションが別途あるので注意を要する．<code>:expires</code> オプションはクッキーの有効期間を秒数で指定するものである（後ほど説明）．</p>
 </div>
 <div class="paragraph">
 <p>これらオプションを変更するには，Sessionミドルウェアより後のミドルウェアチェーンの事前または事後処理で <code>env</code> から <code>:lack.session.options</code> キーの値を取り出して上書きする．これらオプションはSessionミドルウェア事後処理の <code>finaize</code> や <code>finalize-state</code> 関数（<a href="#listings:finalize-state">コード 11</a>を参照）で使用される．</p>
@@ -590,14 +591,14 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
                      (generate-sid state env)
                      id)))
     (when session
-      (apply #'commit store new-id session options))
+      (apply #&#39;commit store new-id session options))
     (if (getf options :expire)
         (expire-state state id res options)
         (finalize-state state new-id res options))))</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><a href="#listings:finalize">コード 8</a>の8&#8212;&#8203;9行目で，<code>store</code> バックエンドにセッション変数が保存される．<code>commit</code> 関数は同じファイル内で<a href="#listings:commit">コード 9</a>のように定義されている．</p>
+<p><a href="#listings:finalize">コード 8</a>の8—​9行目で，<code>store</code> バックエンドにセッション変数が保存される．<code>commit</code> 関数は同じファイル内で<a href="#listings:commit">コード 9</a>のように定義されている．</p>
 </div>
 <div class="paragraph">
 <p><a href="#listings:finalize">コード 8</a>の10行目では <code>:expire</code> オプションが <code>t</code> の時に <code>expire-state</code> 関数を呼び出して直ちにセッションを切る処理をしている．<code>expire-state</code> は<a href="#listings:expire-state">コード 10</a>に定義されているように，クッキーの有効期間（秒数）を保持する <code>:expires</code> オプションを0に設定することで直ちにセッションを無効化している．</p>
@@ -625,7 +626,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 </div>
 <div class="paragraph">
-<p><a href="#listings:finalize">コード 8</a>の最後で呼び出される <code>finalize-state</code> は総称関数で，<code>:expire</code> オプションが <code>nil</code> の時に呼び出され <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/middleware/session/state/cookie.lisp#L38"> <code>src/middleware/session/state/cookie.lisp</code> </a> で2つの実装が定義されている．引数の <code>state</code> 変数には <code>cookie-state</code> 構造体インスタンスが渡される．1つ目の実装（<a href="#listings:finalize-state">コード 11</a>，1&#8212;&#8203;4行目）は，<code>res</code> 引数が関数の場合，すなわち，別のミドルウェアかアプリケーションの場合に呼び出される．この場合は，この関数を実行して実際のレスポンスを生成する．最終的なレスポンスは「ステータス・コード，ヘッダ，レスポンス・ボディ」の3つの要素から成るリストになる．この場合は，<a href="#listings:finalize-state">コード 11</a>の6行目以降で定義されている実装が事後処理として呼び出される．</p>
+<p><a href="#listings:finalize">コード 8</a>の最後で呼び出される <code>finalize-state</code> は総称関数で，<code>:expire</code> オプションが <code>nil</code> の時に呼び出され <a href="https://github.com/fukamachi/lack/blob/19b9f1baa3503b79d68378d70bcd1632eb99de87/src/middleware/session/state/cookie.lisp#L38"> <code>src/middleware/session/state/cookie.lisp</code> </a> で2つの実装が定義されている．引数の <code>state</code> 変数には <code>cookie-state</code> 構造体インスタンスが渡される．1つ目の実装（<a href="#listings:finalize-state">コード 11</a>，1—​4行目）は，<code>res</code> 引数が関数の場合，すなわち，別のミドルウェアかアプリケーションの場合に呼び出される．この場合は，この関数を実行して実際のレスポンスを生成する．最終的なレスポンスは「ステータス・コード，ヘッダ，レスポンス・ボディ」の3つの要素から成るリストになる．この場合は，<a href="#listings:finalize-state">コード 11</a>の6行目以降で定義されている実装が事後処理として呼び出される．</p>
 </div>
 <div id="listings:finalize-state" class="listingblock">
 <div class="title">コード 11. <code>finalize-state</code> メソッドの定義</div>
@@ -636,14 +637,14 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
                    (funcall responder (finalize-state state sid actual-res options))))))
 
 (defmethod finalize-state ((state cookie-state) sid (res list) options)  <i class="conum" data-value="1"></i><b>(1)</b>
-  ;; Don't send Set-Cookie header when it's not necessary.
+  ;; Don&#39;t send Set-Cookie header when it&#39;s not necessary.
   (destructuring-bind (&amp;key no-store new-session change-id expire &amp;allow-other-keys)
       options
     (when (or no-store
               (not (or new-session change-id expire)))
       (return-from finalize-state res)))               <i class="conum" data-value="2"></i><b>(2)</b>
 
-  (let ((res (apply #'make-response res))                         <i class="conum" data-value="3"></i><b>(3)</b>
+  (let ((res (apply #&#39;make-response res))                         <i class="conum" data-value="3"></i><b>(3)</b>
         (options (with-slots (path domain expires secure httponly) state  <i class="conum" data-value="4"></i><b>(4)</b>
                    (list :path path
                          :domain domain
@@ -658,7 +659,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>この時点で引数の <code>options</code> には，<code>env</code> から取り出した <code>lack.session.options</code> のplistがコピーされている．</td>
 </tr>
@@ -672,13 +673,13 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>現在のクッキー情報を格納する <code>state</code> から <code>path</code>, <code>domain</code>, <code>expires</code>, <code>secure</code>, <code>httponly</code> を取り出し，<code>options</code> に設定する．この <code>options</code> が次に送信されるクッキーの設定（22&#8212;&#8203;23行目）に使われる．</td>
+<td>現在のクッキー情報を格納する <code>state</code> から <code>path</code>, <code>domain</code>, <code>expires</code>, <code>secure</code>, <code>httponly</code> を取り出し，<code>options</code> に設定する．この <code>options</code> が次に送信されるクッキーの設定（22—​23行目）に使われる．</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
 <td><code>getf</code> で <code>:expires</code> プロパティの値を取り出す元となる <code>options</code> は <code>env</code> から取り出された <code>lack.session.options</code> のplistのコピー．<code>options</code> 内に <code>:expires</code> プロパティがなければ15行目で <code>cookie-state</code> インスタンスの <code>expires</code> スロットから取り出した値が有効期間となる．ここで指定された秒数は24行目の <code>finalize-response</code> を通して適切な文字列フォーマットに変換される（ <a href="https://github.com/fukamachi/lack/blob/c8b6b003d403811f37dbc5bed734b9f9d378e5b3/src/response.lisp#L57"><code>bake-cookie</code></a> 参照）．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p><code>finalize-state</code> は<a href="#listings:finalize-state">コード 11</a>の10行目の条件が成立しない時，クッキーをブラウザに送信する．すなわち，<code>env</code> 内の <code>:lack.session.options</code> で，<code>:no-store</code> オプションが <code>nil</code> で且つ，<code>:new-session</code>，<code>:change-id</code>，<code>:expire</code> オプション値の全てが <code>nil</code> の場合にクッキーが送信される．</p>
@@ -708,10 +709,10 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <div id="listings:default" class="listingblock">
 <div class="title">コード 12. デフォルト設定のサンプル・アプリ</div>
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(require 'clack)
-(require 'lack)
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(require &#39;clack)
+(require &#39;lack)
 
-(defparameter *subtitle* "&lt;h2&gt;--- With Default Settings ---&lt;/h2&gt;")
+(defparameter *subtitle* &#34;&lt;h2&gt;--- With Default Settings ---&lt;/h2&gt;&#34;)
 
 ;; information to extract from :lack.session.options from env
 (defparameter *options*
@@ -725,18 +726,18 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 	(let* ((session (getf env :lack.session))
 	       (counter (gethash :visit session -1)))
 	  (setf (gethash :visit session) (incf counter))
-	  `(200 (:content-type "text/html")
+	  `(200 (:content-type &#34;text/html&#34;)
 		,(append
-		  (list "&lt;html&gt;&lt;h1&gt;Lack Session Middleware Test&lt;/h1&gt;"
+		  (list &#34;&lt;html&gt;&lt;h1&gt;Lack Session Middleware Test&lt;/h1&gt;&#34;
 			*subtitle*
-			"&lt;ul&gt;"
-			(format nil "&lt;li&gt;Visiting times: ~A&lt;/li&gt;" counter))
+			&#34;&lt;ul&gt;&#34;
+			(format nil &#34;&lt;li&gt;Visiting times: ~A&lt;/li&gt;&#34; counter))
 		  (mapcar (lambda (key)
 			    (let ((val (getf (getf env :lack.session.options)
 					     key)))
-			      (format nil "&lt;li&gt;~A = ~A&lt;/li&gt;" key val)))
+			      (format nil &#34;&lt;li&gt;~A = ~A&lt;/li&gt;&#34; key val)))
 			  *options*)
-		  (list "&lt;/ul&gt;&lt;/html&gt;"))))))
+		  (list &#34;&lt;/ul&gt;&lt;/html&gt;&#34;))))))
 ;;
 ;; Creates Lack Application
 ;;
@@ -773,23 +774,23 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 	  ;; expires after 5 seconds since the last acess
 	  (setf (getf (getf env :lack.session.options) :expires) 5)     <i class="conum" data-value="1"></i><b>(1)</b>
 	  (setf (getf (getf env :lack.session.options) :new-session) t) <i class="conum" data-value="2"></i><b>(2)</b>
-	  `(200 (:content-type "text/html")
+	  `(200 (:content-type &#34;text/html&#34;)
 		,(append
-		  (list "&lt;html&gt;&lt;h1&gt;Lack Session Middleware Test&lt;/h1&gt;"
+		  (list &#34;&lt;html&gt;&lt;h1&gt;Lack Session Middleware Test&lt;/h1&gt;&#34;
 			*subtitle*
-			"&lt;ul&gt;"
-			(format nil "&lt;li&gt;Visiting times: ~A&lt;/li&gt;" counter))
+			&#34;&lt;ul&gt;&#34;
+			(format nil &#34;&lt;li&gt;Visiting times: ~A&lt;/li&gt;&#34; counter))
 		  (mapcar (lambda (key)
 			    (let ((val (getf (getf env :lack.session.options)
 					     key)))
-			      (format nil "&lt;li&gt;~A = ~A&lt;/li&gt;" key val)))
+			      (format nil &#34;&lt;li&gt;~A = ~A&lt;/li&gt;&#34; key val)))
 			  *options*)
-		  (list "&lt;/ul&gt;&lt;/html&gt;"))))))</code></pre>
+		  (list &#34;&lt;/ul&gt;&lt;/html&gt;&#34;))))))</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>env</code> プロパティ・リストから <code>:lack.session.options</code> プロパティ・リストを取り出し，<code>:expires</code> プロパティの値を5に設定．これでクッキーのExpires属性が5秒に設定される．</td>
 </tr>
@@ -797,10 +798,10 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>さらに同オプションの <code>:new-session</code> プロパティの値を <code>t</code> に設定することで，クッキーヘッダがブラウザに送信され更新される．これを忘れるとセッションが切れないので注意．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
-<p>Lispの変数は全て参照渡し（ポインタのコピー）なので，<code>:lack.session.options</code> に格納されているプロパティ・リストへのポインタを<a href="#listings:wrong-example">コード 13</a>の様に，一旦 <code>op</code> に格納し，上の7&#8212;&#8203;8行目のプロパティ・リストの取り出しを1回で済ませようとすると，<code>:expires</code> の設定が反映されないので注意を要する．</p>
+<p>Lispの変数は全て参照渡し（ポインタのコピー）なので，<code>:lack.session.options</code> に格納されているプロパティ・リストへのポインタを<a href="#listings:wrong-example">コード 13</a>の様に，一旦 <code>op</code> に格納し，上の7—​8行目のプロパティ・リストの取り出しを1回で済ませようとすると，<code>:expires</code> の設定が反映されないので注意を要する．</p>
 </div>
 <div id="listings:wrong-example" class="listingblock">
 <div class="title">コード 13. 誤った設定例</div>
@@ -818,7 +819,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 <div class="admonitionblock warning">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-warning" title="Warning"></i>
 </td>
@@ -828,7 +829,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>プロパティ・リストに対する <code>setf</code> で使われる <a href="https://github.com/sbcl/sbcl/blob/66b93f57c23141c132d297d23161c857dc47df2a/src/code/symbol.lisp#L403"><code>SB-IMPL::%PUTF</code></a> の定義は以下のとおり（以下SBCLの場合）．</p>
@@ -847,7 +848,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>property</code> が見つからないときは，<code>property</code> と <code>new-value</code> を先頭要素に加えたリストを返す．つまり返されたリストを指すポインタは元の <code>place</code> とは異なるアドレスを指す．</td>
 </tr>
@@ -855,7 +856,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>見つかったときは <code>place</code>，すなわち元のプロパティ・リストを返す．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>まず <code>DO</code> ループの定義は，</p>
@@ -873,7 +874,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <div id="listings:proper-setf-usage" class="listingblock">
 <div class="title">コード 14. <code>:lack.session.options</code> を設定する時の注意</div>
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (macroexpand '(setf (getf (getf env :lack.session.options) :expires) 5))
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (macroexpand &#39;(setf (getf (getf env :lack.session.options) :expires) 5))
 (LET* ((#:NEW624 5))     <i class="conum" data-value="1"></i><b>(1)</b>
   (LET ((#:NEW623
          (SB-IMPL::%PUTF (GETF ENV :LACK.SESSION.OPTIONS NIL) :EXPIRES
@@ -886,7 +887,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>引数が1回だけ評価されることを保証するために <code>:expire</code> プロパティに設定する値を一時変数 <code>#:NEW624</code> に保存．</td>
 </tr>
@@ -898,11 +899,11 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>上の &lt;2&gt; で代入後のリストを元の <code>ENV</code> の <code>:LACK.SEESION.OPTIONS</code> の値に設定する．上の &lt;2&gt; で <code>:expire</code> が見つからなかった場合には，この時点で <code>:LACK.SEESION.OPTIONS</code> の値は新しいリストへのをポインタに変更されている．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (macroexpand '(setf (getf op :expires) 5))
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (macroexpand &#39;(setf (getf op :expires) 5))
 (LET* ((#:NEW625 5))
   (LET ((#:NEW1 (SB-IMPL::%PUTF OP :EXPIRES #:NEW625)))  <i class="conum" data-value="1"></i><b>(1)</b>
     (SETQ OP #:NEW1)  <i class="conum" data-value="2"></i><b>(2)</b>
@@ -911,7 +912,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>ここまでは，<a href="#listings:proper-setf-usage">コード 14</a>と同じ．</td>
 </tr>
@@ -919,14 +920,14 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>ここで，<code>:expires</code> プロパティが見つからなかった時に新しいリストに変更されているが，一時変数 <code>OP</code> にそのリストへのポインタが設定されるだけで，<code>ENV</code> ないの <code>:LACK.SESSION.OPTIONS</code> プロパティの値は変更されない．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>一方，ハッシュテーブルの場合は，キーが見つからずに新規にキー・バリューが設定されても，ハッシュテーブル・オブジェクト自身のアドレスは変更されないので，問題ない．</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (macroexpand '(setf (gethash :visit session) (incf counter)))
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">CL-USER&gt; (macroexpand &#39;(setf (gethash :visit session) (incf counter)))
 (LET* ((#:HASHTABLE SESSION)     <i class="conum" data-value="1"></i><b>(1)</b>
       	　(#:NEW1 (INCF COUNTER)))
   (SB-KERNEL:%PUTHASH :VISIT #:HASHTABLE #:NEW1))  <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
@@ -934,7 +935,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>引数の <code>session</code> の値（ハッシュテーブルへのポインタ）が一時変数 <code>#:HASHTABLE</code> に設定される．</td>
 </tr>
@@ -942,7 +943,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td><code>#:HASHTABLE</code> と <code>session</code> は同じハッシュテーブルを指すので，ここで <code>#:NEW1</code> の値を設定すれば，元の <code>session</code> 変数の中身も変わる．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -962,11 +963,11 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defparameter *app*
   (lack:builder
    :session
-   (secure-mw #'redirect-to-login-page '("/private"))
-   (:mount "/login" *login*)
-   (:mount "/auth" *auth*)
-   (:mount "/logout" *logout*)
-   (:mount "/private" *private*)
+   (secure-mw #&#39;redirect-to-login-page &#39;(&#34;/private&#34;))
+   (:mount &#34;/login&#34; *login*)
+   (:mount &#34;/auth&#34; *auth*)
+   (:mount &#34;/logout&#34; *logout*)
+   (:mount &#34;/private&#34; *private*)
    *sample-app*))</code></pre>
 </div>
 </div>
@@ -1007,7 +1008,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">;;; ログインページへリダイレクトするレスポンスを返す．
 (defun redirect-to-login-page ()
-  '(303 (:location "/login") ("")))</code></pre>
+  &#39;(303 (:location &#34;/login&#34;) (&#34;&#34;)))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1019,10 +1020,10 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defparameter *login*
   (lambda (env)
     (let ((uid (get-uid env)))
-      `(200 (:content-type "text/html")
+      `(200 (:content-type &#34;text/html&#34;)
             ,(append (page-header)
                      (if uid
-                         (list "&lt;p&gt;You are already logged in as " uid ".&lt;/p&gt;")
+                         (list &#34;&lt;p&gt;You are already logged in as &#34; uid &#34;.&lt;/p&gt;&#34;)
                          (login-form))
                      (page-footer))))))</code></pre>
 </div>
@@ -1035,25 +1036,25 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(defparameter *auth*
   (lambda (env)
     (let* ((params (getf env :body-parameters))
-           (name (cdr (assoc "uname" params :test #'string=)))
-           (pass (cdr (assoc "passwd" params :test #'string=))))
+           (name (cdr (assoc &#34;uname&#34; params :test #&#39;string=)))
+           (pass (cdr (assoc &#34;passwd&#34; params :test #&#39;string=))))
       (if (and (= (length params) 2)
                (authenticate name pass))
           (let* ((session (getf env :lack.session))
-                 (url (gethash :prev-url session "/")))
-            (setf (gethash :uid session "/") name)
+                 (url (gethash :prev-url session &#34;/&#34;)))
+            (setf (gethash :uid session &#34;/&#34;) name)
             (setf (getf (getf env :lack.session.options) :change-id) t) <i class="conum" data-value="1"></i><b>(1)</b>
-            `(303 (:location ,url) ("")))
+            `(303 (:location ,url) (&#34;&#34;)))
           (redirect-to-login-page)))))</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>ログイン後は新しいセッションIDを割り当てる．次回アクセス時には <code>:change-id</code> の値は <code>nil</code> にリセットされるため，セッションIDの更新は1回限りである．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>認証自体は <code>authenticate</code> 関数に委譲し，成功すればセッション変数から <code>:prev-url</code> に保存されている当初のアクセス先を取り出しリダイレクトする．失敗すればログインページへリダイレクトする．セッションの乗っ取りを避けるためにログイン時に新たなセッションIDを割り当てる設定をする（11行目）．</p>
@@ -1066,9 +1067,9 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(defparameter *logout*
   (lambda (env)
     (setf (getf (getf env :lack.session.options) :expire) t)
-    `(200 (:content-type "text/html")
+    `(200 (:content-type &#34;text/html&#34;)
           ,(append (page-header)
-                   (list "&lt;p&gt;You have logged out.&lt;/p&gt;")
+                   (list &#34;&lt;p&gt;You have logged out.&lt;/p&gt;&#34;)
                    (page-footer)))))</code></pre>
 </div>
 </div>

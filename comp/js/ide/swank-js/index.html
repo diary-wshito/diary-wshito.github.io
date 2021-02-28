@@ -74,7 +74,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/js/ide/swank-js/" />
 
@@ -87,13 +87,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -105,23 +105,23 @@
             
         ]
     },
-    "headline": Slime と Swank-js でサクサク JavaScript 開発,
-    "name": Slime と Swank-js でサクサク JavaScript 開発,
-    "wordCount": 3482,
+    "headline": "Slime と Swank-js でサクサク JavaScript 開発",
+    "name": "Slime と Swank-js でサクサク JavaScript 開発",
+    "wordCount":  3482 ,
     "timeRequired": "PT7M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/js/ide/swank-js/,
-    "datePublished": 2018-12-25T00:00Z,
-    "dateModified": 2018-12-25T00:00Z,
+    "url": "http://diary.wshito.com/comp/js/ide/swank-js/",
+    "datePublished": "2018-12-25T00:00Z",
+    "dateModified": "2018-12-25T00:00Z",
     
-    "keywords": javascript, ide, dev-tool, slime, swank, emacs,
-    "description": ,
+    "keywords": "javascript, ide, dev-tool, slime, swank, emacs",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/js/ide/swank-js/
+        "@id": "http://diary.wshito.com/comp/js/ide/swank-js/"
     }
 }
     </script>
@@ -146,7 +146,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -242,9 +243,6 @@
 <div class="paragraph">
 <p>今回は，Emacs エディタからリモート上の Node やブラウザに接続して，エディタの編集画面から直接プログラムをホットスワップする開発方法を紹介します．Lisp 系言語の開発者にはお馴染みの Slime を用いた開発です．JavaScript 用の Swank サーバ（swank-js）は随分前から開発されていましたが，長い間更新が滞り最新の Emacs 環境では使うことができませんでした．今回，最新の Emacs 環境で使えるように修正したので，導入方法と使い方を紹介します．</p>
 </div>
-<div class="paragraph">
-<p></p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -262,7 +260,7 @@
 <div class="paragraph">
 <p>Slime の場合，コードの編集画面から直接コードが実行できます．正確には，エディタのショートカットキーを使って JavaScript コードをリモートの Swank-js サーバーに送り，評価結果をサーバから受け取ります．実際の様子は，以下の動画を見てみてください．エディタ上からコードを実行しているのが見て取れるはずです．</p>
 </div>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qwtVtcQQfqc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qwtVtcQQfqc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 <div class="paragraph">
 <p>残念ながらこの記事を書いている段階では，ブラウザの接続機能の修正が完了していないので，上の動画のようにリモートの Web ページに接続することはできません．本稿では NodeJS に接続して開発する方法のみを説明します．</p>
 </div>
@@ -303,12 +301,12 @@
 <p><code>.emacs</code> か <code>init.el</code> に <code>slime-js.el</code> を有効にする設定を追加します．</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(add-to-list 'load-path "/your-slime-directory/slime")
-(slime-setup  '(slime-fancy slime-js))</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(add-to-list &#39;load-path &#34;/your-slime-directory/slime&#34;)
+(slime-setup  &#39;(slime-fancy slime-js))</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Roswell ユーザは上の設定の代わりに <code>~/.roswell/helper.el</code> 内の <code>roswell-slime-contribs</code> 変数の定義に <code>slime-js</code> を追加します．例: <code>(defvar roswell-slime-contribs '(slime-fancy slime-js))</code></p>
+<p>Roswell ユーザは上の設定の代わりに <code>~/.roswell/helper.el</code> 内の <code>roswell-slime-contribs</code> 変数の定義に <code>slime-js</code> を追加します．例: <code>(defvar roswell-slime-contribs &#39;(slime-fancy slime-js))</code></p>
 </div>
 </li>
 <li>
@@ -318,8 +316,8 @@
 <p>js2-mode の設定を <code>.emacs</code> に追加します．</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(require &#39;js2-mode)
+(add-to-list &#39;auto-mode-alist &#39;(&#34;\\.js\\&#39;&#34; . js2-mode))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -327,10 +325,10 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(add-hook 'js2-mode-hook (lambda ()
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(add-hook &#39;js2-mode-hook (lambda ()
 			   (slime-js-minor-mode 1)
-			   #'js2-imenu-extras-mode
-			   #'rainbow-delimiters-mode
+			   #&#39;js2-imenu-extras-mode
+			   #&#39;rainbow-delimiters-mode
 			   (setq js2-basic-offset 2)))</code></pre>
 </div>
 </div>
@@ -404,7 +402,7 @@ inspect([1, 2, 3, 4, 5].map(double));</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">// setting for swank-js
-console.log = (typeof inspect === "undefined") ? console.log : inspect;</code></pre>
+console.log = (typeof inspect === &#34;undefined&#34;) ? console.log : inspect;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -413,7 +411,7 @@ console.log = (typeof inspect === "undefined") ? console.log : inspect;</code></
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">// setting for swank-js
-console.log = (typeof inspect === "undefined") ? console.log : inspect;
+console.log = (typeof inspect === &#34;undefined&#34;) ? console.log : inspect;
 
 function double (x) {
   return 2 * x;
@@ -451,7 +449,7 @@ console.log([1, 2, 3, 4, 5].map(double));  // console.log に変更</code></pre>
 <p>swank-js サーバにコードを送信するときに注意しなければいけない点は，<code>let</code> で定義した変数を再定義できないことです．普通にプログラミングしていても，ソース上に同じ変数名で <code>let</code> 宣言すると <code>already been declared</code> とシンタックスエラーが出るように，swank-js にも <code>let</code> 宣言を複数回送信することはできません．この場合，ソースから <code>let</code> だけ削除して変数の代入として評価するか，<code>let</code> を除いた部分をリージョン指定して <code>C-c C-r</code> で送信する必要があります．</p>
 </div>
 <div class="paragraph">
-<p>特に関数定義を <code>const double = x &#8658; 2 * x</code> の様に書く習慣がある人は，<code>const</code> 宣言すると名前を変えるか，swank-js を再起動しない限り，関数定義を変更できないので注意する必要があります．私は，テストケースに通るまで <code>let</code> で関数定義を書き，代入で修正を繰り返し，実装が完成したら <code>const</code> に変更しています．</p>
+<p>特に関数定義を <code>const double = x ⇒ 2 * x</code> の様に書く習慣がある人は，<code>const</code> 宣言すると名前を変えるか，swank-js を再起動しない限り，関数定義を変更できないので注意する必要があります．私は，テストケースに通るまで <code>let</code> で関数定義を書き，代入で修正を繰り返し，実装が完成したら <code>const</code> に変更しています．</p>
 </div>
 <div class="paragraph">
 <p>ただし，関数定義を <code>function</code> キーワードを使って定義した場合は，Node ではコードを再評価することにより関数定義を上書きすることができました．</p>

@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ccl on wshito&#39;s diary</title>
+    <title>ccl on wshito&#39;s diary</title>
     <link>http://diary.wshito.com/tags/ccl/</link>
-    <description>Recent content in Ccl on wshito&#39;s diary</description>
+    <description>Recent content in ccl on wshito&#39;s diary</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Fri, 13 Apr 2018 18:46:32 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/tags/ccl/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 13 Apr 2018 18:46:32 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/tags/ccl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ASDF3 on Clozure CL does not search ASD files under the symbolic links</title>
       <link>http://diary.wshito.com/comp/lisp/ccl-init/</link>
@@ -19,7 +15,7 @@
       
       <guid>http://diary.wshito.com/comp/lisp/ccl-init/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;I put all my lisp projects under the directory &lt;code&gt;git-repos&lt;/code&gt; and set symbolic links to each projects from &lt;code&gt;~/common-lisp&lt;/code&gt;.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn&amp;#8217;t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under &lt;code&gt;~/common-lisp&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I put all my lisp projects under the directory &lt;code&gt;git-repos&lt;/code&gt; and set symbolic links to each projects from &lt;code&gt;~/common-lisp&lt;/code&gt;.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn’t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under &lt;code&gt;~/common-lisp&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     

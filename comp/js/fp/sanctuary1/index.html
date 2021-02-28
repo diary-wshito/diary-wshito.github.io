@@ -67,7 +67,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/js/fp/sanctuary1/" />
 
@@ -80,13 +80,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -98,23 +98,23 @@
             
         ]
     },
-    "headline": ファンタジー・ランドの保護地区をゆく Part 1  --- Functor,
-    "name": ファンタジー・ランドの保護地区をゆく Part 1  --- Functor,
-    "wordCount": 4121,
+    "headline": "ファンタジー・ランドの保護地区をゆく Part 1  --- Functor",
+    "name": "ファンタジー・ランドの保護地区をゆく Part 1  --- Functor",
+    "wordCount":  4317 ,
     "timeRequired": "PT9M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/js/fp/sanctuary1/,
-    "datePublished": 2018-12-04T00:00Z,
-    "dateModified": 2018-12-04T00:00Z,
+    "url": "http://diary.wshito.com/comp/js/fp/sanctuary1/",
+    "datePublished": "2018-12-04T00:00Z",
+    "dateModified": "2018-12-04T00:00Z",
     
-    "keywords": sanctuary, fantasyland, javascript, functional programming,
-    "description": JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．,
+    "keywords": "sanctuary, fantasyland, javascript, functional programming",
+    "description": "JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 1．",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/js/fp/sanctuary1/
+        "@id": "http://diary.wshito.com/comp/js/fp/sanctuary1/"
     }
 }
     </script>
@@ -139,7 +139,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -233,9 +234,6 @@
 <div class="paragraph">
 <p>最近，JavaScript の関数型プログラミングにはまっているので，<a href="https://github.com/fantasyland/fantasy-land">Fantasy Land</a> を実装した <a href="https://sanctuary.js.org">Sanctuary.js</a> の使い方をサーベイして行きたいと思います．今回は基本中の基本，Functor から．</p>
 </div>
-<div class="paragraph">
-<p></p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -248,7 +246,7 @@
 <p>まず，配列は内部に値を保持するコンテナです．Functor も内部に値を保持します．Functor は内部に値を保持するラッパー，もしくは箱であると説明されることがよくあります．</p>
 </div>
 <div class="paragraph">
-<p>配列の <code>map</code> メソッドで各要素に関数を適用すると，適用結果は再び配列に格納されて返ります．Functor も内部に保持する値に <code>map</code> を使って関数を適用すると，その結果は再び Functor でラッピングされて返ります．ちなみに，Functor が内部に保持するのはデータだけでなく関数も保持できます（関数は第1級オブジェクトなので当然ですが&#8230;&#8203;.）．</p>
+<p>配列の <code>map</code> メソッドで各要素に関数を適用すると，適用結果は再び配列に格納されて返ります．Functor も内部に保持する値に <code>map</code> を使って関数を適用すると，その結果は再び Functor でラッピングされて返ります．ちなみに，Functor が内部に保持するのはデータだけでなく関数も保持できます（関数は第1級オブジェクトなので当然ですが…​.）．</p>
 </div>
 <div class="paragraph">
 <p>Sanctuary ライブラリでは JavaScript のオブジェクト <code>{}</code> も Functor に分類されています．つまり，オブジェクト <code>{}</code> にも <code>map</code> 関数が使えるということです．配列もオブジェクトも <code>map</code> が使えるので，もはや <code>for</code> ループが不要になります．</p>
@@ -267,8 +265,8 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ node
-&gt; let Z = require('sanctuary-type-classes')  // 型の定義
-&gt; let S = require('sanctuary')               // Sanctuary本体
+&gt; let Z = require(&#39;sanctuary-type-classes&#39;)  // 型の定義
+&gt; let S = require(&#39;sanctuary&#39;)               // Sanctuary本体
 
 &gt; Z.Functor.test(S.Maybe)          // Maybe型はFunctorのサブクラス
 true
@@ -308,13 +306,13 @@ false</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Functor f &#8658;</code> の部分で <code>f</code> に Functor 型の制約を置いている．</p>
+<p><code>Functor f ⇒</code> の部分で <code>f</code> に Functor 型の制約を置いている．</p>
 </li>
 <li>
 <p><code>f a ~&gt;</code> の部分は，<code>map</code> メソッドが帰属するオブジェクトの型を表す．例えば，<code>x.map(Math.sqrt)</code> というコードの <code>x</code> の部分の型を規定している．<code>f a</code> は <code>a</code> に関数 <code>f</code> を適用することを意味する．つまり <code>x</code> はファンクター <code>f</code> の型で内部に <code>a</code> の型を値として保持していることを表す．</p>
 </li>
 <li>
-<p><code>(a &#8594; b)</code> は <code>map</code> の第 1 引数が Type <code>a</code> から Type <code>b</code> への関数であることを表す．</p>
+<p><code>(a → b)</code> は <code>map</code> の第 1 引数が Type <code>a</code> から Type <code>b</code> への関数であることを表す．</p>
 </li>
 <li>
 <p>最後の <code>f b</code> は <code>map</code> の戻り値の型を表す．Type <code>b</code> を格納する Functor 型が返る．</p>
@@ -337,7 +335,7 @@ false</code></pre>
 <p><code>map</code> 関数が呼び出されるオブジェクトの型は配列で，配列の中は <code>number</code> 型なので，<code>f a ~&gt;</code> の部分は <code>f</code> が配列型で，<code>a</code> が <code>number</code> 型になる．</p>
 </li>
 <li>
-<p><code>map</code> の第 1 引数 <code>Math.sqrt</code> は <code>number &#8594; number</code> の関数で，<a href="#mapdef">コード 1</a> の <code>(a &#8594; b
+<p><code>map</code> の第 1 引数 <code>Math.sqrt</code> は <code>number → number</code> の関数で，<a href="#mapdef">コード 1</a> の <code>(a → b
 )</code> 部分に対応する．したがって <code>b</code> も <code>number</code> 型になる．</p>
 </li>
 <li>
@@ -371,13 +369,13 @@ S.map(Math.sqrt)([1, 2, 3, 4, 5])  // fantasy-land/mapのカリー化バージ�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">Z.Functor.test({a: " 1 ", b: " 2 "});
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">Z.Functor.test({a: &#34; 1 &#34;, b: &#34; 2 &#34;});
 //=&gt; true
 
-{a: " 1 ", b: " 2 "}.map(Math.sqrt)    // Object.prototype.map はないのでエラー
+{a: &#34; 1 &#34;, b: &#34; 2 &#34;}.map(Math.sqrt)    // Object.prototype.map はないのでエラー
 //=&gt; エラー！
 
-S.map(Math.sqrt)({a: " 1 ", b: " 2 "}) // こちらを使いましょう．
+S.map(Math.sqrt)({a: &#34; 1 &#34;, b: &#34; 2 &#34;}) // こちらを使いましょう．
 //=&gt; { a: 1, b: 1.4142135623730951 }</code></pre>
 </div>
 </div>
@@ -401,19 +399,19 @@ S.map(Math.sqrt)({a: " 1 ", b: " 2 "}) // こちらを使いましょう．
 <div id="markEach1" class="listingblock">
 <div class="title">コード 3. 成績処理のコード例</div>
 <div class="content">
-<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">const S = require('sanctuary')
+<pre class="highlight"><code class="language-JavaScript" data-lang="JavaScript">const S = require(&#39;sanctuary&#39;)
 
 const students = [
-  { name: "太朗", exams: { midterm: 80, endterm: 65 } },
-  { name: "花子", exams: { midterm: 93, endterm: 38 } },
-  { name: "謙太", exams: { midterm: 55, endterm: 65 } },
-  { name: "春子", exams: { midterm: 92, endterm: 78 } },
-  { name: "五朗", exams: { midterm: 48, endterm: 25 } },
-  { name: "郁子", exams: { midterm: 73, endterm: 82 } },
+  { name: &#34;太朗&#34;, exams: { midterm: 80, endterm: 65 } },
+  { name: &#34;花子&#34;, exams: { midterm: 93, endterm: 38 } },
+  { name: &#34;謙太&#34;, exams: { midterm: 55, endterm: 65 } },
+  { name: &#34;春子&#34;, exams: { midterm: 92, endterm: 78 } },
+  { name: &#34;五朗&#34;, exams: { midterm: 48, endterm: 25 } },
+  { name: &#34;郁子&#34;, exams: { midterm: 73, endterm: 82 } },
 ]
 
 const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x); <i class="conum" data-value="1"></i><b>(1)</b>
-const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "C")(x =&gt; "欠席"))))
+const grade = geqAlt(90, &#34;A&#34;)(geqAlt(80, &#34;B&#34;)(geqAlt(60, &#34;C&#34;)(geqAlt(0, &#34;C&#34;)(x =&gt; &#34;欠席&#34;))))
 
 markEach = student =&gt; {
   return {...student, grade: S.map(grade)(student.exams)}; <i class="conum" data-value="2"></i><b>(2)</b>
@@ -424,9 +422,9 @@ console.log(students.map(markEach));  <i class="conum" data-value="3"></i><b>(3)
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>ボーダーラインと <code>grade</code> を引数に取り，ボーダーライン以上なら <code>grade</code> を返し，そうでなければ 第 3 引数に与えられる関数に処理を委譲する．パラメータ <code>x</code> が数字でないと <code>S.map</code> が例外を投げるので，<code>grade</code> 関数の "欠席" はここでは呼び出されない．</td>
+<td>ボーダーラインと <code>grade</code> を引数に取り，ボーダーライン以上なら <code>grade</code> を返し，そうでなければ 第 3 引数に与えられる関数に処理を委譲する．パラメータ <code>x</code> が数字でないと <code>S.map</code> が例外を投げるので，<code>grade</code> 関数の &#34;欠席&#34; はここでは呼び出されない．</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -436,7 +434,7 @@ console.log(students.map(markEach));  <i class="conum" data-value="3"></i><b>(3)
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>全学生の配列データに <code>map</code> を使って <code>grade</code> 関数を適用．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>上のコードを <code>grade.js</code> に保存して実行した結果は以下のとおり．</p>
@@ -444,24 +442,24 @@ console.log(students.map(markEach));  <i class="conum" data-value="3"></i><b>(3)
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ node grade.js
-[ { name: '太朗',
+[ { name: &#39;太朗&#39;,
     exams: { midterm: 80, endterm: 65 },
-    grade: { midterm: 'B', endterm: 'C' } },
-  { name: '花子',
+    grade: { midterm: &#39;B&#39;, endterm: &#39;C&#39; } },
+  { name: &#39;花子&#39;,
     exams: { midterm: 93, endterm: 38 },
-    grade: { midterm: 'A', endterm: 'C' } },
-  { name: '謙太',
+    grade: { midterm: &#39;A&#39;, endterm: &#39;C&#39; } },
+  { name: &#39;謙太&#39;,
     exams: { midterm: 55, endterm: 65 },
-    grade: { midterm: 'C', endterm: 'C' } },
-  { name: '春子',
+    grade: { midterm: &#39;C&#39;, endterm: &#39;C&#39; } },
+  { name: &#39;春子&#39;,
     exams: { midterm: 92, endterm: 78 },
-    grade: { midterm: 'A', endterm: 'C' } },
-  { name: '五朗',
+    grade: { midterm: &#39;A&#39;, endterm: &#39;C&#39; } },
+  { name: &#39;五朗&#39;,
     exams: { midterm: 48, endterm: 25 },
-    grade: { midterm: 'C', endterm: 'C' } },
-  { name: '郁子',
+    grade: { midterm: &#39;C&#39;, endterm: &#39;C&#39; } },
+  { name: &#39;郁子&#39;,
     exams: { midterm: 73, endterm: 82 },
-    grade: { midterm: 'C', endterm: 'B' } } ]</code></pre>
+    grade: { midterm: &#39;C&#39;, endterm: &#39;B&#39; } } ]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -469,25 +467,25 @@ console.log(students.map(markEach));  <i class="conum" data-value="3"></i><b>(3)
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">const S = require('sanctuary')
-const R = require('ramda')
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const S = require(&#39;sanctuary&#39;)
+const R = require(&#39;ramda&#39;)
 
 // studentsオブジェクトの定義は省略．
 
 const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x);
-const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "D")(x =&gt; "欠席"))))
+const grade = geqAlt(90, &#34;A&#34;)(geqAlt(80, &#34;B&#34;)(geqAlt(60, &#34;C&#34;)(geqAlt(0, &#34;D&#34;)(x =&gt; &#34;欠席&#34;))))
 
-const gradeLens = R.lensProp("grade");   <i class="conum" data-value="1"></i><b>(1)</b>
+const gradeLens = R.lensProp(&#34;grade&#34;);   <i class="conum" data-value="1"></i><b>(1)</b>
 const markEach = student =&gt; R.set(gradeLens, S.map(grade)(student.exams), student) <i class="conum" data-value="2"></i><b>(2)</b>
 
 console.log(students.map(markEach))
-console.log("----------------")
+console.log(&#34;----------------&#34;)
 console.log(students)</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>プロパティ・レンズで値の設定先を指定．</td>
 </tr>
@@ -495,7 +493,7 @@ console.log(students)</code></pre>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>これで <code>mark</code> 関数は引数を変更しない．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -512,38 +510,38 @@ console.log(students)</code></pre>
 <p>JavaScript の仕様を理解した上で，部分的に型チェックを回避したい場合は <code>S.map</code> 関数の代わりに <code>S.unchecked.map</code> を使います．（もっと手っ取り早い方法は <a href="https://ramdajs.com">Ramda</a> の <code>map</code> を使います．Ramda は型チェックがありません．）</p>
 </div>
 <div class="paragraph">
-<p>例えば，成績データに <code>"欠席"</code> や <code>"NA"</code> などの文字列か <code>null</code> が含まれている場合，上の <code>grade</code> 関数は，<code>null</code> のとき <code>"D"</code> が返り，<code>"欠席"</code> や <code>"NA"</code> などの文字列のとき最後の <code>"欠席"</code> が返ります．もし，これが意図している動作なら，以下のように <code>S.unchecked.map</code> を使うことで解決できます．</p>
+<p>例えば，成績データに <code>&#34;欠席&#34;</code> や <code>&#34;NA&#34;</code> などの文字列か <code>null</code> が含まれている場合，上の <code>grade</code> 関数は，<code>null</code> のとき <code>&#34;D&#34;</code> が返り，<code>&#34;欠席&#34;</code> や <code>&#34;NA&#34;</code> などの文字列のとき最後の <code>&#34;欠席&#34;</code> が返ります．もし，これが意図している動作なら，以下のように <code>S.unchecked.map</code> を使うことで解決できます．</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">const S = require('sanctuary')
-const R = require('ramda')
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">const S = require(&#39;sanctuary&#39;)
+const R = require(&#39;ramda&#39;)
 
 // setting for swank-js
-console.log = (typeof inspect === "undefined") ? console.log : inspect;
+console.log = (typeof inspect === &#34;undefined&#34;) ? console.log : inspect;
 
 const students = [
-  { name: "太朗", exams: { midterm: 'NA', endterm: 65 } },
-  { name: "花子", exams: { midterm: 93, endterm: 38 } },
-  { name: "謙太", exams: { midterm: null, endterm: 65 } },
-  { name: "春子", exams: { midterm: 92, endterm: 78 } },
-  { name: "五朗", exams: { midterm: 48, endterm: 25 } },
-  { name: "郁子", exams: { midterm: 73, endterm: null } }
+  { name: &#34;太朗&#34;, exams: { midterm: &#39;NA&#39;, endterm: 65 } },
+  { name: &#34;花子&#34;, exams: { midterm: 93, endterm: 38 } },
+  { name: &#34;謙太&#34;, exams: { midterm: null, endterm: 65 } },
+  { name: &#34;春子&#34;, exams: { midterm: 92, endterm: 78 } },
+  { name: &#34;五朗&#34;, exams: { midterm: 48, endterm: 25 } },
+  { name: &#34;郁子&#34;, exams: { midterm: 73, endterm: null } }
 ]
 
 const geqAlt = (border, grade) =&gt; alt =&gt; x =&gt; x &gt;= border ? grade : alt(x);
-const grade = geqAlt(90, "A")(geqAlt(80, "B")(geqAlt(60, "C")(geqAlt(0, "D")(x =&gt; "欠席"))))
+const grade = geqAlt(90, &#34;A&#34;)(geqAlt(80, &#34;B&#34;)(geqAlt(60, &#34;C&#34;)(geqAlt(0, &#34;D&#34;)(x =&gt; &#34;欠席&#34;))))
 
-const gradeLens = R.lensProp("grade");
+const gradeLens = R.lensProp(&#34;grade&#34;);
 const markEach = student =&gt; R.set(gradeLens, S.unchecked.map(grade)(student.exams), student)
 
 console.log(students.map(markEach));
-console.log("----------------");
+console.log(&#34;----------------&#34;);
 console.log(students);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>もちろん，これは本来の関数型プログラミングのやり方ではありません．もっとエレガントなやり方は，モナドの紹介記事のためにとっておきましょう．モナドを使えば，<code>null</code> でも <code>'NA'</code> 同様に <code>"欠席"</code> として扱うことができるようになります．</p>
+<p>もちろん，これは本来の関数型プログラミングのやり方ではありません．もっとエレガントなやり方は，モナドの紹介記事のためにとっておきましょう．モナドを使えば，<code>null</code> でも <code>&#39;NA&#39;</code> 同様に <code>&#34;欠席&#34;</code> として扱うことができるようになります．</p>
 </div>
 </div>
 </div>
@@ -560,10 +558,10 @@ console.log(students);</code></pre>
 <p><code>map</code> メソッドを持つこと．</p>
 </li>
 <li>
-<p><code>u.map(a &#8658; a)</code> は自分自信 <code>u</code> と同値であること．</p>
+<p><code>u.map(a ⇒ a)</code> は自分自信 <code>u</code> と同値であること．</p>
 </li>
 <li>
-<p><code>u.map(x &#8658; f(g(x)))</code> は <code>u.map(g).map(f)</code> と同値であること．</p>
+<p><code>u.map(x ⇒ f(g(x)))</code> は <code>u.map(g).map(f)</code> と同値であること．</p>
 </li>
 </ol>
 </div>
@@ -577,7 +575,7 @@ console.log(students);</code></pre>
 <p>同様に定義の 3 番目も数学の関数に置き換えるために，\(f(x) = x + 1\)，\(g(x) = 2x^2\) を使って考えてみましょう．</p>
 </div>
 <div class="paragraph">
-<p><code>u.map(x &#8658; f(g(x)))</code> は \(f(g(x)) = g + 1 = 2x^2 + 1\) を先に計算し，これを \(u(x)\) に適用することを意味しているので，\(f(g(u(x))) = 2u^2 + 1 = 2(x^2 + 4)^2 + 1\) を得ます．</p>
+<p><code>u.map(x ⇒ f(g(x)))</code> は \(f(g(x)) = g + 1 = 2x^2 + 1\) を先に計算し，これを \(u(x)\) に適用することを意味しているので，\(f(g(u(x))) = 2u^2 + 1 = 2(x^2 + 4)^2 + 1\) を得ます．</p>
 </div>
 <div class="paragraph">
 <p><code>u.map(g).map(f)</code> は，先に \(g(u(x)) = 2u^2 = 2(x^2 + 4)^2\) を計算し，その結果に \(f\) を適用するので \(f(g(u(x)))) =  g(u(x)) + 1 = 2(x^2 + 4)^2 + 1\) を得ます．</p>
@@ -586,7 +584,7 @@ console.log(students);</code></pre>
 <p>つまり 3 つ目の定義は，合成写像が結合法則 \((f \circ g) \circ u = f \circ (g \circ u)\) を満たすことを表しています．</p>
 </div>
 <div class="paragraph">
-<p>もし，Functor <code>u</code> に恒等写像 <code>x &#8658; x</code> が格納されている場合，<code>u.map(g).map(f)</code> は \(f \circ (g \circ u) = f \circ g\) で \(f\) と \(g\) の合成写像になるので，<code>u</code> は関数を合成する combinator になります（B Combinator または Compose）．つまり恒等写像を内部に持つ Functor に，関数を続けて <code>map</code> すると関数合成が実現できます．</p>
+<p>もし，Functor <code>u</code> に恒等写像 <code>x ⇒ x</code> が格納されている場合，<code>u.map(g).map(f)</code> は \(f \circ (g \circ u) = f \circ g\) で \(f\) と \(g\) の合成写像になるので，<code>u</code> は関数を合成する combinator になります（B Combinator または Compose）．つまり恒等写像を内部に持つ Functor に，関数を続けて <code>map</code> すると関数合成が実現できます．</p>
 </div>
 </div>
 </div>

@@ -63,7 +63,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/as/step-by-step/begin-assembly/" />
 
@@ -76,13 +76,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -94,23 +94,23 @@
             
         ]
     },
-    "headline": アセンブリを始めてみる,
-    "name": アセンブリを始めてみる,
-    "wordCount": 1052,
+    "headline": "アセンブリを始めてみる",
+    "name": "アセンブリを始めてみる",
+    "wordCount":  1120 ,
     "timeRequired": "PT3M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/as/step-by-step/begin-assembly/,
-    "datePublished": 2017-06-12T21:15Z,
-    "dateModified": 2017-06-12T21:15Z,
+    "url": "http://diary.wshito.com/comp/as/step-by-step/begin-assembly/",
+    "datePublished": "2017-06-12T21:15Z",
+    "dateModified": "2017-06-12T21:15Z",
     
-    "keywords": assembly, programming,
-    "description": ,
+    "keywords": "assembly, programming",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/as/step-by-step/begin-assembly/
+        "@id": "http://diary.wshito.com/comp/as/step-by-step/begin-assembly/"
     }
 }
     </script>
@@ -135,7 +135,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -216,27 +217,18 @@
 
     <section class="post-content">
       <p>マイコンをもっと極めたい．その一心でひたすら低水準（マシン寄り）の勉強をしていると，結局アセンブリやリンカスクリプトの勉強に辿り着く．</p>
-
 <p>坂井氏の「<a href="http://amzn.to/2tdEj29">12ステップで作る組込みOS自作入門</a>」をやってH8のアセンブリを勉強するか，それとも，もっと基礎から書かれたCASLの解説書の方が良いか．CASL IIの本ではKindleで読める「<a href="http://amzn.to/2tdJdMy">アセンブリ言語スタートブック</a>」が良さそうだ．でもシュミレーターで動く言語じゃなく，実機で動く方がやる気が出る．結局，色々考えた結果，PC向けのアセンブリを勉強することにした．最近は自作OS本も色々と出ているしね．</p>
-
 <p>そこで色々と漁った結果がこれ．「<a href="http://amzn.to/2tdBpKI">Assembly Language Step-by-Step: Programming with Linux, 3rd ed.</a>」</p>
-
 <p>前書きによれば最低限必要なものは以下の３つ．</p>
-
 <ul>
 <li>Intel x86ベースのLinuxマシン（カーネルver 2.6）</li>
 <li>NASM</li>
 <li>GDB</li>
 </ul>
-
 <p>私はMacユーザなのでクロスコンパイラを用意し，VirtualBoxか何かでLinuxを走らせればよいだろう．</p>
-
 <p>さてこの本，Amazonでは100近いレビューがあり高評価なのだが若干の低評価もある．まず第１章から３章をパラパラと飛ばし読みしてみて納得．比喩が多くて読むのに疲れる．著者によれば，「アセンブリを始めて勉強する人」のための本ではなく，「アセンブリで<strong>プログラミングを初めて学ぶ人</strong>」のための本というのがターゲットらしいので致し方ない．その分，核心の内容も丁寧な説明だろうということを期待して，読み飛ばすなという著者の指示がある第４章へ突入．</p>
-
 <p>ここでようやくアセンブリの勉強らしき内容に入ってきた．第４章の本題はメモリ・アドレシング．ここで幾つかIntelのCPUが出てくるのだが，SE/30以来の生粋のMacユーザにはイマイチぴんと来ない．とにかくこの本はIA-32アーキテクチャをサポートした386以降の32bit向けのアセンブリ・プログラミングを学ぶということだ．</p>
-
 <p>そこでIntel CPUの種類を調べてみた．</p>
-
 <ul>
 <li><a href="https://ja.wikipedia.org/wiki/Intel_8086">8086</a> &mdash; 16bitプロセッサ．こいつがx86（80x86）の呼称の原型（1978年発表）
 ．これ以降のCPUは8086用コードを実行できる仮想8086モードを持つ．</li>
@@ -244,10 +236,8 @@
 <li><a href="https://ja.wikipedia.org/wiki/Intel_80286">80286</a> &mdash; Intelの16bit最後のプロセッサ．</li>
 <li><a href="https://ja.wikipedia.org/wiki/Intel_80386">80386</a> &mdash; ここから32bitプロセッサ時代に突入．これがいわゆるi386アーキテクチャの原型．IA-32は32ビットの命令セットのことで，i386以降の32bitプロセッサはこの命令セットを理解する．</li>
 </ul>
-
 <p>Wikipediaの表がとてもわかりやすいのでここに再掲．なるほど．我らが青春時代に流行っていたPentiumプロセッサはIA-32アーキテクチャなのね．これでスッキリした．</p>
-
-<p><img src="x86.png" alt="" /></p>
+<p><img src="x86.png" alt=""></p>
 
     </section>
 

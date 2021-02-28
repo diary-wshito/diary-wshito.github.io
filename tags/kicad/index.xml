@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kicad on wshito&#39;s diary</title>
+    <title>KiCad on wshito&#39;s diary</title>
     <link>http://diary.wshito.com/tags/kicad/</link>
-    <description>Recent content in Kicad on wshito&#39;s diary</description>
+    <description>Recent content in KiCad on wshito&#39;s diary</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Thu, 16 Feb 2017 19:59:57 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/tags/kicad/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 16 Feb 2017 19:59:57 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/tags/kicad/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>次のマイクロマウス製作に向けて</title>
       <link>http://diary.wshito.com/elec/micromouse/micromouse2017/</link>

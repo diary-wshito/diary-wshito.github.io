@@ -63,7 +63,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/cl-dialogue/3/" />
 
@@ -76,13 +76,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -94,23 +94,23 @@
             
         ]
     },
-    "headline": 「対話によるCommon Lisp入門」第3話まとめノート,
-    "name": 「対話によるCommon Lisp入門」第3話まとめノート,
-    "wordCount": 388,
+    "headline": "「対話によるCommon Lisp入門」第3話まとめノート",
+    "name": "「対話によるCommon Lisp入門」第3話まとめノート",
+    "wordCount":  399 ,
     "timeRequired": "PT1M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/cl-dialogue/3/,
-    "datePublished": 2016-11-14T21:49Z,
-    "dateModified": 2016-11-14T21:49Z,
+    "url": "http://diary.wshito.com/comp/lisp/cl-dialogue/3/",
+    "datePublished": "2016-11-14T21:49Z",
+    "dateModified": "2016-11-14T21:49Z",
     
-    "keywords": programming, lisp,
-    "description": ,
+    "keywords": "programming, lisp",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/cl-dialogue/3/
+        "@id": "http://diary.wshito.com/comp/lisp/cl-dialogue/3/"
     }
 }
     </script>
@@ -135,7 +135,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -215,46 +216,34 @@
     </header>
 
     <section class="post-content">
-      
-
-<h2 id="lispのデータ型">Lispのデータ型</h2>
-
-<p><img src="data-type.jpg" alt="Lispのデータ型" style="width:400px;"/></p>
-
+      <h2 id="lispのデータ型">Lispのデータ型</h2>
+<!-- raw HTML omitted -->
 <ul>
 <li>リスト以外はアトム（1つだけ例外あり？p.24）．</li>
 <li>NULL型はリストでありシンボルである．</li>
 <li>NULL型のリストは空リスト<code>()</code>で<code>NIL</code>と同値．</li>
 <li>NULL型のデータはシンボル<code>NIL</code>のみ．
-
 <ul>
 <li>シンボル<code>NIL</code>の値も<code>NIL</code>．</li>
-</ul></li>
 </ul>
-
-<h2 id="フォームとデータ-p-32">フォームとデータ (p.32)</h2>
-
+</li>
+</ul>
+<h2 id="フォームとデータ-p32">フォームとデータ (p.32)</h2>
 <ul>
 <li>Lispはプログラムもデータもリストで表現できるからややこしく見える．</li>
-<li>リストなどの表現をデータとしてではなく，プログラムのつもりで見ている時は，その表現を *フォーム*といって区別する．</li>
+<li>リストなどの表現をデータとしてではなく，プログラムのつもりで見ている時は，その表現を <em>フォーム</em>といって区別する．</li>
 <li>クォートするとデータとして扱われ，Lispによって評価されない．</li>
 </ul>
-
 <h2 id="lispの評価ルール">Lispの評価ルール</h2>
-
 <ul>
 <li>p.37の下線記法ルールは自分でインタプリタを実装する場合に役立ちそう．</li>
 </ul>
-
 <h3 id="関連リンク">関連リンク</h3>
-
 <ul>
 <li><a href="https://github.com/jaseemabid/micromanual">A Micro-Manual for LISP - Not the whole truth by John McCarthy</a></li>
 <li><a href="https://nakkaya.com/2010/08/24/a-micro-manual-for-lisp-implemented-in-c/">A micro-manual for LISP Implemented in C</a></li>
 </ul>
-
 <h2 id="第３話で出てきた組込み関数">第３話で出てきた組込み関数</h2>
-
 <ul>
 <li><code>read</code>&mdash;キーボード入力からデータを１つ読み込んでそれを返す関数．入力時にリストをクォートしなくても <code>read</code>はデータモードで読み込む．</li>
 </ul>

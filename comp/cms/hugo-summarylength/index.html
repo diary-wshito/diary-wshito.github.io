@@ -65,7 +65,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/cms/hugo-summarylength/" />
 
@@ -78,13 +78,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -96,23 +96,23 @@
             
         ]
     },
-    "headline": Hugoのサマリ長（Summary Length）,
-    "name": Hugoのサマリ長（Summary Length）,
-    "wordCount": 784,
+    "headline": "Hugoのサマリ長（Summary Length）",
+    "name": "Hugoのサマリ長（Summary Length）",
+    "wordCount":  799 ,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/cms/hugo-summarylength/,
-    "datePublished": 2017-10-02T10:39Z,
-    "dateModified": 2017-10-02T10:39Z,
+    "url": "http://diary.wshito.com/comp/cms/hugo-summarylength/",
+    "datePublished": "2017-10-02T10:39Z",
+    "dateModified": "2017-10-02T10:39Z",
     
-    "keywords": cms, hugo, theme,
-    "description": ,
+    "keywords": "cms, hugo, theme",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/cms/hugo-summarylength/
+        "@id": "http://diary.wshito.com/comp/cms/hugo-summarylength/"
     }
 }
     </script>
@@ -137,7 +137,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -266,26 +267,26 @@ Hugo Static Site Generator v0.30-DEV darwin/amd64 BuildDate: 2017-10-01T12:26:08
 <p><code>config.toml</code> で設定した文字数内にプログラミング・コードなどが含まれている場合，サマリは全てのタグをストリップするためおかしな文字の羅列がトップページに現れます．その場合，コードの手前で <code>&lt;!--more--&gt;</code> を挿入するとその部分までをサマリとして抽出します（ <a href="https://gohugo.io/content-management/summaries/#user-defined-manual-summary-split">マニュアル</a>）．</p>
 </div>
 <div class="paragraph">
-<p>しかし，hugoは <code>&lt;section class="post-content"&gt;</code> 内の最初から <code>&lt;!--more--&gt;</code> までのコンテンツを，タグをストリップせずに挿入します．例えばasciidocフォーマットから変換した文書だと <code>post-content</code> クラス以下に <code>preamble</code> と <code>sectionbody</code> クラスの <code>div</code> ブロックができますが，これらが <code>&lt;/div&gt;</code> で閉じられる前にサマリが終了してしまいます．以下の例は，<code>&lt;p&gt;第１パラグラフ&lt;/p&gt;</code> 直後に <code>&lt;!--more--&gt;</code> を挿入した場合，トップページに表示されるサマリ抽出部分です．</p>
+<p>しかし，hugoは <code>&lt;section class=&#34;post-content&#34;&gt;</code> 内の最初から <code>&lt;!--more--&gt;</code> までのコンテンツを，タグをストリップせずに挿入します．例えばasciidocフォーマットから変換した文書だと <code>post-content</code> クラス以下に <code>preamble</code> と <code>sectionbody</code> クラスの <code>div</code> ブロックができますが，これらが <code>&lt;/div&gt;</code> で閉じられる前にサマリが終了してしまいます．以下の例は，<code>&lt;p&gt;第１パラグラフ&lt;/p&gt;</code> 直後に <code>&lt;!--more--&gt;</code> を挿入した場合，トップページに表示されるサマリ抽出部分です．</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;div id="preamble"&gt;
-&lt;div class="sectionbody"&gt;
-&lt;div class="paragraph"&gt;
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;div id=&#34;preamble&#34;&gt;
+&lt;div class=&#34;sectionbody&#34;&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
 &lt;p&gt;第１パラグラフ&lt;/p&gt;
 &lt;/div&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>&lt;div class="paragraph"&gt;</code> 以外の <code>div</code> はストリップされるべきなので，Casper themeのサマリ表示部分を以下のように変更しました（<code>layouts/partials/li.html</code>）．<code>{{ .Summary | planify }}</code> で常にタグを取り除く処理を実行しています．</p>
+<p><code>&lt;div class=&#34;paragraph&#34;&gt;</code> 以外の <code>div</code> はストリップされるべきなので，Casper themeのサマリ表示部分を以下のように変更しました（<code>layouts/partials/li.html</code>）．<code>{{ .Summary | planify }}</code> で常にタグを取り除く処理を実行しています．</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;section class="post-excerpt"&gt;
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;section class=&#34;post-excerpt&#34;&gt;
         &lt;p&gt;{{ .Summary | plainify }}
         {{ if .Truncated }}
-        &lt;a class="read-more" href="{{.RelPermalink}}"&gt;.... &amp;raquo;&lt;/a&gt;
+        &lt;a class=&#34;read-more&#34; href=&#34;{{.RelPermalink}}&#34;&gt;.... &amp;raquo;&lt;/a&gt;
         {{else}}
         &lt;/p&gt;
         {{ end }}

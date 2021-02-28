@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on wshito&#39;s diary</title>
@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Mon, 03 Sep 2018 16:42:44 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 03 Sep 2018 16:42:44 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OpenMP に依存した R パッケージのインストール</title>
       <link>http://diary.wshito.com/comp/r/openmp/</link>

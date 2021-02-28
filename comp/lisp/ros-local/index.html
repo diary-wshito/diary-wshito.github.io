@@ -73,7 +73,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/ros-local/" />
 
@@ -86,13 +86,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -104,23 +104,23 @@
             
         ]
     },
-    "headline": Roswell 環境下でのローカル・プロジェクト管理入門,
-    "name": Roswell 環境下でのローカル・プロジェクト管理入門,
-    "wordCount": 7287,
+    "headline": "Roswell 環境下でのローカル・プロジェクト管理入門",
+    "name": "Roswell 環境下でのローカル・プロジェクト管理入門",
+    "wordCount":  7315 ,
     "timeRequired": "PT15M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/ros-local/,
-    "datePublished": 2017-12-04T00:00Z,
-    "dateModified": 2013-03-12T00:45Z,
+    "url": "http://diary.wshito.com/comp/lisp/ros-local/",
+    "datePublished": "2017-12-04T00:00Z",
+    "dateModified": "2013-03-12T00:45Z",
     
-    "keywords": lisp, programming, development tool, roswell, ASDF, Quicklisp, roswell,
-    "description": ,
+    "keywords": "lisp, programming, development tool, roswell, ASDF, Quicklisp, roswell",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/ros-local/
+        "@id": "http://diary.wshito.com/comp/lisp/ros-local/"
     }
 }
     </script>
@@ -145,7 +145,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -257,7 +258,7 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (asdf:asdf-version)
-"3.1.5"</code></pre>
+&#34;3.1.5&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -277,7 +278,7 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; asdf:*central-registry*
-(#P"/Users/wshito/.roswell/lisp/quicklisp/quicklisp/")</code></pre>
+(#P&#34;/Users/wshito/.roswell/lisp/quicklisp/quicklisp/&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -286,7 +287,7 @@
 <div class="sect3">
 <h4 id="_source_registry_設定用_dsl">SOURCE-REGISTRY 設定用 DSL</h4>
 <div class="paragraph">
-<p>source-registry 設定用の DSL は <code>(:source-registory &#8230;&#8203;)</code> で始まります．<code>&#8230;&#8203;</code> の箇所にはディレクティヴが続きます．主に使うディレクティヴは下記の 4 つです．</p>
+<p>source-registry 設定用の DSL は <code>(:source-registory …​)</code> で始まります．<code>…​</code> の箇所にはディレクティヴが続きます．主に使うディレクティヴは下記の 4 つです．</p>
 </div>
 <div class="ulist">
 <ul>
@@ -327,8 +328,8 @@
 <div class="title">コード 1. source-registry DSL 記述例</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(:source-registry
-    (:tree (:home "lisp/project1"))        ; /Users/home/wshito/lisp/project1 に展開される
-    (:directory "/usr/local/lib/project2")
+    (:tree (:home &#34;lisp/project1&#34;))        ; /Users/home/wshito/lisp/project1 に展開される
+    (:directory &#34;/usr/local/lib/project2&#34;)
     :inherit-configuration)</code></pre>
 </div>
 </div>
@@ -345,9 +346,9 @@
 <div class="title">コード 2. Lisp コードからのロードパス設定例</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(asdf:initialize-source-registry
-    '(:source-registry
-         (:tree (:home "lisp/project1"))
-         (:directory "/usr/local/lib/project2")
+    &#39;(:source-registry
+         (:tree (:home &#34;lisp/project1&#34;))
+         (:directory &#34;/usr/local/lib/project2&#34;)
          :inherit-configuration))</code></pre>
 </div>
 </div>
@@ -358,8 +359,8 @@
 <div class="title">コード 3. <code>~/lisp/project1/asdf.conf</code> の設定内容</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">(:source-registry
-    (:tree (:here "src/lisp"))            ; /Users/home/wshito/lisp/project1/src/lisp
-    (:directory (:here "src/test/lisp"))) ; /Users/home/wshito/lisp/project1/src/test/lisp</code></pre>
+    (:tree (:here &#34;src/lisp&#34;))            ; /Users/home/wshito/lisp/project1/src/lisp
+    (:directory (:here &#34;src/test/lisp&#34;))) ; /Users/home/wshito/lisp/project1/src/test/lisp</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -440,7 +441,7 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; (ql:where-is-system :clack)
-#P"/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/clack-20161204-git/"</code></pre>
+#P&#34;/Users/wshito/.roswell/lisp/quicklisp/dists/quicklisp/software/clack-20161204-git/&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -458,7 +459,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:system-apropos "woo")  ;; 部分文字列にマッチする．</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:system-apropos &#34;woo&#34;)  ;; 部分文字列にマッチする．</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -466,7 +467,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:who-depends-on "woo")</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:who-depends-on &#34;woo&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -474,7 +475,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:uninstall "woo")</code></pre>
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(ql:uninstall &#34;woo&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -508,7 +509,7 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; ql:*quicklisp-home*
-#P"/Users/wshito/.roswell/lisp/quicklisp/"</code></pre>
+#P&#34;/Users/wshito/.roswell/lisp/quicklisp/&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -521,8 +522,8 @@
 <div class="title">コード 4. Roswell 環境下の Quicklisp のローカル・プロジェクト・ディレクトリ</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">&gt; ql:*local-project-directories*
-(#P"/Users/wshito/.roswell/local-projects/"
- #P"/Users/wshito/.roswell/lisp/quicklisp/local-projects/")</code></pre>
+(#P&#34;/Users/wshito/.roswell/local-projects/&#34;
+ #P&#34;/Users/wshito/.roswell/lisp/quicklisp/local-projects/&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -638,7 +639,7 @@
 <p>まずは，開発者用ツールである <code>hello-builder</code> ディレクトリから見ていきましょう．この中の <code>hello-builder.asd</code> で hello-project の source-registry を設定します．<code>builder.lisp</code> 内にはコンパイル，ロードを自動化するコードを記述します．</p>
 </div>
 <div class="paragraph">
-<p><code>hello-builder.asd</code> の中身は <a href="#listings-hello-builder.asd">コード 7</a> の通りです．<code>asd</code> ファイルでは，パッケージ定義などをせず単一の <code>defsystem</code> のみを記述することが ASDF マニュアルで推奨されています．一方で，<code>asd</code> ファイルの中身は通常の Lisp コードとしてリーダーで読まれ <code>eval</code> されるため Lisp コードを含めることもできます．ここでは，<a href="#listings-hello-builder.asd">コード 7</a> の 14&#8212;&#8203;17 行目で source-registry の設定コードを含めています．これで <code>hello-builder</code> 開発ツールをロードすると，<code>hello-project</code> への検索パスが自動的に設定されます．</p>
+<p><code>hello-builder.asd</code> の中身は <a href="#listings-hello-builder.asd">コード 7</a> の通りです．<code>asd</code> ファイルでは，パッケージ定義などをせず単一の <code>defsystem</code> のみを記述することが ASDF マニュアルで推奨されています．一方で，<code>asd</code> ファイルの中身は通常の Lisp コードとしてリーダーで読まれ <code>eval</code> されるため Lisp コードを含めることもできます．ここでは，<a href="#listings-hello-builder.asd">コード 7</a> の 14—​17 行目で source-registry の設定コードを含めています．これで <code>hello-builder</code> 開発ツールをロードすると，<code>hello-project</code> への検索パスが自動的に設定されます．</p>
 </div>
 <div id="listings-hello-builder.asd" class="listingblock">
 <div class="title">コード 7. hello-builder/hello-builder.asd</div>
@@ -650,28 +651,28 @@
 
 (in-package :hello-builder-asd)
 
-(defsystem "hello-builder"
-  :version "1.0"
-  :author "wshito"
-  :components ((:file "builder")))
+(defsystem &#34;hello-builder&#34;
+  :version &#34;1.0&#34;
+  :author &#34;wshito&#34;
+  :components ((:file &#34;builder&#34;)))
 
 ;; Set up source-registry
 (asdf:initialize-source-registry
- '(:source-registry
-   (:tree (:home "program/blog-examples/lisp/package-management/hello-project")) <i class="conum" data-value="1"></i><b>(1)</b>
+ &#39;(:source-registry
+   (:tree (:home &#34;program/blog-examples/lisp/package-management/hello-project&#34;)) <i class="conum" data-value="1"></i><b>(1)</b>
    :inherit-configuration))</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>`:home`を使うことで絶対パスに変換される．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
-<p><a href="#listings-hello-builder.asd">コード 7</a> の 14&#8212;&#8203;17 行目を手動で REPL で評価してもパスが通りますが，<code>hello-builder</code> 開発ツールをシステムとして定義し <code>~/common-lisp</code> 以下に配置することで，開発ツールを <code>(require :hello-builder)</code> 一発でロードでき，source-registry も同時に設定できます．プロジェクト全体は任意の場所に配置し，開発者用ツールが入ったディレクトリだけ <code>~/common-lisp</code> に配置するのです．</p>
+<p><a href="#listings-hello-builder.asd">コード 7</a> の 14—​17 行目を手動で REPL で評価してもパスが通りますが，<code>hello-builder</code> 開発ツールをシステムとして定義し <code>~/common-lisp</code> 以下に配置することで，開発ツールを <code>(require :hello-builder)</code> 一発でロードでき，source-registry も同時に設定できます．プロジェクト全体は任意の場所に配置し，開発者用ツールが入ったディレクトリだけ <code>~/common-lisp</code> に配置するのです．</p>
 </div>
 <div class="paragraph">
 <p>hello-project 全体のコンパイルやロードは，開発ツールの <code>hello-builder/builder.lisp</code> 内で定義されている <code>make</code> マクロで行います（<a href="#listings-builder.lisp">コード 8</a>）．ASDF 3.1 からは <code>asdf:make</code> が利用可能になっていますが，まだベータ実装ということなのでここでは使用していません．<code>make</code> マクロは <code>debug</code> キーワード引数に応じて <a href="#listings-compile-load">コード 5</a> の様な処理を実行します．</p>
@@ -689,9 +690,9 @@
 
 (defmacro make (&amp;key (debug nil))
   (let ((dec (if debug
-		 '(declaim (optimize (debug 3)))
-		 '(declaim (optimize (speed 3)))))
-	(comp-op (append '(asdf:compile-system :hello :force) (list debug))))
+		 &#39;(declaim (optimize (debug 3)))
+		 &#39;(declaim (optimize (speed 3)))))
+	(comp-op (append &#39;(asdf:compile-system :hello :force) (list debug))))
   `(progn
      ,dec
      ,comp-op
@@ -727,11 +728,11 @@ hello-builder</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-lisp" data-lang="lisp">;;
 ;; ASDF source-registry configuration file
-;; ignores the 'dummy' project
+;; ignores the &#39;dummy&#39; project
 ;;
 (:source-registry
-    (:directory (:here "hello"))
-    (:directory (:here "date-v1.0")))</code></pre>
+    (:directory (:here &#34;hello&#34;))
+    (:directory (:here &#34;date-v1.0&#34;)))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -740,15 +741,15 @@ hello-builder</code></pre>
 <div id="listings-hello.asd" class="listingblock">
 <div class="title">コード 11. <code>hello/hello.asd</code></div>
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defsystem "hello"
-  :version "0.0.1"
-  :author "wshito"
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defsystem &#34;hello&#34;
+  :version &#34;0.0.1&#34;
+  :author &#34;wshito&#34;
   :depends-on (:date
 ;	       :dummy
 	       )
-  :components ((:module "src"
+  :components ((:module &#34;src&#34;
 		:components
-		((:file "hello")))))</code></pre>
+		((:file &#34;hello&#34;)))))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -766,7 +767,7 @@ hello-builder</code></pre>
 (in-package :hello)
 
 (defun hello ()
-  (format t "Hello world! ~A" (date:today)))</code></pre>
+  (format t &#34;Hello world! ~A&#34; (date:today)))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -775,12 +776,12 @@ hello-builder</code></pre>
 <div id="listings-date.asd" class="listingblock">
 <div class="title">コード 13. <code>date-v1.0/date.asd</code></div>
 <div class="content">
-<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defsystem "date"
-  :version "1.0"
-  :author "wshito"
-  :components ((:module "src"
+<pre class="highlight"><code class="language-lisp" data-lang="lisp">(defsystem &#34;date&#34;
+  :version &#34;1.0&#34;
+  :author &#34;wshito&#34;
+  :components ((:module &#34;src&#34;
 		:components
-		((:file "date")))))</code></pre>
+		((:file &#34;date&#34;)))))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -805,7 +806,7 @@ hello-builder</code></pre>
 
 (defun today ()
   (with-utime-decoding ((get-universal-time))
-      (format nil "~A年~A月~A日（~[月~;火~;水~;木~;金~;土~;日~]）~A時~A分~A秒"
+      (format nil &#34;~A年~A月~A日（~[月~;火~;水~;木~;金~;土~;日~]）~A時~A分~A秒&#34;
 	      year month date day-of-week h min sec)))</code></pre>
 </div>
 </div>
@@ -862,7 +863,7 @@ Successfully generated: hello.ros</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>生成された <code>hello.ros</code> ファイルを <a href="#listings:hello.ros">コード 17</a> の様に書き換えます．重要なポイントは 3 か所です．まず，<a href="#listings:hello.ros">コード 17</a> の 16&#8212;&#8203;19 行目は <a href="#listings-hello-builder.asd">コード 7</a> の <code>hello-builder.asd</code> 内で設定した source-registry と全く同じになります．これでプロジェクト・ルートの <code>asd.conf</code> が読み込まれます．2 点目が 22 行目のプロジェクトのロードです．3 点目は 26 行目でプログラムを起動しています．</p>
+<p>生成された <code>hello.ros</code> ファイルを <a href="#listings:hello.ros">コード 17</a> の様に書き換えます．重要なポイントは 3 か所です．まず，<a href="#listings:hello.ros">コード 17</a> の 16—​19 行目は <a href="#listings-hello-builder.asd">コード 7</a> の <code>hello-builder.asd</code> 内で設定した source-registry と全く同じになります．これでプロジェクト・ルートの <code>asd.conf</code> が読み込まれます．2 点目が 22 行目のプロジェクトのロードです．3 点目は 26 行目でプログラムを起動しています．</p>
 </div>
 <div id="listings:hello.ros" class="listingblock">
 <div class="title">コード 17. hello.ros スクリプト</div>
@@ -870,11 +871,11 @@ Successfully generated: hello.ros</code></pre>
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">#!/bin/sh
 #|-*- mode:lisp -*-|#
 #| &lt;Put a one-line description here&gt;
-exec ros -Q -- $0 "$@"
+exec ros -Q -- $0 &#34;$@&#34;
 |#
 (progn ;;init forms
   (ros:ensure-asdf)
-  ;;#+quicklisp (ql:quickload '() :silent t)
+  ;;#+quicklisp (ql:quickload &#39;() :silent t)
   )
 
 (defpackage :ros.script.hello.3720592857
@@ -883,8 +884,8 @@ exec ros -Q -- $0 "$@"
 
 ;; Set up source-registry
 (asdf:initialize-source-registry
- '(:source-registry
-   (:tree (:home "program/blog-examples/lisp/package-management/hello-project")) <i class="conum" data-value="1"></i><b>(1)</b>
+ &#39;(:source-registry
+   (:tree (:home &#34;program/blog-examples/lisp/package-management/hello-project&#34;)) <i class="conum" data-value="1"></i><b>(1)</b>
    :inherit-configuration))
 
 ;; load the application
@@ -897,11 +898,11 @@ exec ros -Q -- $0 "$@"
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>:home</code> を使うことで絶対パスに変換される．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="paragraph">
 <p>実行結果は以下の通りです．source-registry でプロジェクトルートへの絶対パスを設定しているので，どのディレクトリから Ros スクリプトを実行しても <code>hello</code> を実行することができます．</p>

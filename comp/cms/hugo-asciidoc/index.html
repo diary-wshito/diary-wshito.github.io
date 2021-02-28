@@ -69,7 +69,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/cms/hugo-asciidoc/" />
 
@@ -82,13 +82,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -100,23 +100,23 @@
             
         ]
     },
-    "headline": Hugo で AsciiDoc 原稿を書く際の留意点,
-    "name": Hugo で AsciiDoc 原稿を書く際の留意点,
-    "wordCount": 1986,
-    "timeRequired": "PT4M",
+    "headline": "Hugo で AsciiDoc 原稿を書く際の留意点",
+    "name": "Hugo で AsciiDoc 原稿を書く際の留意点",
+    "wordCount":  2032 ,
+    "timeRequired": "PT5M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/cms/hugo-asciidoc/,
-    "datePublished": 2017-08-25T23:20Z,
-    "dateModified": 2017-08-25T23:20Z,
+    "url": "http://diary.wshito.com/comp/cms/hugo-asciidoc/",
+    "datePublished": "2017-08-25T23:20Z",
+    "dateModified": "2017-08-25T23:20Z",
     
-    "keywords": cms, hugo, asciidoc, prism, mathjax,
-    "description": HugoでAsciiDoc原稿を書く際に，気付いた点をまとめておきます．インストールしている処理系はAsciidoctorであることを前提にしています．,
+    "keywords": "cms, hugo, asciidoc, prism, mathjax",
+    "description": "HugoでAsciiDoc原稿を書く際に，気付いた点をまとめておきます．インストールしている処理系はAsciidoctorであることを前提にしています．",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/cms/hugo-asciidoc/
+        "@id": "http://diary.wshito.com/comp/cms/hugo-asciidoc/"
     }
 }
     </script>
@@ -141,7 +141,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -251,14 +252,14 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code>---
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
+title: &#34;{{ replace .TranslationBaseName &#34;-&#34; &#34; &#34; | title }}&#34;
 date: {{ .Date }}
 draft: true
 aliases:
 categories:
 tags:
 comments: false
-description: ""
+description: &#34;&#34;
 keywords:
 isCJKLanguage: true
 ---
@@ -295,6 +296,20 @@ isCJKLanguage: true
 <div class="paragraph">
 <p><a href="http://asciidoc.org">AsciiDoc</a> は， <a href="http://docbook.org">DocBook</a> に比べマークアップの手間が省ける分，地のテキストとコマンドを分離するマークアップ記号がありません．そのため，コマンドの前後に空白を置かなければならないという制約があります．</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>マークアップの前後のスペースに関する新しい投稿があります．「<a href="../asciidoc-jp">AsciiDoc で日本語原稿を書く際の留意点</a>」</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
 <div class="sect2">
 <h3 id="_インラインコードのケース">インライン・コードのケース</h3>
 <div class="paragraph">
@@ -314,8 +329,8 @@ isCJKLanguage: true
 </div>
 </div>
 <div class="paragraph">
-<p>これを変換すると以下のようになります．<br>
-&#8220;このように，<code>print();</code> 後ろだけ空白を入れれば良い．<code>print()</code> ここも大丈夫．&#8221;</p>
+<p>これを変換すると以下のようになります．<br/>
+“このように，<code>print();</code> 後ろだけ空白を入れれば良い．<code>print()</code> ここも大丈夫．”</p>
 </div>
 </div>
 <div class="sect2">
@@ -335,23 +350,23 @@ isCJKLanguage: true
 <h2 id="_prism_js_を使ったコードハイライト">Prism.js を使ったコードハイライト</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://prismjs.com">PrismJS</a> は，<code>&lt;pre&gt;&lt;code class="language-lisp"&gt;</code> で始まるコードブロックをハイライト処理します． <a href="http://asciidoc.org">AsciiDoc</a> の記法でコードを書くと，この形式に変換されます．</p>
+<p><a href="http://prismjs.com">PrismJS</a> は，<code>&lt;pre&gt;&lt;code class=&#34;language-lisp&#34;&gt;</code> で始まるコードブロックをハイライト処理します． <a href="http://asciidoc.org">AsciiDoc</a> の記法でコードを書くと，この形式に変換されます．</p>
 </div>
 <div class="sect2">
 <h3 id="_行番号のつけ方">行番号のつけ方</h3>
 <div class="paragraph">
-<p><a href="http://prismjs.com">PrismJS</a> で行番号をつけるには，<code>code</code> 要素に <code>line-numbers</code> クラスを追加する必要があります． <a href="http://asciidoc.org">AsciiDoc</a> では，言語指定の後ろに半角スペースを入れて <code>line-numbers</code> を追加すると，<code>&lt;code class="language-c line-numbers"&gt;</code> というマークアップが生成されます．</p>
+<p><a href="http://prismjs.com">PrismJS</a> で行番号をつけるには，<code>code</code> 要素に <code>line-numbers</code> クラスを追加する必要があります． <a href="http://asciidoc.org">AsciiDoc</a> では，言語指定の後ろに半角スペースを入れて <code>line-numbers</code> を追加すると，<code>&lt;code class=&#34;language-c line-numbers&#34;&gt;</code> というマークアップが生成されます．</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>```lisp line-numbers
 (cffi:define-foreign-library libuv
-  (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
-  (:unix    (:or "libuv.so.1" "libuv.so"))
-  (:windows (:or "libuv.dll" "libuv-1.dll"))
-  (t        (:default "libuv")))
+  (:darwin  (:or &#34;libuv.1.dylib&#34; &#34;libuv.dylib&#34;))
+  (:unix    (:or &#34;libuv.so.1&#34; &#34;libuv.so&#34;))
+  (:windows (:or &#34;libuv.dll&#34; &#34;libuv-1.dll&#34;))
+  (t        (:default &#34;libuv&#34;)))
 
-(unless (cffi:foreign-library-loaded-p 'libuv)
+(unless (cffi:foreign-library-loaded-p &#39;libuv)
   (cffi:use-foreign-library libuv))
 ```</pre>
 </div>
@@ -362,12 +377,12 @@ isCJKLanguage: true
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(cffi:define-foreign-library libuv
-  (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
-  (:unix    (:or "libuv.so.1" "libuv.so"))
-  (:windows (:or "libuv.dll" "libuv-1.dll"))
-  (t        (:default "libuv")))
+  (:darwin  (:or &#34;libuv.1.dylib&#34; &#34;libuv.dylib&#34;))
+  (:unix    (:or &#34;libuv.so.1&#34; &#34;libuv.so&#34;))
+  (:windows (:or &#34;libuv.dll&#34; &#34;libuv-1.dll&#34;))
+  (t        (:default &#34;libuv&#34;)))
 
-(unless (cffi:foreign-library-loaded-p 'libuv)
+(unless (cffi:foreign-library-loaded-p &#39;libuv)
   (cffi:use-foreign-library libuv))</code></pre>
 </div>
 </div>
@@ -380,12 +395,12 @@ isCJKLanguage: true
 .libuvのロード
 ----
 (cffi:define-foreign-library libuv
-  (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
-  (:unix    (:or "libuv.so.1" "libuv.so"))
-  (:windows (:or "libuv.dll" "libuv-1.dll"))
-  (t        (:default "libuv")))
+  (:darwin  (:or &#34;libuv.1.dylib&#34; &#34;libuv.dylib&#34;))
+  (:unix    (:or &#34;libuv.so.1&#34; &#34;libuv.so&#34;))
+  (:windows (:or &#34;libuv.dll&#34; &#34;libuv-1.dll&#34;))
+  (t        (:default &#34;libuv&#34;)))
 
-(unless (cffi:foreign-library-loaded-p 'libuv)
+(unless (cffi:foreign-library-loaded-p &#39;libuv)
   (cffi:use-foreign-library libuv))
 ----</code></pre>
 </div>
@@ -397,12 +412,12 @@ isCJKLanguage: true
 <div class="title">コード 1. libuvのロード</div>
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(cffi:define-foreign-library libuv
-  (:darwin  (:or "libuv.1.dylib" "libuv.dylib"))
-  (:unix    (:or "libuv.so.1" "libuv.so"))
-  (:windows (:or "libuv.dll" "libuv-1.dll"))
-  (t        (:default "libuv")))
+  (:darwin  (:or &#34;libuv.1.dylib&#34; &#34;libuv.dylib&#34;))
+  (:unix    (:or &#34;libuv.so.1&#34; &#34;libuv.so&#34;))
+  (:windows (:or &#34;libuv.dll&#34; &#34;libuv-1.dll&#34;))
+  (t        (:default &#34;libuv&#34;)))
 
-(unless (cffi:foreign-library-loaded-p 'libuv)
+(unless (cffi:foreign-library-loaded-p &#39;libuv)
   (cffi:use-foreign-library libuv))</code></pre>
 </div>
 </div>
@@ -410,11 +425,11 @@ isCJKLanguage: true
 <div class="sect2">
 <h3 id="_コールアウトを実現するには">コールアウトを実現するには</h3>
 <div class="paragraph">
-<p><a href="http://asciidoctor.org">Asciidoctor</a> はコールアウトを <code>&lt;b class="conum"&gt;(1)&lt;/b&gt;</code> というマークアップに変換します． <a href="http://prismjs.com">PrismJS</a> は，ソースコード中のマークアップをプログラミング言語の一部とみなして別の形式に変換してしまいます．ソースコード中のマークアップをそのまま残すには，&#8220;Keep Markup&#8221; プラグインを一緒にインストールします．あとは，スタイルシートでコールアウトの見栄えを設定します．</p>
+<p><a href="http://asciidoctor.org">Asciidoctor</a> はコールアウトを <code>&lt;b class=&#34;conum&#34;&gt;(1)&lt;/b&gt;</code> というマークアップに変換します． <a href="http://prismjs.com">PrismJS</a> は，ソースコード中のマークアップをプログラミング言語の一部とみなして別の形式に変換してしまいます．ソースコード中のマークアップをそのまま残すには，“Keep Markup” プラグインを一緒にインストールします．あとは，スタイルシートでコールアウトの見栄えを設定します．</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./keep-markup.png" alt="keep markup" width="500">
+<img src="./keep-markup.png" alt="keep markup" width="500" height=""/>
 </div>
 </div>
 <div class="paragraph">
@@ -427,11 +442,11 @@ isCJKLanguage: true
 ----
 #include <stdio.h>
 int main() {
-    printf("Hello World\n");    // <1>
+    printf(&#34;Hello World\n&#34;);    // &lt;1&gt;
     return 0;
 }
 ----
-<1> コールアウト</pre>
+&lt;1&gt; コールアウト</stdio.h></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -439,18 +454,18 @@ int main() {
 <div class="content">
 <pre class="highlight"><code class="language-c line-numbers" data-lang="c line-numbers">#include &lt;stdio.h&gt;
 int main() {
-    printf("Hello World\n");   <i class="conum" data-value="1"></i><b>(1)</b>
+    printf(&#34;Hello World\n&#34;);   <i class="conum" data-value="1"></i><b>(1)</b>
     return 0;
 }</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>コールアウト</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -485,8 +500,8 @@ int main() {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;div class="stemblock"&gt;
-&lt;div class="content"&gt;
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;div class=&#34;stemblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
 \[\int_0^\infty f(x) dx\]
 &lt;/div&gt;
 &lt;/div&gt;</code></pre>

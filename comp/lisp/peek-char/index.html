@@ -69,7 +69,7 @@
       
       
     
-    <meta name="generator" content="Hugo 0.30-DEV" />
+    <meta name="generator" content="Hugo 0.81.0" />
 
     <link rel="canonical" href="http://diary.wshito.com/comp/lisp/peek-char/" />
 
@@ -82,13 +82,13 @@
     "@type": "Article",
     "publisher": {
         "@type": "Organization",
-        "name": W.Shito
+        "name": "W.Shito"
     },
     "author": {
         "@type": "Person",
-        "name": W.Shito,
+        "name": "W.Shito",
         
-        "url": http://diary.wshito.com,
+        "url": "http://diary.wshito.com",
         "sameAs": [
             
             
@@ -100,23 +100,23 @@
             
         ]
     },
-    "headline": Lisp のストリームあれこれ,
-    "name": Lisp のストリームあれこれ,
-    "wordCount": 860,
+    "headline": "Lisp のストリームあれこれ",
+    "name": "Lisp のストリームあれこれ",
+    "wordCount":  892 ,
     "timeRequired": "PT2M",
     "inLanguage": {
       "@type": "Language",
-      "alternateName": en
+      "alternateName": "en"
     },
-    "url": http://diary.wshito.com/comp/lisp/peek-char/,
-    "datePublished": 2018-04-20T10:10Z,
-    "dateModified": 2018-04-20T10:10Z,
+    "url": "http://diary.wshito.com/comp/lisp/peek-char/",
+    "datePublished": "2018-04-20T10:10Z",
+    "dateModified": "2018-04-20T10:10Z",
     
-    "keywords": lisp, programming, stream,
-    "description": ,
+    "keywords": "lisp, programming, stream",
+    "description": "",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": http://diary.wshito.com/comp/lisp/peek-char/
+        "@id": "http://diary.wshito.com/comp/lisp/peek-char/"
     }
 }
     </script>
@@ -141,7 +141,8 @@
     
 
     
-    <script src="https://use.fontawesome.com/0268256572.js"></script>
+    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+    
 </head>
 
 
@@ -227,15 +228,14 @@
 <h2 id="_peek_char_の便利な機能"><code>peek-char</code> の便利な機能</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ストリームから文字を peek する際，<code>peek-char</code> の第 1 引数に <code>t</code> を指定すると空白文字をスキップしてくれる．次に <code>read-char</code> を実行すると，スキップ後の 1 文字を返す．
-</p>
+<p>ストリームから文字を peek する際，<code>peek-char</code> の第 1 引数に <code>t</code> を指定すると空白文字をスキップしてくれる．次に <code>read-char</code> を実行すると，スキップ後の 1 文字を返す．</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(with-input-from-string (in "   1 2 3 4 5")
-  (format t "Peek: ~s  Read: ~s~%" (peek-char t in) (read-char in))     ; <i class="conum" data-value="1"></i><b>(1)</b>
-  (format t "Peek: ~s  Read: ~s~%" (peek-char nil in) (read-char in))   ; <i class="conum" data-value="2"></i><b>(2)</b>
-  (format t "Peek: ~s  Read: ~s~%" (peek-char nil in) (read-char in)))  ; <i class="conum" data-value="3"></i><b>(3)</b>
+<pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(with-input-from-string (in &#34;   1 2 3 4 5&#34;)
+  (format t &#34;Peek: ~s  Read: ~s~%&#34; (peek-char t in) (read-char in))     ; <i class="conum" data-value="1"></i><b>(1)</b>
+  (format t &#34;Peek: ~s  Read: ~s~%&#34; (peek-char nil in) (read-char in))   ; <i class="conum" data-value="2"></i><b>(2)</b>
+  (format t &#34;Peek: ~s  Read: ~s~%&#34; (peek-char nil in) (read-char in)))  ; <i class="conum" data-value="3"></i><b>(3)</b>
 ;=&gt; Peek: #\1  Read: #\1
 ;   Peek: #\   Read: #\
 ;   Peek: #\2  Read: #\2</code></pre>
@@ -243,7 +243,7 @@
 </div>
 <div class="colist arabic">
 <table>
-<tr>
+<tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td><code>peek-char</code> の第 1 引数は <code>t</code> なので先頭の空白文字はスキップされ <code>#\1</code> が返る．<code>read-char</code> は直前の <code>peek-char</code> が返したスキップ後の <code>#\1</code> を返す．</td>
 </tr>
@@ -255,7 +255,7 @@
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>3 行目の <code>read-char</code> でストリームのポインタが 1 つ前進し入力文字列の 2 を指しているので 4 行目の <code>peek-char</code> の第 1 引数が <code>nil</code> でも <code>#\2</code> が返る．</td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -271,14 +271,14 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(let ((str (make-array 100                         ; 初期バッファサイズ
-                       :element-type 'character
+                       :element-type &#39;character
                        :fill-pointer 0
                        :adjustable t)))
-   (with-input-from-string (in "今日は晴れ．明日は雨．")
+   (with-input-from-string (in &#34;今日は晴れ．明日は雨．&#34;)
       (dotimes (i 3)                               ; 最初の3文字のみ
          (vector-push-extend (read-char in) str))) ; バッファに読み込む
-   (format t "~a" str)
-   (string= "今日は" str))
+   (format t &#34;~a&#34; str)
+   (string= &#34;今日は&#34; str))
 ;=&gt; 今日は
 ;   T</code></pre>
 </div>
@@ -289,11 +289,11 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-lisp line-numbers" data-lang="lisp line-numbers">(let ((str (make-string 10)))                      ; 初期バッファサイズ
-   (with-input-from-string (in "今日は晴れ．明日は雨．")
+   (with-input-from-string (in &#34;今日は晴れ．明日は雨．&#34;)
       (dotimes (i 3)                               ; 最初の3文字のみ
          (setf (schar str i) (read-char in))))     ; バッファに読み込む
-   (format t "~a" str)
-   (string= "今日は" str))
+   (format t &#34;~a&#34; str)
+   (string= &#34;今日は&#34; str))
 ;=&gt; 今日は^@^@^@^@^@^@^@
     NIL</code></pre>
 </div>

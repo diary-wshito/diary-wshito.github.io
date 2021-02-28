@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Programming on wshito&#39;s diary</title>
+    <title>programming on wshito&#39;s diary</title>
     <link>http://diary.wshito.com/tags/programming/</link>
-    <description>Recent content in Programming on wshito&#39;s diary</description>
+    <description>Recent content in programming on wshito&#39;s diary</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-JP</language>
     <copyright>All rights reserved 2016--</copyright>
-    <lastBuildDate>Wed, 15 Aug 2018 15:51:30 +0900</lastBuildDate>
-    
-	<atom:link href="http://diary.wshito.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 15 Aug 2018 15:51:30 +0900</lastBuildDate><atom:link href="http://diary.wshito.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ltk と Tk との接続</title>
       <link>http://diary.wshito.com/comp/lisp/ltk/wish/</link>
@@ -33,8 +29,7 @@
 &lt;h2 id=&#34;_peek_char_の便利な機能&#34;&gt;&lt;code&gt;peek-char&lt;/code&gt; の便利な機能&lt;/h2&gt;
 &lt;div class=&#34;sectionbody&#34;&gt;
 &lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;ストリームから文字を peek する際，&lt;code&gt;peek-char&lt;/code&gt; の第 1 引数に &lt;code&gt;t&lt;/code&gt; を指定すると空白文字をスキップしてくれる．次に &lt;code&gt;read-char&lt;/code&gt; を実行すると，スキップ後の 1 文字を返す．
-&lt;/p&gt;
+&lt;p&gt;ストリームから文字を peek する際，&lt;code&gt;peek-char&lt;/code&gt; の第 1 引数に &lt;code&gt;t&lt;/code&gt; を指定すると空白文字をスキップしてくれる．次に &lt;code&gt;read-char&lt;/code&gt; を実行すると，スキップ後の 1 文字を返す．&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -45,7 +40,7 @@
       
       <guid>http://diary.wshito.com/comp/lisp/ccl-init/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;I put all my lisp projects under the directory &lt;code&gt;git-repos&lt;/code&gt; and set symbolic links to each projects from &lt;code&gt;~/common-lisp&lt;/code&gt;.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn&amp;#8217;t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under &lt;code&gt;~/common-lisp&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I put all my lisp projects under the directory &lt;code&gt;git-repos&lt;/code&gt; and set symbolic links to each projects from &lt;code&gt;~/common-lisp&lt;/code&gt;.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn’t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under &lt;code&gt;~/common-lisp&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -118,7 +113,7 @@
       <pubDate>Tue, 15 Nov 2016 22:11:47 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/cl-dialogue/4/</guid>
-      <description>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, &amp;#8230;&amp;#8203;., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える． &amp;gt; (elt &#39;(0 1 2 3 4 5) 3) 3 last リストの末尾の要素を取り出す． 末</description>
+      <description>この章ではリストから要素を取り出す方法と，要素からリストを構築する方法について書かれている．car，cdr，cons の基本関数以外に，便利な関数が幾つか紹介されている． 要素の取り出し first, second, …​., tenth 第1要素から第10要素まで簡単に取りだす関数が用意されている． elt Element関数はリストから任意位置の要素を取り出せる．位置のインデックスは0から数える． &amp;gt; (elt &amp;#39;(0 1 2 3 4 5) 3) 3 last リストの末尾の要素を取り出</description>
     </item>
     
     <item>
@@ -127,7 +122,7 @@
       <pubDate>Mon, 14 Nov 2016 21:49:25 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/cl-dialogue/3/</guid>
-      <description>Lispのデータ型 リスト以外はアトム（1つだけ例外あり？p.24）． NULL型はリストでありシンボルである． NULL型のリストは空リスト()でNILと同値． NULL型のデータはシンボルNILのみ． シンボルNILの値もNIL． フォームとデータ (p.32) Lispはプログラムもデータもリストで表現できるからややこしく見える． リストなどの表現をデータとしてではなく，プログラムのつもりで見ている時は，その表現を *フ</description>
+      <description>Lispのデータ型 リスト以外はアトム（1つだけ例外あり？p.24）． NULL型はリストでありシンボルである． NULL型のリストは空リスト()でNILと同値． NULL型のデータはシンボルNILのみ． シンボルNILの値もNIL． フォームとデータ (p.32) Lispはプログラムもデータもリストで表現できるからややこしく見える． リストなどの表現をデータとしてではなく，プログラムのつもりで見ている時は，その表現を フォ</description>
     </item>
     
     <item>
@@ -136,7 +131,7 @@
       <pubDate>Mon, 14 Nov 2016 19:27:25 +0900</pubDate>
       
       <guid>http://diary.wshito.com/comp/lisp/cl-dialogue/2/</guid>
-      <description>関数と変数の作成 defun 関数定義 全ての引数は評価されない（マクロで通常の関数ではない）． setf 変数への代入 変数宣言なしで新たに変数が作れる．トップレベルで使えばスペシャル変数（大域変数），関数内で使えばレキシカル変数（ローカル変数）を作れる．第１引数は評価されない（マクロで通常の関数ではない）． 共通点 どちらも副作用がある．つまり処理をして値を返すだけでない． defunは関数を実行できるよう定義する副作用を持</description>
+      <description>関数と変数の作成 defun 関数定義全ての引数は評価されない（マクロで通常の関数ではない）． setf 変数への代入変数宣言なしで新たに変数が作れる．トップレベルで使えばスペシャル変数（大域変数），関数内で使えばレキシカル変数（ローカル変数）を作れる．第１引数は評価されない（マクロで通常の関数ではない）． 共通点 どちらも副作用がある．つまり処理をして値を返すだけでない． defunは関数を実行できるよう定義する副作用を持</description>
     </item>
     
     <item>
