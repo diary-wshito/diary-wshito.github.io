@@ -98,7 +98,7 @@
     },
     "headline": "AsciiDoc で日本語原稿を書く際の留意点",
     "name": "AsciiDoc で日本語原稿を書く際の留意点",
-    "wordCount":  1863 ,
+    "wordCount":  1843 ,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -270,7 +270,7 @@
 <h2 id="_本文中に記述するインラインコード">本文中に記述するインライン・コード</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>インラインコードは等幅（monospace）のマークアップであるバックティックを使用します．もし，バックティックで囲んだ中に <a href="http://asciidoc.org">AsciiDoc</a> のマークアップがあった場合，それらは <a href="http://asciidoctor.org">Asciidoctor</a> によってフォーマティングされてしまいます．例えば，上の4つのunconstrained formatting marksのテーブルの2列目はインライン・コードとして等幅で表示していますが，<a href="http://asciidoc.org">AsciiDoc</a> のマークアップもそのままコードとして表示させています．</p>
+<p>インラインコードは等幅（monospace）のマークアップであるバックティックを使用します．もし，バックティックで囲んだ中に <a href="http://asciidoc.org">AsciiDoc</a> のマークアップがあった場合，それらは <a href="http://asciidoctor.org">Asciidoctor</a> によってフォーマティングされてしまいます．例えば，<code>ここを``等幅``にする</code>を実現するにはインラインコード中のバックティックをマークアップとしてではなくコードとしてそのまま表示させる必要があります．</p>
 </div>
 <div class="paragraph">
 <p>このようにインライン・コード中の <a href="http://asciidoc.org">AsciiDoc</a> 固有の記号もそのまま印字させたい場合には<code>``+</code>と<code>+``</code>で囲みます．例えば<code>ここを**太字**にする</code>を記述するには<code>``+ここを**太字**にする+``</code>と書いています．</p>
