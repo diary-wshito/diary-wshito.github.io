@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja-JP">
+
 <head>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    
+  
     
         <meta name="twitter:card" content="summary"/>
     
@@ -18,65 +19,66 @@
 
 
 
-  	<meta property="og:title" content="uvbook for Lisp -- Hello World &middot; wshito&#39;s diary" />
-  	<meta property="og:site_name" content="wshito&#39;s diary" />
-  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/" />
+  <meta property="og:title" content="uvbook for Lisp -- Hello World &middot; wshito&#39;s diary" />
+  <meta property="og:site_name" content="wshito&#39;s diary" />
+  <meta property="og:url" content="http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/" />
 
-    
-        
-    
+  
+  
+  
 
-    
-    <meta property="og:description" content="" />
-  	<meta property="og:type" content="article" />
-    <meta property="article:published_time" content="2017-01-01T01:21:32&#43;09:00" />
+  
+  <meta property="og:description" content="" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2017-01-01T01:21:32&#43;09:00" />
 
-    
-    <meta property="article:tag" content="list" />
-    
-    <meta property="article:tag" content="programming" />
-    
-    <meta property="article:tag" content="async" />
-    
-    <meta property="article:tag" content="node.js" />
-    
-    <meta property="article:tag" content="uvbook" />
-    
-    <meta property="article:tag" content="CFFI" />
-    
-    
+  
+  <meta property="article:tag" content="list" />
+  
+  <meta property="article:tag" content="programming" />
+  
+  <meta property="article:tag" content="async" />
+  
+  <meta property="article:tag" content="node.js" />
+  
+  <meta property="article:tag" content="uvbook" />
+  
+  <meta property="article:tag" content="CFFI" />
+  
+  
 
-    <title>uvbook for Lisp -- Hello World &middot; wshito&#39;s diary</title>
+  <title>uvbook for Lisp -- Hello World &middot; wshito&#39;s diary</title>
 
-    
-    <meta name="description" content="&lt;p&gt;ここでは，&lt;a href=&#34;https://github.com/libuv/libuv&#34;&gt;libuv&lt;/a&gt;のチュートリアル本，&lt;a href=&#34;http://nikhilm.github.io/uvbook/basics.html#hello-world&#34;&gt;uvbookの第2.2節&lt;/a&gt;に載っている以下のH" />
-    
+  
+  <meta name="description" content="&lt;p&gt;ここでは，&lt;a href=&#34;https://github.com/libuv/libuv&#34;&gt;libuv&lt;/a&gt;のチュートリアル本，&lt;a href=&#34;http://nikhilm.github.io/uvbook/basics.html#hello-world&#34;&gt;uvbookの第2.2節&lt;/a&gt;に載っている以下のH" />
+  
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
-	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
 
-    
+  
 
-    
-      
-          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
-      
-      
-    
-    <meta name="generator" content="Hugo 0.81.0" />
+  
+  
+  <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.81.0" />
 
-    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/" />
+  <link rel="canonical" href="http://diary.wshito.com/comp/lisp/uvbook/uvlisp-helloworld/" />
 
-    
-      
+  
+  
     
     <script type="application/ld+json">
 {
@@ -125,28 +127,36 @@
     
 
 
-    
+  
 
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-422028-3', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-422028-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 
-    </script>
-    
 
-    
+  
 
-    
-    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
-    
+  
+  <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+  
 </head>
-
 
 <body class="post-template nav-closed">
 
@@ -186,53 +196,71 @@
 
   <div class="site-wrapper">
 
+    
+          <header class="main-header post-head no-cover">
+            <nav class="main-nav clearfix">
+              
 
-<header class="main-header post-head no-cover">
-  <nav class="main-nav clearfix">
+              
+              
+              <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+              
+            </nav>
+          </header>
 
 
-  
-  
-      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
-  
-  </nav>
-</header>
+          <main class="content" role="main">
 
+            
 
-<main class="content" role="main">
+            <article class="post comp">
 
-  
+              <header class="post-header">
+                <h1 class="post-title">uvbook for Lisp -- Hello World</h1>
+                
+                <section class="post-meta">
+                  <time class="post-date" datetime="2017-01-01T01:21:32&#43;09:00">
+                    January 1, 2017
+                  </time>
+                  
+                  on
+                  
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/list/">#list</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/async/">#async</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/node.js/">#node.js</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/uvbook/">#uvbook</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/cffi/">#CFFI</a></span>
+                  
+                </section>
+              </header>
 
-  <article class="post comp">
-
-    <header class="post-header">
-        <h1 class="post-title">uvbook for Lisp -- Hello World</h1>
-        
-        <section class="post-meta">
-          <time class="post-date" datetime="2017-01-01T01:21:32&#43;09:00">
-            January 1, 2017
-          </time>
-	  
-	  on
-	  
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/list/">#list</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/async/">#async</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/node.js/">#node.js</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/uvbook/">#uvbook</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/cffi/">#CFFI</a></span>
-         
-        </section>
-    </header>
-
-    <section class="post-content">
-      <p>ここでは，<a href="https://github.com/libuv/libuv">libuv</a>のチュートリアル本，<a href="http://nikhilm.github.io/uvbook/basics.html#hello-world">uvbookの第2.2節</a>に載っている以下のHello WorldコードをLispで実装する手順を解説します．まず始めに<a href="https://common-lisp.net/project/cffi/">CFFI</a>を使って直接libuvの関数を呼び出す方法を解説し，最後にlibuvラッパーの<a href="https://github.com/orthecreedence/cl-libuv">cl-libuv</a>を使った実装方法を解説します．間違い，コメント等ありましたら，<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>までお願いします．</p>
+              <section class="post-content">
+                
+                目次
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ライブラリのロード">ライブラリのロード</a></li>
+    <li><a href="#uv_loop_t構造体変数の準備"><code>uv_loop_t</code>構造体変数の準備</a>
+      <ul>
+        <li></li>
+        <li><a href="#メモリの割当て方法">メモリの割当て方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#イベントループの初期化">イベントループの初期化</a></li>
+    <li><a href="#ポインタ変数について">ポインタ変数について</a></li>
+    <li><a href="#cffiによる実装仕上げ">CFFIによる実装仕上げ</a></li>
+    <li><a href="#cl-libuvを使った実装">cl-libuvを使った実装</a></li>
+  </ul>
+</nav>
+                
+                <p>ここでは，<a href="https://github.com/libuv/libuv">libuv</a>のチュートリアル本，<a href="http://nikhilm.github.io/uvbook/basics.html#hello-world">uvbookの第2.2節</a>に載っている以下のHello WorldコードをLispで実装する手順を解説します．まず始めに<a href="https://common-lisp.net/project/cffi/">CFFI</a>を使って直接libuvの関数を呼び出す方法を解説し，最後にlibuvラッパーの<a href="https://github.com/orthecreedence/cl-libuv">cl-libuv</a>を使った実装方法を解説します．間違い，コメント等ありましたら，<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>までお願いします．</p>
 <pre><code class="language-{c" data-lang="{c">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;uv.h&gt;
@@ -370,13 +398,13 @@ int main() {
 
 (uv:uv-loop-close *loop*)
 </code></pre>
-    </section>
+              </section>
 
 
-  <footer class="post-footer">
+              <footer class="post-footer">
 
 
-    
+                
 
 
 
@@ -400,7 +428,7 @@ int main() {
 
 
 
-    
+                
 <section class="share">
   <h4>Share this post</h4>
   <a class="icon-twitter" href="https://twitter.com/share?text=uvbook%20for%20Lisp%20--%20Hello%20World&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fuvbook%2fuvlisp-helloworld%2f"
@@ -419,19 +447,19 @@ int main() {
 
 
 
-    
+                
 
 
 
 
 
-  </footer>
-</article>
+              </footer>
+            </article>
 
-</main>
+          </main>
 
-
-  <aside class="read-next">
+          
+          <aside class="read-next">
   
   <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/">
           <section class="post">
@@ -449,9 +477,9 @@ int main() {
   
 </aside>
 
+          
 
-
-    <footer class="site-footer clearfix">
+              <footer class="site-footer clearfix">
         <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
         
         <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
@@ -476,4 +504,3 @@ int main() {
     
 </body>
 </html>
-

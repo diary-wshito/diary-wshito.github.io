@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja-JP">
+
 <head>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    
+  
     
         <meta name="twitter:card" content="summary"/>
     
@@ -18,63 +19,64 @@
 
 
 
-  	<meta property="og:title" content="uvbook -- libuvの仕組みとidle-basicの解説 &middot; wshito&#39;s diary" />
-  	<meta property="og:site_name" content="wshito&#39;s diary" />
-  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/" />
+  <meta property="og:title" content="uvbook -- libuvの仕組みとidle-basicの解説 &middot; wshito&#39;s diary" />
+  <meta property="og:site_name" content="wshito&#39;s diary" />
+  <meta property="og:url" content="http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/" />
 
-    
-        
-    
+  
+  
+  
 
-    
-    <meta property="og:description" content="" />
-  	<meta property="og:type" content="article" />
-    <meta property="article:published_time" content="2017-01-06T00:05:25&#43;09:00" />
+  
+  <meta property="og:description" content="" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2017-01-06T00:05:25&#43;09:00" />
 
-    
-    <meta property="article:tag" content="libuv" />
-    
-    <meta property="article:tag" content="uvbook" />
-    
-    <meta property="article:tag" content="c" />
-    
-    <meta property="article:tag" content="asynchronous programming" />
-    
-    <meta property="article:tag" content="nonblocking IO" />
-    
-    
+  
+  <meta property="article:tag" content="libuv" />
+  
+  <meta property="article:tag" content="uvbook" />
+  
+  <meta property="article:tag" content="c" />
+  
+  <meta property="article:tag" content="asynchronous programming" />
+  
+  <meta property="article:tag" content="nonblocking IO" />
+  
+  
 
-    <title>uvbook -- libuvの仕組みとidle-basicの解説 &middot; wshito&#39;s diary</title>
+  <title>uvbook -- libuvの仕組みとidle-basicの解説 &middot; wshito&#39;s diary</title>
 
-    
-    <meta name="description" content="libuvのチュートリアルuvbook，第２節のIdlingプログラムを解説します．libuvはNode.jsの根幹部分を担うCライブラリです．IdlingプログラムのLispによる実装例は後ほど別ページとして投稿します．間違い，コメント等は@waterloo_jpまで． 下のコードは，uvbookのIdleハンドル使" />
-    
+  
+  <meta name="description" content="libuvのチュートリアルuvbook，第２節のIdlingプログラムを解説します．libuvはNode.jsの根幹部分を担うCライブラリです．IdlingプログラムのLispによる実装例は後ほど別ページとして投稿します．間違い，コメント等は@waterloo_jpまで． 下のコードは，uvbookのIdleハンドル使" />
+  
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
-	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
 
-    
+  
 
-    
-      
-          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
-      
-      
-    
-    <meta name="generator" content="Hugo 0.81.0" />
+  
+  
+  <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.81.0" />
 
-    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/" />
+  <link rel="canonical" href="http://diary.wshito.com/comp/lisp/uvbook/uvbook-idle-basic/" />
 
-    
-      
+  
+  
     
     <script type="application/ld+json">
 {
@@ -123,28 +125,36 @@
     
 
 
-    
+  
 
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-422028-3', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-422028-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 
-    </script>
-    
 
-    
+  
 
-    
-    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
-    
+  
+  <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+  
 </head>
-
 
 <body class="post-template nav-closed">
 
@@ -184,51 +194,74 @@
 
   <div class="site-wrapper">
 
+    
+          <header class="main-header post-head no-cover">
+            <nav class="main-nav clearfix">
+              
 
-<header class="main-header post-head no-cover">
-  <nav class="main-nav clearfix">
+              
+              
+              <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+              
+            </nav>
+          </header>
 
 
-  
-  
-      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
-  
-  </nav>
-</header>
+          <main class="content" role="main">
 
+            
 
-<main class="content" role="main">
+            <article class="post comp">
 
-  
+              <header class="post-header">
+                <h1 class="post-title">uvbook -- libuvの仕組みとidle-basicの解説</h1>
+                
+                <section class="post-meta">
+                  <time class="post-date" datetime="2017-01-06T00:05:25&#43;09:00">
+                    January 6, 2017
+                  </time>
+                  
+                  on
+                  
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/libuv/">#libuv</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/uvbook/">#uvbook</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/c/">#c</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/asynchronous-programming/">#asynchronous programming</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/nonblocking-io/">#nonblocking IO</a></span>
+                  
+                </section>
+              </header>
 
-  <article class="post comp">
-
-    <header class="post-header">
-        <h1 class="post-title">uvbook -- libuvの仕組みとidle-basicの解説</h1>
-        
-        <section class="post-meta">
-          <time class="post-date" datetime="2017-01-06T00:05:25&#43;09:00">
-            January 6, 2017
-          </time>
-	  
-	  on
-	  
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/libuv/">#libuv</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/uvbook/">#uvbook</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/c/">#c</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/asynchronous-programming/">#asynchronous programming</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/nonblocking-io/">#nonblocking IO</a></span>
-         
-        </section>
-    </header>
-
-    <section class="post-content">
-      <p><a href="http://libuv.org">libuv</a>のチュートリアル<a href="http://nikhilm.github.io/uvbook/index.html">uvbook</a>，第２節の<a href="http://nikhilm.github.io/uvbook/basics.html#idling">Idlingプログラム</a>を解説します．<code>libuv</code>は<a href="https://nodejs.org/ja/">Node.js</a>の根幹部分を担うCライブラリです．IdlingプログラムのLispによる実装例は後ほど別ページとして投稿します．間違い，コメント等は<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>まで．</p>
+              <section class="post-content">
+                
+                目次
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ループオブジェクトの初期化">ループ・オブジェクトの初期化</a></li>
+    <li><a href="#ハンドルとリクエスト">ハンドルとリクエスト</a></li>
+    <li><a href="#idleハンドル">Idleハンドル</a></li>
+    <li><a href="#イベントループの開始">イベントループの開始</a></li>
+    <li><a href="#イベントループ内の動作">イベントループ内の動作</a></li>
+    <li><a href="#イベントループの終了">イベントループの終了</a></li>
+    <li><a href="#ループオブジェクトの後片付け">ループ・オブジェクトの後片付け</a></li>
+    <li><a href="#libuvの内部実装を覗く">libuvの内部実装を覗く</a>
+      <ul>
+        <li><a href="#uv_idle_initの処理"><code>uv_idle_init()</code>の処理</a></li>
+        <li><a href="#uv_idle_startの処理"><code>uv_idle_start()</code>の処理</a></li>
+        <li><a href="#uv_runの処理"><code>uv_run()</code>の処理</a></li>
+        <li><a href="#uv_loop_closeの処理"><code>uv_loop_close()</code>の処理</a></li>
+      </ul>
+    </li>
+    <li><a href="#注釈">注釈</a></li>
+  </ul>
+</nav>
+                
+                <p><a href="http://libuv.org">libuv</a>のチュートリアル<a href="http://nikhilm.github.io/uvbook/index.html">uvbook</a>，第２節の<a href="http://nikhilm.github.io/uvbook/basics.html#idling">Idlingプログラム</a>を解説します．<code>libuv</code>は<a href="https://nodejs.org/ja/">Node.js</a>の根幹部分を担うCライブラリです．IdlingプログラムのLispによる実装例は後ほど別ページとして投稿します．間違い，コメント等は<a href="https://twitter.com/waterloo_jp">@waterloo_jp</a>まで．</p>
 <p>下のコードは，<a href="http://nikhilm.github.io/uvbook/index.html">uvbook</a>のIdleハンドル使用例です．ここでは下のコード例を追いながら，Idleハンドルの使い方と，<code>libuv</code>内の仕組みについて説明します．コードとMakefileは<a href="https://github.com/wshito/blog-examples/tree/master/uvbook/2-4_idle-basic">GitHub</a>に置いています．</p>
 <pre><code class="language-{c" data-lang="{c">#include &lt;stdio.h&gt;
 #include &lt;uv.h&gt;
@@ -384,13 +417,13 @@ uv__handle_platform_init(h);
 </ol>
 </section>
 
-    </section>
+              </section>
 
 
-  <footer class="post-footer">
+              <footer class="post-footer">
 
 
-    
+                
 
 
 
@@ -414,7 +447,7 @@ uv__handle_platform_init(h);
 
 
 
-    
+                
 <section class="share">
   <h4>Share this post</h4>
   <a class="icon-twitter" href="https://twitter.com/share?text=uvbook%20--%20libuv%e3%81%ae%e4%bb%95%e7%b5%84%e3%81%bf%e3%81%a8idle-basic%e3%81%ae%e8%a7%a3%e8%aa%ac&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fuvbook%2fuvbook-idle-basic%2f"
@@ -433,19 +466,19 @@ uv__handle_platform_init(h);
 
 
 
-    
+                
 
 
 
 
 
-  </footer>
-</article>
+              </footer>
+            </article>
 
-</main>
+          </main>
 
-
-  <aside class="read-next">
+          
+          <aside class="read-next">
   
   <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/as/step-by-step/begin-assembly/">
           <section class="post">
@@ -463,9 +496,9 @@ uv__handle_platform_init(h);
   
 </aside>
 
+          
 
-
-    <footer class="site-footer clearfix">
+              <footer class="site-footer clearfix">
         <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
         
         <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
@@ -490,4 +523,3 @@ uv__handle_platform_init(h);
     
 </body>
 </html>
-

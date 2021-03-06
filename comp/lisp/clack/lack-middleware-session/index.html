@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja-JP">
+
 <head>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    
+  
     
         <meta name="twitter:card" content="summary"/>
     
@@ -18,61 +19,62 @@
 
 
 
-  	<meta property="og:title" content="コードリーディング: Lack の Session ミドルウェアを理解する &middot; wshito&#39;s diary" />
-  	<meta property="og:site_name" content="wshito&#39;s diary" />
-  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/" />
+  <meta property="og:title" content="コードリーディング: Lack の Session ミドルウェアを理解する &middot; wshito&#39;s diary" />
+  <meta property="og:site_name" content="wshito&#39;s diary" />
+  <meta property="og:url" content="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/" />
 
-    
-        
-    
+  
+  
+  
 
-    
-    <meta property="og:description" content="" />
-  	<meta property="og:type" content="article" />
-    <meta property="article:published_time" content="2018-02-07T15:36:34&#43;09:00" />
+  
+  <meta property="og:description" content="" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2018-02-07T15:36:34&#43;09:00" />
 
-    
-    <meta property="article:tag" content="lisp" />
-    
-    <meta property="article:tag" content="clack" />
-    
-    <meta property="article:tag" content="lack" />
-    
-    <meta property="article:tag" content="webapp" />
-    
-    
+  
+  <meta property="article:tag" content="lisp" />
+  
+  <meta property="article:tag" content="clack" />
+  
+  <meta property="article:tag" content="lack" />
+  
+  <meta property="article:tag" content="webapp" />
+  
+  
 
-    <title>コードリーディング: Lack の Session ミドルウェアを理解する &middot; wshito&#39;s diary</title>
+  <title>コードリーディング: Lack の Session ミドルウェアを理解する &middot; wshito&#39;s diary</title>
 
-    
-    <meta name="description" content="Webアプリケーションを構築する際にはユーザのセッション管理が必須である．今回は lack-middleware-session のソースを読みながらSessionミドルウェアの使い方を学ぶ．本稿の最後ではSessionミドルウェアを使ったサンプルWebアプリケーションを構築する． Sessionミドルウェアの概観 S" />
-    
+  
+  <meta name="description" content="Webアプリケーションを構築する際にはユーザのセッション管理が必須である．今回は lack-middleware-session のソースを読みながらSessionミドルウェアの使い方を学ぶ．本稿の最後ではSessionミドルウェアを使ったサンプルWebアプリケーションを構築する． Sessionミドルウェアの概観 S" />
+  
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
-	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
 
-    
+  
 
-    
-      
-          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
-      
-      
-    
-    <meta name="generator" content="Hugo 0.81.0" />
+  
+  
+  <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.81.0" />
 
-    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/" />
+  <link rel="canonical" href="http://diary.wshito.com/comp/lisp/clack/lack-middleware-session/" />
 
-    
-      
+  
+  
     
     <script type="application/ld+json">
 {
@@ -121,28 +123,36 @@
     
 
 
-    
+  
 
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-422028-3', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-422028-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 
-    </script>
-    
 
-    
+  
 
-    
-    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
-    
+  
+  <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+  
 </head>
-
 
 <body class="post-template nav-closed">
 
@@ -182,49 +192,53 @@
 
   <div class="site-wrapper">
 
+    
+          <header class="main-header post-head no-cover">
+            <nav class="main-nav clearfix">
+              
 
-<header class="main-header post-head no-cover">
-  <nav class="main-nav clearfix">
+              
+              
+              <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+              
+            </nav>
+          </header>
 
 
-  
-  
-      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
-  
-  </nav>
-</header>
+          <main class="content" role="main">
 
+            
 
-<main class="content" role="main">
+            <article class="post comp">
 
-  
+              <header class="post-header">
+                <h1 class="post-title">コードリーディング: Lack の Session ミドルウェアを理解する</h1>
+                
+                <section class="post-meta">
+                  <time class="post-date" datetime="2018-02-07T15:36:34&#43;09:00">
+                    February 7, 2018
+                  </time>
+                  
+                  on
+                  
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/clack/">#clack</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/lack/">#lack</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/webapp/">#webapp</a></span>
+                  
+                </section>
+              </header>
 
-  <article class="post comp">
-
-    <header class="post-header">
-        <h1 class="post-title">コードリーディング: Lack の Session ミドルウェアを理解する</h1>
-        
-        <section class="post-meta">
-          <time class="post-date" datetime="2018-02-07T15:36:34&#43;09:00">
-            February 7, 2018
-          </time>
-	  
-	  on
-	  
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/clack/">#clack</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lack/">#lack</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/webapp/">#webapp</a></span>
-         
-        </section>
-    </header>
-
-    <section class="post-content">
-      <div id="preamble">
+              <section class="post-content">
+                
+                目次
+                <nav id="TableOfContents"></nav>
+                
+                <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Webアプリケーションを構築する際にはユーザのセッション管理が必須である．今回は <a href="https://github.com/fukamachi/lack/blob/master/src/middleware/session.lisp">lack-middleware-session</a> のソースを読みながらSessionミドルウェアの使い方を学ぶ．<a href="#sec:sample">本稿の最後</a>ではSessionミドルウェアを使ったサンプルWebアプリケーションを構築する．</p>
@@ -1077,13 +1091,13 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 </div>
 </div>
 
-    </section>
+              </section>
 
 
-  <footer class="post-footer">
+              <footer class="post-footer">
 
 
-    
+                
 
 
 
@@ -1107,7 +1121,7 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 
 
 
-    
+                
 <section class="share">
   <h4>Share this post</h4>
   <a class="icon-twitter" href="https://twitter.com/share?text=%e3%82%b3%e3%83%bc%e3%83%89%e3%83%aa%e3%83%bc%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0%3a%20Lack%20%e3%81%ae%20Session%20%e3%83%9f%e3%83%89%e3%83%ab%e3%82%a6%e3%82%a7%e3%82%a2%e3%82%92%e7%90%86%e8%a7%a3%e3%81%99%e3%82%8b&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fclack%2flack-middleware-session%2f"
@@ -1126,19 +1140,19 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
 
 
 
-    
+                
 
 
 
 
 
-  </footer>
-</article>
+              </footer>
+            </article>
 
-</main>
+          </main>
 
-
-  <aside class="read-next">
+          
+          <aside class="read-next">
   
   <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/sequence/">
           <section class="post">
@@ -1156,9 +1170,9 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
   
 </aside>
 
+          
 
-
-    <footer class="site-footer clearfix">
+              <footer class="site-footer clearfix">
         <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
         
         <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
@@ -1183,4 +1197,3 @@ Sessionミドルウェアを使用するアプリケーション側からはク�
     
 </body>
 </html>
-

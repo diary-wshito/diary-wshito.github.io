@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="JavaScript プロジェクトで私がよく使う定番 Tips 集"/>
+<meta name="twitter:description" content="JavaScriptを使った開発プロジェクトでよく使う定番 Tips の覚書です．"/>
+<meta name="twitter:site" content="@waterloo_jp"/>
+
+
+
+  <meta property="og:title" content="JavaScript プロジェクトで私がよく使う定番 Tips 集 &middot; wshito&#39;s diary" />
+  <meta property="og:site_name" content="wshito&#39;s diary" />
+  <meta property="og:url" content="http://diary.wshito.com/comp/js/dev/tips/" />
+
+  
+  
+  
+
+  
+  <meta property="og:description" content="JavaScriptを使った開発プロジェクトでよく使う定番 Tips の覚書です．" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2021-03-06T08:50:55&#43;09:00" />
+
+  
+  <meta property="article:tag" content="javascript" />
+  
+  <meta property="article:tag" content="tips" />
+  
+  <meta property="article:tag" content="development" />
+  
+  <meta property="article:tag" content="npm" />
+  
+  <meta property="article:tag" content="webpack" />
+  
+  
+
+  <title>JavaScript プロジェクトで私がよく使う定番 Tips 集 &middot; wshito&#39;s diary</title>
+
+  
+  <meta name="description" content="JavaScriptを使った開発プロジェクトでよく使う定番 Tips の覚書です．" />
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+
+  
+
+  
+  
+  <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.81.0" />
+
+  <link rel="canonical" href="http://diary.wshito.com/comp/js/dev/tips/" />
+
+  
+  
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "W.Shito"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "W.Shito",
+        
+        "url": "http://diary.wshito.com",
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": "JavaScript プロジェクトで私がよく使う定番 Tips 集",
+    "name": "JavaScript プロジェクトで私がよく使う定番 Tips 集",
+    "wordCount":  2097 ,
+    "timeRequired": "PT5M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "http://diary.wshito.com/comp/js/dev/tips/",
+    "datePublished": "2021-03-06T08:50Z",
+    "dateModified": "2021-03-06T08:50Z",
+    
+    "keywords": "javascript, tips, development, npm, webpack",
+    "description": "JavaScriptを使った開発プロジェクトでよく使う定番 Tips の覚書です．",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://diary.wshito.com/comp/js/dev/tips/"
+    }
+}
+    </script>
+    
+
+
+  
+
+  
+  
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-422028-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+
+
+  
+
+  
+  <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body class="post-template nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/">Home</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/categories/">Categories</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="http://diary.wshito.com/tags/">Tags</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="http://diary.wshito.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+  <div class="site-wrapper">
+
+    
+          <header class="main-header post-head no-cover">
+            <nav class="main-nav clearfix">
+              
+
+              
+              
+              <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+              
+            </nav>
+          </header>
+
+
+          <main class="content" role="main">
+
+            
+
+            <article class="post comp">
+
+              <header class="post-header">
+                <h1 class="post-title">JavaScript プロジェクトで私がよく使う定番 Tips 集</h1>
+                
+                <div id="description">JavaScriptを使った開発プロジェクトでよく使う定番 Tips の覚書です．</div>
+                
+                <section class="post-meta">
+                  <time class="post-date" datetime="2021-03-06T08:50:55&#43;09:00">
+                    March 6, 2021
+                  </time>
+                  
+                  on
+                  
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/javascript/">#javascript</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/tips/">#tips</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/development/">#development</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/npm/">#npm</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/webpack/">#webpack</a></span>
+                  
+                </section>
+              </header>
+
+              <section class="post-content">
+                
+                目次
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_package_json_内のバージョン番号をコードに埋め込む">package.json 内のバージョン番号をコードに埋め込む</a></li>
+    <li><a href="#_webpack_でバンドル化した_asset_にコード内からアクセスしデータとして使う">Webpack でバンドル化した asset にコード内からアクセスしデータとして使う</a></li>
+    <li><a href="#_同じプロジェクト内の複数の_npm_スクリプトを同時実行する">同じプロジェクト内の複数の npm スクリプトを同時実行する</a></li>
+    <li><a href="#_プロジェクトをまたがって複数のプログラムを同時実行する">プロジェクトをまたがって複数のプログラムを同時実行する</a></li>
+  </ul>
+</nav>
+                
+                <div class="paragraph">
+<p>JavaScript を用いた開発プロジェクトで私がよく使う設定やコードスニペットなどを自分への覚書としてまとめました．今後も利用頻度の高い Tips が出てきたら付け加えていきます．自分で参照するために一箇所にまとめているので長くなるかもしれません．</p>
+</div>
+<div class="sect1">
+<h2 id="_package_json_内のバージョン番号をコードに埋め込む">package.json 内のバージョン番号をコードに埋め込む</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Webpack の DefinPlugin はソースコード内の文字列を別の文字に置き換えるプリプロセッサとして使えます．これを利用して <code>package.json</code> からバージョン番号を取り出して例えばソースコード内の <code>__VERSION__</code> と置き換えるだけです．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const version = __VERSION__;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>しかしこれだと Webpack でビルドしていない状態のソースをそのままユニットテストで走らせたりすると <code>__VERSION__</code> が未定義でエラーになります．それを回避するのが以下のスニペットです．</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const version = (typeof __VERSION__) !== &#39;undefined&#39; ? __VERSION__ : &#39;dev&#39;;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Webpack 側の設定は以下のようになります．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 1. package.json ファイル内の設定</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const version = JSON.stringify(require(&#39;./package.json&#39;).version);
+
+module.exports = {
+  // ... 省略
+  plugins: [
+    new webpack.DefinePlugin({
+      __VERSION__: version,
+    })
+  ],
+  // ... 省略
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>プロジェクトでの使用例: <a href="https://github.com/wshito/asciidoctor-chunker/blob/65d873231ba9f314f5b2f619ea431270baa37173/webpack.config.js">webpack.config.js</a>, <a href="https://github.com/wshito/asciidoctor-chunker/blob/65d873231ba9f314f5b2f619ea431270baa37173/src/CommandOptions.mjs#L10">コマンドオプション</a>．</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_webpack_でバンドル化した_asset_にコード内からアクセスしデータとして使う">Webpack でバンドル化した asset にコード内からアクセスしデータとして使う</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>プログラム内で用いるデータをソースコードとは別ファイルにしておくとき，開発中のユニットテスト等ではファイルからデータを読み込む一方，デプロイ時にはデータファイルをソースコードと一緒にバンドルし，そこからデータを読み込みたいことがよくあります．</p>
+</div>
+<div class="paragraph">
+<p>例えば <a href="https://github.com/wshito/asciidoctor-chunker">asciidoctor-chunker</a> プロジェクトでは，HTML ファイルをプログラムから生成する際に，ローカル環境では別ファイルである CSS ファイルを <a href="https://github.com/wshito/asciidoctor-chunker/blob/65d873231ba9f314f5b2f619ea431270baa37173/src/DOM.mjs#L740">copyIfNewer 関数内</a>で <code>fs.copyFile()</code> を使ってコピーしています．しかし，Webpack によって asset としてバンドル化されている場合は，
+<a href="https://github.com/wshito/asciidoctor-chunker/blob/65d873231ba9f314f5b2f619ea431270baa37173/src/DOM.mjs#L733">import</a> を使ってバンドル内から CSS ファイルの内容をデータとしてロードしています．</p>
+</div>
+<div class="paragraph">
+<p>上のプロジェクトを例にまず <a href="https://github.com/wshito/asciidoctor-chunker/blob/65d873231ba9f314f5b2f619ea431270baa37173/webpack.config.js#L7">Webpack の設定</a>を以下に示します．<a href="https://webpack.js.org/guides/asset-modules/">Asset Modules</a> の <code>asset/source</code> を使います．ここでは <code>.css</code> 拡張子のファイルをバンドルに含めています．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 2. webpack.config.js ファイル</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">module.exports = {
+  // ... 省略
+  output: {
+    path: path.resolve(__dirname, &#39;dist&#39;),
+    filename: &#39;asciidoctor-chunker.js&#39;,
+  },
+  module: {
+    rules: [{
+      test: /\.css$/i,
+      type: &#39;asset/source&#39;,
+    }],
+  },
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>バンドルされた asset にコードからアクセスするには <code>import</code> 文でロードします．もし，常にバンドル化されたスクリプトからしかプログラムを実行しないのであれば，ソースコードのトップレベルで静的 <code>import</code> を使って以下のようにロードします．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 3. 静的 import による asset のロード</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">import aseet from &#39;./css/asciidoctor-chunker.css&#39;;
+
+const css = asset.default;  // moduleのdefaultでアクセスできる</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>しかし上のコードは Webpack でバンドル化したプログラムでしか使えません．開発中にソースの変更を watch して単体テストを動かす場合は，変更のたびにビルドすることなく直接ソーススクリプトを実行したいでしょう．そのような時は，以下のようにダイナミック import を使いロードに失敗した場合にローカルファイルからデータを読み込むという方法を使います．ただ，ここで注意すべきは，ダイナミック import はもともと遅延ロードのための機能なため，Webpack はビルド時にファイルをバンドルファイル内に埋め込まないという点です．それを回避するにはコメント行で
+ <code>webpackMode: &#34;eager&#34;</code> と書き，<a href="https://webpack.js.org/api/module-methods/#magic-comments">Webpack に向けたディレクティヴ</a>を指定します．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 4. ダイナミック import を使った asset のロード</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">import( /* webpackMode: &#34;eager&#34; */      <i class="conum" data-value="1"></i><b>(1)</b>
+       &#39;./css/asciidoctor-chunker.css&#39;) // webpack bundle
+  .then(module =&gt; fsp.writeFile(dest, module.default))    <i class="conum" data-value="2"></i><b>(2)</b>
+  .catch(e =&gt; {                                           <i class="conum" data-value="3"></i><b>(3)</b>
+    const __dirname = path.dirname(fileURLToPath(
+      import.meta.url));
+    const src = path.resolve(__dirname, &#39;css&#39;, &#39;asciidoctor-chunker.css&#39;);
+    copyIfNewer(src)(dest);
+  }); // no bundle, regular file</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ファイルをダイナミック import していますが，ファイル前のコメントで <code>eager</code> モードを指定してWebpackにファイルをバンドルするように指定しています．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>バンドルされている asset からロードできた場合はプロミスが resolve 時に <code>module</code> を返すので，<code>module.default</code> でロードしたデータにアクセスできます．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>ロードに失敗した場合は <code>catch()</code> でローカルディスクのファイルにアクセスして CSS ファイルを処理しています．</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_同じプロジェクト内の複数の_npm_スクリプトを同時実行する">同じプロジェクト内の複数の npm スクリプトを同時実行する</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>npm-run-all を使います．例えば，下の例では <code>npm run dev</code> を実行すると <code>npm-run-all</code> が <code>npm run watch</code> と <code>npm run live</code> を並行実行します．それぞれのスクリプトの動作は以下の通りです．</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>npm run watch</code>: <code>src-doc</code> と <code>build/adoc</code> ディレクトリ内の変更を <code>npm-watch</code> が常時監視して変更があれば <code>npm run html</code> を実行します．</p>
+</li>
+<li>
+<p><code>npm run live</code>: <code>build/html</code> ディレクトリ内の変更を監視し変更があればブラウザをリロードします．</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">コード 5. package.json ファイル</div>
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">  &#34;watch&#34;: {       <i class="conum" data-value="1"></i><b>(1)</b>
+    &#34;html&#34;: {
+      &#34;patterns&#34;: [
+        &#34;src-doc&#34;,
+        &#34;build/adoc&#34;
+      ],
+      &#34;extensions&#34;: &#34;adoc,anw&#34;
+    }
+  },
+  &#34;scripts&#34;: {
+    &#34;dev&#34;: &#34;npm-run-all --parallel watch live&#34;,  <i class="conum" data-value="2"></i><b>(2)</b>
+    &#34;watch&#34;: &#34;npm-watch&#34;,
+    &#34;live&#34;: &#34;live-server build/html&#34;,
+    &#34;html&#34;: &#34;make html&#34;,
+  },</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>npm-watch</code> の設定．変更があれば <code>npm run html</code> を実行する．</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>npm run dev</code> を実行すると <code>npm run watch</code> と <code>npm run live</code> を並行実行する．</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_プロジェクトをまたがって複数のプログラムを同時実行する">プロジェクトをまたがって複数のプログラムを同時実行する</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>前節の例では一つの npm プロジェクト内で複数スクリプトを並列起動する方法ですが，別々のプロジェクトから npm スクリプトをそれぞれ並列起動したいことがあります．例えば SPA 用プロジェクト内で webpack の dev-server を起動して変更をライブビューで確認しながらコーディングする一方，SPA にデータをフィードする REST サーバーを同時に起動しておきたいケーづなのです．ここではシェルスクリプトから起動する方法と，parallel というプログラムを用いる方法の2つを紹介します．もちろんコンテナに全て納めてオーケストレーションツールでコマンド一発起動という方法もありますが，小さなプロジェクトでそこまでしたくない場合には，ここに記述する方法で十分でしょう．</p>
+</div>
+<div class="paragraph">
+<p>元ネタは <a href="https://stackoverflow.com/questions/3004811/how-do-you-run-multiple-programs-in-parallel-from-a-bash-script">StackOverflow</a> です．</p>
+</div>
+<div class="listingblock">
+<div class="title">コード 6. bash スクリプト</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">some_command &amp;
+P1=$!
+other_command &amp;
+P2=$!
+wait $P1 $P2</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">コード 7. GNU Parallel を使う場合</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">parallel ::: prog1 prgo2</code></pre>
+</div>
+</div>
+</div>
+</div>
+              </section>
+
+
+              <footer class="post-footer">
+
+
+                
+
+
+
+
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://diary.wshito.com/">wshito</a></h4>
+  
+  <p>Read <a href="http://diary.wshito.com/">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Itoshima, Japan</span>
+    <span class="author-link icon-link"><a href="http://diary.wshito.com">http://diary.wshito.com</a></span>
+  </div>
+</section>
+
+
+
+
+                
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" href="https://twitter.com/share?text=JavaScript%20%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%a7%e7%a7%81%e3%81%8c%e3%82%88%e3%81%8f%e4%bd%bf%e3%81%86%e5%ae%9a%e7%95%aa%20Tips%20%e9%9b%86&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2fdev%2ftips%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2fdev%2ftips%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2fdev%2ftips%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+                
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "http:\/\/diary.wshito.com\/comp\/js\/dev\/tips\/";  
+this.page.identifier = "http:\/\/diary.wshito.com\/comp\/js\/dev\/tips\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diary-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+              </footer>
+            </article>
+
+          </main>
+
+          
+          <aside class="read-next">
+  
+  
+      <a class="read-next-story prev no-cover" style="no-cover" href="http://diary.wshito.com/comp/cms/asciidoc-jp/">
+          <section class="post">
+              <h2>AsciiDoc で日本語原稿を書く際の留意点</h2>
+          </section>
+      </a>
+  
+</aside>
+
+          
+
+              <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/index.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/prism.js"></script>
+    <script type="text/javascript" src="http://diary.wshito.com/js/toc.js"></script>
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       TeX: {
+	 extensions: ["AMSmath.js", "AMSsymbols.js"]
+       }
+     });
+    </script>
+    <script type="text/javascript" async
+	    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+    
+</body>
+</html>

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja-JP">
+
 <head>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    
+  
     
         <meta name="twitter:card" content="summary"/>
     
@@ -18,61 +19,62 @@
 
 
 
-  	<meta property="og:title" content="ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド &middot; wshito&#39;s diary" />
-  	<meta property="og:site_name" content="wshito&#39;s diary" />
-  	<meta property="og:url" content="http://diary.wshito.com/comp/js/fp/sanctuary2/" />
+  <meta property="og:title" content="ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド &middot; wshito&#39;s diary" />
+  <meta property="og:site_name" content="wshito&#39;s diary" />
+  <meta property="og:url" content="http://diary.wshito.com/comp/js/fp/sanctuary2/" />
 
-    
-        
-    
+  
+  
+  
 
-    
-    <meta property="og:description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 2．" />
-  	<meta property="og:type" content="article" />
-    <meta property="article:published_time" content="2018-12-18T00:00:00&#43;09:00" />
+  
+  <meta property="og:description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 2．" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2018-12-18T00:00:00&#43;09:00" />
 
-    
-    <meta property="article:tag" content="sanctuary" />
-    
-    <meta property="article:tag" content="fantasyland" />
-    
-    <meta property="article:tag" content="javascript" />
-    
-    <meta property="article:tag" content="functional programming" />
-    
-    
+  
+  <meta property="article:tag" content="sanctuary" />
+  
+  <meta property="article:tag" content="fantasyland" />
+  
+  <meta property="article:tag" content="javascript" />
+  
+  <meta property="article:tag" content="functional programming" />
+  
+  
 
-    <title>ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド &middot; wshito&#39;s diary</title>
+  <title>ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド &middot; wshito&#39;s diary</title>
 
-    
-    <meta name="description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 2．" />
-    
+  
+  <meta name="description" content="JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 2．" />
+  
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
-	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
 
-    
+  
 
-    
-      
-          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
-      
-      
-    
-    <meta name="generator" content="Hugo 0.81.0" />
+  
+  
+  <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.81.0" />
 
-    <link rel="canonical" href="http://diary.wshito.com/comp/js/fp/sanctuary2/" />
+  <link rel="canonical" href="http://diary.wshito.com/comp/js/fp/sanctuary2/" />
 
-    
-      
+  
+  
     
     <script type="application/ld+json">
 {
@@ -121,28 +123,36 @@
     
 
 
-    
+  
 
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-422028-3', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-422028-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 
-    </script>
-    
 
-    
+  
 
-    
-    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
-    
+  
+  <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+  
 </head>
-
 
 <body class="post-template nav-closed">
 
@@ -182,51 +192,55 @@
 
   <div class="site-wrapper">
 
+    
+          <header class="main-header post-head no-cover">
+            <nav class="main-nav clearfix">
+              
 
-<header class="main-header post-head no-cover">
-  <nav class="main-nav clearfix">
+              
+              
+              <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+              
+            </nav>
+          </header>
 
 
-  
-  
-      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
-  
-  </nav>
-</header>
+          <main class="content" role="main">
 
+            
 
-<main class="content" role="main">
+            <article class="post comp">
 
-  
+              <header class="post-header">
+                <h1 class="post-title">ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド</h1>
+                
+                <div id="description">JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 2．</div>
+                
+                <section class="post-meta">
+                  <time class="post-date" datetime="2018-12-18T00:00:00&#43;09:00">
+                    December 18, 2018
+                  </time>
+                  
+                  on
+                  
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/sanctuary/">#sanctuary</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/fantasyland/">#fantasyland</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/javascript/">#javascript</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/functional-programming/">#functional programming</a></span>
+                  
+                </section>
+              </header>
 
-  <article class="post comp">
-
-    <header class="post-header">
-        <h1 class="post-title">ファンタジー・ランドの保護地区をゆく Part 2 --- Maybe モナド</h1>
-        
-        <div id="description">JavaScript の関数型プログラミング・ライブラリである Sanctuary.js のサーベイ Part 2．</div>
-        
-        <section class="post-meta">
-          <time class="post-date" datetime="2018-12-18T00:00:00&#43;09:00">
-            December 18, 2018
-          </time>
-	  
-	  on
-	  
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/sanctuary/">#sanctuary</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/fantasyland/">#fantasyland</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/javascript/">#javascript</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/functional-programming/">#functional programming</a></span>
-         
-        </section>
-    </header>
-
-    <section class="post-content">
-      <div id="preamble">
+              <section class="post-content">
+                
+                目次
+                <nav id="TableOfContents"></nav>
+                
+                <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>この記事は <a href="https://qiita.com/advent-calendar/2018/javascript_02">JavaScript2 Advent Calendar 2018</a> の 19 日目の記事として書かれました．コードは <a href="https://github.com/wshito/blog-examples/tree/master/JavaScript/fp">GitHub</a> にまとめてあります．</p>
@@ -410,13 +424,13 @@ const grade2 = R.compose(
 </div>
 </div>
 </div>
-    </section>
+              </section>
 
 
-  <footer class="post-footer">
+              <footer class="post-footer">
 
 
-    
+                
 
 
 
@@ -440,7 +454,7 @@ const grade2 = R.compose(
 
 
 
-    
+                
 <section class="share">
   <h4>Share this post</h4>
   <a class="icon-twitter" href="https://twitter.com/share?text=%e3%83%95%e3%82%a1%e3%83%b3%e3%82%bf%e3%82%b8%e3%83%bc%e3%83%bb%e3%83%a9%e3%83%b3%e3%83%89%e3%81%ae%e4%bf%9d%e8%ad%b7%e5%9c%b0%e5%8c%ba%e3%82%92%e3%82%86%e3%81%8f%20Part%202%20---%20Maybe%20%e3%83%a2%e3%83%8a%e3%83%89&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fjs%2ffp%2fsanctuary2%2f"
@@ -459,7 +473,7 @@ const grade2 = R.compose(
 
 
 
-    
+                
 
 <div id="disqus_thread"></div>
 <script>
@@ -488,13 +502,13 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-  </footer>
-</article>
+              </footer>
+            </article>
 
-</main>
+          </main>
 
-
-  <aside class="read-next">
+          
+          <aside class="read-next">
   
   <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/js/ide/swank-js/">
           <section class="post">
@@ -512,9 +526,9 @@ s.setAttribute('data-timestamp', +new Date());
   
 </aside>
 
+          
 
-
-    <footer class="site-footer clearfix">
+              <footer class="site-footer clearfix">
         <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
         
         <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
@@ -539,4 +553,3 @@ s.setAttribute('data-timestamp', +new Date());
     
 </body>
 </html>
-

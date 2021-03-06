@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja-JP">
+
 <head>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    
+  
     
         <meta name="twitter:card" content="summary"/>
     
@@ -18,57 +19,58 @@
 
 
 
-  	<meta property="og:title" content="Buffered IO or Unbuffered IO &middot; wshito&#39;s diary" />
-  	<meta property="og:site_name" content="wshito&#39;s diary" />
-  	<meta property="og:url" content="http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/" />
+  <meta property="og:title" content="Buffered IO or Unbuffered IO &middot; wshito&#39;s diary" />
+  <meta property="og:site_name" content="wshito&#39;s diary" />
+  <meta property="og:url" content="http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/" />
 
-    
-        
-    
+  
+  
+  
 
-    
-    <meta property="og:description" content="" />
-  	<meta property="og:type" content="article" />
-    <meta property="article:published_time" content="2016-11-09T19:29:46&#43;09:00" />
+  
+  <meta property="og:description" content="" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2016-11-09T19:29:46&#43;09:00" />
 
-    
-    <meta property="article:tag" content="programming" />
-    
-    <meta property="article:tag" content="network" />
-    
-    
+  
+  <meta property="article:tag" content="programming" />
+  
+  <meta property="article:tag" content="network" />
+  
+  
 
-    <title>Buffered IO or Unbuffered IO &middot; wshito&#39;s diary</title>
+  <title>Buffered IO or Unbuffered IO &middot; wshito&#39;s diary</title>
 
-    
-    <meta name="description" content="ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，Unbuffered IOのread()，write()を使用している理由が気になって調べてみた．普通のIOならシステムコールを減らすためにBuffered IOを使用するがなぜネットワークプログラミングではどの例もUnbufferedなのか？調べた結果" />
-    
+  
+  <meta name="description" content="ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，Unbuffered IOのread()，write()を使用している理由が気になって調べてみた．普通のIOならシステムコールを減らすためにBuffered IOを使用するがなぜネットワークプログラミングではどの例もUnbufferedなのか？調べた結果" />
+  
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
-	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
 
-    
+  
 
-    
-      
-          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
-      
-      
-    
-    <meta name="generator" content="Hugo 0.81.0" />
+  
+  
+  <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.81.0" />
 
-    <link rel="canonical" href="http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/" />
+  <link rel="canonical" href="http://diary.wshito.com/comp/prog/buffered-io-or-unbuffered-io/" />
 
-    
-      
+  
+  
     
     <script type="application/ld+json">
 {
@@ -117,28 +119,36 @@
     
 
 
-    
+  
 
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-422028-3', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-422028-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 
-    </script>
-    
 
-    
+  
 
-    
-    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
-    
+  
+  <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+  
 </head>
-
 
 <body class="post-template nav-closed">
 
@@ -178,57 +188,61 @@
 
   <div class="site-wrapper">
 
+    
+          <header class="main-header post-head no-cover">
+            <nav class="main-nav clearfix">
+              
 
-<header class="main-header post-head no-cover">
-  <nav class="main-nav clearfix">
+              
+              
+              <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+              
+            </nav>
+          </header>
 
 
-  
-  
-      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
-  
-  </nav>
-</header>
+          <main class="content" role="main">
 
+            
 
-<main class="content" role="main">
+            <article class="post comp">
 
-  
+              <header class="post-header">
+                <h1 class="post-title">Buffered IO or Unbuffered IO</h1>
+                
+                <section class="post-meta">
+                  <time class="post-date" datetime="2016-11-09T19:29:46&#43;09:00">
+                    November 9, 2016
+                  </time>
+                  
+                  on
+                  
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/network/">#network</a></span>
+                  
+                </section>
+              </header>
 
-  <article class="post comp">
-
-    <header class="post-header">
-        <h1 class="post-title">Buffered IO or Unbuffered IO</h1>
-        
-        <section class="post-meta">
-          <time class="post-date" datetime="2016-11-09T19:29:46&#43;09:00">
-            November 9, 2016
-          </time>
-	  
-	  on
-	  
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/network/">#network</a></span>
-         
-        </section>
-    </header>
-
-    <section class="post-content">
-      <p>ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，<strong>Unbuffered IO</strong>の<code>read()</code>，<code>write()</code>を使用している理由が気になって調べてみた．普通のIOならシステムコールを減らすために<strong>Buffered IO</strong>を使用するがなぜネットワークプログラミングではどの例も<strong>Unbuffered</strong>なのか？調べた結果は後でブログにまとめるとして，見つけた解説記事を載せておきます．</p>
+              <section class="post-content">
+                
+                目次
+                <nav id="TableOfContents"></nav>
+                
+                <p>ネットワーク越しにパケットを送受信するプログラム例を読んでいたら，<strong>Unbuffered IO</strong>の<code>read()</code>，<code>write()</code>を使用している理由が気になって調べてみた．普通のIOならシステムコールを減らすために<strong>Buffered IO</strong>を使用するがなぜネットワークプログラミングではどの例も<strong>Unbuffered</strong>なのか？調べた結果は後でブログにまとめるとして，見つけた解説記事を載せておきます．</p>
 <ul>
 <li><a href="http://stackoverflow.com/questions/1450551/buffered-vs-unbuffered-io">Buffered vs unbuffered IO (stack overflow)</a> - バッファドとアンバッファドの違いについての基礎知識の確認のため．</li>
 <li><a href="http://alas.matf.bg.ac.rs/manuals/lspe/snode=88.html">Defining Buffer Operation (Linux Socket Programming by Example - Warren Gay)</a> - ネットワークプログラミングでアンバッファドを使う理由はここ．</li>
 </ul>
 
-    </section>
+              </section>
 
 
-  <footer class="post-footer">
+              <footer class="post-footer">
 
 
-    
+                
 
 
 
@@ -252,7 +266,7 @@
 
 
 
-    
+                
 <section class="share">
   <h4>Share this post</h4>
   <a class="icon-twitter" href="https://twitter.com/share?text=Buffered%20IO%20or%20Unbuffered%20IO&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2fprog%2fbuffered-io-or-unbuffered-io%2f"
@@ -271,19 +285,19 @@
 
 
 
-    
+                
 
 
 
 
 
-  </footer>
-</article>
+              </footer>
+            </article>
 
-</main>
+          </main>
 
-
-  <aside class="read-next">
+          
+          <aside class="read-next">
   
   <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/lisp/cl-dialogue/2/">
           <section class="post">
@@ -295,9 +309,9 @@
   
 </aside>
 
+          
 
-
-    <footer class="site-footer clearfix">
+              <footer class="site-footer clearfix">
         <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
         
         <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
@@ -322,4 +336,3 @@
     
 </body>
 </html>
-

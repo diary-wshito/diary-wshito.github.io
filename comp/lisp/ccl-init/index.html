@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja-JP">
+
 <head>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    
+  
     
         <meta name="twitter:card" content="summary"/>
     
@@ -18,66 +19,67 @@
 
 
 
-  	<meta property="og:title" content="ASDF3 on Clozure CL does not search ASD files under the symbolic links &middot; wshito&#39;s diary" />
-  	<meta property="og:site_name" content="wshito&#39;s diary" />
-  	<meta property="og:url" content="http://diary.wshito.com/comp/lisp/ccl-init/" />
+  <meta property="og:title" content="ASDF3 on Clozure CL does not search ASD files under the symbolic links &middot; wshito&#39;s diary" />
+  <meta property="og:site_name" content="wshito&#39;s diary" />
+  <meta property="og:url" content="http://diary.wshito.com/comp/lisp/ccl-init/" />
 
-    
-        
-    
+  
+  
+  
 
-    
-    <meta property="og:description" content="" />
-  	<meta property="og:type" content="article" />
-    <meta property="article:published_time" content="2018-04-13T18:46:32&#43;09:00" />
+  
+  <meta property="og:description" content="" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2018-04-13T18:46:32&#43;09:00" />
 
-    
-    <meta property="article:tag" content="lisp" />
-    
-    <meta property="article:tag" content="programming" />
-    
-    <meta property="article:tag" content="ccl" />
-    
-    <meta property="article:tag" content="asdf" />
-    
-    <meta property="article:tag" content="source-registry" />
-    
-    <meta property="article:tag" content="clozure cl" />
-    
-    
+  
+  <meta property="article:tag" content="lisp" />
+  
+  <meta property="article:tag" content="programming" />
+  
+  <meta property="article:tag" content="ccl" />
+  
+  <meta property="article:tag" content="asdf" />
+  
+  <meta property="article:tag" content="source-registry" />
+  
+  <meta property="article:tag" content="clozure cl" />
+  
+  
 
-    <title>ASDF3 on Clozure CL does not search ASD files under the symbolic links &middot; wshito&#39;s diary</title>
+  <title>ASDF3 on Clozure CL does not search ASD files under the symbolic links &middot; wshito&#39;s diary</title>
 
-    
-    <meta name="description" content="&lt;div class=&#34;paragraph&#34;&gt;
+  
+  <meta name="description" content="&lt;div class=&#34;paragraph&#34;&gt;
 &lt;p&gt;I put all my lisp projects under the directory &lt;code&gt;git-repos&lt;/code&gt; and set symbolic links to each projects from &lt;code&gt;~/common-lis" />
-    
+  
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
-	  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="http://diary.wshito.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="http://diary.wshito.com/images/apple-touch-icon.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
-    <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/screen.css" />
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="http://diary.wshito.com/css/wshito-casper.css">
 
-    
+  
 
-    
-      
-          <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
-      
-      
-    
-    <meta name="generator" content="Hugo 0.81.0" />
+  
+  
+  <link href="http://diary.wshito.com/index.xml" rel="alternate" type="application/rss+xml" title="wshito&#39;s diary" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.81.0" />
 
-    <link rel="canonical" href="http://diary.wshito.com/comp/lisp/ccl-init/" />
+  <link rel="canonical" href="http://diary.wshito.com/comp/lisp/ccl-init/" />
 
-    
-      
+  
+  
     
     <script type="application/ld+json">
 {
@@ -126,28 +128,36 @@
     
 
 
-    
+  
 
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-422028-3', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-422028-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 
-    </script>
-    
 
-    
+  
 
-    
-    <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
-    
+  
+  <script src="https://kit.fontawesome.com/7c5784892e.js" crossorigin="anonymous"></script>
+  
 </head>
-
 
 <body class="post-template nav-closed">
 
@@ -187,53 +197,57 @@
 
   <div class="site-wrapper">
 
+    
+          <header class="main-header post-head no-cover">
+            <nav class="main-nav clearfix">
+              
 
-<header class="main-header post-head no-cover">
-  <nav class="main-nav clearfix">
+              
+              
+              <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+              
+            </nav>
+          </header>
 
 
-  
-  
-      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
-  
-  </nav>
-</header>
+          <main class="content" role="main">
 
+            
 
-<main class="content" role="main">
+            <article class="post comp">
 
-  
+              <header class="post-header">
+                <h1 class="post-title">ASDF3 on Clozure CL does not search ASD files under the symbolic links</h1>
+                
+                <section class="post-meta">
+                  <time class="post-date" datetime="2018-04-13T18:46:32&#43;09:00">
+                    April 13, 2018
+                  </time>
+                  
+                  on
+                  
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/ccl/">#ccl</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/asdf/">#asdf</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/source-registry/">#source-registry</a></span>
+                  
+                  <span class="post-tag small"><a href="http://diary.wshito.com//tags/clozure-cl/">#clozure cl</a></span>
+                  
+                </section>
+              </header>
 
-  <article class="post comp">
-
-    <header class="post-header">
-        <h1 class="post-title">ASDF3 on Clozure CL does not search ASD files under the symbolic links</h1>
-        
-        <section class="post-meta">
-          <time class="post-date" datetime="2018-04-13T18:46:32&#43;09:00">
-            April 13, 2018
-          </time>
-	  
-	  on
-	  
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/lisp/">#lisp</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/programming/">#programming</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/ccl/">#ccl</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/asdf/">#asdf</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/source-registry/">#source-registry</a></span>
-         
-          <span class="post-tag small"><a href="http://diary.wshito.com//tags/clozure-cl/">#clozure cl</a></span>
-         
-        </section>
-    </header>
-
-    <section class="post-content">
-      <div class="paragraph">
+              <section class="post-content">
+                
+                目次
+                <nav id="TableOfContents"></nav>
+                
+                <div class="paragraph">
 <p>I put all my lisp projects under the directory <code>git-repos</code> and set symbolic links to each projects from <code>~/common-lisp</code>.  ASDF3 on SBCL loads ASD files under the symbolic links recursively while that on Clozure CL doesn’t.  If you add those links to source-registry they get loaded on CCL too.  Here is the snipped for CCL to add all the links and directories under <code>~/common-lisp</code>.</p>
 </div>
 <div class="paragraph">
@@ -294,13 +308,13 @@
 #+ccl (update-search-path)</code></pre>
 </div>
 </div>
-    </section>
+              </section>
 
 
-  <footer class="post-footer">
+              <footer class="post-footer">
 
 
-    
+                
 
 
 
@@ -324,7 +338,7 @@
 
 
 
-    
+                
 <section class="share">
   <h4>Share this post</h4>
   <a class="icon-twitter" href="https://twitter.com/share?text=ASDF3%20on%20Clozure%20CL%20does%20not%20search%20ASD%20files%20under%20the%20symbolic%20links&nbsp;-&nbsp;wshito%27s%20diary&amp;url=http%3a%2f%2fdiary.wshito.com%2fcomp%2flisp%2fccl-init%2f"
@@ -343,7 +357,7 @@
 
 
 
-    
+                
 
 <div id="disqus_thread"></div>
 <script>
@@ -372,13 +386,13 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-  </footer>
-</article>
+              </footer>
+            </article>
 
-</main>
+          </main>
 
-
-  <aside class="read-next">
+          
+          <aside class="read-next">
   
   <a class="read-next-story no-cover" style="no-cover" href="http://diary.wshito.com/comp/cg/eec277/">
           <section class="post">
@@ -396,9 +410,9 @@ s.setAttribute('data-timestamp', +new Date());
   
 </aside>
 
+          
 
-
-    <footer class="site-footer clearfix">
+              <footer class="site-footer clearfix">
         <section class="copyright"><a href="">wshito&#39;s diary</a> All rights reserved 2016--</section>
         
         <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
@@ -423,4 +437,3 @@ s.setAttribute('data-timestamp', +new Date());
     
 </body>
 </html>
-
